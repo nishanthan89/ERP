@@ -1,0 +1,253 @@
+﻿@model ERP.Resource.Models.TimeSheetBO
+@{
+    string dateformat = MvcApplication.DateFormat;
+    string timeformat = MvcApplication.TimeFormat;
+}
+
+<div>
+    <a href="@Url.Action("TimeSheet", "TimeSheet", new { area = "Resource" })"><span class="glyphicon glyphicon-backward"></span>&nbsp; Back to List</a>
+</div>
+@using (Ajax.BeginForm("TimeSheetAuthorizedSaved", "TimeSheet", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "", OnSuccess = "SavedSuccess" }))
+{
+    @Html.HiddenFor(x => x.TimesheetID)
+    @Html.HiddenFor(x => x.ResourcesID)
+    @Html.HiddenFor(x => x.MonthName)
+    @Html.HiddenFor(x => x.MonthID)
+    @Html.HiddenFor(x => x.Year)
+    @Html.HiddenFor(x => x.Status)
+    @Html.HiddenFor(x => x.FrequencyID)
+    @Html.HiddenFor(x => x.dtDethTime1)
+    @Html.HiddenFor(x => x.TimeSheetDate)
+    @Html.HiddenFor(x => x.NoOFShift)
+    @Html.HiddenFor(x => x.TolShiftHrs)
+    @Html.HiddenFor(x => x.Payment)
+    @Html.HiddenFor(x => x.shiftPattern)
+    @Html.HiddenFor(x => x.holidayPattern)
+    @Html.HiddenFor(x => x.ListOFTolHoliday)
+    @Html.HiddenFor(x => x.ListOFTolHolidayHours)
+    @Html.HiddenFor(x => x.ListOFShift)
+    
+
+<div class="row" style="background-color:aquamarine">
+    <div class="col-md-12">
+        <div class="col-md-2">
+          <b> @Html.DisplayNameFor(x => x.ResourcesName) : </b> @Model.ResourcesName
+        </div>
+
+        <div class="col-md-2">
+            @{Model.MonthName = new DateTime(2000, Model.MonthID, 1).ToString("MMMM"); }
+            <b> @Html.DisplayNameFor(x => x.MonthName) : </b>  @Model.MonthName, &nbsp;@Model.Year
+        </div>
+
+        <div class="col-md-2">
+            <b> @Html.DisplayNameFor(x => x.ListOFTolHoliday) : </b>
+            @{var ListOFTolHolidayCount= Model.ListOFTolHoliday == null ? 0: Model.ListOFTolHoliday.Count();} 
+            @ListOFTolHolidayCount
+        </div>
+
+        <div class="col-md-3" >
+            <b>  @Html.DisplayNameFor(x => x.Status) :</b> <a id="authorisedIdStatus">@Model.Status</a>
+        </div>
+        <div class="col-md-2">
+            <b>  @Html.DisplayNameFor(x => x.StatusDate) :</b> <a id="authorisedIdStatusDate">
+                                                                   <span>
+                                                                       @String.Format("{0: " + dateformat + "}", Model.StatusDate) &nbsp;
+                                                                      
+                                                                      @String.Format("{0: " + timeformat + "}", Model.StatusDate) &nbsp;
+                                                                       </span>
+
+</a>
+</div>
+
+    </div>
+</div>
+<br />
+<div class="row ">
+    <div class="col-md-12">
+        <div class="col-md-6">
+            
+                <table>
+                    <thead>
+                        <tr style="align-items:center; background-color:lightgreen" >
+
+                            <th class="col-md-2">
+                                @Html.DisplayNameFor(x => x.shiftPattern)
+                            </th>
+                            <th class="col-md-2">
+                                Shift Date
+                            </th>
+                            <th class="col-md-2">
+                                Duration
+                            </th>
+                        </tr>
+                    </thead>
+
+                   
+                        @if (Model.shiftPattern!=null &&  Model.shiftPattern.Count() > 0)
+                        {
+
+                            foreach (var sf in Model.shiftPattern)
+                            {
+                                    <tr style="background-color:antiquewhite">
+
+                                        <td class="col-md-2">
+                                            @sf.Description
+                                        </td>
+                                        <td class="col-md-2">
+                                            <span> @String.Format("{0: " + dateformat + "}", sf.ShiftDate) &nbsp;</span>
+                                        </td>
+                                        <td class="col-md-2">
+                                            @{
+
+                                                var hour = sf.Duration / 60;
+                                                var min = sf.Duration % 60;
+                                                 }
+                                           
+                                            @hour <b>Hr</b>
+                                        </td>
+                                       
+                                    </tr>
+                                                }
+                                                <tr style="align-items:inherit; background-color:coral">
+                                                    <td class="col-md-2"><b>Total Shift Hours</b></td > <td></td>
+                                                    <td class="col-md-2">
+                                                        @{
+                                                            var Hour1 = Model.TolShiftHrs / 60 > 0 ? Model.TolShiftHrs / 60 : 0;
+                                                            var min1 = Model.TolShiftHrs % 60 > 0 ? Model.TolShiftHrs % 60 : 0;
+
+                                                        }
+
+                                                       
+
+                                                        @Hour1 <b>Hr</b>
+
+
+                                                    </td>
+                                               </tr>
+                                                                }
+                                                            
+
+                                                            else
+                                                            {
+
+                                                    <tr style="color:red; text-align:center">
+                                                        <td colspan="3" style="background-color:white">
+                                                            No Results Found..!
+                                                        </td>
+                                                  
+                                                        
+                                                   
+                        </tr>
+
+                                                            }
+
+                </table>
+
+            </div>
+
+        
+        <div class="col-md-6">
+            <div class="form-group-sm">
+                <div class="col-md-offset-9">
+                    @if (Model.Status == "UnAuthorized")
+                    {
+                    <input type="submit" class="form-control btn-success" name="ButtonType" value="Authorized"  id="Authorized"  />
+                    <input type="submit" class="form-control btn-default" name="ButtonType" value="UnAuthorized" id="UnAuthorized"  style="display:none;"/>
+                    }
+                    @if (Model.Status == "Authorized")
+                    {
+                        <input type="submit" class="form-control btn-success" name="ButtonType" value="Authorized" id="Authorized" style="display:none;" />
+                     <input type="submit" class="form-control btn-default" name="ButtonType" value="UnAuthorized"  id="UnAuthorized"/>
+                    }
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<br />
+<div class="row">
+
+
+    <table class="col-md-12">
+        <tr style="align-items:center; background-color:springgreen">
+
+
+            <th class="col-md-3">
+                Holiday Date
+            </th>
+            <th class="col-md-3">
+                Holiday Hours
+            </th>
+            <th class="col-md-3">
+                Holiday Type
+            </th>
+
+            <th class="col-md-3">
+                Comment
+            </th>
+
+            <th class="col-md-3">
+                Authorized
+            </th>
+
+        </tr>
+        @if(Model.holidayPattern!=null && Model.holidayPattern.Count() > 0) {
+            foreach (var item in Model.holidayPattern)
+            {
+            <tr style="align-items:center; background-color:antiquewhite">
+                <td class="col-md-3">
+                    <span> @String.Format("{0: " + dateformat + "}", item.HolidayDate) &nbsp;</span>
+           
+                </td>
+                <td class="col-md-3">
+                    @item.HolidayHours <b>Hr</b>
+                </td>
+                <td class="col-md-3">
+                   @item.HolidayType
+                </td>
+                <td class="col-md-3">
+                    @item.Comment
+                </td>
+                <td class="col-md-3">
+                    @item.Authorized
+                </td>
+
+            </tr>
+            }
+
+            <tr style="align-items:inherit; background-color:coral">
+                <td class="col-md-2"><b>Total Holiday Hours </b></td>
+               
+                <td class="col-md-2">
+                    @{
+                        var HolyDays = Model.TolHlyHours / 60 > 0 ? Model.TolHlyHours / 60 : 0;
+                        var min1 = Model.TolHlyHours % 60 > 0 ? Model.TolHlyHours % 60 : 0;
+
+                    }
+
+                 
+
+                     @HolyDays<b> Hr</b>
+                </td>
+                <td></td><td></td><td></td>
+            </tr>
+                        }
+
+                        else
+                        {
+            <tr style="color:red; text-align:center">
+                <td colspan="4" style="background-color:white">
+                   No Results Found..!
+                </td>
+
+            </tr>
+
+        }
+    </table>
+</div>
+
+}
+
+

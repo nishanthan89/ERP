@@ -1,0 +1,230 @@
+﻿@model ERP.Resource.Models.Employee_WorkingPatternDetailsBO
+
+@*@using (Html.BeginForm())
+    {*@
+@Html.AntiForgeryToken()
+
+<div class="form-horizontal well">
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.WorkingPatternID)
+    @*@Html.HiddenFor(model => model.ResourceID)*@
+    @*<div class="form-group">
+            @Html.LabelFor(model => model.WorkingPatternID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.WorkingPatternID, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.WorkingPatternID, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+    @*<div class="form-group">
+            @Html.LabelFor(model => model.EmployeeID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.EmployeeID, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ResourceID, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+    <div class="form-group">
+        <div class="form-group-sm control-label col-md-4 text-bold">Working Days</div>
+        <div class="col-md-1">
+            @Html.LabelFor(model => model.Monday, htmlAttributes: new { @class = "control-label col-md-1" })
+            <div class="col-md-1">
+                @if (Model.Monday == false && Model.Tuesday == false && Model.Wednesday == false && Model.Thursday == false && Model.Friday == false && Model.Saturday == false && Model.Sunday == false)
+                {
+                    @Html.CheckBoxFor(model => model.Monday)<br />
+                }
+                else
+                {
+                    <input type="checkbox" id="Monday" name="Monday" @*value="true"*@ @(Model.Monday ? "checked=\"checked\"" : "") />
+                }
+            </div>
+            @Html.ValidationMessageFor(model => model.Monday, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="col-md-1">
+            @Html.LabelFor(model => model.Tuesday, htmlAttributes: new { @class = "control-label col-md-1" })
+            <div class="col-md-1">
+                @*@Html.CheckBoxFor(model => model.Tuesday)<br />*@
+                @if (Model.Monday == false && Model.Tuesday == false && Model.Wednesday == false && Model.Thursday == false && Model.Friday == false && Model.Saturday == false && Model.Sunday == false)
+                {
+                    @Html.CheckBoxFor(model => model.Tuesday)<br />
+                }
+                else
+                {
+                    <input type="checkbox" id="Tuesday" name="Tuesday" @*value="true"*@ @(Model.Tuesday ? "checked=\"checked\"" : "") />
+                }
+            </div>
+            @Html.ValidationMessageFor(model => model.Tuesday, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="col-md-1">
+            @Html.LabelFor(model => model.Wednesday, htmlAttributes: new { @class = "control-label col-md-1" })
+            <div class="col-md-1">
+                @* @Html.CheckBoxFor(model => model.Wednesday)<br />*@
+                @if (Model.Monday == false && Model.Tuesday == false && Model.Wednesday == false && Model.Thursday == false && Model.Friday == false && Model.Saturday == false && Model.Sunday == false)
+                {
+                    @Html.CheckBoxFor(model => model.Wednesday)<br />
+                }
+                else
+                {
+                    <input type="checkbox" id="Wednesday" name="Wednesday" @*value="true"*@ @(Model.Wednesday ? "checked=\"checked\"" : "") />
+                }
+            </div>
+            @Html.ValidationMessageFor(model => model.Wednesday, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="col-md-1">
+            @Html.LabelFor(model => model.Thursday, htmlAttributes: new { @class = "control-label col-md-1" })
+            <div class="col-md-1">
+                @*@Html.CheckBoxFor(model => model.Thursday)<br />*@
+                @if (Model.Monday == false && Model.Tuesday == false && Model.Wednesday == false && Model.Thursday == false && Model.Friday == false && Model.Saturday == false && Model.Sunday == false)
+                {
+                    @Html.CheckBoxFor(model => model.Thursday)<br />
+                }
+                else
+                {
+                    <input type="checkbox" id="Thursday" name="Thursday" @*value="true"*@ @(Model.Thursday ? "checked=\"checked\"" : "") />
+                }
+            </div>
+            @Html.ValidationMessageFor(model => model.Thursday, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="col-md-1">
+            @Html.LabelFor(model => model.Friday, htmlAttributes: new { @class = "control-label col-md-1" })
+            <div class="col-md-1">
+                @if (Model.Monday == false && Model.Tuesday == false && Model.Wednesday == false && Model.Thursday == false && Model.Friday == false && Model.Saturday == false && Model.Sunday == false)
+                {
+                    @Html.CheckBoxFor(model => model.Friday)<br />
+                }
+                else
+                {
+                    <input type="checkbox" id="Friday" name="Friday" @*value="true"*@ @(Model.Friday ? "checked=\"checked\"" : "") />
+                }
+            </div>
+            @Html.ValidationMessageFor(model => model.Friday, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="col-md-1">
+            @Html.LabelFor(model => model.Saturday, htmlAttributes: new { @class = "control-label col-md-1" })
+            <div class="col-md-1">
+                @if (Model.Monday == false && Model.Tuesday == false && Model.Wednesday == false && Model.Thursday == false && Model.Friday == false && Model.Saturday == false && Model.Sunday == false)
+                {
+                    @Html.CheckBoxFor(model => model.Saturday)<br />
+                }
+                else
+                {
+                    <input type="checkbox" id="Saturday" name="Saturday" @*value="true"*@ @(Model.Saturday ? "checked=\"checked\"" : "") />
+                }
+            </div>
+            @Html.ValidationMessageFor(model => model.Saturday, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="col-md-1">
+            @Html.LabelFor(model => model.Sunday, htmlAttributes: new { @class = "control-label col-md-1" })<br />
+            <div class="col-md-1">
+                @if (Model.Monday == false && Model.Tuesday == false && Model.Wednesday == false && Model.Thursday == false && Model.Friday == false && Model.Saturday == false && Model.Sunday == false)
+                {
+                    @Html.CheckBoxFor(model => model.Sunday)<br />
+                }
+                else
+                {
+                    <input type="checkbox" id="Sunday" name="Sunday" @*value="true"*@ @(Model.Sunday ? "checked=\"checked\"" : "") />
+                }
+            </div>
+            @Html.ValidationMessageFor(model => model.Sunday, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.NoOfWorkingHours, htmlAttributes: new { @class = "control-label col-md-4" })
+        <div class="col-md-8">
+            @Html.EditorFor(model => model.NoOfWorkingHours, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.NoOfWorkingHours, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ChangeDate, htmlAttributes: new { @class = "control-label col-md-4" })
+        <div class="col-md-8">
+            @Html.EditorFor(model => model.ChangeDate, new { @class = "form-control", nowifnull = true })
+            @Html.ValidationMessageFor(model => model.ChangeDate, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="text-center" id="EmpButtonsDIV" hidden>
+        <a class="btn btn-success" data-toggle="tooltip" @*title="Create"*@ role="button" onclick="SaveEmployeeWorkingPattern()">&nbsp; Save</a>
+        <button type="button" class="btn btn-default" data-toggle="tooltip" title="Cancel" role="button" onclick="CancelEmployeeWorkingPattern()">Cancel</button>
+    </div>
+</div>
+@* } *@
+
+<script>
+    $(document).on("click", "[type='checkbox']", function (e) {
+        if (this.checked) {
+            $(this).attr("value", "true");
+        } else {
+            $(this).attr("value", "false");
+        }
+    });
+    //$(document).on("click", "[type='checkbox']", function (e) {
+    if (Monday.checked) {
+        $(Monday).attr("value", "true");
+    } else {
+        $(Monday).attr("value", "false");
+    }
+    //});
+
+    //$(document).on("click", "[type='checkbox']", function (e) {
+    if (Tuesday.checked) {
+        $(Tuesday).attr("value", "true");
+    } else {
+        $(Tuesday).attr("value", "false");
+    }
+    //});
+
+    //$(document).on("click", "[type='checkbox']", function (e) {
+    if (Wednesday.checked) {
+        $(Wednesday).attr("value", "true");
+    } else {
+        $(Wednesday).attr("value", "false");
+    }
+    //});
+
+    //$(document).on("click", "[type='checkbox']", function (e) {
+    if (Thursday.checked) {
+        $(Thursday).attr("value", "true");
+    } else {
+        $(Thursday).attr("value", "false");
+    }
+    //});
+
+    //$(document).on("click", "[type='checkbox']", function (e) {
+    if (Friday.checked) {
+        $(Friday).attr("value", "true");
+    } else {
+        $(Friday).attr("value", "false");
+    }
+    //});
+
+    //$(document).on("click", "[type='checkbox']", function (e) {
+    if (Saturday.checked) {
+        $(Saturday).attr("value", "true");
+    } else {
+        $(Saturday).attr("value", "false");
+    }
+    //});
+
+    //$(document).on("click", "[type='checkbox']", function (e) {
+    if (Sunday.checked) {
+        $(Sunday).attr("value", "true");
+    } else {
+        $(Sunday).attr("value", "false");
+    }
+    //});
+
+</script>
+@Scripts.Render("~/bundles/jqueryval")
+
+@*@section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }*@
+

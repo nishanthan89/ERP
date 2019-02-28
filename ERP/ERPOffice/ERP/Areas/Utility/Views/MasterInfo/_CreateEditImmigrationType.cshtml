@@ -1,0 +1,63 @@
+﻿@model ERP.Utility.Models.ImmigrationTypeBO
+
+@using (Ajax.BeginForm("CreateImmigrationType", "MasterInfo", new AjaxOptions { HttpMethod = "POST", OnSuccess = "SaveImmigration" }))
+{
+    @Html.AntiForgeryToken()
+    <br />
+    <div class="form-horizontal well">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ImmigrationTypeId)
+        <div>
+            <div class="form-group ">
+                @Html.LabelFor(model => model.ImmigrationStatus, htmlAttributes: new { @class = "control-label col-md-5" })
+                <div class="col-md-7">
+                    @Html.EditorFor(model => model.ImmigrationStatus, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ImmigrationStatus, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-5 col-md-7">
+                    @if (Model == null || Model.ImmigrationTypeId == 0)
+                    {
+                        <input type="submit" value="Create" id="CreateId" class="btn btn-success" data-toggle="tooltip" title="Save the Immigration Status" />
+}
+                    else
+                    {
+                        <input type="submit" value="Update" id="CreateId" class="btn btn-success" data-toggle="tooltip" title="Update the Immigration Status" />
+}
+                    <input type="button" value="Cancel" class="btn btn-default" data-toggle="tooltip" title="Cancel the Immigration Status Creation" role="button" onclick="CancelButton()" />
+                </div>
+            </div>
+        </div>
+
+    </div>
+}
+@Scripts.Render("~/bundles/jqueryval")
+
+<script>
+    function SaveImmigration(status) {
+        if (status.success == true) {
+            $.get('@Url.Action("CreateImmigrationType", "MasterInfo")',
+                      function (result) {
+                          $("#CreateEditImmigration").html(result);
+                      });
+            successMessage(status.errorMsg, 'Success');
+        }
+        else {
+            $("#CreateEditImmigration").html(status);
+        }
+        $.post('@Url.Action("GetImmigrationList", "MasterInfo")',
+                 function (result) {
+                     $("#ImmigrationList").html(result);
+                 });
+    }
+
+    function CancelButton() {
+        $.get('@Url.Action("CreateImmigrationType", "MasterInfo")',
+                              function (result) {
+                                  $("#CreateEditImmigration").html(result);
+                              });
+    }
+</script>
+

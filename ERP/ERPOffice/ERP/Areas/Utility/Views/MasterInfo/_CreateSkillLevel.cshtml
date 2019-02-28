@@ -1,0 +1,110 @@
+﻿@model ERP.Utility.Models.SkillLevelBO
+
+
+@using (Ajax.BeginForm("CreateSkillLevel", "MasterInfo", new AjaxOptions { HttpMethod = "POST", OnSuccess = "Save" }))
+{
+    @Html.AntiForgeryToken()
+    <br />
+    <div class="form-horizontal well">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.SkillLevelID)
+        @if (Model.SkillLevelID != 0)
+        {
+            @Html.HiddenFor(model => model.SkillLevelName)
+        }
+       
+        <div class="form-group">
+            @Html.LabelFor(model => model.SkillLevelName, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-7">
+@if (Model.SkillLevelID != 0)
+{
+    @Html.EditorFor(model => model.SkillLevelName, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+
+}
+else
+{
+    @Html.EditorFor(model => model.SkillLevelName, new { htmlAttributes = new { @class = "form-control" } })
+}
+                @Html.ValidationMessageFor(model => model.SkillLevelName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-7">
+                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MinSkillLevel, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-3">
+                @Html.EditorFor(model => model.MinSkillLevel, new { htmlAttributes = new { @class = "form-control", min = 0, max = 10 } })
+                @Html.ValidationMessageFor(model => model.MinSkillLevel, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MaxSkillLevel, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-3">
+                @Html.EditorFor(model => model.MaxSkillLevel, new { htmlAttributes = new { @class = "form-control", min = 0, max = 10 } })
+                @Html.ValidationMessageFor(model => model.MaxSkillLevel, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-4 col-md-7">
+                @if (Model == null || Model.SkillLevelID == 0)
+                {
+                    <input type="submit" value="Create" class="btn btn-success" data-toggle="tooltip" title="Create" id="create" />
+}
+                else
+                {
+                    <input type="submit" value="Update" class="btn btn-success" data-toggle="tooltip" title="Update" id="Update" />
+}
+                <input type="button" value="Cancel" class="btn btn-default" data-toggle="tooltip" title="Cancel" role="button" onclick="Cancel()" />
+
+            </div>
+</div>
+        </div>
+}
+
+    @Scripts.Render("~/bundles/jqueryval")
+
+<script>
+    function Save(status) {
+        console.log("inside save");
+        if (status.success == true) {
+            $.get('@Url.Action("CreateSkillLevel", "MasterInfo")',
+                      function (result) {
+                          $("#createSkillLevel").html(result);
+                      });
+            console.log(status);
+            successMessage(status.errorMsg, 'Success');
+        }
+        else {
+            //console.log(status);
+            //successMessage(result.errorMsg, 'Error');
+            $("#createSkillLevel").html(status);
+        }
+        $.post('@Url.Action("GetSkillLevelList", "MasterInfo")',
+                function (result) {
+                    $("#skillLevelList").html(result);
+                });
+    }
+
+    function Cancel() {
+        $.get('@Url.Action("CreateSkillLevel", "MasterInfo")',
+                              function (result) {
+                                  $("#createSkillLevel").html(result);
+                              });
+    }
+
+    //$('#MaxSkillLevel').on('change', function () {
+    //    if ($('#MaxSkillLevel').val() < $('#MinSkillLevel').val()) {
+    //        alert("");
+    //    }
+        
+    //     // or $(this).val()
+    //});
+</script>

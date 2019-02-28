@@ -1,0 +1,133 @@
+﻿@model ERP.Utility.Models.EmployeeTypeBO
+
+@using (Ajax.BeginForm("CreateEmployeeType", "MasterInfo", new { id = 0 }, new AjaxOptions { HttpMethod = "POST", OnSuccess = "Save" }))
+{
+
+    @Html.AntiForgeryToken()
+    <br />
+    <div class="form-horizontal well">       
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })       
+        @Html.HiddenFor(model => model.EmployeeTypeID)
+        @if (Model.EmployeeTypeID != 0)
+        { 
+            @Html.HiddenFor(model => model.EmployeeTypeName)
+        }
+
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.EmployeeTypeID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.EmployeeTypeID, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.EmployeeTypeID, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+      
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.EmployeeTypeName, htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-8">
+                    @* @Html.EditorFor(model => model.EmployeeTypeName, new { htmlAttributes = new { @class = "form-control", disabled = (Model.EmployeeTypeID == 0 ? "" : "disabled") } })*@
+                    
+                    @if (@*Model == null ||*@ Model.EmployeeTypeID == 0)
+                    {
+                        @Html.EditorFor(model => model.EmployeeTypeName, new { htmlAttributes = new { @class = "form-control" } })
+                    }
+                    else
+                    {
+                        @Html.EditorFor(model => model.EmployeeTypeName, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+                    }                   
+                    @Html.ValidationMessageFor(model => model.EmployeeTypeName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ReportingTo, htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-8">
+                    @Html.DropDownListFor(model => model.ReportingTo, ViewContext.Controller.ViewBag.Reporting as IEnumerable<SelectListItem>, "-- Select --", new { @class = "form-control" })
+                    @*@Html.EditorFor(model => model.ReportingTo, new { htmlAttributes = new { @class = "form-control" } })*@
+                    @Html.ValidationMessageFor(model => model.ReportingTo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-4 col-md-8">
+                    @if (Model == null || Model.EmployeeTypeID == 0)
+                    {
+                        <input type="submit" value="Create" class="btn btn-success" data-toggle="tooltip" title="Create Resource Type" />
+}
+                    else
+                    {
+                        <input type="submit" value="Update" class="btn btn-success" data-toggle="tooltip" title="Update the Resource Type" />
+}
+                    @*<input type="submit" value=@ViewBag.btnName class="btn btn-primary" />*@
+                    <input type="button" value="Cancel" class="btn btn-default" data-toggle="tooltip" title="Cancel The Resource Type Creation" role="button" onclick="CancelButton()" />
+
+                </div>
+            </div>
+            </div>
+        
+}
+   @Scripts.Render("~/bundles/jqueryval") 
+
+
+@*<script>
+    $(document).ready(function () {
+        console.log("ready!");
+    if (@Model.EmployeeTypeID != 0)
+    {
+        $("#EmployeeTypeName").attr('disabled', 'disabled');
+        var a=$("#EmployeeTypeName").val();
+        
+        //$('#Reportingto option[value=a]').attr('disabled', 'disabled');
+        $('#Reportingto option[value=a]').hide();
+        //console.log( $("#EmployeeTypeName").val());
+
+        //var x= $('#Reportingto option:contains("c")').attr('disabled', 'disabled');
+        //console.log(x);
+    }
+
+    });
+
+</script>*@
+
+@*<script>
+    Scripts.Render("~/bundles/jqueryval")
+</script>*@
+      
+  <script>
+      function Save(status) {
+          console.log(status);
+          if (status.success == true) {            
+              $.get('@Url.Action("CreateEmployeeType", "MasterInfo", new RouteValueDictionary(new { id = 0 }))',
+                      function (result) {
+                          console.log("reload the create form");
+                          $("#CreateEdit").html(result);
+                      });
+              successMessage(status.errorMsg, 'Success');
+          }
+          else {
+              console.log("hi else");
+              $("#CreateEdit").html(status);
+          }
+          $.post('@Url.Action("GetTypeList", "MasterInfo")',
+                     function (result) {
+                         //console.log("refresh list--save save");
+                         $("#TypeList").html(result);
+                     });
+      }
+
+      function CancelButton() {
+          console.log("Cancel buttton");
+          $.get('@Url.Action("CreateEmployeeType", "MasterInfo")',
+                                function (result) {
+                                    $("#CreateEdit").html(result);
+                                });
+      }
+  </script>

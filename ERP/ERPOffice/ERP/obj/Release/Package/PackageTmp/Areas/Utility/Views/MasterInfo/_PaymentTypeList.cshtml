@@ -1,0 +1,41 @@
+﻿@model IEnumerable<ERP.Utility.Models.PaymentTypeBO>
+<br />
+<table class="table">
+    <thead>
+        <tr>
+            <th></th>                          
+            <th>
+                @Html.DisplayNameFor(m => m.PaymentName)
+            </th>            
+            <th></th>                            
+        </tr>
+    </thead>
+    @if (Model.Count() > 0)
+    {
+        foreach (var eth in Model)
+        {
+            <tr>
+                <td>
+                    <a data-toggle="tooltip" title="Edit payment Status" role="button" onclick="EditPayment(@eth.PaymentID)" id="edit"><span class="glyphicon glyphicon-pencil text-success"></span></a>
+                </td>
+                <td>
+                    @Html.DisplayFor(m => eth.PaymentName)
+                </td>
+                
+                <td>
+                    <a data-toggle="tooltip" title="Delete Payment Status" role="button" onclick="DeletePayment(@eth.PaymentID)"><span class="glyphicon glyphicon-trash text-danger"></span></a>
+                </td>
+            </tr>
+        }
+    }
+    else {
+        <tr>
+            <td align="center" colspan=15>
+                <center>
+                    <font color="red" ; style="text-align:center">"Sorry, No Payment Status  are found!!."</font>
+                </center>
+            </td>
+        </tr>
+    }
+</table>
+

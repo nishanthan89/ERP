@@ -1,0 +1,11 @@
+E:\TFS\ERP\ERPOffice\ERPOffice\ERP.DA\bin\Release\ERP.DA.dll.config
+E:\TFS\ERP\ERPOffice\ERPOffice\ERP.DA\bin\Release\ERP.DA.dll
+E:\TFS\ERP\ERPOffice\ERPOffice\ERP.DA\bin\Release\ERP.DA.pdb
+E:\TFS\ERP\ERPOffice\ERPOffice\ERP.DA\bin\Release\EntityFramework.dll
+E:\TFS\ERP\ERPOffice\ERPOffice\ERP.DA\bin\Release\EntityFramework.SqlServer.dll
+E:\TFS\ERP\ERPOffice\ERPOffice\ERP.DA\bin\Release\System.Web.Helpers.dll
+E:\TFS\ERP\ERPOffice\ERPOffice\ERP.DA\bin\Release\EntityFramework.xml
+E:\TFS\ERP\ERPOffice\ERPOffice\ERP.DA\bin\Release\EntityFramework.SqlServer.xml
+E:\TFS\ERP\ERPOffice\ERPOffice\ERP.DA\obj\Release\ERP.DA.csprojResolveAssemblyReference.cache
+E:\TFS\ERP\ERPOffice\ERPOffice\ERP.DA\obj\Release\ERP.DA.dll
+E:\TFS\ERP\ERPOffice\ERPOffice\ERP.DA\obj\Release\ERP.DA.pdb

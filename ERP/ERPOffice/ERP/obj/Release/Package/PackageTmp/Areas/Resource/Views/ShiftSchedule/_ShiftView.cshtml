@@ -1,0 +1,73 @@
+﻿@model ERP.Resource.ViewModels.ShiftSearchViewModel
+
+<div>
+
+<div class="pull-right">
+    <a href="#"><input type="button" name="AddShiftSchedule" class="btn btn-success" value="AddShiftSchedule" onclick="addShiftSchedule()" /></a>
+    @*@Ajax.ActionLink("Add ShiftSchedule", "AddShiftSchedule", "ShiftSchedule", new AjaxOptions { InsertionMode = InsertionMode.ReplaceWith, UpdateTargetId = "shiftPanelDIV" })*@
+</div>
+
+@using (Ajax.BeginForm("SearchShiftSchedule", "ShiftSchedule", new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace, UpdateTargetId = "shiftSearchDIV" }))
+{
+<br class="form-control" />
+
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <div>
+            <div>
+                @Html.LabelFor(model => model.EmployeeID, new { @class = "col-md-1 control-label" })
+                <div class="col-md-2">
+                    @Html.DropDownListFor(model => model.EmployeeID, new SelectList(ViewBag.EmployeeList, "Value", "Text"), "-- Select --", htmlAttributes: new { @class = "form-control" })
+                </div>
+                @Html.ValidationMessageFor(model => model.EmployeeID, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.BranchID, new { @class = "col-md-1 control-label" })
+                <div class="col-md-2">
+                    @Html.DropDownListFor(model => model.BranchID, new SelectList(ViewBag.BranchList, "Value", "Text"), "-- Select --", htmlAttributes: new { @class = "form-control" })
+                </div>
+                @Html.ValidationMessageFor(model => model.BranchID, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.StartDate, new { @class = "col-md-1 control-label" })
+                <div class="col-md-2">
+                    @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control", style = "width:200px;" }, nowIfNull = true })
+                </div>
+                @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.EndDate, new { @class = "col-md-1 control-label" })
+                <div class="col-md-2">
+                    @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @class = "form-control" }, nowIfNull = true })
+                </div>
+                @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group col-md-1 col-md-offset-11">
+                <input type="submit" class="form-control btn-default" name="Search" value="Search" />
+            </div>
+        </div>
+    </div>
+}
+</div>
+
+<hr />
+
+<script>
+    function addShiftSchedule() {
+        $.ajax({
+            url: '@Url.Action("AddShiftSchedule", "ShiftSchedule")',
+            type: 'GET',
+            cache: false,
+            dataType: 'html',
+            data: ({}),
+            success: function (data) {
+                //  alert(data);
+                //$("#shiftSearchDIV").empty();
+                //$("#shiftPanelDIV").empty();
+                $("#shiftSearchDIV").html('');
+                $("#shiftPanelDIV").html(data);
+
+            }
+        })
+    }
+</script>

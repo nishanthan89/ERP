@@ -1,0 +1,195 @@
+﻿@model ERP.Admin.ViewModels.CompanyInfoViewModel
+@using ERP.MvcHelpers
+@{
+    ViewBag.Title = "CompanyInfo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Ajax.BeginForm("Update","CompanyInfo", new AjaxOptions { HttpMethod = "POST", OnSuccess = "Update"}))
+{
+
+    @Html.AntiForgeryToken()
+    <div class="panel panel-success">
+        <div class="panel-heading clearfix">
+            <h3 class="panel-title pull-left" style="padding-top: 7.5px;"><b>Company Information</b></h3>
+            <div class="form-inline pull-right">
+                @*<span>Upload Your Company Logo:</span> <input type="file" name="UploadFile" id="txtUploadFile" class="makethispretty" multiple />*@
+            </div>
+        </div>
+        <div class="panel-body">           
+            <div class="row">
+            <div class="col-md-6">
+                <div class="form-group-sm">
+                    @Html.LabelFor(model => model.CompanyName, new { @class = "col-md-4 control-label" })
+                    <div>
+                        @Html.EditorFor(model => model.CompanyName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.CompanyName, "", new { @class = "text-danger col-md-offset-4" })
+                   </div>
+                    </div>
+                <div class="form-group-sm">
+                    @Html.LabelFor(model => model.RegistrationNo, new { @class = "col-md-4 control-label" })
+                    <div>
+                        @Html.EditorFor(model => model.RegistrationNo, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                    @Html.ValidationMessageFor(model => model.RegistrationNo, "", new { @class = "text-danger col-md-offset-4" })
+                </div>
+                <div class="form-group-sm">
+                    @Html.LabelFor(model => model.VATNo, new { @class = "col-md-4 control-label" })
+                    <div>
+                        @Html.EditorFor(model => model.VATNo, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                    @Html.ValidationMessageFor(model => model.VATNo, "", new { @class = "text-danger col-md-offset-4" })
+                </div>
+                <div class="form-group-sm">
+                    @Html.LabelFor(model => model.EmailAddress, new { @class = "col-md-4 control-label" })
+                    <div>
+                        @Html.EditorFor(model => model.EmailAddress, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                    @Html.ValidationMessageFor(model => model.EmailAddress, "", new { @class = "text-danger col-md-offset-4" })
+                </div>
+                @*<div class="form-group-sm">
+                        @Html.LabelFor(model => model.LicienceNO, new { @class = "col-md-4 control-label" })
+                        <div>
+                            @Html.EditorFor(model => model.LicienceNO, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                        @Html.ValidationMessageFor(model => model.LicienceNO, "", new { @class = "text-danger" })
+                    </div><br />*@
+                <div class="form-group-sm">
+                    @Html.LabelFor(model => model.FaxNo, new { @class = "col-md-4 control-label" })
+                    <div>
+                        @Html.EditorFor(model => model.FaxNo, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                    @Html.ValidationMessageFor(model => model.FaxNo, "", new { @class = "text-danger" })
+                </div><br />
+                <div class="form-group-sm">
+                    @Html.LabelFor(model => model.TelephoneNo, new { @class = "col-md-4 control-label" })
+                    <div>
+                        @Html.EditorFor(model => model.TelephoneNo, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                    @Html.ValidationMessageFor(model => model.TelephoneNo, "", new { @class = "text-danger" })
+                </div><br />
+                <div class="form-group-sm">
+                    @Html.LabelFor(model => model.Website, new { @class = "col-md-4 control-label" })
+                    <div>
+                        @Html.EditorFor(model => model.Website, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                    @Html.ValidationMessageFor(model => model.Website, "", new {  @class = "text-danger col-md-offset-4" })
+                   
+                </div><br />
+                <div class="form-group-sm">
+                    @Html.LabelFor(model => model.TimeZone, new { @class = "col-md-4 control-label" })
+                    <div>
+                        @Html.DropDownListFor(model => model.TimeZoneID, new SelectList(ViewBag.TimeZoneList as IEnumerable<SelectListItem>, "Value", "Text"), "-- Select --", htmlAttributes: new { @class = "form-control" })
+                    </div>
+                    @Html.ValidationMessageFor(model => model.TimeZoneID, "", new { @class = "text-danger col-md-offset-4" })
+                </div>
+                <div class="form-group-sm">
+                    @Html.LabelFor(model => model.DateFormat, new { @class = "col-md-4 control-label" })
+                    <div>
+
+                        @Html.DropDownListFor(model => model.DateFormatID, new SelectList(ViewBag.DateFormatList as IEnumerable<SelectListItem>, "Value", "Text"), "-- Select --", htmlAttributes: new { @class = "form-control" })
+                    </div>
+                    @Html.ValidationMessageFor(model => model.DateFormatID, "", new { @class = "text-danger col-md-offset-4" })
+                </div>
+                <div class="form-group-sm ">
+                    @Html.LabelFor(model => model.Currency, new { @class = "col-md-4 control-label" })
+                    <div>
+                        @Html.DropDownListFor(model => model.CurrencyID, new SelectList(ViewBag.CurrencyList as IEnumerable<SelectListItem>, "Value", "Text"), "-- Select --", htmlAttributes: new { @class = "form-control" })
+                    </div>
+                    @Html.ValidationMessageFor(model => model.CurrencyID, "", new { @class = "text-danger col-md-offset-4" })
+                </div>
+
+                <div class="form-group-sm">
+                    @Html.LabelFor(model => model.TimeID, new { @class = "col-md-4 control-label" })
+                    <div>
+                        @Html.DropDownListFor(model => model.TimeID, new SelectList(ViewBag.TimeFormatList as IEnumerable<SelectListItem>, "Value", "Text"), "-- Select --", htmlAttributes: new { @class = "form-control" })
+                    </div>
+                    @Html.ValidationMessageFor(model => model.TimeID, "", new { @class = "text-danger col-md-offset-4" })
+                </div>
+            </div>
+            <div class="col-md-6">
+                
+                <div class="form-group-sm" id="AddressDIV">
+                    @{
+                        Html.RenderAction("Address", "Address", new { area = "", addressID = Model.AddressID, multiAddress = 0 });
+                    }
+                </div>
+               
+                    <div class="row col-lg-offset-3">
+                        @Html.Partial("_LogoView")
+                    </div>
+                    <div class="row col-lg-offset-5">
+                        <input type="submit" class="btn btn-success" value="Update" id="UpdateIdd" onclick="Up()" />
+                        <a href="@Url.Action("Index", "Home", new { area = "" })"><input type="button" class="btn btn-default" value="Cancel" /></a>
+
+                    </div>
+                   
+                </div> 
+            </div>  
+            </div>               
+        </div>
+                        }
+
+<script>
+    //function Up() {
+
+    //    swal("Successfully fdgdsfds")
+
+    //}
+
+    
+
+    $('#txtUploadFile').on('change', function (e) {
+
+        
+        var files = e.target.files;
+        //var myID = 3; //uncomment this to make sure the ajax URL works
+        if (files.length > 0) {
+            if (window.FormData !== undefined) {
+                var data = new FormData();
+                for (var x = 0; x < files.length; x++) {
+                    data.append("file" + x, files[x]);
+                }    
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("UploadFiles", "CompanyInfo")',
+                    contentType: false,
+                    processData: false,
+                    data: data,
+                    success: function (result) {
+                        // alert(result)
+                        $('#LogoID').html("").show();
+                        $('#LogoID').html(result);
+                        //console.log(result);
+
+                    },
+                    error: function (xhr, status, p3, p4) {
+                        var err = "Error " + " " + status + " " + p3 + " " + p4;
+                        if (xhr.responseText && xhr.responseText[0] == "{")
+                            err = JSON.parse(xhr.responseText).Message;
+                        console.log(err);
+                    }
+                });
+            } else {
+                swal("This browser doesn't support HTML5 file uploads!");
+            }
+        }
+    });
+
+    var Upd = new Audio();
+    Upd.src = "@Url.Content("~/Content/music/SuccessFullyUpdated.wav")";
+    
+    function Update() {
+        if(Update.success=true){
+            Upd.play();
+            swal("Successfully Update")
+
+        }
+
+    }
+   
+</script>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,10 @@
+﻿
+@using (Html.BeginForm("ImportExcelFileToDatabase", "ShiftSchedule", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+<div class="form-group">
+    <input type="file" name="FileUpload" id="FileUpload" value="Choose Excel File" class="form-control" />
+
+    <input type="submit" class="form-control btn btn-default " name="UploadShift" value="Upload Shift" />
+   
+</div>
+}

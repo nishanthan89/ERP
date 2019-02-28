@@ -1,0 +1,110 @@
+﻿@model ERP.Utility.ViewModels.CurrencyView
+
+@{
+    ViewBag.Title = "Currency";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="panel panel-success">
+    <div class="panel-heading">
+        <h3 class="panel-title">Currency Format </h3>
+    </div>
+    <div class="panel-body">
+        <div class="col-md-3" id="currencyList">
+            @Html.Partial("_CurrencyList", Model.currencyList)
+        </div>
+
+        <div class="col-md-5 col-md-offset-3" id="CreateEdit">
+            @Html.Partial("_CreateCurrency", Model.currencyBO)
+        </div>
+    </div>
+</div>
+
+<script>
+    function Save(status) {
+        if (status.success == true) {
+            $.post('@Url.Action("GetCurrencyList", "MasterInfo")',
+                 function (result) {
+                     $("#currencyList").html(result);
+                 });
+            $.get('@Url.Action("CreateCurrency", "MasterInfo")',
+                      function (result) {
+                          $("#CreateEdit").html(result);
+                      });
+            console.log(status);
+            successMessage(status.errorMsg, 'Success');
+
+        }
+        else {
+            $("#CreateEdit").html(status);
+        }
+    }
+    function DeleteCurrency(CurrencyID) {
+        //console.log(TitleId);
+        swal({
+            title: 'Confirm',
+            text: 'Are you sure you want to Delete?',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes',
+            cancelButtonText: 'No'
+        },
+         function (isConfirm) {
+             // console.log(isConfirm);
+             if (isConfirm) {
+                 $.ajax({
+                     url: '@Url.Action("DeleteCurrency", "MasterInfo")',
+                     dataType: 'html',
+                     data: ({ id: CurrencyID }),
+                     success: function Delete(status) {
+                         var statusObj = jQuery.parseJSON(status);
+                         console.log(statusObj);
+                         if (statusObj.success == true) {
+                             console.log(statusObj.success);
+                             successMessage(statusObj.errorMsg, 'Success');
+                            
+                         }
+                         else {
+                             console.log(statusObj.success);
+                             successMessage(statusObj.errorMsg, 'Error');
+                         }
+                         $.post('@Url.Action("GetCurrencyList", "MasterInfo")',
+                                                                function (result) {
+                                                                    $("#currencyList").html(result);
+                                                                });
+
+                         $.get('@Url.Action("CreateCurrency", "MasterInfo")',
+                                function (result) {
+                                    $("#CreateEdit").html(result);
+                                });
+                     },
+                     error: function (data) {
+                         alert("error Loading the data");
+                     }
+                 })
+             }
+         })
+    }
+
+    function CancelButton() {
+        $.get('@Url.Action("CreateCurrency", "MasterInfo")',
+                              function (result) {
+                                  $("#CreateEdit").html(result);
+                              });
+    }
+
+    function EditCurrency(TitleId) {
+        $.ajax({
+            url: '@Url.Action("EditCurrency", "MasterInfo")',
+            dataType: 'html',
+            data: ({ id: TitleId }),
+            success: function (data) {
+                $("#CreateEdit").html(data).show();
+            },
+            error: function (data) {
+                alert("error Loading the data");
+            }
+        })
+    }
+
+</script>

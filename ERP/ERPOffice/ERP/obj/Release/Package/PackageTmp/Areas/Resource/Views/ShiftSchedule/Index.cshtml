@@ -1,0 +1,29 @@
+﻿@model ERP.Resource.Models.ShiftBO
+@{
+    ViewBag.Title = "Shift Schedule";
+    Layout =Request.IsAjaxRequest()?null: "~/Views/Shared/_Layout.cshtml";
+}
+<div id="shiftPanelDIV">
+    <div class="panel panel-success">
+        <div class="panel-heading">Shift Schedule</div>
+        <div class="panel-body">
+            <div>
+                @{
+                    Html.RenderPartial("_ShiftView", Model.ShiftSearch);
+                }
+            </div>
+            <div id="shiftSearchDIV">
+                @{
+                    Html.RenderPartial("_ShiftSearchView", Model);
+                }
+            </div>
+            <div id="loadingDiv" style="text-align: center; display: none; margin-bottom: 20px;">
+                <img alt="Loading" src="@Url.Content("~/Content/dist/img/ajax-loading.gif")" />
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+}

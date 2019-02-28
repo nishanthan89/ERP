@@ -1,0 +1,100 @@
+﻿
+@using ERP.MvcBinder
+
+@model Nullable<DateTime>
+
+@{
+    string DateFormat = MvcApplication.DateFormat;
+
+    var date = Model as DateTime?;
+
+    if ((!date.HasValue
+        || date.Equals(default(DateTime)))
+        && ((bool?)ViewData["nowIfNull"] ?? false))
+    {
+        date = DateTime.Now;
+    }
+}
+
+<div class="input-group date">
+
+    @*@Html.TextBox("", String.Format("{0:d}", Model.ToShortDateString()),
+  new { @class = "datefield", type = "date"})*@
+    @Html.TextBox("", date == null
+                    ? String.Empty
+                    : String.Format("{0:d}", date.Value.ToString(DateFormat))
+                , new
+                {
+                    @class = "form-control daterule",
+                    @onkeypress = "return ValidateDateInput(this);",
+                    size = 10,
+                    placeholder = DateFormat.ToLower()
+                })
+    <div class="input-group-addon"><i class="glyphicon glyphicon-calendar" aria-hidden="true"></i></div>
+</div>
+@{
+    string name = ViewData.TemplateInfo.HtmlFieldPrefix;
+    string id = name.Replace(".", "_");
+}
+
+<script type="text/javascript">
+
+    $(function (){
+        //$("input[data-val-date]").removeAttr("data-val-date");
+            $('#date').removeAttr("data-val-date");
+            $(".input-group.date").datepicker({
+                autoclose: true,
+                todayHighlight: true,
+                showButtonPanel: true,
+                todayBtn: true,
+                forceParse: false,
+                format: "@MvcApplication.DateFormat.ToLower()",
+            });
+
+            @*jQuery.validator.methods.date = function (value, element) {
+                if (value) {
+                    try {
+                        //console.log(value);
+                        $.datepicker.parseDate('@MvcApplication.DateFormat.ToLower().Replace("yyyy", "yy")', value);
+                    } catch (ex) {
+                        //console.log(ex);
+                        return false;
+                    }
+                }
+                //console.log('here..');
+                return true;
+            }
+
+            jQuery(function ($) {
+                $.validator.addMethod(
+                    "daterule",
+                    function (value, element) {
+                        var required = $(element).data('val-required');
+                        if (required == undefined || required == '')
+                            return true;
+                        var ok = true;
+                        try {
+                            if (value != '') {
+                                var dateFormat = '@MvcApplication.DateFormat.ToLower()';
+                                dateFormat = dateFormat.replace('yyyy', 'yy');
+                                console.log(dateFormat);
+                                var date = $.datepicker.parseDate(dateFormat, value);
+                                //alert(date);
+                                //$.fn.datepicker.DPGlobal.formatDate = 'dd/mm/yyyy';
+                                //var dpg = $.fn.datepicker.DPGlobal;
+                                //alert(value);
+                                //console.log(dpg.parseDate(value, dpg.parseFormat('dd/mm/yyyy')));
+                                console.log('here');
+                            }
+                            //else
+                            //    ok = true;
+                        } catch (err) {
+                            //alert('err: ' + err);
+                            ok = false;
+                        }
+                        return ok;
+                    }, 'Wrong date format');
+            });*@
+
+   })
+</script>

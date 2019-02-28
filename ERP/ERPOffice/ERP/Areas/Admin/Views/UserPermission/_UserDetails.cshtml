@@ -1,0 +1,116 @@
+﻿
+<div class="table-responsive">
+    <table class="table table-hover table-striped" id="example">
+        <thead>
+            <tr>
+                <th></th>
+                <th>@Html.DisplayName("Employee No")</th>
+                <th>@Html.DisplayName("Title")</th>
+                <th>@Html.DisplayName("First Name")</th>
+                <th>@Html.DisplayName("Last Name")</th>
+                <th>@Html.DisplayName("Username")</th>
+                <th>@Html.DisplayName("Address")</th>
+                <th>@Html.DisplayName("Telephone")</th>
+                <th>@Html.DisplayName("Mobile")</th>
+                <th>@Html.DisplayName("Email")</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null)
+            {
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td><a href="@Url.Action("EditUser","Register",new { id=@item.UserID})"><span class="glyphicon glyphicon-pencil text-success" data-toggle="tooltip" title="Edit"></span></a></td>
+                        <td>@item.EmployeeNO</td>
+                        <td>@item.Title</td>
+                        <td>@item.FirstName</td>
+                        <td>@item.LastName</td>
+                        <td>@item.Username</td>
+                        <td>@item.Address</td>
+                        <td>@item.Telephone</td>
+                        <td>@item.Mobile</td>
+                        <td>@item.Email</td>
+                        <td>
+                            <a href="#">
+                                <span class="glyphicon glyphicon-trash text-danger" data-toggle="tooltip" title="Delete" , new { onclick="return swal(
+                                              {
+                                                title: 'Confirm',
+                                                text: 'Are you sure to delete this User?',
+                                                type: 'warning',
+                                                showCancelButton: true,
+                                                confirmButtonText: 'Yes',
+                                                cancelButtonText: 'No',
+                                              closeOnConfirm: false,
+                                              },
+                                              function(isConfirm){
+                                                  if (isConfirm) {
+                                                      location.href='@Url.Action("DeleteUser","Register",new { id=@item.UserID})'
+                                                  }
+                                              }
+                                            );" }></span>
+                            </a>
+                        </td>
+                        <td>
+                            @if (item.LoginUserID != null)
+                            {
+                                <a href="#">
+                                    <span class="glyphicon glyphicon-log-out text-danger" data-toggle="tooltip" title="Last Login Date:@item.LoginDate" , new { onclick="return swal(
+                                              {
+                                                title: 'Confirm',
+                                                text: 'Are you sure to Log Off this User?',
+                                                type: 'warning',
+                                                showCancelButton: true,
+                                                confirmButtonText: 'Yes',
+                                                cancelButtonText: 'No',
+                                              closeOnConfirm: false,
+                                              },
+                                              function(isConfirm){
+                                                  if (isConfirm) {
+                                                      location.href='@Url.Action("LogOffUser", "UserPermission", new { id = @item.LoginUserID })'
+                                                  }
+                                              }
+                                            );" }></span>
+                                </a>
+                            }
+                        </td>
+                    </tr>
+                }
+            }
+            @*else {
+                <tr><td>  </td>
+                    <td>  </td>
+                    <td>  </td>
+                    <td>  </td>
+                    <td>  </td>
+                    <td> <p class="text-center text-danger"> Sorry, Records Not Found.... </p></td>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
+            </tr>
+            }*@
+        </tbody>
+    </table>
+
+</div>
+<script>
+    $(document).ready(function () {
+        $('#example').DataTable({
+            bFilter: false,       //disable search text
+            bInfo: false,
+            //bPaginate: false,
+            "language": {
+                "zeroRecords": "<p class='text-danger'>No Results Found</p>",
+                "text-color":"#7f1416"
+            }
+        });
+    });
+</script>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,149 @@
+﻿@model ERP.Resource.ViewModels.ShiftSearchViewModel
+
+@{
+    string dateformat = MvcApplication.DateFormat;
+    string timeformat = MvcApplication.TimeFormat;
+}
+
+@*<div class="pull-right">
+        <a href="#"><input type="button" name="AddShiftSchedule" class="btn btn-success" value="AddShiftSchedule" onclick="addShiftSchedule()" /></a>
+         @Ajax.ActionLink(" Add New Shift", "AddShiftSchedule", "ShiftSchedule", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "shiftPanelDIV" }, new { @class = "btn btn-success  glyphicon-plus-sign" })
+    </div>
+    <div class="pull-right">
+        <input type="file"   name="shiftExcel" value="Upload Shift" />
+    </div>
+        <br />*@
+
+<div class="form-inline">
+    <div class="form-group col-md-offset-6">
+        @Html.Partial("_UploadShift")
+    </div>
+    <div class="form-group">
+        @*<input type="button" name="DownloadTemplate" value="DownloadTemplate" id="DownloadTemplateID" class="btn btn-default"/>*@
+        @*@Ajax.ActionLink("Download Template", "DownloadTemplate", "ShiftSchedule", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "shiftPanelDIV" }, new { @class = "btn btn-success" })*@
+        @Html.ActionLink("Download Template", "DownloadTemplate", "ShiftSchedule", new { @class = "btn btn-success" })
+
+    </div>
+    <br />
+    <br />
+    @using (Ajax.BeginForm("SearchShiftSchedule", "ShiftSchedule", new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace, UpdateTargetId = "shiftSearchDIV" }))
+    {
+        @Html.AntiForgeryToken()
+
+
+        <div class="form-horizontal">
+            <div class="col-md-3">
+                <div class="row">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.SelectView, new { @class = "control-label col-md-6 " })
+                        <div class="form-group-sm col-md-6">
+                            @Html.DropDownListFor(model => model.SelectView, new List<SelectListItem>
+                {
+                new SelectListItem() {Text = "--Daily View--", Value="Daily"},
+                //new SelectListItem() {Text = "First Name", Value="FName"},
+                new SelectListItem() {Text = "Weekly", Value="Weekly"},}, new { @class = "form-control" })
+                        </div>
+                        @Html.ValidationMessageFor(model => model.SelectView, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.StartDate, new { @class = "control-label col-md-5" })
+                        <div class="form-group-sm col-md-7">
+                            @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control" }, nowIfNull = true })
+                        </div>
+                        @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="row">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.BranchID, new { @class = "control-label col-md-6" })
+                        <div class="form-group-sm col-md-6">
+                            @Html.DropDownListFor(model => model.BranchID, new SelectList(ViewBag.BranchList, "Value", "Text"), "-- Select --", htmlAttributes: new { @class = "form-control" })
+                        </div>
+                        @Html.ValidationMessageFor(model => model.BranchID, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <br />
+                <div class="row">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.EndDate, new { @class = "control-label col-md-5 " })
+                        <div class="form-group-sm col-md-7">
+                            @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @class = "form-control" }, nowIfNull = true })
+                        </div>
+                        @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="row">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.EmployeeID, new { @class = "control-label col-md-7" })
+                        <div class="form-group-sm col-md-5">
+                            @Html.DropDownListFor(model => model.EmployeeID, new SelectList(ViewBag.EmployeeList, "Value", "Text"), "-- Select --", htmlAttributes: new { @class = "form-control" })
+                        </div>
+                        @Html.ValidationMessageFor(model => model.EmployeeID, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-default" name="Search" value="Search" />
+                    </div>
+                    <div class="form-group">
+                        <span class="col-md-1"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="row">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ShiftPatternNameID, new { @class = "control-label col-md-7" })
+                        <div class="form-group-sm col-md-5">
+                            @Html.DropDownListFor(model => model.ShiftPatternNameID, new SelectList(ViewBag.ShiftPatternList, "Value", "Text"), "-- Select --", htmlAttributes: new { @class = "form-control" })
+                        </div>
+                        @Html.ValidationMessageFor(model => model.ShiftPatternNameID, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <br />
+                
+                    <div class="col-md-offset-6">
+                        @*<a href="#"><input type="button" name="AddShiftSchedule" class="btn btn-success" value="AddShiftSchedule" onclick="addShiftSchedule()" /></a>*@
+                        @Ajax.ActionLink(" Add New Shift", "AddShiftSchedule", "ShiftSchedule", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "shiftPanelDIV" }, new { @class = "btn btn-success  glyphicon-plus-sign" })
+                    </div>
+               
+            </div>
+        </div>
+        <div class="row"></div>
+        
+    }
+</div>
+
+<script>
+
+    $("#SelectView").change(function () {
+        if ($("#SelectView").val() == "Weekly") {
+            $("#EndDate").attr("disabled", "disabled");
+            $("#ShiftPatternNameID").attr("disabled", "disabled");
+            $("#BranchID").attr("disabled", "disabled");
+            $("#EmployeeID").attr("disabled", "disabled");
+        }
+        else {
+            $("#EndDate").attr("disabled", false);
+            $("#ShiftPatternNameID").attr("disabled", false);
+            $("#BranchID").attr("disabled", false);
+            $("#EmployeeID").attr("disabled", false);
+        }
+    })
+</script>
+
+
+
+
+

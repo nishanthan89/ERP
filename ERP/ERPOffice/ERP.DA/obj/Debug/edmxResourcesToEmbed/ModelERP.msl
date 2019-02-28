@@ -1,0 +1,685 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ERPModelStoreContainer" CdmEntityContainer="ERPEntities">
+    <EntitySetMapping Name="C__MigrationHistory">
+      <EntityTypeMapping TypeName="ERPModel.C__MigrationHistory">
+        <MappingFragment StoreEntitySet="__MigrationHistory">
+          <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+          <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetLoginOffs">
+      <EntityTypeMapping TypeName="ERPModel.AspNetLoginOff">
+        <MappingFragment StoreEntitySet="AspNetLoginOff">
+          <ScalarProperty Name="BranchID" ColumnName="BranchID" />
+          <ScalarProperty Name="DeviceId" ColumnName="DeviceId" />
+          <ScalarProperty Name="Login" ColumnName="Login" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="LoginLogoutID" ColumnName="LoginLogoutID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetPermissions">
+      <EntityTypeMapping TypeName="ERPModel.AspNetPermission">
+        <MappingFragment StoreEntitySet="AspNetPermission">
+          <ScalarProperty Name="PermissionType" ColumnName="PermissionType" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Permission" ColumnName="Permission" />
+          <ScalarProperty Name="PermissionID" ColumnName="PermissionID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetRoles">
+      <EntityTypeMapping TypeName="ERPModel.AspNetRole">
+        <MappingFragment StoreEntitySet="AspNetRoles">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetUserClaims">
+      <EntityTypeMapping TypeName="ERPModel.AspNetUserClaim">
+        <MappingFragment StoreEntitySet="AspNetUserClaims">
+          <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+          <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetUserLogins">
+      <EntityTypeMapping TypeName="ERPModel.AspNetUserLogin">
+        <MappingFragment StoreEntitySet="AspNetUserLogins">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+          <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetUsers">
+      <EntityTypeMapping TypeName="ERPModel.AspNetUser">
+        <MappingFragment StoreEntitySet="AspNetUsers">
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+          <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+          <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+          <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+          <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+          <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+          <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Branch_Details">
+      <EntityTypeMapping TypeName="ERPModel.Branch_Details">
+        <MappingFragment StoreEntitySet="Branch_Details">
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="VATNumber" ColumnName="VATNumber" />
+          <ScalarProperty Name="AddressID" ColumnName="AddressID" />
+          <ScalarProperty Name="Fax" ColumnName="Fax" />
+          <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+          <ScalarProperty Name="BranchTypeID" ColumnName="BranchTypeID" />
+          <ScalarProperty Name="BranchStatusID" ColumnName="BranchStatusID" />
+          <ScalarProperty Name="BranchCode" ColumnName="BranchCode" />
+          <ScalarProperty Name="BranchName" ColumnName="BranchName" />
+          <ScalarProperty Name="BranchID" ColumnName="BranchID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Branch_Holidays">
+      <EntityTypeMapping TypeName="ERPModel.Branch_Holidays">
+        <MappingFragment StoreEntitySet="Branch_Holidays">
+          <ScalarProperty Name="HolidayName" ColumnName="HolidayName" />
+          <ScalarProperty Name="HolidayDate" ColumnName="HolidayDate" />
+          <ScalarProperty Name="HolidayTypeID" ColumnName="HolidayTypeID" />
+          <ScalarProperty Name="BranchID" ColumnName="BranchID" />
+          <ScalarProperty Name="BnchComHolyID" ColumnName="BnchComHolyID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Branch_Status">
+      <EntityTypeMapping TypeName="ERPModel.Branch_Status">
+        <MappingFragment StoreEntitySet="Branch_Status">
+          <ScalarProperty Name="BranchStatus" ColumnName="BranchStatus" />
+          <ScalarProperty Name="BranchStatusID" ColumnName="BranchStatusID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Branch_Type">
+      <EntityTypeMapping TypeName="ERPModel.Branch_Type">
+        <MappingFragment StoreEntitySet="Branch_Type">
+          <ScalarProperty Name="BranchType" ColumnName="BranchType" />
+          <ScalarProperty Name="BranchTypeID" ColumnName="BranchTypeID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Common_Address">
+      <EntityTypeMapping TypeName="ERPModel.Common_Address">
+        <MappingFragment StoreEntitySet="Common_Address">
+          <ScalarProperty Name="CountryID" ColumnName="CountryID" />
+          <ScalarProperty Name="PostCode" ColumnName="PostCode" />
+          <ScalarProperty Name="County" ColumnName="County" />
+          <ScalarProperty Name="Town" ColumnName="Town" />
+          <ScalarProperty Name="AddressLine3" ColumnName="AddressLine3" />
+          <ScalarProperty Name="AddressLine2" ColumnName="AddressLine2" />
+          <ScalarProperty Name="AddressLine1" ColumnName="AddressLine1" />
+          <ScalarProperty Name="AddressID" ColumnName="AddressID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Common_Area">
+      <EntityTypeMapping TypeName="ERPModel.Common_Area">
+        <MappingFragment StoreEntitySet="Common_Area">
+          <ScalarProperty Name="RegionID" ColumnName="RegionID" />
+          <ScalarProperty Name="AreaName" ColumnName="AreaName" />
+          <ScalarProperty Name="AreaID" ColumnName="AreaID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Common_AreaPostCodeDetails">
+      <EntityTypeMapping TypeName="ERPModel.Common_AreaPostCodeDetails">
+        <MappingFragment StoreEntitySet="Common_AreaPostCodeDetails">
+          <ScalarProperty Name="PostCode" ColumnName="PostCode" />
+          <ScalarProperty Name="AreaID" ColumnName="AreaID" />
+          <ScalarProperty Name="PostCodeID" ColumnName="PostCodeID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Common_Company">
+      <EntityTypeMapping TypeName="ERPModel.Common_Company">
+        <MappingFragment StoreEntitySet="Common_Company">
+          <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+          <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Common_Country">
+      <EntityTypeMapping TypeName="ERPModel.Common_Country">
+        <MappingFragment StoreEntitySet="Common_Country">
+          <ScalarProperty Name="IsSelected" ColumnName="IsSelected" />
+          <ScalarProperty Name="CountryCode" ColumnName="CountryCode" />
+          <ScalarProperty Name="CountryName" ColumnName="CountryName" />
+          <ScalarProperty Name="CountryID" ColumnName="CountryID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Common_CurrencyFormat">
+      <EntityTypeMapping TypeName="ERPModel.Common_CurrencyFormat">
+        <MappingFragment StoreEntitySet="Common_CurrencyFormat">
+          <ScalarProperty Name="Currency" ColumnName="Currency" />
+          <ScalarProperty Name="CurrencyID" ColumnName="CurrencyID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Common_DateFormat">
+      <EntityTypeMapping TypeName="ERPModel.Common_DateFormat">
+        <MappingFragment StoreEntitySet="Common_DateFormat">
+          <ScalarProperty Name="DateFormat" ColumnName="DateFormat" />
+          <ScalarProperty Name="DateFormatID" ColumnName="DateFormatID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Common_Day">
+      <EntityTypeMapping TypeName="ERPModel.Common_Day">
+        <MappingFragment StoreEntitySet="Common_Day">
+          <ScalarProperty Name="DayName" ColumnName="DayName" />
+          <ScalarProperty Name="DayID" ColumnName="DayID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Common_Department">
+      <EntityTypeMapping TypeName="ERPModel.Common_Department">
+        <MappingFragment StoreEntitySet="Common_Department">
+          <ScalarProperty Name="DepartmentName" ColumnName="DepartmentName" />
+          <ScalarProperty Name="DepartmentID" ColumnName="DepartmentID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Common_Designation">
+      <EntityTypeMapping TypeName="ERPModel.Common_Designation">
+        <MappingFragment StoreEntitySet="Common_Designation">
+          <ScalarProperty Name="DesignationName" ColumnName="DesignationName" />
+          <ScalarProperty Name="DesignationID" ColumnName="DesignationID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Common_EmployeeType">
+      <EntityTypeMapping TypeName="ERPModel.Common_EmployeeType">
+        <MappingFragment StoreEntitySet="Common_EmployeeType">
+          <ScalarProperty Name="ReportingTo" ColumnName="ReportingTo" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="EmployeeTypeName" ColumnName="EmployeeTypeName" />
+          <ScalarProperty Name="EmployeeTypeID" ColumnName="EmployeeTypeID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Common_EthnicGroup">
+      <EntityTypeMapping TypeName="ERPModel.Common_EthnicGroup">
+        <MappingFragment StoreEntitySet="Common_EthnicGroup">
+          <ScalarProperty Name="EthnicGroupName" ColumnName="EthnicGroupName" />
+          <ScalarProperty Name="EthnicGroupID" ColumnName="EthnicGroupID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Common_HostLogo">
+      <EntityTypeMapping TypeName="ERPModel.Common_HostLogo">
+        <MappingFragment StoreEntitySet="Common_HostLogo">
+          <ScalarProperty Name="HostLogoContentType" ColumnName="HostLogoContentType" />
+          <ScalarProperty Name="HostLogoContent" ColumnName="HostLogoContent" />
+          <ScalarProperty Name="LogoID" ColumnName="LogoID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Common_HostSettings">
+      <EntityTypeMapping TypeName="ERPModel.Common_HostSettings">
+        <MappingFragment StoreEntitySet="Common_HostSettings">
+          <ScalarProperty Name="HostValue" ColumnName="HostValue" />
+          <ScalarProperty Name="HostKey" ColumnName="HostKey" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Common_ImmigrationStatus">
+      <EntityTypeMapping TypeName="ERPModel.Common_ImmigrationStatus">
+        <MappingFragment StoreEntitySet="Common_ImmigrationStatus">
+          <ScalarProperty Name="ImmigrationName" ColumnName="ImmigrationName" />
+          <ScalarProperty Name="ImmigrationStatusID" ColumnName="ImmigrationStatusID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Common_JobTitle">
+      <EntityTypeMapping TypeName="ERPModel.Common_JobTitle">
+        <MappingFragment StoreEntitySet="Common_JobTitle">
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="JobTitleName" ColumnName="JobTitleName" />
+          <ScalarProperty Name="JobTitleID" ColumnName="JobTitleID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Common_Key">
+      <EntityTypeMapping TypeName="ERPModel.Common_Key">
+        <MappingFragment StoreEntitySet="Common_Key">
+          <ScalarProperty Name="MaximumChars" ColumnName="MaximumChars" />
+          <ScalarProperty Name="LeadingChar" ColumnName="LeadingChar" />
+          <ScalarProperty Name="Prefix" ColumnName="Prefix" />
+          <ScalarProperty Name="KeyValue" ColumnName="KeyValue" />
+          <ScalarProperty Name="KeyName" ColumnName="KeyName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Common_Location">
+      <EntityTypeMapping TypeName="ERPModel.Common_Location">
+        <MappingFragment StoreEntitySet="Common_Location">
+          <ScalarProperty Name="LocationName" ColumnName="LocationName" />
+          <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Common_MaritalStatus">
+      <EntityTypeMapping TypeName="ERPModel.Common_MaritalStatus">
+        <MappingFragment StoreEntitySet="Common_MaritalStatus">
+          <ScalarProperty Name="MaritalStatusName" ColumnName="MaritalStatusName" />
+          <ScalarProperty Name="MaritalStatusID" ColumnName="MaritalStatusID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Common_Nationality">
+      <EntityTypeMapping TypeName="ERPModel.Common_Nationality">
+        <MappingFragment StoreEntitySet="Common_Nationality">
+          <ScalarProperty Name="NationalityName" ColumnName="NationalityName" />
+          <ScalarProperty Name="NationalityID" ColumnName="NationalityID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Common_PaymentType">
+      <EntityTypeMapping TypeName="ERPModel.Common_PaymentType">
+        <MappingFragment StoreEntitySet="Common_PaymentType">
+          <ScalarProperty Name="PaymentName" ColumnName="PaymentName" />
+          <ScalarProperty Name="PaymentTypeID" ColumnName="PaymentTypeID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Common_Region">
+      <EntityTypeMapping TypeName="ERPModel.Common_Region">
+        <MappingFragment StoreEntitySet="Common_Region">
+          <ScalarProperty Name="RegionName" ColumnName="RegionName" />
+          <ScalarProperty Name="RegionID" ColumnName="RegionID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Common_Skill">
+      <EntityTypeMapping TypeName="ERPModel.Common_Skill">
+        <MappingFragment StoreEntitySet="Common_Skill">
+          <ScalarProperty Name="SkillDescription" ColumnName="SkillDescription" />
+          <ScalarProperty Name="SkillName" ColumnName="SkillName" />
+          <ScalarProperty Name="SkillID" ColumnName="SkillID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Common_SkillCategory">
+      <EntityTypeMapping TypeName="ERPModel.Common_SkillCategory">
+        <MappingFragment StoreEntitySet="Common_SkillCategory">
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+          <ScalarProperty Name="SkillCategoryID" ColumnName="SkillCategoryID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Common_SkillGroup">
+      <EntityTypeMapping TypeName="ERPModel.Common_SkillGroup">
+        <MappingFragment StoreEntitySet="Common_SkillGroup">
+          <ScalarProperty Name="SkillLevelID" ColumnName="SkillLevelID" />
+          <ScalarProperty Name="SkillCategoryID" ColumnName="SkillCategoryID" />
+          <ScalarProperty Name="SkillID" ColumnName="SkillID" />
+          <ScalarProperty Name="SkillGroupID" ColumnName="SkillGroupID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Common_SkillLevelScheme">
+      <EntityTypeMapping TypeName="ERPModel.Common_SkillLevelScheme">
+        <MappingFragment StoreEntitySet="Common_SkillLevelScheme">
+          <ScalarProperty Name="MinSkillLevel" ColumnName="MinSkillLevel" />
+          <ScalarProperty Name="MaxSkillLevel" ColumnName="MaxSkillLevel" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="SkillLevelName" ColumnName="SkillLevelName" />
+          <ScalarProperty Name="SkillLevelID" ColumnName="SkillLevelID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Common_Team">
+      <EntityTypeMapping TypeName="ERPModel.Common_Team">
+        <MappingFragment StoreEntitySet="Common_Team">
+          <ScalarProperty Name="TeamName" ColumnName="TeamName" />
+          <ScalarProperty Name="TeamID" ColumnName="TeamID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Common_TimeFormat">
+      <EntityTypeMapping TypeName="ERPModel.Common_TimeFormat">
+        <MappingFragment StoreEntitySet="Common_TimeFormat">
+          <ScalarProperty Name="TimeFormat" ColumnName="TimeFormat" />
+          <ScalarProperty Name="TimeID" ColumnName="TimeID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Common_TimeSheetFrequency">
+      <EntityTypeMapping TypeName="ERPModel.Common_TimeSheetFrequency">
+        <MappingFragment StoreEntitySet="Common_TimeSheetFrequency">
+          <ScalarProperty Name="TimeSheetFrequencyDeadline" ColumnName="TimeSheetFrequencyDeadline" />
+          <ScalarProperty Name="TimeSheetFrequencyName" ColumnName="TimeSheetFrequencyName" />
+          <ScalarProperty Name="TimeSheetFrequencyID" ColumnName="TimeSheetFrequencyID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Common_Title">
+      <EntityTypeMapping TypeName="ERPModel.Common_Title">
+        <MappingFragment StoreEntitySet="Common_Title">
+          <ScalarProperty Name="TitleName" ColumnName="TitleName" />
+          <ScalarProperty Name="TitleID" ColumnName="TitleID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Resouce_WorkingPatternDetails">
+      <EntityTypeMapping TypeName="ERPModel.Resouce_WorkingPatternDetails">
+        <MappingFragment StoreEntitySet="Resouce_WorkingPatternDetails">
+          <ScalarProperty Name="Saturday" ColumnName="Saturday" />
+          <ScalarProperty Name="Friday" ColumnName="Friday" />
+          <ScalarProperty Name="Thursday" ColumnName="Thursday" />
+          <ScalarProperty Name="Wednesday" ColumnName="Wednesday" />
+          <ScalarProperty Name="Tuesday" ColumnName="Tuesday" />
+          <ScalarProperty Name="Monday" ColumnName="Monday" />
+          <ScalarProperty Name="Sunday" ColumnName="Sunday" />
+          <ScalarProperty Name="NoOfWorkingHours" ColumnName="NoOfWorkingHours" />
+          <ScalarProperty Name="ChangeDate" ColumnName="ChangeDate" />
+          <ScalarProperty Name="ResourceID" ColumnName="ResourceID" />
+          <ScalarProperty Name="WorkingPatternID" ColumnName="WorkingPatternID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Resource_BranchDetails">
+      <EntityTypeMapping TypeName="ERPModel.Resource_BranchDetails">
+        <MappingFragment StoreEntitySet="Resource_BranchDetails">
+          <ScalarProperty Name="IsDefault" ColumnName="IsDefault" />
+          <ScalarProperty Name="ResourceID" ColumnName="ResourceID" />
+          <ScalarProperty Name="BranchID" ColumnName="BranchID" />
+          <ScalarProperty Name="ResourceBranchID" ColumnName="ResourceBranchID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Resource_Department">
+      <EntityTypeMapping TypeName="ERPModel.Resource_Department">
+        <MappingFragment StoreEntitySet="Resource_Department">
+          <ScalarProperty Name="ToDate" ColumnName="ToDate" />
+          <ScalarProperty Name="FromDate" ColumnName="FromDate" />
+          <ScalarProperty Name="TeamID" ColumnName="TeamID" />
+          <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+          <ScalarProperty Name="ResourceID" ColumnName="ResourceID" />
+          <ScalarProperty Name="DepartmentID" ColumnName="DepartmentID" />
+          <ScalarProperty Name="ResourceDeptID" ColumnName="ResourceDeptID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Resource_DepartmentAreaDetails">
+      <EntityTypeMapping TypeName="ERPModel.Resource_DepartmentAreaDetails">
+        <MappingFragment StoreEntitySet="Resource_DepartmentAreaDetails">
+          <ScalarProperty Name="AreaID" ColumnName="AreaID" />
+          <ScalarProperty Name="DepartmentID" ColumnName="DepartmentID" />
+          <ScalarProperty Name="DepartmentDetailID" ColumnName="DepartmentDetailID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Resource_Employee">
+      <EntityTypeMapping TypeName="ERPModel.Resource_Employee">
+        <MappingFragment StoreEntitySet="Resource_Employee">
+          <ScalarProperty Name="KIN_MobileNo" ColumnName="KIN_MobileNo" />
+          <ScalarProperty Name="KIN_TelephoneNo" ColumnName="KIN_TelephoneNo" />
+          <ScalarProperty Name="NextOfKIN_Name" ColumnName="NextOfKIN_Name" />
+          <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+          <ScalarProperty Name="TelephoneNo" ColumnName="TelephoneNo" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="AdderessID" ColumnName="AdderessID" />
+          <ScalarProperty Name="ImmigrationStatusID" ColumnName="ImmigrationStatusID" />
+          <ScalarProperty Name="NINo" ColumnName="NINo" />
+          <ScalarProperty Name="PhotoFileType" ColumnName="PhotoFileType" />
+          <ScalarProperty Name="ProfilePhoto" ColumnName="ProfilePhoto" />
+          <ScalarProperty Name="DateOfLeave" ColumnName="DateOfLeave" />
+          <ScalarProperty Name="DateOfJoin" ColumnName="DateOfJoin" />
+          <ScalarProperty Name="TimeSheetFrequencyID" ColumnName="TimeSheetFrequencyID" />
+          <ScalarProperty Name="MaritalStatusID" ColumnName="MaritalStatusID" />
+          <ScalarProperty Name="EthnicGroupID" ColumnName="EthnicGroupID" />
+          <ScalarProperty Name="EmployeeTypeID" ColumnName="EmployeeTypeID" />
+          <ScalarProperty Name="NationalityID" ColumnName="NationalityID" />
+          <ScalarProperty Name="Sex" ColumnName="Sex" />
+          <ScalarProperty Name="DoB" ColumnName="DoB" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="TitleID" ColumnName="TitleID" />
+          <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Resource_EmployeePayment">
+      <EntityTypeMapping TypeName="ERPModel.Resource_EmployeePayment">
+        <MappingFragment StoreEntitySet="Resource_EmployeePayment">
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="PaymentTypeID" ColumnName="PaymentTypeID" />
+          <ScalarProperty Name="PaymentAmount" ColumnName="PaymentAmount" />
+          <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+          <ScalarProperty Name="EmployeePayID" ColumnName="EmployeePayID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Resource_ExperienceDetails">
+      <EntityTypeMapping TypeName="ERPModel.Resource_ExperienceDetails">
+        <MappingFragment StoreEntitySet="Resource_ExperienceDetails">
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="ExternalDesignation" ColumnName="ExternalDesignation" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+          <ScalarProperty Name="DesignationID" ColumnName="DesignationID" />
+          <ScalarProperty Name="ResourceID" ColumnName="ResourceID" />
+          <ScalarProperty Name="ExperienceID" ColumnName="ExperienceID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Resource_Holiday">
+      <EntityTypeMapping TypeName="ERPModel.Resource_Holiday">
+        <MappingFragment StoreEntitySet="Resource_Holiday">
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+          <ScalarProperty Name="BookingHrs" ColumnName="BookingHrs" />
+          <ScalarProperty Name="HolidayTypeID" ColumnName="HolidayTypeID" />
+          <ScalarProperty Name="HolidayDate" ColumnName="HolidayDate" />
+          <ScalarProperty Name="ResourceID" ColumnName="ResourceID" />
+          <ScalarProperty Name="HolidayID" ColumnName="HolidayID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Resource_Holiday_Type">
+      <EntityTypeMapping TypeName="ERPModel.Resource_Holiday_Type">
+        <MappingFragment StoreEntitySet="Resource_Holiday_Type">
+          <ScalarProperty Name="IconCode" ColumnName="IconCode" />
+          <ScalarProperty Name="AbbriviatedHolidayType" ColumnName="AbbriviatedHolidayType" />
+          <ScalarProperty Name="HolidayTypeName" ColumnName="HolidayTypeName" />
+          <ScalarProperty Name="HolidayTypeID" ColumnName="HolidayTypeID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Resource_HolidayStatus">
+      <EntityTypeMapping TypeName="ERPModel.Resource_HolidayStatus">
+        <MappingFragment StoreEntitySet="Resource_HolidayStatus">
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+          <ScalarProperty Name="StatusChangedBy" ColumnName="StatusChangedBy" />
+          <ScalarProperty Name="StatusDateTime" ColumnName="StatusDateTime" />
+          <ScalarProperty Name="HolidayStatusTypeID" ColumnName="HolidayStatusTypeID" />
+          <ScalarProperty Name="HolidayID" ColumnName="HolidayID" />
+          <ScalarProperty Name="HolidayStatusID" ColumnName="HolidayStatusID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Resource_HolidayStatusType">
+      <EntityTypeMapping TypeName="ERPModel.Resource_HolidayStatusType">
+        <MappingFragment StoreEntitySet="Resource_HolidayStatusType">
+          <ScalarProperty Name="HolidayStatusType" ColumnName="HolidayStatusType" />
+          <ScalarProperty Name="HolidayStatusTypeID" ColumnName="HolidayStatusTypeID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Resource_ShiftPattern">
+      <EntityTypeMapping TypeName="ERPModel.Resource_ShiftPattern">
+        <MappingFragment StoreEntitySet="Resource_ShiftPattern">
+          <ScalarProperty Name="BreakDuration" ColumnName="BreakDuration" />
+          <ScalarProperty Name="IsEnable" ColumnName="IsEnable" />
+          <ScalarProperty Name="Duration" ColumnName="Duration" />
+          <ScalarProperty Name="ShiftStartTime" ColumnName="ShiftStartTime" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="ShiftPatternID" ColumnName="ShiftPatternID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Resource_ShiftSchedule">
+      <EntityTypeMapping TypeName="ERPModel.Resource_ShiftSchedule">
+        <MappingFragment StoreEntitySet="Resource_ShiftSchedule">
+          <ScalarProperty Name="BranchID" ColumnName="BranchID" />
+          <ScalarProperty Name="ActualOffTime" ColumnName="ActualOffTime" />
+          <ScalarProperty Name="ActualOnTime" ColumnName="ActualOnTime" />
+          <ScalarProperty Name="ExpectedOffTime" ColumnName="ExpectedOffTime" />
+          <ScalarProperty Name="ExpectedOnTime" ColumnName="ExpectedOnTime" />
+          <ScalarProperty Name="ShiftDate" ColumnName="ShiftDate" />
+          <ScalarProperty Name="ShiftPatternID" ColumnName="ShiftPatternID" />
+          <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+          <ScalarProperty Name="ShiftScheduleID" ColumnName="ShiftScheduleID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Resource_SkillDetails">
+      <EntityTypeMapping TypeName="ERPModel.Resource_SkillDetails">
+        <MappingFragment StoreEntitySet="Resource_SkillDetails">
+          <ScalarProperty Name="ProjectStartDate" ColumnName="ProjectStartDate" />
+          <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+          <ScalarProperty Name="SkillLevel" ColumnName="SkillLevel" />
+          <ScalarProperty Name="SkillID" ColumnName="SkillID" />
+          <ScalarProperty Name="SkillCategoryID" ColumnName="SkillCategoryID" />
+          <ScalarProperty Name="ResourceID" ColumnName="ResourceID" />
+          <ScalarProperty Name="ResourceSkillID" ColumnName="ResourceSkillID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Resource_TimeSheet">
+      <EntityTypeMapping TypeName="ERPModel.Resource_TimeSheet">
+        <MappingFragment StoreEntitySet="Resource_TimeSheet">
+          <ScalarProperty Name="IsAct" ColumnName="IsAct" />
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+          <ScalarProperty Name="LockedDateTime" ColumnName="LockedDateTime" />
+          <ScalarProperty Name="LockedBy" ColumnName="LockedBy" />
+          <ScalarProperty Name="Approved" ColumnName="Approved" />
+          <ScalarProperty Name="TimeSheetAuthorizationDate" ColumnName="TimeSheetAuthorizationDate" />
+          <ScalarProperty Name="Payment" ColumnName="Payment" />
+          <ScalarProperty Name="NoOfHolidayHours" ColumnName="NoOfHolidayHours" />
+          <ScalarProperty Name="NoOfHolidays" ColumnName="NoOfHolidays" />
+          <ScalarProperty Name="TotalShiftHours" ColumnName="TotalShiftHours" />
+          <ScalarProperty Name="NoOfShift" ColumnName="NoOfShift" />
+          <ScalarProperty Name="TimeSheetFrequencyID" ColumnName="TimeSheetFrequencyID" />
+          <ScalarProperty Name="TimeSheetDate" ColumnName="TimeSheetDate" />
+          <ScalarProperty Name="ResourceID" ColumnName="ResourceID" />
+          <ScalarProperty Name="TimeSheetID" ColumnName="TimeSheetID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Resource_TimeSheetDetails">
+      <EntityTypeMapping TypeName="ERPModel.Resource_TimeSheetDetails">
+        <MappingFragment StoreEntitySet="Resource_TimeSheetDetails">
+          <ScalarProperty Name="ShiftScheduleID" ColumnName="ShiftScheduleID" />
+          <ScalarProperty Name="TimeSheetID" ColumnName="TimeSheetID" />
+          <ScalarProperty Name="TimeSheetDetailsID" ColumnName="TimeSheetDetailsID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Resource_TimeSheetDetailsHoliday">
+      <EntityTypeMapping TypeName="ERPModel.Resource_TimeSheetDetailsHoliday">
+        <MappingFragment StoreEntitySet="Resource_TimeSheetDetailsHoliday">
+          <ScalarProperty Name="HolidayID" ColumnName="HolidayID" />
+          <ScalarProperty Name="TimeSheetID" ColumnName="TimeSheetID" />
+          <ScalarProperty Name="TimeSheetDetailsHoliID" ColumnName="TimeSheetDetailsHoliID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Resource_WeeklyPatternDetails">
+      <EntityTypeMapping TypeName="ERPModel.Resource_WeeklyPatternDetails">
+        <MappingFragment StoreEntitySet="Resource_WeeklyPatternDetails">
+          <ScalarProperty Name="DayID" ColumnName="DayID" />
+          <ScalarProperty Name="PatternID" ColumnName="PatternID" />
+          <ScalarProperty Name="WrkPatternDetailsID" ColumnName="WrkPatternDetailsID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Resource_WorkingPattern">
+      <EntityTypeMapping TypeName="ERPModel.Resource_WorkingPattern">
+        <MappingFragment StoreEntitySet="Resource_WorkingPattern">
+          <ScalarProperty Name="NoOfHours" ColumnName="NoOfHours" />
+          <ScalarProperty Name="PatternEndDate" ColumnName="PatternEndDate" />
+          <ScalarProperty Name="PatternStartDate" ColumnName="PatternStartDate" />
+          <ScalarProperty Name="ResourceID" ColumnName="ResourceID" />
+          <ScalarProperty Name="PatternID" ColumnName="PatternID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="ERPModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="definition" ColumnName="definition" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="User_UserDetails">
+      <EntityTypeMapping TypeName="ERPModel.User_UserDetails">
+        <MappingFragment StoreEntitySet="User_UserDetails">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="StatusComment" ColumnName="StatusComment" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="JobTitleID" ColumnName="JobTitleID" />
+          <ScalarProperty Name="JoinDate" ColumnName="JoinDate" />
+          <ScalarProperty Name="DateofBirth" ColumnName="DateofBirth" />
+          <ScalarProperty Name="AddressID" ColumnName="AddressID" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+          <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="TitleID" ColumnName="TitleID" />
+          <ScalarProperty Name="EmployeeNo" ColumnName="EmployeeNo" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="AspNetRolePermission" TypeName="ERPModel.AspNetRolePermission" StoreEntitySet="AspNetRolePermission">
+      <EndProperty Name="AspNetRole">
+        <ScalarProperty Name="Id" ColumnName="RoleID" />
+      </EndProperty>
+      <EndProperty Name="AspNetPermission">
+        <ScalarProperty Name="PermissionID" ColumnName="PermissionID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="AspNetUserRoles" TypeName="ERPModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+      <EndProperty Name="AspNetUser">
+        <ScalarProperty Name="Id" ColumnName="UserId" />
+      </EndProperty>
+      <EndProperty Name="AspNetRole">
+        <ScalarProperty Name="Id" ColumnName="RoleId" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,85 @@
+﻿@model ERP.Resource.Models.HolidayBO
+@{
+    string dateformat = MvcApplication.DateFormat;
+    string timeformat = MvcApplication.TimeFormat;
+}
+@Html.HiddenFor(model => model.searchHoliday.SearchResourceID)
+@Html.HiddenFor(model => model.searchHoliday.Year)
+@Html.HiddenFor(model => model.searchHoliday.Month)
+<div>
+    <a href="#" onclick="BackList()"><span class="glyphicon glyphicon-backward"  ></span>&nbsp; Back to List</a>
+</div>
+<br />
+<div class="col-md-6">
+    <div class="panel panel-success">
+        <div class="panel-heading">Holiday Details List</div>
+        <div class="panel-body">
+            <div>
+                <table class="table table-responsive" id="example" style="border-bottom:hidden">
+                    <thead>
+                        <tr style="background-color:#CFE5DB;">
+
+                            <th>
+                                Status
+                            </th>
+                            <th>
+                                Status Changed By
+                            </th>
+                            <th>
+                                Status Changed On
+                            </th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.detailsHolidayList.Count != 0)
+                        {
+                            foreach (var item in Model.detailsHolidayList)
+                            {
+
+                                <tr>
+
+                                    <td>
+                                        @item.Status
+                                    </td>
+                                    <td>
+                                        @item.StatusChangedBy
+                                    </td>
+                                    <td>
+                                        @String.Format("{0: " + dateformat + "}", item.StatusChangedOn) &nbsp; @String.Format("{0: " + timeformat + "}", item.StatusChangedOn)
+                                        @*@item.StatusChangedOn*@
+                                    </td>
+
+
+                                </tr>
+
+                            }
+                        }
+
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function BackList() {
+        var model =@Html.Raw(Json.Encode(Model.searchHoliday))
+       // alert(model.Year);
+        $.ajax({
+            url: '@Url.Action("Index", "Holiday")',
+            type: 'POST',
+            dataType: 'html',
+            data: ({ searchHoliday: model}),
+            success: function (data) {
+               // alert(data);
+                    $("#holidayPanelDIV").html(data);
+                    
+            },
+            error: function (data) {
+                successMessage(data.message, 'Error');
+            }
+        })
+    }
+</script>

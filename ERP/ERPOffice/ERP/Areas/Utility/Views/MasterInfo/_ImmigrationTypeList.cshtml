@@ -1,0 +1,123 @@
+﻿@model IEnumerable<ERP.Utility.Models.ImmigrationTypeBO>
+<br />
+<table class="table" id="ImmigrationTable">
+    <thead>
+        <tr>
+            <th></th>
+            <th>
+                @Html.DisplayNameFor(m => m.ImmigrationStatus)
+            </th>
+            
+            <th></th>                          
+        </tr>
+    </thead>
+    @if (Model.Count() > 0)
+    {
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <a data-toggle="tooltip" title="Edit" role="button" onclick="EditImmigration(@item.ImmigrationTypeId)" id="edit"><span class="glyphicon glyphicon-pencil text-success" style="position:static"></span></a>
+                </td>
+                <td>
+                    @Html.DisplayFor(m => item.ImmigrationStatus)
+                </td>                
+                <td>
+                    <a data-toggle="tooltip" title="Delete" role="button" onclick="DeleteImmigration(@item.ImmigrationTypeId)"><span class="glyphicon glyphicon-trash text-danger" style="position:static"></span></a>
+                </td>
+            </tr>
+        }
+    }
+
+    else {
+        <tr>
+            <td align="center" colspan=15>
+                <center>
+                    <font color="red" ; style="text-align:center">"Sorry, Immigration Types are Not found!!."</font>
+                </center>
+            </td>
+        </tr>
+    }
+</table>
+
+
+<script>
+    $(document).ready(function () {
+        $('#ImmigrationTable').DataTable({
+            //"displayLength": 5,
+            bPaginate: false,     //disable Pagination
+            bFilter: false,       //disable search text
+            bInfo: false,
+            "language": {
+                "zeroRecords": "<p class='text-danger'>Sorry!..No matching Records found...</p>",
+                "text-color": "#7f1416"
+            }
+        });
+        $("#ImmigrationTable").freezeHeader({
+            offset: '50px',
+            //background-color: rgba(255, 255, 255, 0.7)
+            //"background-color":"cadetblue"
+        });
+    });
+
+    function DeleteImmigration(ImmigrationID) {
+        //console.log(ImmigrationID);
+        $.get('@Url.Action("CreateImmigrationType", "MasterInfo")',
+                       function (result) {
+                           $("#CreateEditImmigration").html(result);
+                       });
+        swal({
+            title: 'Confirm',
+            text: 'Would You Like To Delete This Immigration Status?',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes',
+            cancelButtonText: 'No'
+        },
+         function (isConfirm) {
+             console.log(isConfirm);
+             if (isConfirm) {
+                 $.ajax({
+                     url: '@Url.Action("DeleteImmigrationType", "MasterInfo")',
+                     type: 'POST',
+                     dataType: 'html',
+                     data: ({ id: ImmigrationID }),
+                     success: function (data) {
+                         var dataObj = jQuery.parseJSON(data);
+                         if (dataObj.success == true) {
+                             successMessage(dataObj.errorMsg, 'Success');
+                             $.post('@Url.Action("GetImmigrationList", "MasterInfo")',
+                               function (result) {
+                                   $("#ImmigrationList").html(result);
+                               });
+                         }
+                         else {
+                             console.log("hi");
+                             successMessage(dataObj.errorMsg, 'Error');
+                         }
+                     },
+                     error: function (data) {
+                         alert("error Loading the data");
+                     }
+                 })
+             }
+         })
+    }
+
+    function EditImmigration(ImmigrationID) {
+        $.ajax({
+            url: '@Url.Action("EditImmigrationType", "MasterInfo")',
+            dataType: 'html',
+            data: ({ id: ImmigrationID }),
+            success: function (data) {
+                $("#CreateEditImmigration").html(data).show();
+
+            },
+            error: function (data) {
+                alert("error Loading the data");
+            }
+        })
+    }
+</script>
+
+

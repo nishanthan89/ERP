@@ -1,0 +1,123 @@
+﻿@model IEnumerable<ERP.Utility.Models.MaritalStatusBO>
+<br />
+<table class="table" id="MaritalStatusTable">
+    <thead>
+        <tr>
+            <th></th>                           
+            <th>
+                @Html.DisplayNameFor(m => m.MaritalStatus)
+            </th>           
+           <th> </th>                          
+        </tr>
+    </thead>
+    @if (Model.Count() > 0)
+    {
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <a data-toggle="tooltip" title="Edit" role="button" onclick="EditMarital(@item.MaritalId)" id="edit"><span class="glyphicon glyphicon-pencil text-success" style="position:static"></span></a>
+                </td>
+                <td>
+                    @Html.DisplayFor(m => item.MaritalStatus)
+                </td>
+                
+                <td>
+                    <a data-toggle="tooltip" title="Delete" role="button" onclick="DeleteMarital(@item.MaritalId)"><span class="glyphicon glyphicon-trash text-danger" style="position:static"></span></a>
+                </td>
+            </tr>
+        }
+    }
+    else {
+
+        <tr>
+            <td align="center" colspan=15>
+                <center>
+                    <font color="red" ; style="text-align:center">"Sorry, No Marital Status  are found!!."</font>
+                </center>
+            </td>
+
+        </tr>
+    }
+</table>
+
+<script>
+    $(document).ready(function () {
+        $('#MaritalStatusTable').DataTable({
+            //"displayLength": 5,
+            bPaginate: false,     //disable Pagination
+            bFilter: false,       //disable search text
+            bInfo: false,
+            "language": {
+                "zeroRecords": "<p class='text-danger'>Sorry!..No matching Records found...</p>",
+                "text-color": "#7f1416"
+            }
+        });
+        $("#MaritalStatusTable").freezeHeader({
+            offset: '50px',
+            //background-color: rgba(255, 255, 255, 0.7)
+            //"background-color":"cadetblue"
+        });
+    });
+
+
+    function DeleteMarital(MaritalID) {
+        //console.log(MaritalID);
+
+        $.get('@Url.Action("CreateMaritalStatus", "MasterInfo")',
+                       function (result) {
+                           $("#CreateEditMarital").html(result);
+                       }),
+         swal({
+             title: 'Confirm',
+             text: 'Would You Like To Delete This Marital Status?',
+             type: 'warning',
+             showCancelButton: true,
+             confirmButtonText: 'Yes',
+             cancelButtonText: 'No'
+         },
+          function (isConfirm) {
+              console.log(isConfirm);
+              if (isConfirm) {
+                  $.ajax({
+                      url: '@Url.Action("DeleteMaritalStatus", "MasterInfo")',
+                      type: 'POST',
+                      dataType: 'html',
+                      data: ({ id: MaritalID }),
+                      success: function (data) {
+                          var dataObj = jQuery.parseJSON(data);
+                          if (dataObj.success == true) {
+                              successMessage(dataObj.errorMsg, 'Success');
+                              $.post('@Url.Action("GetMaritalStatus", "MasterInfo")',
+            function (result) {
+                $("#MaritalList").html(result);
+            });
+                          }
+                          else {
+                              console.log("hi");
+                              successMessage(dataObj.errorMsg, 'Error');
+                          }
+                      },
+                      error: function (data) {
+                          alert("error Loading the data");
+                      }
+                  })
+              }
+          })
+    }
+
+    function EditMarital(MaritalID) {
+
+        $.ajax({
+            url: '@Url.Action("EditMaritalStatus", "MasterInfo")',
+            dataType: 'html',
+            data: ({ id: MaritalID }),
+            success: function (data) {
+                $("#CreateEditMarital").html(data).show();
+            },
+            error: function (data) {
+                alert("error Loading the data");
+            }
+        })
+    }
+</script>

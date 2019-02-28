@@ -1,0 +1,43 @@
+﻿@model ERP.Resource.ViewModels.SearchHolidayViewModel
+@{
+    ViewBag.Title = "Create Holiday";
+}
+
+@using (Ajax.BeginForm("SearchHoliday", "Holiday", null, new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace, UpdateTargetId = "holidaySearchDIV" }))
+{
+
+<div class="form-inline">
+        <div class="form-group">
+            @Html.LabelFor(model => model.ResourceID, new { @class = "col-md-4 control-label" })
+            <div class="col-md-2">
+                @Html.DropDownListFor(model => model.ResourceID, new SelectList(ViewBag.ResourceList, "Value", "Text"), "-- Select --", htmlAttributes: new { @class = "form-control", style = "width:156px;" })
+            </div>
+            @Html.ValidationMessageFor(model => model.ResourceID, "", new { @class = "text-danger col-md-4" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Month, new { @class = "col-md-4 control-label" })
+            <div class="col-md-2">
+               @Html.DropDownListFor(model => model.Month, Enumerable.Range(1, 12).Select(i => new SelectListItem { Value = i.ToString(), Text = System.Globalization.CultureInfo.InvariantCulture.DateTimeFormat.GetMonthName(i), Selected = (i == DateTime.Today.Month) }), "-- Select --", htmlAttributes: new { @class = "form-control", style = "width:120px;" })
+                
+            </div>
+            @Html.ValidationMessageFor(model => model.Month, "", new { @class = "text-danger col-md-4" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Year, new { @class = "col-md-4 control-label" })
+            <div class="col-md-2">
+                @Html.DropDownListFor(model => model.Year, Enumerable.Range(2015, DateTime.Now.Year - 2015 + 1).Select(i => new SelectListItem { Value = i.ToString(), Text = i.ToString(), Selected = (i == DateTime.Today.Year) }).OrderByDescending(x => x.Text), "-- Select --", htmlAttributes: new { @class = "form-control", style = "width:120px;" })
+            </div>
+            @Html.ValidationMessageFor(model => model.Year, "", new { @class = "text-danger col-md-4" })
+        </div>
+    <div class="form-group">
+        <input type="submit" class="form-control btn-default" name="Search" value="Search" />&nbsp;&nbsp;&nbsp;
+    </div>
+    <div class="form-group pull-right">
+        @Ajax.ActionLink("Add New Holiday", "AddHoliday", "Holiday", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "holidayPanelDIV" }, new { @class = "btn btn-success" })
+    </div>
+    
+</div>
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

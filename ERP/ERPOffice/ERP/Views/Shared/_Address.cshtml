@@ -1,0 +1,134 @@
+﻿@model ERP.Address.ViewModels.AddressViewModel
+@*@Scripts.Render("~/bundles/jquery")*@
+
+@{  
+    // string htmlFieldPrefix = Html.ViewData.TemplateInfo.HtmlFieldPrefix;
+    string htmlFieldPrefix = Html.ViewData.TemplateInfo.HtmlFieldPrefix;
+}
+
+<script type="text/javascript">
+    var u = new SpeechSynthesisUtterance(); // text to Speech Object Create
+    function PAFClk() {
+        var postCode = $('#@string.Concat(htmlFieldPrefix, "_Postcode")').val();
+        var countryID = $('#@string.Concat(htmlFieldPrefix, "_CountryID")').val();
+            console.log(postCode,countryID)
+            $.ajax({
+                url: '@Url.Action("PAF", "Address",new { area=""})',
+                dataType: 'json',
+                data: ({ postcode: postCode, countryid: countryID }),
+                type: "POST",
+                success: function (data) {
+                    if (data.success == false) {                        
+                        u.text = data.errorMsg;
+                        sweetAlert(u.text);
+                        speechSynthesis.speak(u);
+                        //successMessage(data.errorMsg, "Error");
+                    }
+                    else {
+                        // $("#Address_StreetName").val(data.StreetName);
+                        $('#@string.Concat(htmlFieldPrefix, "_StreetName")').val(data.StreetName);
+                        $('#@string.Concat(htmlFieldPrefix, "_Town")').val(data.Town);
+                        $('#@string.Concat(htmlFieldPrefix, "_BuildingName")').val(data.BuildingName);
+                        $('#@string.Concat(htmlFieldPrefix, "_County")').val(data.County);
+                        $('#@string.Concat(htmlFieldPrefix, "_Locality")').val(data.Locality);
+                        $('#@string.Concat(htmlFieldPrefix, "_Postcode")').val(data.Postcode);
+                    }
+                },
+                error: function (data) {
+                    u.text = "Please Select Country";
+                    sweetAlert(u.text);
+                    speechSynthesis.speak(u);
+                    //successMessage("Please Select Country ", "Error");
+                }
+            })
+        }      
+            
+        function PostCode(postcode) {
+            var countryID = document.getElementById("AddressViewModel_CountryID").value;
+            checkPostCode(postcode, countryID);
+        }
+
+        function ClearAddress() {
+            //'#string.Concat(htmlFieldPrefix, "_Postcode")'
+            $( '#@string.Concat(htmlFieldPrefix, "_StreetName"),#@string.Concat(htmlFieldPrefix, "_Town"),#@string.Concat(htmlFieldPrefix, "_BuildingName"),#@string.Concat(htmlFieldPrefix, "_County"),#@string.Concat(htmlFieldPrefix, "_Locality"),#@string.Concat(htmlFieldPrefix, "_Postcode")').val("");
+        }
+</script>
+
+<br />
+<div id="AddressDIV1" class="form-horizontal">
+    @*@Html.ValidationSummary(false)*@
+    <div class="form-group">
+        @Html.HiddenFor(model =>model.AddressID)
+        @Html.LabelFor(model => model.BuildingName, new { @class = "control-label col-md-4" })
+        <div class="form-group-sm col-md-8">
+            @Html.EditorFor(model => model.BuildingName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.BuildingName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.StreetName, new { @class = "control-label col-md-4" })
+        <div class="form-group-sm col-md-8">
+            @Html.EditorFor(model => model.StreetName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.StreetName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Locality, new { @class = "control-label col-md-4" })
+        <div class="form-group-sm col-md-8">
+            @Html.EditorFor(model => model.Locality, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Locality, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Town, new { @class = "control-label col-md-4" })
+        <div class="form-group-sm col-md-8">
+            @Html.EditorFor(model => model.Town, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Town, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.County, new { @class = "control-label col-md-4" })
+        <div class="form-group-sm col-md-8">
+            @Html.EditorFor(model => model.County, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.County, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Postcode, new { @class = "control-label col-md-4" })
+        @*@{int? multiAddress= 0;}*@
+        <div class="form-group-sm col-md-8">
+            <div class="btn-group">
+                @Html.TextBoxFor(model => model.Postcode, new { onblur = "javascript:PostCode(this);", @class = "form-control col-md-5",style = "width:140px;height:34px" })
+                <input type="button" name="PAF" value="PAF" id="PAFId" class="btn btn-default" onclick="PAFClk()" style="width:70px;"  />
+                 <input type="button" name="Clear" value="Clear" id="clearID" class="btn btn-default" onclick="ClearAddress()" style="width:70px;" />
+            </div>
+            <br />
+            @Html.ValidationMessageFor(model => model.Postcode, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.CountryID, new { @class = "control-label col-md-4" })
+        <div class="form-group-sm col-md-8">
+            @Html.DropDownListFor(model => model.CountryID, new SelectList(ViewContext.Controller.ViewBag.CountryList as IEnumerable<SelectListItem>, "Value", "Text", "Selected"), "-- Select --", htmlAttributes: new { @class = "form-control" })
+            @*@Html.DropDownListFor(model => model.CountryID, new SelectList(ViewBag.CountryList, "CountryID", "CountryName", "IsSelected"), new { @class = "form-control" })*@
+            @Html.ValidationMessageFor(model => model.CountryID, "", new { @class = "text-danger" })
+        </div>
+    </div>   
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/Scripts/jquery.qtip.validation.js")
+}
+
+
+
+   
+        
+    

@@ -1,0 +1,1794 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ERPModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="ERPEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="C__MigrationHistory" EntityType="ERPModel.C__MigrationHistory" />
+    <EntitySet Name="AspNetLoginOffs" EntityType="ERPModel.AspNetLoginOff" />
+    <EntitySet Name="AspNetPermissions" EntityType="ERPModel.AspNetPermission" />
+    <EntitySet Name="AspNetRoles" EntityType="ERPModel.AspNetRole" />
+    <EntitySet Name="AspNetUserClaims" EntityType="ERPModel.AspNetUserClaim" />
+    <EntitySet Name="AspNetUserLogins" EntityType="ERPModel.AspNetUserLogin" />
+    <EntitySet Name="AspNetUsers" EntityType="ERPModel.AspNetUser" />
+    <EntitySet Name="Branch_Details" EntityType="ERPModel.Branch_Details" />
+    <EntitySet Name="Branch_Holidays" EntityType="ERPModel.Branch_Holidays" />
+    <EntitySet Name="Branch_Status" EntityType="ERPModel.Branch_Status" />
+    <EntitySet Name="Branch_Type" EntityType="ERPModel.Branch_Type" />
+    <EntitySet Name="Common_Address" EntityType="ERPModel.Common_Address" />
+    <EntitySet Name="Common_Area" EntityType="ERPModel.Common_Area" />
+    <EntitySet Name="Common_AreaPostCodeDetails" EntityType="ERPModel.Common_AreaPostCodeDetails" />
+    <EntitySet Name="Common_Company" EntityType="ERPModel.Common_Company" />
+    <EntitySet Name="Common_Country" EntityType="ERPModel.Common_Country" />
+    <EntitySet Name="Common_CurrencyFormat" EntityType="ERPModel.Common_CurrencyFormat" />
+    <EntitySet Name="Common_DateFormat" EntityType="ERPModel.Common_DateFormat" />
+    <EntitySet Name="Common_Day" EntityType="ERPModel.Common_Day" />
+    <EntitySet Name="Common_Department" EntityType="ERPModel.Common_Department" />
+    <EntitySet Name="Common_Designation" EntityType="ERPModel.Common_Designation" />
+    <EntitySet Name="Common_EmployeeType" EntityType="ERPModel.Common_EmployeeType" />
+    <EntitySet Name="Common_EthnicGroup" EntityType="ERPModel.Common_EthnicGroup" />
+    <EntitySet Name="Common_HostLogo" EntityType="ERPModel.Common_HostLogo" />
+    <EntitySet Name="Common_HostSettings" EntityType="ERPModel.Common_HostSettings" />
+    <EntitySet Name="Common_ImmigrationStatus" EntityType="ERPModel.Common_ImmigrationStatus" />
+    <EntitySet Name="Common_JobTitle" EntityType="ERPModel.Common_JobTitle" />
+    <EntitySet Name="Common_Key" EntityType="ERPModel.Common_Key" />
+    <EntitySet Name="Common_Location" EntityType="ERPModel.Common_Location" />
+    <EntitySet Name="Common_MaritalStatus" EntityType="ERPModel.Common_MaritalStatus" />
+    <EntitySet Name="Common_Nationality" EntityType="ERPModel.Common_Nationality" />
+    <EntitySet Name="Common_PaymentType" EntityType="ERPModel.Common_PaymentType" />
+    <EntitySet Name="Common_Region" EntityType="ERPModel.Common_Region" />
+    <EntitySet Name="Common_Skill" EntityType="ERPModel.Common_Skill" />
+    <EntitySet Name="Common_SkillCategory" EntityType="ERPModel.Common_SkillCategory" />
+    <EntitySet Name="Common_SkillGroup" EntityType="ERPModel.Common_SkillGroup" />
+    <EntitySet Name="Common_SkillLevelScheme" EntityType="ERPModel.Common_SkillLevelScheme" />
+    <EntitySet Name="Common_Team" EntityType="ERPModel.Common_Team" />
+    <EntitySet Name="Common_TimeFormat" EntityType="ERPModel.Common_TimeFormat" />
+    <EntitySet Name="Common_TimeSheetFrequency" EntityType="ERPModel.Common_TimeSheetFrequency" />
+    <EntitySet Name="Common_Title" EntityType="ERPModel.Common_Title" />
+    <EntitySet Name="Resouce_WorkingPatternDetails" EntityType="ERPModel.Resouce_WorkingPatternDetails" />
+    <EntitySet Name="Resource_BranchDetails" EntityType="ERPModel.Resource_BranchDetails" />
+    <EntitySet Name="Resource_Department" EntityType="ERPModel.Resource_Department" />
+    <EntitySet Name="Resource_DepartmentAreaDetails" EntityType="ERPModel.Resource_DepartmentAreaDetails" />
+    <EntitySet Name="Resource_Employee" EntityType="ERPModel.Resource_Employee" />
+    <EntitySet Name="Resource_EmployeePayment" EntityType="ERPModel.Resource_EmployeePayment" />
+    <EntitySet Name="Resource_ExperienceDetails" EntityType="ERPModel.Resource_ExperienceDetails" />
+    <EntitySet Name="Resource_Holiday" EntityType="ERPModel.Resource_Holiday" />
+    <EntitySet Name="Resource_Holiday_Type" EntityType="ERPModel.Resource_Holiday_Type" />
+    <EntitySet Name="Resource_HolidayStatus" EntityType="ERPModel.Resource_HolidayStatus" />
+    <EntitySet Name="Resource_HolidayStatusType" EntityType="ERPModel.Resource_HolidayStatusType" />
+    <EntitySet Name="Resource_ShiftPattern" EntityType="ERPModel.Resource_ShiftPattern" />
+    <EntitySet Name="Resource_ShiftSchedule" EntityType="ERPModel.Resource_ShiftSchedule" />
+    <EntitySet Name="Resource_SkillDetails" EntityType="ERPModel.Resource_SkillDetails" />
+    <EntitySet Name="Resource_TimeSheet" EntityType="ERPModel.Resource_TimeSheet" />
+    <EntitySet Name="Resource_TimeSheetDetails" EntityType="ERPModel.Resource_TimeSheetDetails" />
+    <EntitySet Name="Resource_TimeSheetDetailsHoliday" EntityType="ERPModel.Resource_TimeSheetDetailsHoliday" />
+    <EntitySet Name="Resource_WeeklyPatternDetails" EntityType="ERPModel.Resource_WeeklyPatternDetails" />
+    <EntitySet Name="Resource_WorkingPattern" EntityType="ERPModel.Resource_WorkingPattern" />
+    <EntitySet Name="sysdiagrams" EntityType="ERPModel.sysdiagram" />
+    <EntitySet Name="User_UserDetails" EntityType="ERPModel.User_UserDetails" />
+    <AssociationSet Name="FK_AspNetLoginOff_AspNetUsers" Association="ERPModel.FK_AspNetLoginOff_AspNetUsers">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="AspNetLoginOff" EntitySet="AspNetLoginOffs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="ERPModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserClaim" EntitySet="AspNetUserClaims" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="ERPModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserLogin" EntitySet="AspNetUserLogins" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_UserDetails_AspNetUsers" Association="ERPModel.FK_User_UserDetails_AspNetUsers">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="User_UserDetails" EntitySet="User_UserDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Branch_Details_Branch_Status1" Association="ERPModel.FK_Branch_Details_Branch_Status1">
+      <End Role="Branch_Status" EntitySet="Branch_Status" />
+      <End Role="Branch_Details" EntitySet="Branch_Details" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Branch_Details_Branch_Type" Association="ERPModel.FK_Branch_Details_Branch_Type">
+      <End Role="Branch_Type" EntitySet="Branch_Type" />
+      <End Role="Branch_Details" EntitySet="Branch_Details" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Branch_Details_Common_Address" Association="ERPModel.FK_Branch_Details_Common_Address">
+      <End Role="Common_Address" EntitySet="Common_Address" />
+      <End Role="Branch_Details" EntitySet="Branch_Details" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Branch_Holidays_Branch_Details" Association="ERPModel.FK_Branch_Holidays_Branch_Details">
+      <End Role="Branch_Details" EntitySet="Branch_Details" />
+      <End Role="Branch_Holidays" EntitySet="Branch_Holidays" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Resource_BranchDetails_Branch_Details" Association="ERPModel.FK_Resource_BranchDetails_Branch_Details">
+      <End Role="Branch_Details" EntitySet="Branch_Details" />
+      <End Role="Resource_BranchDetails" EntitySet="Resource_BranchDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Resource_ShiftSchedule_Branch_Details" Association="ERPModel.FK_Resource_ShiftSchedule_Branch_Details">
+      <End Role="Branch_Details" EntitySet="Branch_Details" />
+      <End Role="Resource_ShiftSchedule" EntitySet="Resource_ShiftSchedule" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Branch_Holidays_Holiday_Type" Association="ERPModel.FK_Branch_Holidays_Holiday_Type">
+      <End Role="Resource_Holiday_Type" EntitySet="Resource_Holiday_Type" />
+      <End Role="Branch_Holidays" EntitySet="Branch_Holidays" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Common_Address_Common_Country" Association="ERPModel.FK_Common_Address_Common_Country">
+      <End Role="Common_Country" EntitySet="Common_Country" />
+      <End Role="Common_Address" EntitySet="Common_Address" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Resource_Employee_Common_Address" Association="ERPModel.FK_Resource_Employee_Common_Address">
+      <End Role="Common_Address" EntitySet="Common_Address" />
+      <End Role="Resource_Employee" EntitySet="Resource_Employee" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_UserDetails_Common_Address" Association="ERPModel.FK_User_UserDetails_Common_Address">
+      <End Role="Common_Address" EntitySet="Common_Address" />
+      <End Role="User_UserDetails" EntitySet="User_UserDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Common_Area_Common_Region" Association="ERPModel.FK_Common_Area_Common_Region">
+      <End Role="Common_Region" EntitySet="Common_Region" />
+      <End Role="Common_Area" EntitySet="Common_Area" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Common_AreaPostCode_Details_Common_Area" Association="ERPModel.FK_Common_AreaPostCode_Details_Common_Area">
+      <End Role="Common_Area" EntitySet="Common_Area" />
+      <End Role="Common_AreaPostCodeDetails" EntitySet="Common_AreaPostCodeDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Resource_DepartmentAreaDetails_Common_Area" Association="ERPModel.FK_Resource_DepartmentAreaDetails_Common_Area">
+      <End Role="Common_Area" EntitySet="Common_Area" />
+      <End Role="Resource_DepartmentAreaDetails" EntitySet="Resource_DepartmentAreaDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Resource_ExperienceDetails_Common_Company" Association="ERPModel.FK_Resource_ExperienceDetails_Common_Company">
+      <End Role="Common_Company" EntitySet="Common_Company" />
+      <End Role="Resource_ExperienceDetails" EntitySet="Resource_ExperienceDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Resource_SkillDetails_Common_Company" Association="ERPModel.FK_Resource_SkillDetails_Common_Company">
+      <End Role="Common_Company" EntitySet="Common_Company" />
+      <End Role="Resource_SkillDetails" EntitySet="Resource_SkillDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Resource_WeeklyPatternDetails_Common_DayType" Association="ERPModel.FK_Resource_WeeklyPatternDetails_Common_DayType">
+      <End Role="Common_Day" EntitySet="Common_Day" />
+      <End Role="Resource_WeeklyPatternDetails" EntitySet="Resource_WeeklyPatternDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Resource_Department_Common_Department" Association="ERPModel.FK_Resource_Department_Common_Department">
+      <End Role="Common_Department" EntitySet="Common_Department" />
+      <End Role="Resource_Department" EntitySet="Resource_Department" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Resource_ExperienceDetails_Common_Designation" Association="ERPModel.FK_Resource_ExperienceDetails_Common_Designation">
+      <End Role="Common_Designation" EntitySet="Common_Designation" />
+      <End Role="Resource_ExperienceDetails" EntitySet="Resource_ExperienceDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Common_EmployeeType_Common_EmployeeType" Association="ERPModel.FK_Common_EmployeeType_Common_EmployeeType">
+      <End Role="Common_EmployeeType" EntitySet="Common_EmployeeType" />
+      <End Role="Common_EmployeeType1" EntitySet="Common_EmployeeType" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Resource_Employee_Common_EmployeeType" Association="ERPModel.FK_Resource_Employee_Common_EmployeeType">
+      <End Role="Common_EmployeeType" EntitySet="Common_EmployeeType" />
+      <End Role="Resource_Employee" EntitySet="Resource_Employee" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Resource_Employee_Common_EthnicGroup" Association="ERPModel.FK_Resource_Employee_Common_EthnicGroup">
+      <End Role="Common_EthnicGroup" EntitySet="Common_EthnicGroup" />
+      <End Role="Resource_Employee" EntitySet="Resource_Employee" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Resource_Employee_Common_ImmigrationStatus" Association="ERPModel.FK_Resource_Employee_Common_ImmigrationStatus">
+      <End Role="Common_ImmigrationStatus" EntitySet="Common_ImmigrationStatus" />
+      <End Role="Resource_Employee" EntitySet="Resource_Employee" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_UserDetails_Common_JobTitle" Association="ERPModel.FK_User_UserDetails_Common_JobTitle">
+      <End Role="Common_JobTitle" EntitySet="Common_JobTitle" />
+      <End Role="User_UserDetails" EntitySet="User_UserDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Resource_Department_Common_Location" Association="ERPModel.FK_Resource_Department_Common_Location">
+      <End Role="Common_Location" EntitySet="Common_Location" />
+      <End Role="Resource_Department" EntitySet="Resource_Department" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Resource_Employee_Common_MaritalStatus" Association="ERPModel.FK_Resource_Employee_Common_MaritalStatus">
+      <End Role="Common_MaritalStatus" EntitySet="Common_MaritalStatus" />
+      <End Role="Resource_Employee" EntitySet="Resource_Employee" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Resource_Employee_Common_Nationality1" Association="ERPModel.FK_Resource_Employee_Common_Nationality1">
+      <End Role="Common_Nationality" EntitySet="Common_Nationality" />
+      <End Role="Resource_Employee" EntitySet="Resource_Employee" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Common_EmployeePayment_Common_PaymentType1" Association="ERPModel.FK_Common_EmployeePayment_Common_PaymentType1">
+      <End Role="Common_PaymentType" EntitySet="Common_PaymentType" />
+      <End Role="Resource_EmployeePayment" EntitySet="Resource_EmployeePayment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Common_SkillGroup_Common_Skill" Association="ERPModel.FK_Common_SkillGroup_Common_Skill">
+      <End Role="Common_Skill" EntitySet="Common_Skill" />
+      <End Role="Common_SkillGroup" EntitySet="Common_SkillGroup" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Resource_SkillDetails_Common_Skill" Association="ERPModel.FK_Resource_SkillDetails_Common_Skill">
+      <End Role="Common_Skill" EntitySet="Common_Skill" />
+      <End Role="Resource_SkillDetails" EntitySet="Resource_SkillDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Common_SkillGroup_Common_SkillCategory" Association="ERPModel.FK_Common_SkillGroup_Common_SkillCategory">
+      <End Role="Common_SkillCategory" EntitySet="Common_SkillCategory" />
+      <End Role="Common_SkillGroup" EntitySet="Common_SkillGroup" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Resource_SkillDetails_Common_SkillCategory" Association="ERPModel.FK_Resource_SkillDetails_Common_SkillCategory">
+      <End Role="Common_SkillCategory" EntitySet="Common_SkillCategory" />
+      <End Role="Resource_SkillDetails" EntitySet="Resource_SkillDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Common_SkillGroup_Common_SkillLevelScheme" Association="ERPModel.FK_Common_SkillGroup_Common_SkillLevelScheme">
+      <End Role="Common_SkillLevelScheme" EntitySet="Common_SkillLevelScheme" />
+      <End Role="Common_SkillGroup" EntitySet="Common_SkillGroup" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Resource_Department_Common_Team" Association="ERPModel.FK_Resource_Department_Common_Team">
+      <End Role="Common_Team" EntitySet="Common_Team" />
+      <End Role="Resource_Department" EntitySet="Resource_Department" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Resource_Employee_Common_TimeSheetFrequency" Association="ERPModel.FK_Resource_Employee_Common_TimeSheetFrequency">
+      <End Role="Common_TimeSheetFrequency" EntitySet="Common_TimeSheetFrequency" />
+      <End Role="Resource_Employee" EntitySet="Resource_Employee" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Resource_TimeSheet_Common_TimeSheetFrequency" Association="ERPModel.FK_Resource_TimeSheet_Common_TimeSheetFrequency">
+      <End Role="Common_TimeSheetFrequency" EntitySet="Common_TimeSheetFrequency" />
+      <End Role="Resource_TimeSheet" EntitySet="Resource_TimeSheet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Resource_Employee_Common_Title" Association="ERPModel.FK_Resource_Employee_Common_Title">
+      <End Role="Common_Title" EntitySet="Common_Title" />
+      <End Role="Resource_Employee" EntitySet="Resource_Employee" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_UserDetails_Common_Title" Association="ERPModel.FK_User_UserDetails_Common_Title">
+      <End Role="Common_Title" EntitySet="Common_Title" />
+      <End Role="User_UserDetails" EntitySet="User_UserDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Resouce_WorkingPatternDetails_Resource_Employee" Association="ERPModel.FK_Resouce_WorkingPatternDetails_Resource_Employee">
+      <End Role="Resource_Employee" EntitySet="Resource_Employee" />
+      <End Role="Resouce_WorkingPatternDetails" EntitySet="Resouce_WorkingPatternDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Resource_BranchDetails_Resource_Employee" Association="ERPModel.FK_Resource_BranchDetails_Resource_Employee">
+      <End Role="Resource_Employee" EntitySet="Resource_Employee" />
+      <End Role="Resource_BranchDetails" EntitySet="Resource_BranchDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Resource_Department_Resource_Employee" Association="ERPModel.FK_Resource_Department_Resource_Employee">
+      <End Role="Resource_Employee" EntitySet="Resource_Employee" />
+      <End Role="Resource_Department" EntitySet="Resource_Department" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Resource_DepartmentPostCodeDetails_Resource_Department" Association="ERPModel.FK_Resource_DepartmentPostCodeDetails_Resource_Department">
+      <End Role="Resource_Department" EntitySet="Resource_Department" />
+      <End Role="Resource_DepartmentAreaDetails" EntitySet="Resource_DepartmentAreaDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Common_EmployeePayment_Resource_Employee" Association="ERPModel.FK_Common_EmployeePayment_Resource_Employee">
+      <End Role="Resource_Employee" EntitySet="Resource_Employee" />
+      <End Role="Resource_EmployeePayment" EntitySet="Resource_EmployeePayment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Resource_ExperienceDetails_Resource_Employee" Association="ERPModel.FK_Resource_ExperienceDetails_Resource_Employee">
+      <End Role="Resource_Employee" EntitySet="Resource_Employee" />
+      <End Role="Resource_ExperienceDetails" EntitySet="Resource_ExperienceDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Resource_Holiday_Resource_Employee" Association="ERPModel.FK_Resource_Holiday_Resource_Employee">
+      <End Role="Resource_Employee" EntitySet="Resource_Employee" />
+      <End Role="Resource_Holiday" EntitySet="Resource_Holiday" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Resource_ShiftSchedule_Resource_Employee" Association="ERPModel.FK_Resource_ShiftSchedule_Resource_Employee">
+      <End Role="Resource_Employee" EntitySet="Resource_Employee" />
+      <End Role="Resource_ShiftSchedule" EntitySet="Resource_ShiftSchedule" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Resource_SkillDetails_Resource_Employee" Association="ERPModel.FK_Resource_SkillDetails_Resource_Employee">
+      <End Role="Resource_Employee" EntitySet="Resource_Employee" />
+      <End Role="Resource_SkillDetails" EntitySet="Resource_SkillDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Resource_TimeSheet_Resource_Employee" Association="ERPModel.FK_Resource_TimeSheet_Resource_Employee">
+      <End Role="Resource_Employee" EntitySet="Resource_Employee" />
+      <End Role="Resource_TimeSheet" EntitySet="Resource_TimeSheet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Resource_WorkingPattern_Resource_Employee" Association="ERPModel.FK_Resource_WorkingPattern_Resource_Employee">
+      <End Role="Resource_Employee" EntitySet="Resource_Employee" />
+      <End Role="Resource_WorkingPattern" EntitySet="Resource_WorkingPattern" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Resource_Holiday_Holiday_Type" Association="ERPModel.FK_Resource_Holiday_Holiday_Type">
+      <End Role="Resource_Holiday_Type" EntitySet="Resource_Holiday_Type" />
+      <End Role="Resource_Holiday" EntitySet="Resource_Holiday" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Resource_HolidayStatus_Resource_Holiday1" Association="ERPModel.FK_Resource_HolidayStatus_Resource_Holiday1">
+      <End Role="Resource_Holiday" EntitySet="Resource_Holiday" />
+      <End Role="Resource_HolidayStatus" EntitySet="Resource_HolidayStatus" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Resource_TimeSheetDetailsHoliDay_Resource_Holiday" Association="ERPModel.FK_Resource_TimeSheetDetailsHoliDay_Resource_Holiday">
+      <End Role="Resource_Holiday" EntitySet="Resource_Holiday" />
+      <End Role="Resource_TimeSheetDetailsHoliday" EntitySet="Resource_TimeSheetDetailsHoliday" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Resource_HolidayStatus_Resource_HolidayStatusType1" Association="ERPModel.FK_Resource_HolidayStatus_Resource_HolidayStatusType1">
+      <End Role="Resource_HolidayStatusType" EntitySet="Resource_HolidayStatusType" />
+      <End Role="Resource_HolidayStatus" EntitySet="Resource_HolidayStatus" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Resource_ShiftSchedule_Resource_ShiftPattern1" Association="ERPModel.FK_Resource_ShiftSchedule_Resource_ShiftPattern1">
+      <End Role="Resource_ShiftPattern" EntitySet="Resource_ShiftPattern" />
+      <End Role="Resource_ShiftSchedule" EntitySet="Resource_ShiftSchedule" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Resource_TimeSheetDetails_Resource_ShiftSchedule" Association="ERPModel.FK_Resource_TimeSheetDetails_Resource_ShiftSchedule">
+      <End Role="Resource_ShiftSchedule" EntitySet="Resource_ShiftSchedule" />
+      <End Role="Resource_TimeSheetDetails" EntitySet="Resource_TimeSheetDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Resource_TimeSheetDetails_Resource_TimeSheet" Association="ERPModel.FK_Resource_TimeSheetDetails_Resource_TimeSheet">
+      <End Role="Resource_TimeSheet" EntitySet="Resource_TimeSheet" />
+      <End Role="Resource_TimeSheetDetails" EntitySet="Resource_TimeSheetDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Resource_TimeSheetDetailsHoliDay_Resource_TimeSheet" Association="ERPModel.FK_Resource_TimeSheetDetailsHoliDay_Resource_TimeSheet">
+      <End Role="Resource_TimeSheet" EntitySet="Resource_TimeSheet" />
+      <End Role="Resource_TimeSheetDetailsHoliday" EntitySet="Resource_TimeSheetDetailsHoliday" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Resource_WorkingPatternDetails_Resource_WorkingPattern" Association="ERPModel.FK_Resource_WorkingPatternDetails_Resource_WorkingPattern">
+      <End Role="Resource_WorkingPattern" EntitySet="Resource_WorkingPattern" />
+      <End Role="Resource_WeeklyPatternDetails" EntitySet="Resource_WeeklyPatternDetails" />
+    </AssociationSet>
+    <AssociationSet Name="AspNetRolePermission" Association="ERPModel.AspNetRolePermission">
+      <End Role="AspNetPermission" EntitySet="AspNetPermissions" />
+      <End Role="AspNetRole" EntitySet="AspNetRoles" />
+    </AssociationSet>
+    <AssociationSet Name="AspNetUserRoles" Association="ERPModel.AspNetUserRoles">
+      <End Role="AspNetRole" EntitySet="AspNetRoles" />
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="C__MigrationHistory">
+    <Key>
+      <PropertyRef Name="MigrationId" />
+      <PropertyRef Name="ContextKey" />
+    </Key>
+    <Property Name="MigrationId" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="ContextKey" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="Model" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+    <Property Name="ProductVersion" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="AspNetLoginOff">
+    <Key>
+      <PropertyRef Name="LoginLogoutID" />
+    </Key>
+    <Property Name="LoginLogoutID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Login" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="DeviceId" Type="Int32" />
+    <Property Name="BranchID" Type="Int16" />
+    <NavigationProperty Name="AspNetUser" Relationship="ERPModel.FK_AspNetLoginOff_AspNetUsers" FromRole="AspNetLoginOff" ToRole="AspNetUser" />
+  </EntityType>
+  <EntityType Name="AspNetPermission">
+    <Key>
+      <PropertyRef Name="PermissionID" />
+    </Key>
+    <Property Name="PermissionID" Type="Int32" Nullable="false" />
+    <Property Name="Permission" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PermissionType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetRoles" Relationship="ERPModel.AspNetRolePermission" FromRole="AspNetPermission" ToRole="AspNetRole" />
+  </EntityType>
+  <EntityType Name="AspNetRole">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetPermissions" Relationship="ERPModel.AspNetRolePermission" FromRole="AspNetRole" ToRole="AspNetPermission" />
+    <NavigationProperty Name="AspNetUsers" Relationship="ERPModel.AspNetUserRoles" FromRole="AspNetRole" ToRole="AspNetUser" />
+  </EntityType>
+  <EntityType Name="AspNetUserClaim">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUser" Relationship="ERPModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaim" ToRole="AspNetUser" />
+  </EntityType>
+  <EntityType Name="AspNetUserLogin">
+    <Key>
+      <PropertyRef Name="LoginProvider" />
+      <PropertyRef Name="ProviderKey" />
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="LoginProvider" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ProviderKey" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUser" Relationship="ERPModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogin" ToRole="AspNetUser" />
+  </EntityType>
+  <EntityType Name="AspNetUser">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+    <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+    <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetLoginOffs" Relationship="ERPModel.FK_AspNetLoginOff_AspNetUsers" FromRole="AspNetUser" ToRole="AspNetLoginOff" />
+    <NavigationProperty Name="AspNetUserClaims" Relationship="ERPModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserClaim" />
+    <NavigationProperty Name="AspNetUserLogins" Relationship="ERPModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserLogin" />
+    <NavigationProperty Name="User_UserDetails" Relationship="ERPModel.FK_User_UserDetails_AspNetUsers" FromRole="AspNetUser" ToRole="User_UserDetails" />
+    <NavigationProperty Name="AspNetRoles" Relationship="ERPModel.AspNetUserRoles" FromRole="AspNetUser" ToRole="AspNetRole" />
+  </EntityType>
+  <EntityType Name="Branch_Details">
+    <Key>
+      <PropertyRef Name="BranchID" />
+    </Key>
+    <Property Name="BranchID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BranchName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="BranchCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="BranchStatusID" Type="Int32" Nullable="false" />
+    <Property Name="BranchTypeID" Type="Int32" Nullable="false" />
+    <Property Name="Telephone" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Fax" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="AddressID" Type="Int32" Nullable="false" />
+    <Property Name="VATNumber" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Branch_Status" Relationship="ERPModel.FK_Branch_Details_Branch_Status1" FromRole="Branch_Details" ToRole="Branch_Status" />
+    <NavigationProperty Name="Branch_Type" Relationship="ERPModel.FK_Branch_Details_Branch_Type" FromRole="Branch_Details" ToRole="Branch_Type" />
+    <NavigationProperty Name="Common_Address" Relationship="ERPModel.FK_Branch_Details_Common_Address" FromRole="Branch_Details" ToRole="Common_Address" />
+    <NavigationProperty Name="Branch_Holidays" Relationship="ERPModel.FK_Branch_Holidays_Branch_Details" FromRole="Branch_Details" ToRole="Branch_Holidays" />
+    <NavigationProperty Name="Resource_BranchDetails" Relationship="ERPModel.FK_Resource_BranchDetails_Branch_Details" FromRole="Branch_Details" ToRole="Resource_BranchDetails" />
+    <NavigationProperty Name="Resource_ShiftSchedule" Relationship="ERPModel.FK_Resource_ShiftSchedule_Branch_Details" FromRole="Branch_Details" ToRole="Resource_ShiftSchedule" />
+  </EntityType>
+  <EntityType Name="Branch_Holidays">
+    <Key>
+      <PropertyRef Name="BnchComHolyID" />
+    </Key>
+    <Property Name="BnchComHolyID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BranchID" Type="Int32" />
+    <Property Name="HolidayTypeID" Type="Int32" />
+    <Property Name="HolidayDate" Type="DateTime" Precision="3" />
+    <Property Name="HolidayName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Branch_Details" Relationship="ERPModel.FK_Branch_Holidays_Branch_Details" FromRole="Branch_Holidays" ToRole="Branch_Details" />
+    <NavigationProperty Name="Resource_Holiday_Type" Relationship="ERPModel.FK_Branch_Holidays_Holiday_Type" FromRole="Branch_Holidays" ToRole="Resource_Holiday_Type" />
+  </EntityType>
+  <EntityType Name="Branch_Status">
+    <Key>
+      <PropertyRef Name="BranchStatusID" />
+    </Key>
+    <Property Name="BranchStatusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BranchStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Branch_Details" Relationship="ERPModel.FK_Branch_Details_Branch_Status1" FromRole="Branch_Status" ToRole="Branch_Details" />
+  </EntityType>
+  <EntityType Name="Branch_Type">
+    <Key>
+      <PropertyRef Name="BranchTypeID" />
+    </Key>
+    <Property Name="BranchTypeID" Type="Int32" Nullable="false" />
+    <Property Name="BranchType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Branch_Details" Relationship="ERPModel.FK_Branch_Details_Branch_Type" FromRole="Branch_Type" ToRole="Branch_Details" />
+  </EntityType>
+  <EntityType Name="Common_Address">
+    <Key>
+      <PropertyRef Name="AddressID" />
+    </Key>
+    <Property Name="AddressID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AddressLine1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="AddressLine2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="AddressLine3" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Town" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="County" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PostCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CountryID" Type="Int32" />
+    <NavigationProperty Name="Branch_Details" Relationship="ERPModel.FK_Branch_Details_Common_Address" FromRole="Common_Address" ToRole="Branch_Details" />
+    <NavigationProperty Name="Common_Country" Relationship="ERPModel.FK_Common_Address_Common_Country" FromRole="Common_Address" ToRole="Common_Country" />
+    <NavigationProperty Name="Resource_Employee" Relationship="ERPModel.FK_Resource_Employee_Common_Address" FromRole="Common_Address" ToRole="Resource_Employee" />
+    <NavigationProperty Name="User_UserDetails" Relationship="ERPModel.FK_User_UserDetails_Common_Address" FromRole="Common_Address" ToRole="User_UserDetails" />
+  </EntityType>
+  <EntityType Name="Common_Area">
+    <Key>
+      <PropertyRef Name="AreaID" />
+    </Key>
+    <Property Name="AreaID" Type="Int32" Nullable="false" />
+    <Property Name="AreaName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="RegionID" Type="Int32" />
+    <NavigationProperty Name="Common_Region" Relationship="ERPModel.FK_Common_Area_Common_Region" FromRole="Common_Area" ToRole="Common_Region" />
+    <NavigationProperty Name="Common_AreaPostCodeDetails" Relationship="ERPModel.FK_Common_AreaPostCode_Details_Common_Area" FromRole="Common_Area" ToRole="Common_AreaPostCodeDetails" />
+    <NavigationProperty Name="Resource_DepartmentAreaDetails" Relationship="ERPModel.FK_Resource_DepartmentAreaDetails_Common_Area" FromRole="Common_Area" ToRole="Resource_DepartmentAreaDetails" />
+  </EntityType>
+  <EntityType Name="Common_AreaPostCodeDetails">
+    <Key>
+      <PropertyRef Name="PostCodeID" />
+    </Key>
+    <Property Name="PostCodeID" Type="Int32" Nullable="false" />
+    <Property Name="AreaID" Type="Int32" />
+    <Property Name="PostCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Common_Area" Relationship="ERPModel.FK_Common_AreaPostCode_Details_Common_Area" FromRole="Common_AreaPostCodeDetails" ToRole="Common_Area" />
+  </EntityType>
+  <EntityType Name="Common_Company">
+    <Key>
+      <PropertyRef Name="CompanyID" />
+    </Key>
+    <Property Name="CompanyID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CompanyName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Resource_ExperienceDetails" Relationship="ERPModel.FK_Resource_ExperienceDetails_Common_Company" FromRole="Common_Company" ToRole="Resource_ExperienceDetails" />
+    <NavigationProperty Name="Resource_SkillDetails" Relationship="ERPModel.FK_Resource_SkillDetails_Common_Company" FromRole="Common_Company" ToRole="Resource_SkillDetails" />
+  </EntityType>
+  <EntityType Name="Common_Country">
+    <Key>
+      <PropertyRef Name="CountryID" />
+    </Key>
+    <Property Name="CountryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CountryName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CountryCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IsSelected" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Common_Address" Relationship="ERPModel.FK_Common_Address_Common_Country" FromRole="Common_Country" ToRole="Common_Address" />
+  </EntityType>
+  <EntityType Name="Common_CurrencyFormat">
+    <Key>
+      <PropertyRef Name="CurrencyID" />
+    </Key>
+    <Property Name="CurrencyID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Currency" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Common_DateFormat">
+    <Key>
+      <PropertyRef Name="DateFormatID" />
+    </Key>
+    <Property Name="DateFormatID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DateFormat" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Common_Day">
+    <Key>
+      <PropertyRef Name="DayID" />
+    </Key>
+    <Property Name="DayID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DayName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Resource_WeeklyPatternDetails" Relationship="ERPModel.FK_Resource_WeeklyPatternDetails_Common_DayType" FromRole="Common_Day" ToRole="Resource_WeeklyPatternDetails" />
+  </EntityType>
+  <EntityType Name="Common_Department">
+    <Key>
+      <PropertyRef Name="DepartmentID" />
+    </Key>
+    <Property Name="DepartmentID" Type="Int32" Nullable="false" />
+    <Property Name="DepartmentName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Resource_Department" Relationship="ERPModel.FK_Resource_Department_Common_Department" FromRole="Common_Department" ToRole="Resource_Department" />
+  </EntityType>
+  <EntityType Name="Common_Designation">
+    <Key>
+      <PropertyRef Name="DesignationID" />
+    </Key>
+    <Property Name="DesignationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DesignationName" Type="String" Nullable="false" MaxLength="70" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Resource_ExperienceDetails" Relationship="ERPModel.FK_Resource_ExperienceDetails_Common_Designation" FromRole="Common_Designation" ToRole="Resource_ExperienceDetails" />
+  </EntityType>
+  <EntityType Name="Common_EmployeeType">
+    <Key>
+      <PropertyRef Name="EmployeeTypeID" />
+    </Key>
+    <Property Name="EmployeeTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EmployeeTypeName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ReportingTo" Type="Int32" />
+    <NavigationProperty Name="Common_EmployeeType1" Relationship="ERPModel.FK_Common_EmployeeType_Common_EmployeeType" FromRole="Common_EmployeeType" ToRole="Common_EmployeeType1" />
+    <NavigationProperty Name="Common_EmployeeType2" Relationship="ERPModel.FK_Common_EmployeeType_Common_EmployeeType" FromRole="Common_EmployeeType1" ToRole="Common_EmployeeType" />
+    <NavigationProperty Name="Resource_Employee" Relationship="ERPModel.FK_Resource_Employee_Common_EmployeeType" FromRole="Common_EmployeeType" ToRole="Resource_Employee" />
+  </EntityType>
+  <EntityType Name="Common_EthnicGroup">
+    <Key>
+      <PropertyRef Name="EthnicGroupID" />
+    </Key>
+    <Property Name="EthnicGroupID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EthnicGroupName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Resource_Employee" Relationship="ERPModel.FK_Resource_Employee_Common_EthnicGroup" FromRole="Common_EthnicGroup" ToRole="Resource_Employee" />
+  </EntityType>
+  <EntityType Name="Common_HostLogo">
+    <Key>
+      <PropertyRef Name="LogoID" />
+    </Key>
+    <Property Name="LogoID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="HostLogoContent" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="HostLogoContentType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Common_HostSettings">
+    <Key>
+      <PropertyRef Name="HostKey" />
+    </Key>
+    <Property Name="HostKey" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="HostValue" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Common_ImmigrationStatus">
+    <Key>
+      <PropertyRef Name="ImmigrationStatusID" />
+    </Key>
+    <Property Name="ImmigrationStatusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ImmigrationName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Resource_Employee" Relationship="ERPModel.FK_Resource_Employee_Common_ImmigrationStatus" FromRole="Common_ImmigrationStatus" ToRole="Resource_Employee" />
+  </EntityType>
+  <EntityType Name="Common_JobTitle">
+    <Key>
+      <PropertyRef Name="JobTitleID" />
+    </Key>
+    <Property Name="JobTitleID" Type="Int16" Nullable="false" />
+    <Property Name="JobTitleName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="User_UserDetails" Relationship="ERPModel.FK_User_UserDetails_Common_JobTitle" FromRole="Common_JobTitle" ToRole="User_UserDetails" />
+  </EntityType>
+  <EntityType Name="Common_Key">
+    <Key>
+      <PropertyRef Name="KeyName" />
+    </Key>
+    <Property Name="KeyName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="KeyValue" Type="Int64" Nullable="false" />
+    <Property Name="Prefix" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+    <Property Name="LeadingChar" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="MaximumChars" Type="Byte" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Common_Location">
+    <Key>
+      <PropertyRef Name="LocationID" />
+    </Key>
+    <Property Name="LocationID" Type="Int32" Nullable="false" />
+    <Property Name="LocationName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Resource_Department" Relationship="ERPModel.FK_Resource_Department_Common_Location" FromRole="Common_Location" ToRole="Resource_Department" />
+  </EntityType>
+  <EntityType Name="Common_MaritalStatus">
+    <Key>
+      <PropertyRef Name="MaritalStatusID" />
+    </Key>
+    <Property Name="MaritalStatusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MaritalStatusName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Resource_Employee" Relationship="ERPModel.FK_Resource_Employee_Common_MaritalStatus" FromRole="Common_MaritalStatus" ToRole="Resource_Employee" />
+  </EntityType>
+  <EntityType Name="Common_Nationality">
+    <Key>
+      <PropertyRef Name="NationalityID" />
+    </Key>
+    <Property Name="NationalityID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NationalityName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Resource_Employee" Relationship="ERPModel.FK_Resource_Employee_Common_Nationality1" FromRole="Common_Nationality" ToRole="Resource_Employee" />
+  </EntityType>
+  <EntityType Name="Common_PaymentType">
+    <Key>
+      <PropertyRef Name="PaymentTypeID" />
+    </Key>
+    <Property Name="PaymentTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PaymentName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Resource_EmployeePayment" Relationship="ERPModel.FK_Common_EmployeePayment_Common_PaymentType1" FromRole="Common_PaymentType" ToRole="Resource_EmployeePayment" />
+  </EntityType>
+  <EntityType Name="Common_Region">
+    <Key>
+      <PropertyRef Name="RegionID" />
+    </Key>
+    <Property Name="RegionID" Type="Int32" Nullable="false" />
+    <Property Name="RegionName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Common_Area" Relationship="ERPModel.FK_Common_Area_Common_Region" FromRole="Common_Region" ToRole="Common_Area" />
+  </EntityType>
+  <EntityType Name="Common_Skill">
+    <Key>
+      <PropertyRef Name="SkillID" />
+    </Key>
+    <Property Name="SkillID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SkillName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SkillDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Common_SkillGroup" Relationship="ERPModel.FK_Common_SkillGroup_Common_Skill" FromRole="Common_Skill" ToRole="Common_SkillGroup" />
+    <NavigationProperty Name="Resource_SkillDetails" Relationship="ERPModel.FK_Resource_SkillDetails_Common_Skill" FromRole="Common_Skill" ToRole="Resource_SkillDetails" />
+  </EntityType>
+  <EntityType Name="Common_SkillCategory">
+    <Key>
+      <PropertyRef Name="SkillCategoryID" />
+    </Key>
+    <Property Name="SkillCategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CategoryName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Common_SkillGroup" Relationship="ERPModel.FK_Common_SkillGroup_Common_SkillCategory" FromRole="Common_SkillCategory" ToRole="Common_SkillGroup" />
+    <NavigationProperty Name="Resource_SkillDetails" Relationship="ERPModel.FK_Resource_SkillDetails_Common_SkillCategory" FromRole="Common_SkillCategory" ToRole="Resource_SkillDetails" />
+  </EntityType>
+  <EntityType Name="Common_SkillGroup">
+    <Key>
+      <PropertyRef Name="SkillGroupID" />
+    </Key>
+    <Property Name="SkillGroupID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SkillID" Type="Int32" />
+    <Property Name="SkillCategoryID" Type="Int32" />
+    <Property Name="SkillLevelID" Type="Int32" />
+    <NavigationProperty Name="Common_Skill" Relationship="ERPModel.FK_Common_SkillGroup_Common_Skill" FromRole="Common_SkillGroup" ToRole="Common_Skill" />
+    <NavigationProperty Name="Common_SkillCategory" Relationship="ERPModel.FK_Common_SkillGroup_Common_SkillCategory" FromRole="Common_SkillGroup" ToRole="Common_SkillCategory" />
+    <NavigationProperty Name="Common_SkillLevelScheme" Relationship="ERPModel.FK_Common_SkillGroup_Common_SkillLevelScheme" FromRole="Common_SkillGroup" ToRole="Common_SkillLevelScheme" />
+  </EntityType>
+  <EntityType Name="Common_SkillLevelScheme">
+    <Key>
+      <PropertyRef Name="SkillLevelID" />
+    </Key>
+    <Property Name="SkillLevelID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SkillLevelName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="MaxSkillLevel" Type="Int32" />
+    <Property Name="MinSkillLevel" Type="Int32" />
+    <NavigationProperty Name="Common_SkillGroup" Relationship="ERPModel.FK_Common_SkillGroup_Common_SkillLevelScheme" FromRole="Common_SkillLevelScheme" ToRole="Common_SkillGroup" />
+  </EntityType>
+  <EntityType Name="Common_Team">
+    <Key>
+      <PropertyRef Name="TeamID" />
+    </Key>
+    <Property Name="TeamID" Type="Int32" Nullable="false" />
+    <Property Name="TeamName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Resource_Department" Relationship="ERPModel.FK_Resource_Department_Common_Team" FromRole="Common_Team" ToRole="Resource_Department" />
+  </EntityType>
+  <EntityType Name="Common_TimeFormat">
+    <Key>
+      <PropertyRef Name="TimeID" />
+    </Key>
+    <Property Name="TimeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TimeFormat" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Common_TimeSheetFrequency">
+    <Key>
+      <PropertyRef Name="TimeSheetFrequencyID" />
+    </Key>
+    <Property Name="TimeSheetFrequencyID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TimeSheetFrequencyName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="TimeSheetFrequencyDeadline" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Resource_Employee" Relationship="ERPModel.FK_Resource_Employee_Common_TimeSheetFrequency" FromRole="Common_TimeSheetFrequency" ToRole="Resource_Employee" />
+    <NavigationProperty Name="Resource_TimeSheet" Relationship="ERPModel.FK_Resource_TimeSheet_Common_TimeSheetFrequency" FromRole="Common_TimeSheetFrequency" ToRole="Resource_TimeSheet" />
+  </EntityType>
+  <EntityType Name="Common_Title">
+    <Key>
+      <PropertyRef Name="TitleID" />
+    </Key>
+    <Property Name="TitleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TitleName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Resource_Employee" Relationship="ERPModel.FK_Resource_Employee_Common_Title" FromRole="Common_Title" ToRole="Resource_Employee" />
+    <NavigationProperty Name="User_UserDetails" Relationship="ERPModel.FK_User_UserDetails_Common_Title" FromRole="Common_Title" ToRole="User_UserDetails" />
+  </EntityType>
+  <EntityType Name="Resouce_WorkingPatternDetails">
+    <Key>
+      <PropertyRef Name="WorkingPatternID" />
+    </Key>
+    <Property Name="WorkingPatternID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ResourceID" Type="Int32" Nullable="false" />
+    <Property Name="ChangeDate" Type="DateTime" Precision="0" />
+    <Property Name="NoOfWorkingHours" Type="Double" Nullable="false" />
+    <Property Name="Sunday" Type="Boolean" Nullable="false" />
+    <Property Name="Monday" Type="Boolean" Nullable="false" />
+    <Property Name="Tuesday" Type="Boolean" Nullable="false" />
+    <Property Name="Wednesday" Type="Boolean" Nullable="false" />
+    <Property Name="Thursday" Type="Boolean" Nullable="false" />
+    <Property Name="Friday" Type="Boolean" Nullable="false" />
+    <Property Name="Saturday" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Resource_Employee" Relationship="ERPModel.FK_Resouce_WorkingPatternDetails_Resource_Employee" FromRole="Resouce_WorkingPatternDetails" ToRole="Resource_Employee" />
+  </EntityType>
+  <EntityType Name="Resource_BranchDetails">
+    <Key>
+      <PropertyRef Name="ResourceBranchID" />
+    </Key>
+    <Property Name="ResourceBranchID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BranchID" Type="Int32" Nullable="false" />
+    <Property Name="ResourceID" Type="Int32" Nullable="false" />
+    <Property Name="IsDefault" Type="Boolean" />
+    <NavigationProperty Name="Branch_Details" Relationship="ERPModel.FK_Resource_BranchDetails_Branch_Details" FromRole="Resource_BranchDetails" ToRole="Branch_Details" />
+    <NavigationProperty Name="Resource_Employee" Relationship="ERPModel.FK_Resource_BranchDetails_Resource_Employee" FromRole="Resource_BranchDetails" ToRole="Resource_Employee" />
+  </EntityType>
+  <EntityType Name="Resource_Department">
+    <Key>
+      <PropertyRef Name="ResourceDeptID" />
+    </Key>
+    <Property Name="ResourceDeptID" Type="Int32" Nullable="false" />
+    <Property Name="DepartmentID" Type="Int32" Nullable="false" />
+    <Property Name="ResourceID" Type="Int32" Nullable="false" />
+    <Property Name="LocationID" Type="Int32" Nullable="false" />
+    <Property Name="TeamID" Type="Int32" Nullable="false" />
+    <Property Name="FromDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="ToDate" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="Common_Department" Relationship="ERPModel.FK_Resource_Department_Common_Department" FromRole="Resource_Department" ToRole="Common_Department" />
+    <NavigationProperty Name="Common_Location" Relationship="ERPModel.FK_Resource_Department_Common_Location" FromRole="Resource_Department" ToRole="Common_Location" />
+    <NavigationProperty Name="Common_Team" Relationship="ERPModel.FK_Resource_Department_Common_Team" FromRole="Resource_Department" ToRole="Common_Team" />
+    <NavigationProperty Name="Resource_Employee" Relationship="ERPModel.FK_Resource_Department_Resource_Employee" FromRole="Resource_Department" ToRole="Resource_Employee" />
+    <NavigationProperty Name="Resource_DepartmentAreaDetails" Relationship="ERPModel.FK_Resource_DepartmentPostCodeDetails_Resource_Department" FromRole="Resource_Department" ToRole="Resource_DepartmentAreaDetails" />
+  </EntityType>
+  <EntityType Name="Resource_DepartmentAreaDetails">
+    <Key>
+      <PropertyRef Name="DepartmentDetailID" />
+    </Key>
+    <Property Name="DepartmentDetailID" Type="Int32" Nullable="false" />
+    <Property Name="DepartmentID" Type="Int32" Nullable="false" />
+    <Property Name="AreaID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Common_Area" Relationship="ERPModel.FK_Resource_DepartmentAreaDetails_Common_Area" FromRole="Resource_DepartmentAreaDetails" ToRole="Common_Area" />
+    <NavigationProperty Name="Resource_Department" Relationship="ERPModel.FK_Resource_DepartmentPostCodeDetails_Resource_Department" FromRole="Resource_DepartmentAreaDetails" ToRole="Resource_Department" />
+  </EntityType>
+  <EntityType Name="Resource_Employee">
+    <Key>
+      <PropertyRef Name="EmployeeID" />
+    </Key>
+    <Property Name="EmployeeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TitleID" Type="Int32" />
+    <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="MiddleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DoB" Type="DateTime" Precision="0" />
+    <Property Name="Sex" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="NationalityID" Type="Int32" />
+    <Property Name="EmployeeTypeID" Type="Int32" />
+    <Property Name="EthnicGroupID" Type="Int32" />
+    <Property Name="MaritalStatusID" Type="Int32" />
+    <Property Name="TimeSheetFrequencyID" Type="Int32" />
+    <Property Name="DateOfJoin" Type="DateTime" Precision="0" />
+    <Property Name="DateOfLeave" Type="DateTime" Precision="0" />
+    <Property Name="ProfilePhoto" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="PhotoFileType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="NINo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ImmigrationStatusID" Type="Int32" />
+    <Property Name="AdderessID" Type="Int32" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="TelephoneNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="MobileNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="NextOfKIN_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="KIN_TelephoneNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="KIN_MobileNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Common_Address" Relationship="ERPModel.FK_Resource_Employee_Common_Address" FromRole="Resource_Employee" ToRole="Common_Address" />
+    <NavigationProperty Name="Common_EmployeeType" Relationship="ERPModel.FK_Resource_Employee_Common_EmployeeType" FromRole="Resource_Employee" ToRole="Common_EmployeeType" />
+    <NavigationProperty Name="Common_EthnicGroup" Relationship="ERPModel.FK_Resource_Employee_Common_EthnicGroup" FromRole="Resource_Employee" ToRole="Common_EthnicGroup" />
+    <NavigationProperty Name="Common_ImmigrationStatus" Relationship="ERPModel.FK_Resource_Employee_Common_ImmigrationStatus" FromRole="Resource_Employee" ToRole="Common_ImmigrationStatus" />
+    <NavigationProperty Name="Common_MaritalStatus" Relationship="ERPModel.FK_Resource_Employee_Common_MaritalStatus" FromRole="Resource_Employee" ToRole="Common_MaritalStatus" />
+    <NavigationProperty Name="Common_Nationality" Relationship="ERPModel.FK_Resource_Employee_Common_Nationality1" FromRole="Resource_Employee" ToRole="Common_Nationality" />
+    <NavigationProperty Name="Common_TimeSheetFrequency" Relationship="ERPModel.FK_Resource_Employee_Common_TimeSheetFrequency" FromRole="Resource_Employee" ToRole="Common_TimeSheetFrequency" />
+    <NavigationProperty Name="Common_Title" Relationship="ERPModel.FK_Resource_Employee_Common_Title" FromRole="Resource_Employee" ToRole="Common_Title" />
+    <NavigationProperty Name="Resouce_WorkingPatternDetails" Relationship="ERPModel.FK_Resouce_WorkingPatternDetails_Resource_Employee" FromRole="Resource_Employee" ToRole="Resouce_WorkingPatternDetails" />
+    <NavigationProperty Name="Resource_BranchDetails" Relationship="ERPModel.FK_Resource_BranchDetails_Resource_Employee" FromRole="Resource_Employee" ToRole="Resource_BranchDetails" />
+    <NavigationProperty Name="Resource_Department" Relationship="ERPModel.FK_Resource_Department_Resource_Employee" FromRole="Resource_Employee" ToRole="Resource_Department" />
+    <NavigationProperty Name="Resource_EmployeePayment" Relationship="ERPModel.FK_Common_EmployeePayment_Resource_Employee" FromRole="Resource_Employee" ToRole="Resource_EmployeePayment" />
+    <NavigationProperty Name="Resource_ExperienceDetails" Relationship="ERPModel.FK_Resource_ExperienceDetails_Resource_Employee" FromRole="Resource_Employee" ToRole="Resource_ExperienceDetails" />
+    <NavigationProperty Name="Resource_Holiday" Relationship="ERPModel.FK_Resource_Holiday_Resource_Employee" FromRole="Resource_Employee" ToRole="Resource_Holiday" />
+    <NavigationProperty Name="Resource_ShiftSchedule" Relationship="ERPModel.FK_Resource_ShiftSchedule_Resource_Employee" FromRole="Resource_Employee" ToRole="Resource_ShiftSchedule" />
+    <NavigationProperty Name="Resource_SkillDetails" Relationship="ERPModel.FK_Resource_SkillDetails_Resource_Employee" FromRole="Resource_Employee" ToRole="Resource_SkillDetails" />
+    <NavigationProperty Name="Resource_TimeSheet" Relationship="ERPModel.FK_Resource_TimeSheet_Resource_Employee" FromRole="Resource_Employee" ToRole="Resource_TimeSheet" />
+    <NavigationProperty Name="Resource_WorkingPattern" Relationship="ERPModel.FK_Resource_WorkingPattern_Resource_Employee" FromRole="Resource_Employee" ToRole="Resource_WorkingPattern" />
+  </EntityType>
+  <EntityType Name="Resource_EmployeePayment">
+    <Key>
+      <PropertyRef Name="EmployeePayID" />
+    </Key>
+    <Property Name="EmployeePayID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EmployeeID" Type="Int32" Nullable="false" />
+    <Property Name="PaymentAmount" Type="Double" />
+    <Property Name="PaymentTypeID" Type="Int32" Nullable="false" />
+    <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="EndDate" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="Common_PaymentType" Relationship="ERPModel.FK_Common_EmployeePayment_Common_PaymentType1" FromRole="Resource_EmployeePayment" ToRole="Common_PaymentType" />
+    <NavigationProperty Name="Resource_Employee" Relationship="ERPModel.FK_Common_EmployeePayment_Resource_Employee" FromRole="Resource_EmployeePayment" ToRole="Resource_Employee" />
+  </EntityType>
+  <EntityType Name="Resource_ExperienceDetails">
+    <Key>
+      <PropertyRef Name="ExperienceID" />
+    </Key>
+    <Property Name="ExperienceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ResourceID" Type="Int32" Nullable="false" />
+    <Property Name="DesignationID" Type="Int32" Nullable="false" />
+    <Property Name="CompanyID" Type="Int32" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+    <Property Name="ExternalDesignation" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+    <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="EndDate" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="Common_Company" Relationship="ERPModel.FK_Resource_ExperienceDetails_Common_Company" FromRole="Resource_ExperienceDetails" ToRole="Common_Company" />
+    <NavigationProperty Name="Common_Designation" Relationship="ERPModel.FK_Resource_ExperienceDetails_Common_Designation" FromRole="Resource_ExperienceDetails" ToRole="Common_Designation" />
+    <NavigationProperty Name="Resource_Employee" Relationship="ERPModel.FK_Resource_ExperienceDetails_Resource_Employee" FromRole="Resource_ExperienceDetails" ToRole="Resource_Employee" />
+  </EntityType>
+  <EntityType Name="Resource_Holiday">
+    <Key>
+      <PropertyRef Name="HolidayID" />
+    </Key>
+    <Property Name="HolidayID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ResourceID" Type="Int32" Nullable="false" />
+    <Property Name="HolidayDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="HolidayTypeID" Type="Int32" Nullable="false" />
+    <Property Name="BookingHrs" Type="Double" />
+    <Property Name="Comments" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Resource_Employee" Relationship="ERPModel.FK_Resource_Holiday_Resource_Employee" FromRole="Resource_Holiday" ToRole="Resource_Employee" />
+    <NavigationProperty Name="Resource_Holiday_Type" Relationship="ERPModel.FK_Resource_Holiday_Holiday_Type" FromRole="Resource_Holiday" ToRole="Resource_Holiday_Type" />
+    <NavigationProperty Name="Resource_HolidayStatus" Relationship="ERPModel.FK_Resource_HolidayStatus_Resource_Holiday1" FromRole="Resource_Holiday" ToRole="Resource_HolidayStatus" />
+    <NavigationProperty Name="Resource_TimeSheetDetailsHoliday" Relationship="ERPModel.FK_Resource_TimeSheetDetailsHoliDay_Resource_Holiday" FromRole="Resource_Holiday" ToRole="Resource_TimeSheetDetailsHoliday" />
+  </EntityType>
+  <EntityType Name="Resource_Holiday_Type">
+    <Key>
+      <PropertyRef Name="HolidayTypeID" />
+    </Key>
+    <Property Name="HolidayTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="HolidayTypeName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="AbbriviatedHolidayType" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="IconCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Branch_Holidays" Relationship="ERPModel.FK_Branch_Holidays_Holiday_Type" FromRole="Resource_Holiday_Type" ToRole="Branch_Holidays" />
+    <NavigationProperty Name="Resource_Holiday" Relationship="ERPModel.FK_Resource_Holiday_Holiday_Type" FromRole="Resource_Holiday_Type" ToRole="Resource_Holiday" />
+  </EntityType>
+  <EntityType Name="Resource_HolidayStatus">
+    <Key>
+      <PropertyRef Name="HolidayStatusID" />
+    </Key>
+    <Property Name="HolidayStatusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="HolidayID" Type="Int32" Nullable="false" />
+    <Property Name="HolidayStatusTypeID" Type="Int32" Nullable="false" />
+    <Property Name="StatusDateTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="StatusChangedBy" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Resource_Holiday" Relationship="ERPModel.FK_Resource_HolidayStatus_Resource_Holiday1" FromRole="Resource_HolidayStatus" ToRole="Resource_Holiday" />
+    <NavigationProperty Name="Resource_HolidayStatusType" Relationship="ERPModel.FK_Resource_HolidayStatus_Resource_HolidayStatusType1" FromRole="Resource_HolidayStatus" ToRole="Resource_HolidayStatusType" />
+  </EntityType>
+  <EntityType Name="Resource_HolidayStatusType">
+    <Key>
+      <PropertyRef Name="HolidayStatusTypeID" />
+    </Key>
+    <Property Name="HolidayStatusTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="HolidayStatusType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Resource_HolidayStatus" Relationship="ERPModel.FK_Resource_HolidayStatus_Resource_HolidayStatusType1" FromRole="Resource_HolidayStatusType" ToRole="Resource_HolidayStatus" />
+  </EntityType>
+  <EntityType Name="Resource_ShiftPattern">
+    <Key>
+      <PropertyRef Name="ShiftPatternID" />
+    </Key>
+    <Property Name="ShiftPatternID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Description" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ShiftStartTime" Type="Int32" Nullable="false" />
+    <Property Name="Duration" Type="Int32" Nullable="false" />
+    <Property Name="IsEnable" Type="Boolean" />
+    <Property Name="BreakDuration" Type="Int32" />
+    <NavigationProperty Name="Resource_ShiftSchedule" Relationship="ERPModel.FK_Resource_ShiftSchedule_Resource_ShiftPattern1" FromRole="Resource_ShiftPattern" ToRole="Resource_ShiftSchedule" />
+  </EntityType>
+  <EntityType Name="Resource_ShiftSchedule">
+    <Key>
+      <PropertyRef Name="ShiftScheduleID" />
+    </Key>
+    <Property Name="ShiftScheduleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EmployeeID" Type="Int32" Nullable="false" />
+    <Property Name="ShiftPatternID" Type="Int32" Nullable="false" />
+    <Property Name="ShiftDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ExpectedOnTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ExpectedOffTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ActualOnTime" Type="DateTime" Precision="3" />
+    <Property Name="ActualOffTime" Type="DateTime" Precision="3" />
+    <Property Name="BranchID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Branch_Details" Relationship="ERPModel.FK_Resource_ShiftSchedule_Branch_Details" FromRole="Resource_ShiftSchedule" ToRole="Branch_Details" />
+    <NavigationProperty Name="Resource_Employee" Relationship="ERPModel.FK_Resource_ShiftSchedule_Resource_Employee" FromRole="Resource_ShiftSchedule" ToRole="Resource_Employee" />
+    <NavigationProperty Name="Resource_ShiftPattern" Relationship="ERPModel.FK_Resource_ShiftSchedule_Resource_ShiftPattern1" FromRole="Resource_ShiftSchedule" ToRole="Resource_ShiftPattern" />
+    <NavigationProperty Name="Resource_TimeSheetDetails" Relationship="ERPModel.FK_Resource_TimeSheetDetails_Resource_ShiftSchedule" FromRole="Resource_ShiftSchedule" ToRole="Resource_TimeSheetDetails" />
+  </EntityType>
+  <EntityType Name="Resource_SkillDetails">
+    <Key>
+      <PropertyRef Name="ResourceSkillID" />
+    </Key>
+    <Property Name="ResourceSkillID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ResourceID" Type="Int32" Nullable="false" />
+    <Property Name="SkillCategoryID" Type="Int32" Nullable="false" />
+    <Property Name="SkillID" Type="Int32" Nullable="false" />
+    <Property Name="SkillLevel" Type="Int32" Nullable="false" />
+    <Property Name="CompanyID" Type="Int32" Nullable="false" />
+    <Property Name="ProjectStartDate" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="Common_Company" Relationship="ERPModel.FK_Resource_SkillDetails_Common_Company" FromRole="Resource_SkillDetails" ToRole="Common_Company" />
+    <NavigationProperty Name="Common_Skill" Relationship="ERPModel.FK_Resource_SkillDetails_Common_Skill" FromRole="Resource_SkillDetails" ToRole="Common_Skill" />
+    <NavigationProperty Name="Common_SkillCategory" Relationship="ERPModel.FK_Resource_SkillDetails_Common_SkillCategory" FromRole="Resource_SkillDetails" ToRole="Common_SkillCategory" />
+    <NavigationProperty Name="Resource_Employee" Relationship="ERPModel.FK_Resource_SkillDetails_Resource_Employee" FromRole="Resource_SkillDetails" ToRole="Resource_Employee" />
+  </EntityType>
+  <EntityType Name="Resource_TimeSheet">
+    <Key>
+      <PropertyRef Name="TimeSheetID" />
+    </Key>
+    <Property Name="TimeSheetID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ResourceID" Type="Int32" Nullable="false" />
+    <Property Name="TimeSheetDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="TimeSheetFrequencyID" Type="Int32" Nullable="false" />
+    <Property Name="NoOfShift" Type="Int32" Nullable="false" />
+    <Property Name="TotalShiftHours" Type="Double" Nullable="false" />
+    <Property Name="NoOfHolidays" Type="Double" Nullable="false" />
+    <Property Name="NoOfHolidayHours" Type="Double" Nullable="false" />
+    <Property Name="Payment" Type="Double" Nullable="false" />
+    <Property Name="TimeSheetAuthorizationDate" Type="DateTime" Precision="3" />
+    <Property Name="Approved" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="LockedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="LockedDateTime" Type="DateTime" Precision="3" />
+    <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IsAct" Type="Boolean" />
+    <NavigationProperty Name="Common_TimeSheetFrequency" Relationship="ERPModel.FK_Resource_TimeSheet_Common_TimeSheetFrequency" FromRole="Resource_TimeSheet" ToRole="Common_TimeSheetFrequency" />
+    <NavigationProperty Name="Resource_Employee" Relationship="ERPModel.FK_Resource_TimeSheet_Resource_Employee" FromRole="Resource_TimeSheet" ToRole="Resource_Employee" />
+    <NavigationProperty Name="Resource_TimeSheetDetails" Relationship="ERPModel.FK_Resource_TimeSheetDetails_Resource_TimeSheet" FromRole="Resource_TimeSheet" ToRole="Resource_TimeSheetDetails" />
+    <NavigationProperty Name="Resource_TimeSheetDetailsHoliday" Relationship="ERPModel.FK_Resource_TimeSheetDetailsHoliDay_Resource_TimeSheet" FromRole="Resource_TimeSheet" ToRole="Resource_TimeSheetDetailsHoliday" />
+  </EntityType>
+  <EntityType Name="Resource_TimeSheetDetails">
+    <Key>
+      <PropertyRef Name="TimeSheetDetailsID" />
+    </Key>
+    <Property Name="TimeSheetDetailsID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TimeSheetID" Type="Int32" />
+    <Property Name="ShiftScheduleID" Type="Int32" />
+    <NavigationProperty Name="Resource_ShiftSchedule" Relationship="ERPModel.FK_Resource_TimeSheetDetails_Resource_ShiftSchedule" FromRole="Resource_TimeSheetDetails" ToRole="Resource_ShiftSchedule" />
+    <NavigationProperty Name="Resource_TimeSheet" Relationship="ERPModel.FK_Resource_TimeSheetDetails_Resource_TimeSheet" FromRole="Resource_TimeSheetDetails" ToRole="Resource_TimeSheet" />
+  </EntityType>
+  <EntityType Name="Resource_TimeSheetDetailsHoliday">
+    <Key>
+      <PropertyRef Name="TimeSheetDetailsHoliID" />
+    </Key>
+    <Property Name="TimeSheetDetailsHoliID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TimeSheetID" Type="Int32" />
+    <Property Name="HolidayID" Type="Int32" />
+    <NavigationProperty Name="Resource_Holiday" Relationship="ERPModel.FK_Resource_TimeSheetDetailsHoliDay_Resource_Holiday" FromRole="Resource_TimeSheetDetailsHoliday" ToRole="Resource_Holiday" />
+    <NavigationProperty Name="Resource_TimeSheet" Relationship="ERPModel.FK_Resource_TimeSheetDetailsHoliDay_Resource_TimeSheet" FromRole="Resource_TimeSheetDetailsHoliday" ToRole="Resource_TimeSheet" />
+  </EntityType>
+  <EntityType Name="Resource_WeeklyPatternDetails">
+    <Key>
+      <PropertyRef Name="WrkPatternDetailsID" />
+    </Key>
+    <Property Name="WrkPatternDetailsID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PatternID" Type="Int32" />
+    <Property Name="DayID" Type="Int32" />
+    <NavigationProperty Name="Common_Day" Relationship="ERPModel.FK_Resource_WeeklyPatternDetails_Common_DayType" FromRole="Resource_WeeklyPatternDetails" ToRole="Common_Day" />
+    <NavigationProperty Name="Resource_WorkingPattern" Relationship="ERPModel.FK_Resource_WorkingPatternDetails_Resource_WorkingPattern" FromRole="Resource_WeeklyPatternDetails" ToRole="Resource_WorkingPattern" />
+  </EntityType>
+  <EntityType Name="Resource_WorkingPattern">
+    <Key>
+      <PropertyRef Name="PatternID" />
+    </Key>
+    <Property Name="PatternID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ResourceID" Type="Int32" Nullable="false" />
+    <Property Name="PatternStartDate" Type="DateTime" Precision="3" />
+    <Property Name="PatternEndDate" Type="DateTime" Precision="3" />
+    <Property Name="NoOfHours" Type="Double" />
+    <NavigationProperty Name="Resource_Employee" Relationship="ERPModel.FK_Resource_WorkingPattern_Resource_Employee" FromRole="Resource_WorkingPattern" ToRole="Resource_Employee" />
+    <NavigationProperty Name="Resource_WeeklyPatternDetails" Relationship="ERPModel.FK_Resource_WorkingPatternDetails_Resource_WorkingPattern" FromRole="Resource_WorkingPattern" ToRole="Resource_WeeklyPatternDetails" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="User_UserDetails">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EmployeeNo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="TitleID" Type="Int32" Nullable="false" />
+    <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Mobile" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Telephone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="AddressID" Type="Int32" Nullable="false" />
+    <Property Name="DateofBirth" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="JoinDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="JobTitleID" Type="Int16" Nullable="false" />
+    <Property Name="Status" Type="Boolean" Nullable="false" />
+    <Property Name="StatusComment" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUser" Relationship="ERPModel.FK_User_UserDetails_AspNetUsers" FromRole="User_UserDetails" ToRole="AspNetUser" />
+    <NavigationProperty Name="Common_Address" Relationship="ERPModel.FK_User_UserDetails_Common_Address" FromRole="User_UserDetails" ToRole="Common_Address" />
+    <NavigationProperty Name="Common_JobTitle" Relationship="ERPModel.FK_User_UserDetails_Common_JobTitle" FromRole="User_UserDetails" ToRole="Common_JobTitle" />
+    <NavigationProperty Name="Common_Title" Relationship="ERPModel.FK_User_UserDetails_Common_Title" FromRole="User_UserDetails" ToRole="Common_Title" />
+  </EntityType>
+  <Association Name="FK_AspNetLoginOff_AspNetUsers">
+    <End Type="ERPModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+    <End Type="ERPModel.AspNetLoginOff" Role="AspNetLoginOff" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetLoginOff">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+    <End Type="ERPModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="ERPModel.AspNetUserClaim" Role="AspNetUserClaim" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserClaim">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+    <End Type="ERPModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="ERPModel.AspNetUserLogin" Role="AspNetUserLogin" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserLogin">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_UserDetails_AspNetUsers">
+    <End Type="ERPModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+    <End Type="ERPModel.User_UserDetails" Role="User_UserDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="User_UserDetails">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Branch_Details_Branch_Status1">
+    <End Type="ERPModel.Branch_Status" Role="Branch_Status" Multiplicity="1" />
+    <End Type="ERPModel.Branch_Details" Role="Branch_Details" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Branch_Status">
+        <PropertyRef Name="BranchStatusID" />
+      </Principal>
+      <Dependent Role="Branch_Details">
+        <PropertyRef Name="BranchStatusID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Branch_Details_Branch_Type">
+    <End Type="ERPModel.Branch_Type" Role="Branch_Type" Multiplicity="1" />
+    <End Type="ERPModel.Branch_Details" Role="Branch_Details" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Branch_Type">
+        <PropertyRef Name="BranchTypeID" />
+      </Principal>
+      <Dependent Role="Branch_Details">
+        <PropertyRef Name="BranchTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Branch_Details_Common_Address">
+    <End Type="ERPModel.Common_Address" Role="Common_Address" Multiplicity="1" />
+    <End Type="ERPModel.Branch_Details" Role="Branch_Details" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Common_Address">
+        <PropertyRef Name="AddressID" />
+      </Principal>
+      <Dependent Role="Branch_Details">
+        <PropertyRef Name="AddressID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Branch_Holidays_Branch_Details">
+    <End Type="ERPModel.Branch_Details" Role="Branch_Details" Multiplicity="0..1" />
+    <End Type="ERPModel.Branch_Holidays" Role="Branch_Holidays" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Branch_Details">
+        <PropertyRef Name="BranchID" />
+      </Principal>
+      <Dependent Role="Branch_Holidays">
+        <PropertyRef Name="BranchID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Resource_BranchDetails_Branch_Details">
+    <End Type="ERPModel.Branch_Details" Role="Branch_Details" Multiplicity="1" />
+    <End Type="ERPModel.Resource_BranchDetails" Role="Resource_BranchDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Branch_Details">
+        <PropertyRef Name="BranchID" />
+      </Principal>
+      <Dependent Role="Resource_BranchDetails">
+        <PropertyRef Name="BranchID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Resource_ShiftSchedule_Branch_Details">
+    <End Type="ERPModel.Branch_Details" Role="Branch_Details" Multiplicity="1" />
+    <End Type="ERPModel.Resource_ShiftSchedule" Role="Resource_ShiftSchedule" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Branch_Details">
+        <PropertyRef Name="BranchID" />
+      </Principal>
+      <Dependent Role="Resource_ShiftSchedule">
+        <PropertyRef Name="BranchID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Branch_Holidays_Holiday_Type">
+    <End Type="ERPModel.Resource_Holiday_Type" Role="Resource_Holiday_Type" Multiplicity="0..1" />
+    <End Type="ERPModel.Branch_Holidays" Role="Branch_Holidays" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Resource_Holiday_Type">
+        <PropertyRef Name="HolidayTypeID" />
+      </Principal>
+      <Dependent Role="Branch_Holidays">
+        <PropertyRef Name="HolidayTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Common_Address_Common_Country">
+    <End Type="ERPModel.Common_Country" Role="Common_Country" Multiplicity="0..1" />
+    <End Type="ERPModel.Common_Address" Role="Common_Address" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Common_Country">
+        <PropertyRef Name="CountryID" />
+      </Principal>
+      <Dependent Role="Common_Address">
+        <PropertyRef Name="CountryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Resource_Employee_Common_Address">
+    <End Type="ERPModel.Common_Address" Role="Common_Address" Multiplicity="0..1" />
+    <End Type="ERPModel.Resource_Employee" Role="Resource_Employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Common_Address">
+        <PropertyRef Name="AddressID" />
+      </Principal>
+      <Dependent Role="Resource_Employee">
+        <PropertyRef Name="AdderessID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_UserDetails_Common_Address">
+    <End Type="ERPModel.Common_Address" Role="Common_Address" Multiplicity="1" />
+    <End Type="ERPModel.User_UserDetails" Role="User_UserDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Common_Address">
+        <PropertyRef Name="AddressID" />
+      </Principal>
+      <Dependent Role="User_UserDetails">
+        <PropertyRef Name="AddressID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Common_Area_Common_Region">
+    <End Type="ERPModel.Common_Region" Role="Common_Region" Multiplicity="0..1" />
+    <End Type="ERPModel.Common_Area" Role="Common_Area" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Common_Region">
+        <PropertyRef Name="RegionID" />
+      </Principal>
+      <Dependent Role="Common_Area">
+        <PropertyRef Name="RegionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Common_AreaPostCode_Details_Common_Area">
+    <End Type="ERPModel.Common_Area" Role="Common_Area" Multiplicity="0..1" />
+    <End Type="ERPModel.Common_AreaPostCodeDetails" Role="Common_AreaPostCodeDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Common_Area">
+        <PropertyRef Name="AreaID" />
+      </Principal>
+      <Dependent Role="Common_AreaPostCodeDetails">
+        <PropertyRef Name="AreaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Resource_DepartmentAreaDetails_Common_Area">
+    <End Type="ERPModel.Common_Area" Role="Common_Area" Multiplicity="1" />
+    <End Type="ERPModel.Resource_DepartmentAreaDetails" Role="Resource_DepartmentAreaDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Common_Area">
+        <PropertyRef Name="AreaID" />
+      </Principal>
+      <Dependent Role="Resource_DepartmentAreaDetails">
+        <PropertyRef Name="AreaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Resource_ExperienceDetails_Common_Company">
+    <End Type="ERPModel.Common_Company" Role="Common_Company" Multiplicity="1" />
+    <End Type="ERPModel.Resource_ExperienceDetails" Role="Resource_ExperienceDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Common_Company">
+        <PropertyRef Name="CompanyID" />
+      </Principal>
+      <Dependent Role="Resource_ExperienceDetails">
+        <PropertyRef Name="CompanyID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Resource_SkillDetails_Common_Company">
+    <End Type="ERPModel.Common_Company" Role="Common_Company" Multiplicity="1" />
+    <End Type="ERPModel.Resource_SkillDetails" Role="Resource_SkillDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Common_Company">
+        <PropertyRef Name="CompanyID" />
+      </Principal>
+      <Dependent Role="Resource_SkillDetails">
+        <PropertyRef Name="CompanyID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Resource_WeeklyPatternDetails_Common_DayType">
+    <End Type="ERPModel.Common_Day" Role="Common_Day" Multiplicity="0..1" />
+    <End Type="ERPModel.Resource_WeeklyPatternDetails" Role="Resource_WeeklyPatternDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Common_Day">
+        <PropertyRef Name="DayID" />
+      </Principal>
+      <Dependent Role="Resource_WeeklyPatternDetails">
+        <PropertyRef Name="DayID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Resource_Department_Common_Department">
+    <End Type="ERPModel.Common_Department" Role="Common_Department" Multiplicity="1" />
+    <End Type="ERPModel.Resource_Department" Role="Resource_Department" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Common_Department">
+        <PropertyRef Name="DepartmentID" />
+      </Principal>
+      <Dependent Role="Resource_Department">
+        <PropertyRef Name="DepartmentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Resource_ExperienceDetails_Common_Designation">
+    <End Type="ERPModel.Common_Designation" Role="Common_Designation" Multiplicity="1" />
+    <End Type="ERPModel.Resource_ExperienceDetails" Role="Resource_ExperienceDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Common_Designation">
+        <PropertyRef Name="DesignationID" />
+      </Principal>
+      <Dependent Role="Resource_ExperienceDetails">
+        <PropertyRef Name="DesignationID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Common_EmployeeType_Common_EmployeeType">
+    <End Type="ERPModel.Common_EmployeeType" Role="Common_EmployeeType" Multiplicity="0..1" />
+    <End Type="ERPModel.Common_EmployeeType" Role="Common_EmployeeType1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Common_EmployeeType">
+        <PropertyRef Name="EmployeeTypeID" />
+      </Principal>
+      <Dependent Role="Common_EmployeeType1">
+        <PropertyRef Name="ReportingTo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Resource_Employee_Common_EmployeeType">
+    <End Type="ERPModel.Common_EmployeeType" Role="Common_EmployeeType" Multiplicity="0..1" />
+    <End Type="ERPModel.Resource_Employee" Role="Resource_Employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Common_EmployeeType">
+        <PropertyRef Name="EmployeeTypeID" />
+      </Principal>
+      <Dependent Role="Resource_Employee">
+        <PropertyRef Name="EmployeeTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Resource_Employee_Common_EthnicGroup">
+    <End Type="ERPModel.Common_EthnicGroup" Role="Common_EthnicGroup" Multiplicity="0..1" />
+    <End Type="ERPModel.Resource_Employee" Role="Resource_Employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Common_EthnicGroup">
+        <PropertyRef Name="EthnicGroupID" />
+      </Principal>
+      <Dependent Role="Resource_Employee">
+        <PropertyRef Name="EthnicGroupID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Resource_Employee_Common_ImmigrationStatus">
+    <End Type="ERPModel.Common_ImmigrationStatus" Role="Common_ImmigrationStatus" Multiplicity="0..1" />
+    <End Type="ERPModel.Resource_Employee" Role="Resource_Employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Common_ImmigrationStatus">
+        <PropertyRef Name="ImmigrationStatusID" />
+      </Principal>
+      <Dependent Role="Resource_Employee">
+        <PropertyRef Name="ImmigrationStatusID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_UserDetails_Common_JobTitle">
+    <End Type="ERPModel.Common_JobTitle" Role="Common_JobTitle" Multiplicity="1" />
+    <End Type="ERPModel.User_UserDetails" Role="User_UserDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Common_JobTitle">
+        <PropertyRef Name="JobTitleID" />
+      </Principal>
+      <Dependent Role="User_UserDetails">
+        <PropertyRef Name="JobTitleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Resource_Department_Common_Location">
+    <End Type="ERPModel.Common_Location" Role="Common_Location" Multiplicity="1" />
+    <End Type="ERPModel.Resource_Department" Role="Resource_Department" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Common_Location">
+        <PropertyRef Name="LocationID" />
+      </Principal>
+      <Dependent Role="Resource_Department">
+        <PropertyRef Name="LocationID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Resource_Employee_Common_MaritalStatus">
+    <End Type="ERPModel.Common_MaritalStatus" Role="Common_MaritalStatus" Multiplicity="0..1" />
+    <End Type="ERPModel.Resource_Employee" Role="Resource_Employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Common_MaritalStatus">
+        <PropertyRef Name="MaritalStatusID" />
+      </Principal>
+      <Dependent Role="Resource_Employee">
+        <PropertyRef Name="MaritalStatusID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Resource_Employee_Common_Nationality1">
+    <End Type="ERPModel.Common_Nationality" Role="Common_Nationality" Multiplicity="0..1" />
+    <End Type="ERPModel.Resource_Employee" Role="Resource_Employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Common_Nationality">
+        <PropertyRef Name="NationalityID" />
+      </Principal>
+      <Dependent Role="Resource_Employee">
+        <PropertyRef Name="NationalityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Common_EmployeePayment_Common_PaymentType1">
+    <End Type="ERPModel.Common_PaymentType" Role="Common_PaymentType" Multiplicity="1" />
+    <End Type="ERPModel.Resource_EmployeePayment" Role="Resource_EmployeePayment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Common_PaymentType">
+        <PropertyRef Name="PaymentTypeID" />
+      </Principal>
+      <Dependent Role="Resource_EmployeePayment">
+        <PropertyRef Name="PaymentTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Common_SkillGroup_Common_Skill">
+    <End Type="ERPModel.Common_Skill" Role="Common_Skill" Multiplicity="0..1" />
+    <End Type="ERPModel.Common_SkillGroup" Role="Common_SkillGroup" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Common_Skill">
+        <PropertyRef Name="SkillID" />
+      </Principal>
+      <Dependent Role="Common_SkillGroup">
+        <PropertyRef Name="SkillID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Resource_SkillDetails_Common_Skill">
+    <End Type="ERPModel.Common_Skill" Role="Common_Skill" Multiplicity="1" />
+    <End Type="ERPModel.Resource_SkillDetails" Role="Resource_SkillDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Common_Skill">
+        <PropertyRef Name="SkillID" />
+      </Principal>
+      <Dependent Role="Resource_SkillDetails">
+        <PropertyRef Name="SkillID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Common_SkillGroup_Common_SkillCategory">
+    <End Type="ERPModel.Common_SkillCategory" Role="Common_SkillCategory" Multiplicity="0..1" />
+    <End Type="ERPModel.Common_SkillGroup" Role="Common_SkillGroup" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Common_SkillCategory">
+        <PropertyRef Name="SkillCategoryID" />
+      </Principal>
+      <Dependent Role="Common_SkillGroup">
+        <PropertyRef Name="SkillCategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Resource_SkillDetails_Common_SkillCategory">
+    <End Type="ERPModel.Common_SkillCategory" Role="Common_SkillCategory" Multiplicity="1" />
+    <End Type="ERPModel.Resource_SkillDetails" Role="Resource_SkillDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Common_SkillCategory">
+        <PropertyRef Name="SkillCategoryID" />
+      </Principal>
+      <Dependent Role="Resource_SkillDetails">
+        <PropertyRef Name="SkillCategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Common_SkillGroup_Common_SkillLevelScheme">
+    <End Type="ERPModel.Common_SkillLevelScheme" Role="Common_SkillLevelScheme" Multiplicity="0..1" />
+    <End Type="ERPModel.Common_SkillGroup" Role="Common_SkillGroup" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Common_SkillLevelScheme">
+        <PropertyRef Name="SkillLevelID" />
+      </Principal>
+      <Dependent Role="Common_SkillGroup">
+        <PropertyRef Name="SkillLevelID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Resource_Department_Common_Team">
+    <End Type="ERPModel.Common_Team" Role="Common_Team" Multiplicity="1" />
+    <End Type="ERPModel.Resource_Department" Role="Resource_Department" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Common_Team">
+        <PropertyRef Name="TeamID" />
+      </Principal>
+      <Dependent Role="Resource_Department">
+        <PropertyRef Name="TeamID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Resource_Employee_Common_TimeSheetFrequency">
+    <End Type="ERPModel.Common_TimeSheetFrequency" Role="Common_TimeSheetFrequency" Multiplicity="0..1" />
+    <End Type="ERPModel.Resource_Employee" Role="Resource_Employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Common_TimeSheetFrequency">
+        <PropertyRef Name="TimeSheetFrequencyID" />
+      </Principal>
+      <Dependent Role="Resource_Employee">
+        <PropertyRef Name="TimeSheetFrequencyID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Resource_TimeSheet_Common_TimeSheetFrequency">
+    <End Type="ERPModel.Common_TimeSheetFrequency" Role="Common_TimeSheetFrequency" Multiplicity="1" />
+    <End Type="ERPModel.Resource_TimeSheet" Role="Resource_TimeSheet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Common_TimeSheetFrequency">
+        <PropertyRef Name="TimeSheetFrequencyID" />
+      </Principal>
+      <Dependent Role="Resource_TimeSheet">
+        <PropertyRef Name="TimeSheetFrequencyID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Resource_Employee_Common_Title">
+    <End Type="ERPModel.Common_Title" Role="Common_Title" Multiplicity="0..1" />
+    <End Type="ERPModel.Resource_Employee" Role="Resource_Employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Common_Title">
+        <PropertyRef Name="TitleID" />
+      </Principal>
+      <Dependent Role="Resource_Employee">
+        <PropertyRef Name="TitleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_UserDetails_Common_Title">
+    <End Type="ERPModel.Common_Title" Role="Common_Title" Multiplicity="1" />
+    <End Type="ERPModel.User_UserDetails" Role="User_UserDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Common_Title">
+        <PropertyRef Name="TitleID" />
+      </Principal>
+      <Dependent Role="User_UserDetails">
+        <PropertyRef Name="TitleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Resouce_WorkingPatternDetails_Resource_Employee">
+    <End Type="ERPModel.Resource_Employee" Role="Resource_Employee" Multiplicity="1" />
+    <End Type="ERPModel.Resouce_WorkingPatternDetails" Role="Resouce_WorkingPatternDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Resource_Employee">
+        <PropertyRef Name="EmployeeID" />
+      </Principal>
+      <Dependent Role="Resouce_WorkingPatternDetails">
+        <PropertyRef Name="ResourceID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Resource_BranchDetails_Resource_Employee">
+    <End Type="ERPModel.Resource_Employee" Role="Resource_Employee" Multiplicity="1" />
+    <End Type="ERPModel.Resource_BranchDetails" Role="Resource_BranchDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Resource_Employee">
+        <PropertyRef Name="EmployeeID" />
+      </Principal>
+      <Dependent Role="Resource_BranchDetails">
+        <PropertyRef Name="ResourceID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Resource_Department_Resource_Employee">
+    <End Type="ERPModel.Resource_Employee" Role="Resource_Employee" Multiplicity="1" />
+    <End Type="ERPModel.Resource_Department" Role="Resource_Department" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Resource_Employee">
+        <PropertyRef Name="EmployeeID" />
+      </Principal>
+      <Dependent Role="Resource_Department">
+        <PropertyRef Name="ResourceID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Resource_DepartmentPostCodeDetails_Resource_Department">
+    <End Type="ERPModel.Resource_Department" Role="Resource_Department" Multiplicity="1" />
+    <End Type="ERPModel.Resource_DepartmentAreaDetails" Role="Resource_DepartmentAreaDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Resource_Department">
+        <PropertyRef Name="ResourceDeptID" />
+      </Principal>
+      <Dependent Role="Resource_DepartmentAreaDetails">
+        <PropertyRef Name="DepartmentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Common_EmployeePayment_Resource_Employee">
+    <End Type="ERPModel.Resource_Employee" Role="Resource_Employee" Multiplicity="1" />
+    <End Type="ERPModel.Resource_EmployeePayment" Role="Resource_EmployeePayment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Resource_Employee">
+        <PropertyRef Name="EmployeeID" />
+      </Principal>
+      <Dependent Role="Resource_EmployeePayment">
+        <PropertyRef Name="EmployeeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Resource_ExperienceDetails_Resource_Employee">
+    <End Type="ERPModel.Resource_Employee" Role="Resource_Employee" Multiplicity="1" />
+    <End Type="ERPModel.Resource_ExperienceDetails" Role="Resource_ExperienceDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Resource_Employee">
+        <PropertyRef Name="EmployeeID" />
+      </Principal>
+      <Dependent Role="Resource_ExperienceDetails">
+        <PropertyRef Name="ResourceID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Resource_Holiday_Resource_Employee">
+    <End Type="ERPModel.Resource_Employee" Role="Resource_Employee" Multiplicity="1" />
+    <End Type="ERPModel.Resource_Holiday" Role="Resource_Holiday" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Resource_Employee">
+        <PropertyRef Name="EmployeeID" />
+      </Principal>
+      <Dependent Role="Resource_Holiday">
+        <PropertyRef Name="ResourceID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Resource_ShiftSchedule_Resource_Employee">
+    <End Type="ERPModel.Resource_Employee" Role="Resource_Employee" Multiplicity="1" />
+    <End Type="ERPModel.Resource_ShiftSchedule" Role="Resource_ShiftSchedule" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Resource_Employee">
+        <PropertyRef Name="EmployeeID" />
+      </Principal>
+      <Dependent Role="Resource_ShiftSchedule">
+        <PropertyRef Name="EmployeeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Resource_SkillDetails_Resource_Employee">
+    <End Type="ERPModel.Resource_Employee" Role="Resource_Employee" Multiplicity="1" />
+    <End Type="ERPModel.Resource_SkillDetails" Role="Resource_SkillDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Resource_Employee">
+        <PropertyRef Name="EmployeeID" />
+      </Principal>
+      <Dependent Role="Resource_SkillDetails">
+        <PropertyRef Name="ResourceID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Resource_TimeSheet_Resource_Employee">
+    <End Type="ERPModel.Resource_Employee" Role="Resource_Employee" Multiplicity="1" />
+    <End Type="ERPModel.Resource_TimeSheet" Role="Resource_TimeSheet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Resource_Employee">
+        <PropertyRef Name="EmployeeID" />
+      </Principal>
+      <Dependent Role="Resource_TimeSheet">
+        <PropertyRef Name="ResourceID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Resource_WorkingPattern_Resource_Employee">
+    <End Type="ERPModel.Resource_Employee" Role="Resource_Employee" Multiplicity="1" />
+    <End Type="ERPModel.Resource_WorkingPattern" Role="Resource_WorkingPattern" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Resource_Employee">
+        <PropertyRef Name="EmployeeID" />
+      </Principal>
+      <Dependent Role="Resource_WorkingPattern">
+        <PropertyRef Name="ResourceID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Resource_Holiday_Holiday_Type">
+    <End Type="ERPModel.Resource_Holiday_Type" Role="Resource_Holiday_Type" Multiplicity="1" />
+    <End Type="ERPModel.Resource_Holiday" Role="Resource_Holiday" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Resource_Holiday_Type">
+        <PropertyRef Name="HolidayTypeID" />
+      </Principal>
+      <Dependent Role="Resource_Holiday">
+        <PropertyRef Name="HolidayTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Resource_HolidayStatus_Resource_Holiday1">
+    <End Type="ERPModel.Resource_Holiday" Role="Resource_Holiday" Multiplicity="1" />
+    <End Type="ERPModel.Resource_HolidayStatus" Role="Resource_HolidayStatus" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Resource_Holiday">
+        <PropertyRef Name="HolidayID" />
+      </Principal>
+      <Dependent Role="Resource_HolidayStatus">
+        <PropertyRef Name="HolidayID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Resource_TimeSheetDetailsHoliDay_Resource_Holiday">
+    <End Type="ERPModel.Resource_Holiday" Role="Resource_Holiday" Multiplicity="0..1" />
+    <End Type="ERPModel.Resource_TimeSheetDetailsHoliday" Role="Resource_TimeSheetDetailsHoliday" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Resource_Holiday">
+        <PropertyRef Name="HolidayID" />
+      </Principal>
+      <Dependent Role="Resource_TimeSheetDetailsHoliday">
+        <PropertyRef Name="HolidayID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Resource_HolidayStatus_Resource_HolidayStatusType1">
+    <End Type="ERPModel.Resource_HolidayStatusType" Role="Resource_HolidayStatusType" Multiplicity="1" />
+    <End Type="ERPModel.Resource_HolidayStatus" Role="Resource_HolidayStatus" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Resource_HolidayStatusType">
+        <PropertyRef Name="HolidayStatusTypeID" />
+      </Principal>
+      <Dependent Role="Resource_HolidayStatus">
+        <PropertyRef Name="HolidayStatusTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Resource_ShiftSchedule_Resource_ShiftPattern1">
+    <End Type="ERPModel.Resource_ShiftPattern" Role="Resource_ShiftPattern" Multiplicity="1" />
+    <End Type="ERPModel.Resource_ShiftSchedule" Role="Resource_ShiftSchedule" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Resource_ShiftPattern">
+        <PropertyRef Name="ShiftPatternID" />
+      </Principal>
+      <Dependent Role="Resource_ShiftSchedule">
+        <PropertyRef Name="ShiftPatternID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Resource_TimeSheetDetails_Resource_ShiftSchedule">
+    <End Type="ERPModel.Resource_ShiftSchedule" Role="Resource_ShiftSchedule" Multiplicity="0..1" />
+    <End Type="ERPModel.Resource_TimeSheetDetails" Role="Resource_TimeSheetDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Resource_ShiftSchedule">
+        <PropertyRef Name="ShiftScheduleID" />
+      </Principal>
+      <Dependent Role="Resource_TimeSheetDetails">
+        <PropertyRef Name="ShiftScheduleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Resource_TimeSheetDetails_Resource_TimeSheet">
+    <End Type="ERPModel.Resource_TimeSheet" Role="Resource_TimeSheet" Multiplicity="0..1" />
+    <End Type="ERPModel.Resource_TimeSheetDetails" Role="Resource_TimeSheetDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Resource_TimeSheet">
+        <PropertyRef Name="TimeSheetID" />
+      </Principal>
+      <Dependent Role="Resource_TimeSheetDetails">
+        <PropertyRef Name="TimeSheetID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Resource_TimeSheetDetailsHoliDay_Resource_TimeSheet">
+    <End Type="ERPModel.Resource_TimeSheet" Role="Resource_TimeSheet" Multiplicity="0..1" />
+    <End Type="ERPModel.Resource_TimeSheetDetailsHoliday" Role="Resource_TimeSheetDetailsHoliday" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Resource_TimeSheet">
+        <PropertyRef Name="TimeSheetID" />
+      </Principal>
+      <Dependent Role="Resource_TimeSheetDetailsHoliday">
+        <PropertyRef Name="TimeSheetID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Resource_WorkingPatternDetails_Resource_WorkingPattern">
+    <End Type="ERPModel.Resource_WorkingPattern" Role="Resource_WorkingPattern" Multiplicity="0..1" />
+    <End Type="ERPModel.Resource_WeeklyPatternDetails" Role="Resource_WeeklyPatternDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Resource_WorkingPattern">
+        <PropertyRef Name="PatternID" />
+      </Principal>
+      <Dependent Role="Resource_WeeklyPatternDetails">
+        <PropertyRef Name="PatternID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AspNetRolePermission">
+    <End Type="ERPModel.AspNetPermission" Role="AspNetPermission" Multiplicity="*" />
+    <End Type="ERPModel.AspNetRole" Role="AspNetRole" Multiplicity="*" />
+  </Association>
+  <Association Name="AspNetUserRoles">
+    <End Type="ERPModel.AspNetRole" Role="AspNetRole" Multiplicity="*" />
+    <End Type="ERPModel.AspNetUser" Role="AspNetUser" Multiplicity="*" />
+  </Association>
+</Schema>

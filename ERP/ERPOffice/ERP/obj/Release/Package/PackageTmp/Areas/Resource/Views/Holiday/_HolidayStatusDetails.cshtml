@@ -1,0 +1,66 @@
+﻿@model ERP.Resource.Models.HolidayBO
+@{
+    string dateformat = MvcApplication.DateFormat;
+    string timeformat = MvcApplication.TimeFormat;
+}
+
+<div>
+    <a href="@Url.Action("Index")"><span class="glyphicon glyphicon-backward"></span>&nbsp; Back to List</a>
+</div>
+<br />
+<div class="col-md-6">
+    <div class="panel panel-success">
+        <div class="panel-heading">Holiday Details List</div>
+        <div class="panel-body">
+            <div>
+                <table class="table table-responsive" id="example" style="border-bottom:hidden">
+                    <thead>
+                        <tr style="background-color:#CFE5DB;">
+
+                            <th>
+                                Status
+                            </th>
+                            <th>
+                                Status Changed By
+                            </th>
+                            <th>
+                                Status Changed On
+                            </th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.detailsHolidayList.Count != 0)
+                        {
+                            foreach (var item in Model.detailsHolidayList)
+                            {
+
+                                <tr>
+
+                                    <td>
+                                        @item.Status
+                                    </td>
+                                    <td>
+                                        @item.StatusChangedBy
+                                    </td>
+                                    <td>
+                                        @String.Format("{0: " + dateformat + "}", item.StatusChangedOn) &nbsp; @String.Format("{0: " + timeformat + "}", item.StatusChangedOn)
+                                        @*@item.StatusChangedOn*@
+                                    </td>
+
+
+                                </tr>
+
+                            }
+                        }
+
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

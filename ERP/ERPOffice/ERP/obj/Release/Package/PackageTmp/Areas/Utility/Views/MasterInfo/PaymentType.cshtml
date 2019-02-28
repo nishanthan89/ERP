@@ -1,0 +1,111 @@
+﻿@model ERP.Utility.ViewModels.PaymentTypeView
+@{
+    ViewBag.Title = "Payment Type";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="panel panel-success">
+    <div class="panel-heading">
+        <h2 class="panel-title">
+            Payment Type
+        </h2>
+    </div>
+    <div class="panel-body">
+        <div class="col-md-3" id="PaymentList">
+            @Html.Partial("_PaymentTypeList", Model.paymentTypeView)
+        </div>
+
+        <div class="col-md-5 col-md-offset-3" id="CreateEditPayment">
+            @Html.Partial("_CreateEditPaymentType", Model.paymentTypeBO)
+        </div>
+
+    </div>
+</div>
+
+<script>
+
+    function SavePayment(status) {
+        if (status.success == true) {
+            $.post('@Url.Action("GetPaymentList", "MasterInfo")',
+                 function (result) {
+                     $("#PaymentList").html(result);
+                 });
+            $.get('@Url.Action("CreatePaymentType", "MasterInfo")',
+                      function (result) {
+                          $("#CreateEditPayment").html(result);
+                      });
+            successMessage(status.errorMsg, 'Success');
+        }
+        else {
+            $("#CreateEditPayment").html(status);
+        }
+    }
+
+    function CancelButton() {
+        $.get('@Url.Action("CreatePaymentType", "MasterInfo")',
+                              function (result) {
+                                  $("#CreateEditPayment").html(result);
+                              });
+    }
+
+    function DeletePayment(PaymentID) {
+        $.get('@Url.Action("CreatePaymentType", "MasterInfo")',
+                       function (result) {
+                           $("#CreateEditPayment").html(result);
+                       });
+        swal({
+            title: 'Confirm',
+            text: 'Are you sure you want to Delete?',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes',
+            cancelButtonText: 'No'
+        },
+         function (isConfirm) {
+             console.log(isConfirm);
+             if (isConfirm) {
+                 $.ajax({
+                     url: '@Url.Action("DeletePaymentType", "MasterInfo")',
+                     dataType: 'html',
+                     data: ({ id: PaymentID }),
+                     success: function (data) {
+                         var dataObj = jQuery.parseJSON(data);
+                         if (dataObj.success == true) {
+                             successMessage(dataObj.errorMsg, 'Success');
+                             $.post('@Url.Action("GetPaymentList", "MasterInfo")',
+                                     function (result) {
+                                         $("#PaymentList").html(result);
+                                     });
+                         }
+                         else {
+                             successMessage(dataObj.errorMsg, 'Error');
+                         }
+                         $.get('@Url.Action("CreatePaymentType", "MasterInfo")',
+                                  function (result) {
+                                      $("#CreateEditPayment").html(result);
+                                  });
+                     },
+                     error: function (data) {
+                         alert("error Loading the data");
+                     }
+                 })
+             }
+         })
+    }
+
+
+    function EditPayment(PaymentID) {
+        $.ajax({
+            url: '@Url.Action("EditPaymentType", "MasterInfo")',
+            dataType: 'html',
+            data: ({ id: PaymentID }),
+            success: function (data) {
+                $("#CreateEditPayment").html(data).show();
+            },
+            error: function (data) {
+                alert("error Loading the data");
+            }
+        })
+    }
+</script>
+

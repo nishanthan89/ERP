@@ -1,0 +1,106 @@
+﻿@model ERP.Admin.ViewModels.UserPermissionView
+@{
+    ViewBag.Title = "UserPermission";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div>
+    <a href="@Url.Action("Permission","UserPermission",new { area="Admin"})"><span class="glyphicon glyphicon-backward"></span>&nbsp; Back to List</a>
+</div>
+<br />
+<div class="panel panel-success">
+    <div class="panel-heading">User Details</div>
+    <div class="panel-body">
+       
+        <div class="col col-md-offset-10">
+            <p class="pull-right">
+                @*<a class="btn btn-sm btn-success " href="@Url.Action("Permission","UserPermission",new { area="Admin"})" data-toggle="tooltip" title="Back to Role" role="button" id="backToList"><span class="glyphicon glyphicon-backward "></span>&nbsp;Back</a>*@
+                <a class="btn  btn-sm btn-success " role="button" href="@Url.Action("Register","Register",new { area="Admin"})" id="createUser" data-toggle="tooltip" title="Create User"><span class="glyphicon glyphicon-user"></span><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;Create&nbsp;User</a>
+            </p>
+        </div>
+        <div class="row">
+            <div class="col-md-2"></div>
+                @Html.DropDownList("SearchBy", new List<SelectListItem>
+                {
+                new SelectListItem() {Text = "--Select Search Criteria--", Value="null"},
+                new SelectListItem() {Text = "Employee No", Value="EmployeeNo"},
+                new SelectListItem() {Text = "First Name", Value="FirstName"},
+                new SelectListItem() {Text = "Last Name", Value="LastName"},
+                new SelectListItem() {Text = "User Name", Value="UserName"},
+                new SelectListItem() {Text = "Address", Value="Address"},
+                new SelectListItem() {Text = "Telephone", Value="Telephone"},
+                 new SelectListItem() {Text = "Mobile", Value="Mobile"},
+                new SelectListItem() {Text = "Email", Value="Email"},
+           }, new { @class = "form-control col-md-1",style="width:200px" })
+            <div class="col-md-6 form-group">
+                <div class="input-group ">
+                    <div id="custom-search-input">
+                        <div class="input-group col-md-12">
+                            @Html.Editor("SearchText", new { htmlAttributes = new { @class = "form-control", placeholder = "Search" } })
+                            <span class="input-group-btn">
+                                @*<button class="btn btn-info btn-sm" type="button">*@
+                                    <i class="glyphicon glyphicon-search"></i>
+                                @*</button>*@
+                            </span>
+                        </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+        <br />
+        <div id="userDetailDiv">
+            @{
+                Html.RenderPartial("_UserDetails", Model.userViewModel);
+            }
+        </div>
+    </div>
+</div>
+
+<script>
+  
+   // setTimeout("window.location.reload();", 60000);
+
+    $(document).ready(function () {
+        $('#SearchBy').change(function () {
+            $("#SearchText").val('');
+            $.ajax({
+                url: '@Url.Action("UserPermission", "UserPermission")',
+                type: 'POST',
+                dataType: 'html',
+                cache: false,
+                data: { searchBy: $('#SearchBy').val(), searchText: $('#SearchText').val() },
+                success: function (data) {
+                    //alert(data);
+                    $("#userDetailDiv").html(data);
+                },
+                error: function (data) {
+                    alert("Error Loading the data");
+                }
+            });
+        });
+        $("#SearchText").keyup(function () {
+            if ($("#SearchBy").val() == "null") {
+                sweetAlert("--Select Search Criteria--");
+                $("#SearchText").val('');
+            }
+                $.ajax({
+                    url: '@Url.Action("UserPermission", "UserPermission")',
+                    type: 'POST',
+                    dataType: 'html',
+                    cache: false,
+                    data: { searchBy: $('#SearchBy').val(), searchText: $('#SearchText').val() },
+                    success: function (data) {
+                        //alert(data);
+                        $("#userDetailDiv").html(data);
+                    },
+                    error: function (data) {
+                        alert("Error Loading the data");
+                    }
+                });
+            });
+        
+
+    });
+</script>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

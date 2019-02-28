@@ -1,0 +1,62 @@
+﻿@model ERP.Resource.ViewModels.SearchHolidayViewModel
+@{
+    ViewBag.Title = "Search Holiday";
+}
+
+@using (Ajax.BeginForm("SearchHoliday", "Holiday", null, new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace, UpdateTargetId = "holidaySearchDIV" }))
+{
+
+<div class="form-inline">
+        <div class="form-group form-group-sm">
+            @Html.LabelFor(model => model.SearchResourceID, new { @class = "col-md-4 control-label" })
+            <div class="col-md-2">
+                @Html.DropDownListFor(model => model.SearchResourceID, new SelectList(ViewBag.ResourceList, "Value", "Text"), "-- Select --", htmlAttributes: new { @class = "form-control" })
+            </div>
+            @Html.ValidationMessageFor(model => model.SearchResourceID, "", new { @class = "text-danger col-md-4" })
+        </div>
+        <div class="form-group form-group-sm">
+            @Html.LabelFor(model => model.Month, new { @class = "col-md-4 control-label" })
+            <div class="col-md-2">
+               @Html.DropDownListFor(model => model.Month, Enumerable.Range(1, 12).Select(i => new SelectListItem { Value = i.ToString(), Text = System.Globalization.CultureInfo.InvariantCulture.DateTimeFormat.GetMonthName(i)@*, Selected = (i == DateTime.Today.Month)*@ }), @*"-- Select --",*@ htmlAttributes: new { @class = "form-control" })
+                
+            </div>
+            @Html.ValidationMessageFor(model => model.Month, "", new { @class = "text-danger col-md-4" })
+        </div>
+        <div class="form-group form-group-sm">
+            @Html.LabelFor(model => model.Year, new { @class = "col-md-4 control-label" })
+            <div class="col-md-2">
+                @Html.DropDownListFor(model => model.Year, Enumerable.Range(2015, DateTime.Now.Year - 2015 + 1).Select(i => new SelectListItem { Value = i.ToString(), Text = i.ToString()@*, Selected = (i == DateTime.Today.Year)*@ }).OrderByDescending(x => x.Text), @*"-- Select --",*@ htmlAttributes: new { @class = "form-control"})
+            </div>
+            @Html.ValidationMessageFor(model => model.Year, "", new { @class = "text-danger col-md-4" })
+        </div>
+    <div class="form-group form-group-sm">
+        <input type="submit" class="form-control btn-default" name="Search" value="Search" />&nbsp;&nbsp;&nbsp;
+    </div>
+    <div class="form-group pull-right">
+        @*@Ajax.ActionLink("Add New Holiday", "AddHoliday", "Holiday",new  { year = Model.Year,month=Model.Month , searchResourceID =Model.SearchResourceID}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "holidayPanelDIV", HttpMethod = "POST" }, new { @class = "btn btn-success" })*@
+    <a href="#" class="btn btn-success"  name="AddHoliday" id="AddHoliday"  value="AddNewHoliday"> <span class="glyphicon glyphicon-plus-sign" ></span> Add New Holiday</a>
+    </div>
+    
+</div>
+}
+<script>
+    $(document).on('click', '#AddHoliday', function () {
+        var month=$("#Month").val();
+        //alert(month);
+        $.ajax({
+            url: '@Url.Action("AddHoliday", "Holiday")',
+            type: 'POST',
+            dataType: 'html',
+            data: ({ month: $("#Month").val(), year: $("#Year").val(), searchResourceID: $("#SearchResourceID").val() }),
+           // async: false,
+            success: function (data) {
+                // alert(data);
+                $("#holidayPanelDIV").html(data);
+
+            },
+            error: function (data) {
+                successMessage(data.message, 'Error');
+            }
+        });
+    });
+</script>

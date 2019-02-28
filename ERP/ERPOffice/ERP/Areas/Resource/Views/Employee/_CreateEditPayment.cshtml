@@ -1,0 +1,78 @@
+@model ERP.Resource.Models.EmployeePaymentBO
+@*<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>*@
+@Scripts.Render("~/bundles/jqueryval")
+@*@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")*@
+
+@*@using (Ajax.BeginForm("EditEmployee", "Employee", new AjaxOptions { HttpMethod = "POST", OnSuccess = "SaveEmployeePayment" }))*@
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal well">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.EmployeePayID)
+        @*@Html.HiddenFor(model => model.employeePaymentBO.EmployeeID)*@
+        @*<div class="form-group" style="display:none">
+                @Html.LabelFor(model => model.EmployeePayID, htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-7">
+                    @Html.EditorFor(model => model.EmployeePayID, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.EmployeePayID, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+
+        @*<div class="form-group" style="display:none">
+                @Html.LabelFor(model => model.employeePaymentBO.EmployeeID, htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-7">
+                    @Html.EditorFor(model => model.employeePaymentBO.EmployeeID, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.employeePaymentBO.EmployeeID, "", new { @class = "text-danger text-left" })
+                </div>
+            </div>*@
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PaymentAmount, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-8">
+                <div class="input-group">
+                    <input class="form-control input-group-addon" type="button" value="@MvcApplication.Currency" style="width:30px;height:30px;" >
+                    @*@MvcApplication.Currency*@
+                    @Html.EditorFor(model => model.PaymentAmount, new { htmlAttributes = new { @class = "form-control", style = "width:190px;height:30px;border-radius: 3px;" } })@*border-radius: 10px;*@
+                    <br />
+                    @Html.ValidationMessageFor(model => model.PaymentAmount, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PaymentTypeID, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-7">
+                @Html.DropDownListFor(model => model.PaymentTypeID, ViewContext.Controller.ViewBag.PaymentType as IEnumerable<SelectListItem>, "-- Select --", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.PaymentTypeID, "", new { @class = "text-danger text-left" })
+            </div>
+        </div>
+
+        <div class="form-group" id="PaymentStartDate" hidden>
+            @Html.LabelFor(model => model.StartDate, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-7">
+                @Html.EditorFor(model => model.StartDate, new { @class = "form-control", nowifnull = true })
+                @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.EndDate, htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-7">
+                    @Html.EditorFor(model => model.EndDate)
+                    @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+
+        <div class="text-center" id="EmpButtonsDIV" hidden>
+                <a class="btn btn-success" data-toggle="tooltip" @*title="Create"*@ role="button" onclick="SaveEmployeePayment()">&nbsp; Save</a>
+                <button type="button" class="btn btn-default" data-toggle="tooltip" title="Cancel" role="button" onclick="CancelEmployeePayment()">Cancel</button>
+        </div>
+    </div>
+}  
+
+@*@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}*@
+

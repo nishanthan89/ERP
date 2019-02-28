@@ -1,0 +1,23 @@
+﻿@model ERP.Utility.ViewModels.SkillLevelView
+
+@{
+    ViewBag.Title = "Skill Level Scheme";
+}
+@*<div class="wrapper">*@
+@Html.Partial("_SkillLayout")
+<div class="panel panel-success">
+
+    <div class="panel-heading">
+        <h3 class="panel-title">Skill Level Scheme  </h3>
+    </div>
+    <div class="panel-body">
+        <div class="col-md-6" id="skillLevelList">
+            @Html.Partial("_SkillLevelList", Model.SkillLevelList)
+        </div>
+        <div class="col-md-5 col-md-offset-1" id="createSkillLevel">
+            @Html.Partial("_CreateSkillLevel", Model.SkillLevel)
+        </div>
+
+    </div>
+
+</div>

@@ -1,0 +1,126 @@
+﻿@model ERP.Resource.ViewModels.EmployeeSkillViewBO
+
+@using (Ajax.BeginForm("CreateEditSkills", "Employee", new AjaxOptions { HttpMethod = "POST", OnSuccess = "SaveEditEmployeeSkills" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="table-responsive">
+        @Html.HiddenFor(model => model.EmployeeID)
+        @*@Html.HiddenFor(model => model.SkillID)*@
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.EmployeeID, htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="form-group-sm col-md-8">
+                    @Html.EditorFor(model => model.EmployeeID, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.EmployeeID, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+        <table class="table table-hover table-striped table-bordered" id="checkCategoryList" style="border-bottom:hidden">
+            <thead>
+                <tr>
+                    <th class="text-center">@Html.DisplayNameFor(model => model.CategoryID)</th>
+                    <th class="text-center">@Html.DisplayNameFor(model => model.SkillID)</th>
+                    <th class="text-center">@Html.DisplayNameFor(model => model.SkillLevel)</th>
+                    <th class="text-center">@Html.DisplayNameFor(model => model.CompanyID)</th>
+                    <th class="text-center">@Html.DisplayNameFor(model => model.ProjectStartDate)</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.SkillCategoryList != null)
+                {
+                    if (Model.SkillCategoryList.Count != 0)
+                    {
+                        for (int i = 0; i < Model.SkillCategoryList.Count(); ++i)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.CheckBoxFor(model => model.SkillCategoryList[i].IsSelectedCategory)
+                                    @Html.HiddenFor(model => model.SkillCategoryList[i].CategoryID)
+                                    @Html.DisplayFor(model => model.SkillCategoryList[i].Category)
+                                    @Html.HiddenFor(model => model.SkillCategoryList[i].Category)
+                                </td>
+                                <td>
+                                    @Html.HiddenFor(model => model.SkillCategoryList[i].SkillID)
+                                    @Html.DisplayFor(model => model.SkillCategoryList[i].skillName)
+                                    @Html.HiddenFor(model => model.SkillCategoryList[i].skillName)
+                                </td>
+                                <td>
+                                    @Html.DropDownListFor(model => Model.SkillCategoryList[i].SkillLevel, new SelectList(new[] { new { Text = "--Select--", Value = (string)null } }.Concat(Enumerable.Range(1, 10).Select(r => new
+                               {
+                                   Text = r.ToString(),
+                                   Value = r.ToString()
+                               })), "Value", "Text", Model.SkillCategoryList[i].SkillLevel), new { @class = "form-control", style = "width:200px;" })
+                                </td>
+                                <td>
+                                    @*@Html.DropDownListFor(model => model.SkillCategoryList[i].CompanyID, ViewContext.Controller.ViewBag.CompanyName as IEnumerable<SelectListItem>, "-- Select --", new { @class = "form-control", style = "width:200px;" })*@
+                                    @*@Html.DropDownListFor(model => model.SkillCategoryList[i].CompanyID, new SelectList(ViewBag.CompanyName as IEnumerable<SelectListItem>, "Value", "Text"), "-- Select --", new { @class = "form-control", style = "width:200px;" })*@
+                                    @Html.DropDownListFor(model => model.SkillCategoryList[i].CompanyID, new SelectList(ViewBag.CompanyName, "Value", "Text", @Model.SkillCategoryList[i].CompanyID), "-- Select --", new { @class = "form-control", style = "width:200px;" })
+                                </td>
+                                <td>
+                                    @Html.EditorFor(model => model.SkillCategoryList[i].ProjectStartDate, new
+                               {
+                                   @class = "form-control"@*, nowifnull = true*@})<span class="glyphicon" style="position:static"></span>@*For The Fixed Header*@
+                            </td>
+                        </tr>
+                        }
+                    }
+                }
+            </tbody>
+        </table>
+        <div class="text-center">
+            @*@if (Model == null || Model.SkillCategoryID == 0)
+                {
+                    <input type="submit" value="Save" class="btn btn-success" />
+                }
+                else
+                {*@
+            <input type="submit" value="Update" class="btn btn-success" />
+            @*}*@
+            <input type="button" value="Cancel" class="btn btn-default" data-toggle="tooltip" title="Cancel" role="button" onclick="Cancel()" />
+        </div>
+    </div>
+}
+
+<script>
+    @*DataTable Function*@
+    $(document).ready(function () {
+        $('#checkCategoryList').DataTable({
+            "displayLength": 5,
+            bPaginate: false,     //Enables Pagination
+            bFilter: true,       //Enables search text
+            bInfo: false,
+            "language": {       //When the list is empty
+                "zeroRecords": "<p class='text-danger'>No Results Found</p>",
+                "text-color": "#7f1416"
+            }
+        });
+        $("#checkCategoryList").freezeHeader({  //FreezeHeader function
+            offset: '50px'
+        });
+    });
+    @*End*@
+
+    @*Saves Employee Skills function*@
+    function SaveEditEmployeeSkills(data) {
+        if (data.success == true) {
+            @*$.post('@Url.Action("CreateEditSkills", "Employee")',
+                    function (result) {
+                        $("#categoryCheckDIV").html(result);
+                        window.setTimeout(function () {
+                            location.reload(true);
+                        }, 1500);
+                    });*@
+            $.get('@Url.Action("SkillIndex", "Employee")',
+                    function (result) {
+                        $("#categoryCheckDIV").html(result);
+                        //window.setTimeout(function () {
+                        //    location.reload(true);
+                        //}, 1500);
+                    });
+            successMessage(data.errorMsg, 'Success');
+        }
+        else {
+            successMessage(data.errorMsg, 'Error');
+        }
+    }
+    @*End*@
+
+</script>

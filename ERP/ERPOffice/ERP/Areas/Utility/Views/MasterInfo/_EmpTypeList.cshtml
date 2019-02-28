@@ -1,0 +1,142 @@
+﻿@model IEnumerable<ERP.Utility.Models.EmployeeTypeBO>
+
+<br />
+<table class="table" id="EmpTypeTable">
+    <thead>
+        <tr>
+            <th></th>
+            @*<th>
+                    @Html.DisplayNameFor(model => model.EmployeeTypeID)
+                </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.EmployeeTypeName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ReportingTo)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+        @if (Model != null || Model.Count() != 0)
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <a data-toggle="tooltip" title="Edit" role="button" onclick="EditEmployeeType(@item.EmployeeTypeID)" id="edit"><span class="glyphicon glyphicon-pencil text-success" style="position:static"></span></a>&nbsp;
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EmployeeTypeName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ReportingEmployee)
+                    </td>
+                    <td> 
+                        <a data-toggle="tooltip" title="Delete" role="button" onclick="DeleteEmployeeType(@item.EmployeeTypeID)"><span class="glyphicon glyphicon-trash text-danger" style="position:static"></span></a>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td align="center" colspan=15>
+                    <center>
+                        <font color="red" ; style="text-align:center">"Sorry, No Title found!!."</font>
+                    </center>
+                </td>
+
+            </tr>
+        }
+
+</table>
+
+<script>
+    $(document).ready(function () {
+        $('#EmpTypeTable').DataTable({
+            //"displayLength": 5,
+            bPaginate: false,     //disable Pagination
+            bFilter: false,       //disable search text
+            bInfo: false,
+            "language": {
+                "zeroRecords": "<p class='text-danger'>Sorry!..No matching Records found...</p>",
+                "text-color": "#7f1416"
+            }
+        });
+        $("#EmpTypeTable").freezeHeader({
+            offset: '50px',
+            //background-color: rgba(255, 255, 255, 0.7)
+            //"background-color":"cadetblue"
+        });
+    });
+
+
+    function EditEmployeeType(EmployeeTypeID) {
+        console.log("hi else");
+        $.ajax({
+            url: '@Url.Action("EditEmployeeType", "MasterInfo")',
+            dataType: 'html',
+            data: ({ id: EmployeeTypeID }),
+            success: function (data) {
+                // $("#EmployeeTypeName").attr('disabled', 'disabled');
+                $("#CreateEdit").html(data).show();
+                $.post('@Url.Action("GetTypeList", "MasterInfo")',
+                                function (result) {
+                                    $("#TypeList").html(result);
+                                });
+            },
+            error: function (data) {
+                alert("error Loading the data");
+            }
+        })
+    }
+
+    function DeleteEmployeeType(EmployeeTypeID) {
+        // console.log(TitleId);
+        swal({
+            title: 'Confirm',
+            text: 'Would You Like To Delete This Resource Type?',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes',
+            cancelButtonText: 'No'
+        },
+         function (isConfirm) {
+             //console.log(isConfirm);
+             if (isConfirm) {
+                 $.ajax({
+                     url: '@Url.Action("DeleteEmployeeType", "MasterInfo")',
+                     type: 'POST',
+                     dataType: 'html',
+                     data: ({ id: EmployeeTypeID }),
+                     success: function (status) {
+                         var statusObj = jQuery.parseJSON(status);
+                         if (statusObj.success == true) {
+                             successMessage(statusObj.errorMsg, 'Success');
+                         }
+                         else {
+                             successMessage(statusObj.errorMsg, 'Error');
+                         }
+                         $.get('@Url.Action("CreateEmployeeType", "MasterInfo")',
+                                 function (result) {
+                                     $("#CreateEdit").html(result);
+                                 });
+                         $.post('@Url.Action("GetTypeList", "MasterInfo")',
+                                function (result) {
+                                    $("#TypeList").html(result);
+                                });
+                     },
+                     error: function (data) {
+                         alert("error Loading the data");
+                     }
+                 })
+             }
+         })
+    }
+</script>

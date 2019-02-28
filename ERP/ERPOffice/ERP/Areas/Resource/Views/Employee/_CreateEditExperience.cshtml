@@ -1,0 +1,210 @@
+﻿@model ERP.Resource.ViewModels.EmployeeExperienceViewModels
+
+@*@using (Html.BeginForm())*@
+@using (Ajax.BeginForm("CreateExperience", "Employee", new AjaxOptions { HttpMethod = "POST", OnSuccess = "SaveExperience" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal well">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.ExperienceID, htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="form-group-sm col-md-8">
+                    @Html.EditorFor(model => model.ExperienceID, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ExperienceID, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+
+        @Html.HiddenFor(model => model.ExperienceID)
+        @Html.HiddenFor(model => model.ResourceID)
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.ResourceID, htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="form-group-sm col-md-8">
+                    @Html.EditorFor(model => model.ResourceID, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ResourceID, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DesignationID, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="form-group-sm col-md-8">
+                @*@Html.EditorFor(model => model.DesignationID, new { htmlAttributes = new { @class = "form-control" } })*@
+                @Html.DropDownListFor(model => model.DesignationID, ViewContext.Controller.ViewBag.Designations as IEnumerable<SelectListItem>, "-- Select --", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.DesignationID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CompanyID, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="form-group-sm col-md-8">
+                @*@Html.EditorFor(model => model.DesignationID, new { htmlAttributes = new { @class = "form-control" } })*@
+                @Html.DropDownListFor(model => model.CompanyID, ViewContext.Controller.ViewBag.CompanyName as IEnumerable<SelectListItem>, "-- Select --", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.CompanyID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="form-group-sm col-md-8">
+                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ExternalDesignation, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="form-group-sm col-md-8">
+                @Html.EditorFor(model => model.ExternalDesignation, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ExternalDesignation, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-3"></div>
+            <div class="col-md-2"></div>
+            <div class="form-group-sm col-md-3">
+                @Html.LabelFor(model => model.Month, htmlAttributes: new { @class = "control-label col-md-3 " })
+            </div>
+            <div class="form-group-sm col-md-3">
+                @Html.LabelFor(model => model.Year, htmlAttributes: new { @class = "control-label col-md-3" })
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Duration, htmlAttributes: new { @class = "col-md-3 text-right" })
+            <div class="col-md-2">
+                @Html.LabelFor(model => model.Start, htmlAttributes: new { @class = "col-md-2" })
+            </div>
+            <div class="form-group-sm col-md-3">
+                @*@Html.EditorFor(model => model.StartMonth, new { htmlAttributes = new { @class = "form-control col-md-3" } })*@
+                @Html.DropDownListFor(model => model.StartMonth, Enumerable.Range(1, 12).Select(i => new SelectListItem { Value = i.ToString(), Text = System.Globalization.CultureInfo.InvariantCulture.DateTimeFormat.GetMonthName(i) }), "Month", htmlAttributes: new { @class = "form-control col-md-3" })
+                @Html.ValidationMessageFor(model => model.StartMonth, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group-sm col-md-3">
+                @*@Html.EditorFor(model => model.StartYear, new { htmlAttributes = new { @class = "form-control col-md-3" } })*@
+                @Html.DropDownListFor(model => model.StartYear, Enumerable.Range(1900, DateTime.Now.Year - 1900 + 1).Select(i => new SelectListItem { Value = i.ToString(), Text = i.ToString() }).OrderByDescending(x => x.Text), "Year", htmlAttributes: new { @class = "form-control col-md-3" })
+                @Html.ValidationMessageFor(model => model.StartYear, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+
+        <div class="form-group">
+            <div class="control-label col-md-3"></div>
+            <div class="col-md-2">
+                @Html.LabelFor(model => model.End, htmlAttributes: new { @class = "col-md-2" })
+            </div>
+            <div class="form-group-sm col-md-3">
+                @*@Html.EditorFor(model => model.EndMonth, new { htmlAttributes = new { @class = "form-control col-md-3" } })*@
+                @Html.DropDownListFor(model => model.EndMonth, Enumerable.Range(1, 12).Select(i => new SelectListItem { Value = i.ToString(), Text = System.Globalization.CultureInfo.InvariantCulture.DateTimeFormat.GetMonthName(i) }), "Month", htmlAttributes: new { @class = "form-control col-md-3" })
+                @Html.ValidationMessageFor(model => model.EndMonth, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group-sm col-md-3">
+                @*@Html.EditorFor(model => model.EndYear, new { htmlAttributes = new { @class = "form-control col-md-3" } })*@
+                @Html.DropDownListFor(model => model.EndYear, Enumerable.Range(1900, DateTime.Now.Year - 1900 + 1).Select(i => new SelectListItem { Value = i.ToString(), Text = i.ToString() }).OrderByDescending(x => x.Text), "Year", htmlAttributes: new { @class = "form-control col-md-3" })
+                @Html.ValidationMessageFor(model => model.EndYear, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-1"> </div>
+        </div>
+
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.Start, htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="form-group-sm col-md-8">
+                    @Html.EditorFor(model => model.Start, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Start, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.End, htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="form-group-sm col-md-8">
+                    @Html.EditorFor(model => model.End, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.End, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.StartYear, htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="form-group-sm col-md-8">
+                    @Html.EditorFor(model => model.StartYear, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.StartYear, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.StartMonth, htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="form-group-sm col-md-8">
+                    @Html.EditorFor(model => model.StartMonth, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.StartMonth, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.EndYear, htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="form-group-sm col-md-8">
+                    @Html.EditorFor(model => model.EndYear, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.EndYear, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.EndMonth, htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="form-group-sm col-md-8">
+                    @Html.EditorFor(model => model.EndMonth, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.EndMonth, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+
+
+        <div class="text-center">
+            @if (Model == null || Model.ExperienceID == 0)
+            {
+                <input type="submit" value="Save" class="btn btn-success" />
+            }
+            else
+            {
+                <input type="submit" value="Update" class="btn btn-success" />
+            }
+            <input type="button" value="Cancel" class="btn btn-default" data-toggle="tooltip" title="Cancel" role="button" onclick="Cancel()" />
+        </div>
+    </div>
+}
+
+<script>
+    @*Saves Employee Experience function*@
+    function SaveExperience(data) {
+        if (data.success == true) {
+            $.get('@Url.Action("CreateExperience", "Employee")',
+                    function (result) {
+                        $("#createEditExperienceDIV").html(result);
+                        window.setTimeout(function () {
+                            location.reload(true);
+                        }, 1500);
+                    });
+            successMessage(data.errorMsg, 'Success');
+            @*$.get('@Url.Action("ExperienceIndex", "Employee")',
+               function (result) {
+                   $("#createEditExperienceDIV").html().show();
+                   $("#employeeExperienceListDIV").html().show();
+               });*@
+        }
+        else {
+            $("#createEditExperienceDIV").html(data);
+        }
+    }
+    @*End*@
+
+    @*Cancel function for "Cancel" button*@
+    function Cancel() {
+        $.get('@Url.Action("CreateExperience", "Employee")',
+                function (result) {
+                    $("#createEditExperienceDIV").html(result);
+                });
+        location.reload();
+    }
+    @*End*@
+</script>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

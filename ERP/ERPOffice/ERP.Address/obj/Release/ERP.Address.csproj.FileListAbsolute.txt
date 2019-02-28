@@ -1,0 +1,9 @@
+E:\TFS\ERP\ERPOffice\ERPOffice\ERP.Address\bin\Release\ERP.Address.dll.config
+E:\TFS\ERP\ERPOffice\ERPOffice\ERP.Address\bin\Release\ERP.Address.dll
+E:\TFS\ERP\ERPOffice\ERPOffice\ERP.Address\bin\Release\ERP.Address.pdb
+E:\TFS\ERP\ERPOffice\ERPOffice\ERP.Address\bin\Release\EntityFramework.dll
+E:\TFS\ERP\ERPOffice\ERPOffice\ERP.Address\bin\Release\ERP.DA.dll
+E:\TFS\ERP\ERPOffice\ERPOffice\ERP.Address\bin\Release\ERP.DA.pdb
+E:\TFS\ERP\ERPOffice\ERPOffice\ERP.Address\obj\Release\ERP.Address.csprojResolveAssemblyReference.cache
+E:\TFS\ERP\ERPOffice\ERPOffice\ERP.Address\obj\Release\ERP.Address.dll
+E:\TFS\ERP\ERPOffice\ERPOffice\ERP.Address\obj\Release\ERP.Address.pdb

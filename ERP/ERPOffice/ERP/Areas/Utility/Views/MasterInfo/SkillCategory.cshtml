@@ -1,0 +1,23 @@
+﻿@model ERP.Utility.ViewModels.SkillCategoryView
+
+@{
+    ViewBag.Title = "Skill Category";
+    }
+
+@Html.Partial("_SkillLayout")
+<div class="panel panel-success">
+
+    <div class="panel-heading">
+        <h3 class="panel-title">Skill Category  </h3>
+    </div>
+    <div class="panel-body">
+        <div class="col-md-6" id="SListDiv">
+            @Html.Partial("_SkillCategoryList", Model.SkillCategoryList)
+        </div>
+        <div class="col-md-5 col-md-offset-1" id="CreateDiv">
+            @Html.Partial("_CreateSkillCategory", Model.SkillCategory)
+        </div>
+
+    </div>
+
+</div>

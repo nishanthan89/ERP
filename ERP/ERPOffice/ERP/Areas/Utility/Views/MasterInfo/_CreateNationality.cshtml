@@ -1,0 +1,67 @@
+﻿@model ERP.Utility.Models.NationalityBO
+
+
+@using (Ajax.BeginForm("CreateNationality", "MasterInfo", new { id = 0 }, new AjaxOptions { HttpMethod = "POST", OnSuccess = "Save" }))
+{
+    @Html.AntiForgeryToken()
+    <br />
+    <div class="form-horizontal well">       
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.NationalityID)       
+        <div class="form-group">
+            @Html.LabelFor(model => model.NationalityName, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-8">
+                @Html.EditorFor(model => model.NationalityName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.NationalityName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-4 col-md-8">
+                @if (Model == null || Model.NationalityID == 0)
+                {
+                    <input type="submit" value="Create" class="btn btn-success" data-toggle="tooltip" title="Create the Nationality" />
+}
+                else
+                {
+                    <input type="submit" value="Update" class="btn btn-success" data-toggle="tooltip" title="Update the Nationality" />
+                }
+                <input type="button" value="Cancel" class="btn btn-default" data-toggle="tooltip" title="Cancel the Nationality Creation" role="button" onclick="CancelButton()" />
+            </div>
+        </div>            
+    </div>
+      
+}
+
+@Scripts.Render("~/bundles/jqueryval")
+
+<script>
+    function Save(status) {
+        console.log(status);
+        if (status.success == true) {          
+            $.get('@Url.Action("CreateNationality", "MasterInfo", new RouteValueDictionary(new { id = 0 }))',
+                    function (result) {
+                        console.log("reload the create form");
+                        $("#CreateEdit").html(result);
+                    });
+            successMessage(status.errorMsg, 'Success');
+        }
+        else {
+            console.log("hi else");
+            $("#CreateEdit").html(status);
+        }
+        $.post('@Url.Action("GetNationalityList", "MasterInfo")',
+                   function (result) {
+                       console.log("refresh list--save save");
+                       $("#List").html(result);
+                   });
+    }
+
+    function CancelButton() {
+        $.get('@Url.Action("CreateNationality", "MasterInfo")',
+                              function (result) {
+                                  $("#CreateEdit").html(result);
+                              });
+    }
+
+</script>

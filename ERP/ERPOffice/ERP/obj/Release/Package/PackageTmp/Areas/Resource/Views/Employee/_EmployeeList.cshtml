@@ -1,0 +1,261 @@
+﻿@model IEnumerable<ERP.Resource.ViewModels.EmployeeViewBO>
+
+@*<script src="~/Scripts/jquery.dataTables.min.js"></script>*@
+@*<script src="~/Scripts/jquery.freezeheader.js"></script>*@
+
+<br />
+<div class="table-responsive">
+    <table class="table table-hover table-striped table-bordered" id="empTable" style="border-bottom:hidden">
+        <thead>
+            <tr @*style="background-color:#CFE5DB;"*@>
+                <th>
+                    
+                </th>
+                @*<th>
+                        @Html.DisplayNameFor(model => model.EmployeeID)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TitleID)
+                    </th>*@
+                @*<th>
+                        @Html.DisplayNameFor(model => model.TitleName)
+                    </th>*@
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstName)
+                </th>
+                @*<th>
+                        @Html.DisplayNameFor(model => model.MiddleName)
+                    </th>*@
+                <th>
+                    @Html.DisplayNameFor(model => model.LastName)
+                </th>
+                @*<th>
+                        @Html.DisplayNameFor(model => model.DoB)
+                    </th>*@
+                @*<th>
+                        @Html.DisplayNameFor(model => model.Sex)
+                    </th>*@
+                @*<th>
+                        @Html.DisplayNameFor(model => model.MaritalStatusID)
+                    </th>*@
+                @*<th>
+                    @Html.DisplayNameFor(model => model.MaritalStatusName)
+                </th>*@
+                <th>
+                    @Html.DisplayNameFor(model => model.TimeSheetFrequencyName)
+                </th>
+                @*<th>
+                        @Html.DisplayNameFor(model => model.NationalityID)
+                    </th>*@
+                @*<th>
+                        @Html.DisplayNameFor(model => model.NationalityName)
+                    </th>*@
+                @*<th>
+                        @Html.DisplayNameFor(model => model.EmployeeTypeID)
+                    </th>*@
+                <th>
+                    @Html.DisplayNameFor(model => model.EmployeeTypeName)
+                </th>
+                @*<th>
+                        @Html.DisplayNameFor(model => model.EthnicGroupID)
+                    </th>*@
+                <th>
+                    @Html.DisplayNameFor(model => model.EthnicGroupName)
+                </th>
+                @*<th>
+                        @Html.DisplayNameFor(model => model.DateOfJoin)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.PhotoFileType)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.NINo)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ImmigrationStatusID)
+                    </th>*@
+                @*<th>
+                        @Html.DisplayNameFor(model => model.ImmigrationStatusName)
+                    </th>*@
+                @*<th>
+                        @Html.DisplayNameFor(model => model.AdderessID)
+                    </th>*@
+                @*<th>
+                        @Html.DisplayNameFor(model => model.Town)
+                    </th>*@
+                <th>
+                    @Html.DisplayNameFor(model => model.Email)
+                </th>
+                @*<th>
+                        @Html.DisplayNameFor(model => model.TelephoneNo)
+                    </th>*@
+                <th>
+                    @Html.DisplayNameFor(model => model.MobileNo)
+                </th>
+                @*<th>
+                        @Html.DisplayNameFor(model => model.NextOfKIN_Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.KIN_TelephoneNo)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.KIN_MobileNo)
+                    </th>*@
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Count() > 0)
+            {
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td class="text-center">
+                            <a href="@Url.Action("EditEmployee","Employee", new { id=item.EmployeeID })"><span class="glyphicon glyphicon-pencil text-success" data-toggle="tooltip" title="Edit"></span></a>
+                        </td>
+                        @*<td>
+                                @Html.DisplayFor(modelItem => item.EmployeeID)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.TitleID)
+                            </td>*@
+                        @*<td>
+                                @Html.DisplayFor(modelItem => item.TitleName)
+                            </td>*@
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FirstName)
+                        </td>
+                        @*<td>
+                                @Html.DisplayFor(modelItem => item.MiddleName)
+                            </td>*@
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LastName)
+                        </td>
+                        @*<td>
+                                @Html.DisplayFor(modelItem => item.DoB)
+                            </td>*@
+                        @*<td>
+                                @Html.DisplayFor(modelItem => item.Sex)
+                            </td>*@
+                        @*<td>
+                                @Html.DisplayFor(modelItem => item.MaritalStatusID)
+                            </td>*@
+                        @*<td>
+                            @Html.DisplayFor(modelItem => item.MaritalStatusName)
+                        </td>*@
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TimeSheetFrequencyName)
+                        </td>
+                        @*<td>
+                                @Html.DisplayFor(modelItem => item.NationalityID)
+                            </td>*@
+                        @*<td>
+                                @Html.DisplayFor(modelItem => item.NationalityName)
+                            </td>*@
+                        @*<td>
+                                @Html.DisplayFor(modelItem => item.EmployeeTypeID)
+                            </td>*@
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EmployeeTypeName)
+                        </td>
+                        @*<td>
+                                @Html.DisplayFor(modelItem => item.EthnicGroupID)
+                            </td>*@
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EthnicGroupName)
+                        </td>
+                        @*<td>
+                                @Html.DisplayFor(modelItem => item.DateOfJoin)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PhotoFileType)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.NINo)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ImmigrationStatusID)
+                            </td>*@
+                        @*<td>
+                                @Html.DisplayFor(modelItem => item.ImmigrationStatusName)
+                            </td>*@
+                        @*<td>
+                                @Html.DisplayFor(modelItem => item.AdderessID)
+                            </td>*@
+                        @*<td>
+                                @Html.DisplayFor(modelItem => item.Town)
+                            </td>*@
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Email)
+                        </td>
+                        @*<td>
+                                @Html.DisplayFor(modelItem => item.TelephoneNo)
+                            </td>*@
+                        <td>
+                            @Html.DisplayFor(modelItem => item.MobileNo)
+                        </td>
+                        @*<td>
+                                @Html.DisplayFor(modelItem => item.NextOfKIN_Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.KIN_TelephoneNo)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.KIN_MobileNo)
+                            </td>*@
+                        <td class="text-center">
+                            <a href="#">
+                                <span class="glyphicon glyphicon-trash text-danger" data-toggle="tooltip" title="Delete" , new { onclick="return swal(
+                                              {
+                                                title: 'Confirm',
+                                                text: 'Are you sure you wish to Delete this?',
+                                                type: 'warning',
+                                                showCancelButton: true,
+                                                confirmButtonText: 'Yes',
+                                                cancelButtonText: 'No',
+                                              closeOnConfirm: false,
+                                              },
+                                              function(isConfirm){
+                                                  if (isConfirm) {
+                                                      location.href='@Url.Action("DeleteEmployee","Employee", new { id = item.EmployeeID })'
+                                                  }
+                                              }
+                                            );" }></span>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            }
+            @*else
+            {
+                <tr>
+                    
+                    <td colspan="9">
+                        <p class="text-center text-danger">Sorry, Records Not Found....</p>
+                    </td>
+                    
+                </tr>
+            }*@
+        </tbody>
+    </table>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#empTable').DataTable({
+            //"displayLength": 5,
+            bPaginate: false,     //disable Pagination
+            bFilter: false,       //disable search text
+            bInfo: false,
+            "language": {
+                "zeroRecords": "<p class='text-danger'>Sorry!..No matching Records found...</p>",
+                "text-color":"#7f1416"
+            }
+        });
+        $("#empTable").freezeHeader({
+            offset: '50px',            
+            //background-color: rgba(255, 255, 255, 0.7)
+            //"background-color":"cadetblue"
+        });
+    });
+</script>

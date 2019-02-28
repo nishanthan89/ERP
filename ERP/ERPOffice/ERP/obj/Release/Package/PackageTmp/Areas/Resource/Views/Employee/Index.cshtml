@@ -1,0 +1,175 @@
+﻿@using ERP.MvcHelpers
+@model ERP.Resource.ViewModels.EmployeeSearchBO
+
+@{
+    ViewBag.Title = "Employee";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/infiniteScroll.js"></script>
+
+<div class="panel panel-success">
+    <div class="panel-heading">
+        <h2 class="panel-title">Employee</h2>
+    </div>
+    <div class="panel-body">
+        <div class="pull-right">
+            <a href="@Url.Action("CreateEmployee", "Employee",new { area = "Resource"})" class="btn btn-success" role="button"><span class="glyphicon glyphicon-user"></span><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;Add New Employee</a>
+            &nbsp;
+            @*@Html.DialogFormLink("Add New Fleet", Url.Action("CreateEmployee"), "Add New Fleet", "600", "900", "PopupContainer", Url.Action("Index"))*@
+        </div>
+
+        @using (Html.BeginForm("Index", "Employee", FormMethod.Get))
+        {
+            <div class="row">
+                <div class="col-md-1"></div>
+                <div class="editor-field">
+                    @Html.DropDownListFor(model => model.searchBy, new List<SelectListItem>
+                {
+                new SelectListItem() {Text = "--Select Search Criteria--", Value="null"},
+                new SelectListItem() {Text = "First Name", Value="FName"},
+                new SelectListItem() {Text = "Last Name", Value="LName"},
+                new SelectListItem() {Text = "Employee Type", Value="EmpType"},
+                new SelectListItem() {Text = "Ethnic Group", Value="EthnicGroup"},
+                new SelectListItem() {Text = "TimeSheet Frequency", Value="TimeSheetFrequency"}}, new { @class = "form-control col-md-1" })
+                </div>
+
+                <div class="col-md-3">
+                    @Html.EditorFor(model => model.text, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>
+        }
+
+        <div id="checkList">
+            @{
+                Html.RenderPartial("_EmployeeList", Model.employeeList);
+            }
+            @*<div id="container"></div>*@
+        </div>
+        <div id="progress" style="display:none">
+            <h4>Loading...</h4>
+            @*<img alt="Loading" src="@Url.Content("~/Content/dist/img/ajax-loading.gif")" />*@
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {        
+        $('#searchBy').change(function () {
+            $("#text").val('');
+            //alert($('#searchBy').val());
+            $.ajax({
+                url: '@Url.Action("SearchEmployee", "Employee")',
+                type: 'POST',
+                dataType: 'html',
+                data: { searchBy: $('#searchBy').val(), searchText: $('#text').val() },
+                success: function (data) {
+                    //alert(data);
+                    $("#checkList").html(data);
+                },
+                error: function (data) {
+                    alert("Error Loading the data");
+                }
+            });
+        });
+        //alert($("#searchBy").val());
+        $("#text").keyup(function () {
+            if ($("#searchBy").val() == "null") {
+                sweetAlert("--Select Search Criteria--");
+                $("#text").val('');
+            }
+            $.ajax({
+                url: '@Url.Action("SearchEmployee", "Employee")',
+                type: 'POST',
+                dataType: 'html',
+                data: { searchBy: $('#searchBy').val(), searchText: $('#text').val() },
+                success: function (data) {
+                    //alert(data);
+                    $("#checkList").html(data);
+                },
+                error: function (data) {
+                    alert("Error Loading the data");
+                }
+            });
+        });
+    });
+
+    //var callback=false;
+    //var pageIndex = 0;
+    //function GetData() {
+    //    if (pageIndex > -1 && !callback) {
+    //        callback = true;
+    //        pageIndex++;
+    //        $("#progress").show();
+    //        $.get("/Employee/GetData" + pageIndex, function (data) {
+    //            if (data != null) {
+    //                $("#checkList").append(data);
+    //                $("#progress").show();
+    //            } else {
+    //                pageIndex = -1;
+    //            }
+    //            callback = false;
+    //            $("#progress").hide();
+    //        });
+    //    }
+    //}
+
+    //$(window).scroll(function () {
+    //    if ($(window).scrollTop() == $(document).height() - $(window).height()) {
+    //        GetData();
+    //    }
+    //});
+
+    var pageSize = 20;
+    var pageIndex=0;
+
+    GetData();
+    pageIndex++;
+
+    $(window).scroll(function () {
+        if ($(window).scrollTop() ==
+           $(document).height() - $(window).height()) {
+        }        
+        GetData();
+        pageIndex++;
+    });
+
+
+    function GetData() {        
+        $.ajax({
+            type: 'GET',
+            url: '@Url.Action("GetData", "Employee")',
+            data: { "pageindex": pageIndex, "pagesize": pageSize },
+            dataType: 'json',            
+            success: function (data) {
+                //var statusObj = jQuery.parseJSON(data);
+                //alert(statusObj);
+                //alert("Hi");
+                if (data != null) {
+                    //alert("Hi");
+                    $("#checkList").append(data);
+                    $("#progress").show();
+                    //pageIndex++;
+                } 
+            },
+            
+            beforeSend: function () {
+                $("#progress").show();
+            },
+            complete: function () {
+                $("#progress").hide();
+            },
+
+            //error: function () {
+            //    alert("Error while retrieving data!");
+            //}
+        });
+        //alert("hi");
+        
+    }
+</script>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+

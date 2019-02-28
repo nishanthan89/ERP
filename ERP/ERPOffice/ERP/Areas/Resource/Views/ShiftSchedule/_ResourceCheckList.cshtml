@@ -1,0 +1,44 @@
+﻿@model ERP.Resource.ViewModels.ShiftScheduleViewModel
+@if (Model.ResourceList != null)
+{
+    if (Model.ResourceList.Count != 0)
+    {
+        <span>&nbsp;&nbsp;</span>
+                                    @Html.CheckBoxFor(model => model.ResourceAll)
+                                    <span>&nbsp;&nbsp;</span>
+                                    @Html.LabelFor(model => model.ResourceAll)<br />
+                                    <div id="checkResourceList">
+                                        @for (int i = 0; i < Model.ResourceList.Count(); ++i)
+                                        {
+                                            <span>&nbsp;&nbsp;</span>
+                                            @*&nbsp;&nbsp; @Html.CheckBoxFor(m=>m.Resource,new {value= @item.Value })*@
+                                            @*&nbsp;&nbsp; <input type='checkbox' value='@Model.ResourceList[i].ResourceID' name='ResourceList[]' />
+                                                <span style='padding-left:5px;  padding-right:5px;'>@Model.ResourceList[i].Resource</span><br />*@
+                                            @Html.CheckBoxFor(model => model.ResourceList[i].ResourceCheck)
+                                            @Html.HiddenFor(model => model.ResourceList[i].ResourceID)<span>&nbsp;&nbsp;</span>
+                                            @Html.DisplayFor(model => model.ResourceList[i].Resource)
+                                            @Html.HiddenFor(model => model.ResourceList[i].Resource)                                        <br />
+
+                                        }
+                                    </div>
+
+    }
+}
+<script>
+    $(function () {
+        $("#ResourceAll").bind("click", function () {
+            if ($(this).is(":checked")) {
+                $('input[type=checkbox]', "#checkResourceList").prop('checked', true);
+            } else {
+                $('input[type=checkbox]', "#checkResourceList").prop('checked', false);
+            }
+        });
+        $('input[type=checkbox]', "#checkResourceList").bind("click", function () {
+            if ($('input[type=checkbox]:checked', "#checkResourceList").length == $('input[type=checkbox]', "#checkResourceList").length) {
+                $("#ResourceAll").prop('checked', true);
+            } else {
+                $("#ResourceAll").prop('checked', false);
+            }
+        });
+    });
+</script>

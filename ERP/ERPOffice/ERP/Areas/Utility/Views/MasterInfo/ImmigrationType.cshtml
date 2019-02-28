@@ -1,0 +1,111 @@
+﻿@model ERP.Utility.ViewModels.ImmigrationTypeView
+@{
+    ViewBag.Title = "Immigration Type";
+}
+
+<div class="panel panel-success">
+    <div class="panel-heading">
+        <h2 class="panel-title">
+            Immigration Status
+        </h2>
+    </div>
+    <div class="panel-body">
+        <div class="col-md-3" id="ImmigrationList">
+            @Html.Partial("_ImmigrationTypeList", Model.ImmigrationTypeList)
+        </div>
+        <div class="col-md-5 col-md-offset-3 " id="CreateEditImmigration">
+            @Html.Partial("_CreateEditImmigrationType", Model.ImmigrationType)
+        </div>
+    </div>
+</div>
+
+@*<script>
+
+    function SaveImmigration(status) {
+        if (status.success == true) {
+            $.post('@Url.Action("GetImmigrationList", "MasterInfo")',
+                 function (result) {
+                     $("#ImmigrationList").html(result);
+                 });
+            $.get('@Url.Action("CreateImmigrationType", "MasterInfo")',
+                      function (result) {
+                          $("#CreateEditImmigration").html(result);
+                      });
+            successMessage(status.errorMsg, 'Success');
+        }
+        else {
+            $("#CreateEditImmigration").html(status);
+        }
+    }
+
+    function CancelButton() {
+        $.get('@Url.Action("CreateImmigrationType", "MasterInfo")',
+                              function (result) {
+                                  $("#CreateEditImmigration").html(result);
+                              });
+    }
+
+    function DeleteImmigration(ImmigrationID) {
+        //console.log(ImmigrationID);
+        $.get('@Url.Action("CreateImmigrationType", "MasterInfo")',
+                       function (result) {
+                           $("#CreateEditImmigration").html(result);
+                       });
+        swal({
+            title: 'Confirm',
+            text: 'Are you sure you want to Delete?',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes',
+            cancelButtonText: 'No'
+        },
+         function (isConfirm) {
+             console.log(isConfirm);
+             if (isConfirm) {
+                 $.ajax({
+                     url: '@Url.Action("DeleteImmigrationType", "MasterInfo")',
+                     type: 'POST',
+                     dataType: 'html',
+                     data: ({ id: ImmigrationID }),
+                     success: function (data) {
+                         var dataObj = jQuery.parseJSON(data);
+                         if (dataObj.success == true) {
+                             successMessage(dataObj.errorMsg, 'Success');
+                             $.post('@Url.Action("GetImmigrationList", "MasterInfo")',
+                               function (result) {
+                                   $("#ImmigrationList").html(result);
+                               });
+                         }
+                         else {
+                             console.log("hi");
+                             successMessage(dataObj.errorMsg, 'Error');
+                         }
+                     },
+                     error: function (data) {
+                         alert("error Loading the data");
+                     }
+                 })
+             }
+         })
+    }
+
+
+    function EditImmigration(ImmigrationID) {
+        $.ajax({
+            url: '@Url.Action("EditImmigrationType", "MasterInfo")',
+            dataType: 'html',
+            data: ({ id: ImmigrationID }),
+            success: function (data) {
+                $("#CreateEditImmigration").html(data).show();
+
+            },
+            error: function (data) {
+                alert("error Loading the data");
+            }
+        })
+    }
+</script>*@
+
+@*@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}*@

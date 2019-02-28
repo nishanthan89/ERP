@@ -1,0 +1,295 @@
+﻿@model IEnumerable<ERP.Resource.Models.TimeSheetBO>
+
+
+
+@{
+    string dateformat = MvcApplication.DateFormat;
+    string timeformat = MvcApplication.TimeFormat;
+    string currencyformat = MvcApplication.Currency;
+}
+
+
+
+@*<div class="table-responsive">
+
+
+
+    <table class="table table-hover table-striped table-bordered" cellspacing="0" border="0"  id="RestTable1">*@
+
+<div class="table-responsive">
+    <table class="table table-hover table-striped table-bordered" id="RestTable1" style="border-bottom:hidden">
+        <thead>
+            <tr style="background-color:#CFE5DB;">
+                <th>
+
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TimeSheetFrequency)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ResourcesName)
+                </th>
+                @*<th>
+                        @Html.DisplayNameFor(model => model.TimeSheetDate)
+
+                    </th>*@
+                <th>
+                    @Html.DisplayNameFor(x => x.NoOFShift)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(x => x.TolShiftHrs)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(x => x.TolHly)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(x => x.TolHlyHours)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(x => x.Payment)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(x => x.Status)
+                </th>
+                <th>
+
+                    @Html.DisplayNameFor(x => x.StatusDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(x => x.locked)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(x => x.LockedBy)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(x => x.LockedDateTime)
+                </th>
+
+
+            </tr>
+        </thead>
+        <tbody>
+            @if(Model!=null)
+            {
+
+                foreach (var item in Model)
+                {
+
+                    <tr style="text-align:right">
+                        <td>
+                            @*<a href="#"><span class="glyphicon glyphicon-info-sign text-success" onclick="editSchedule('@item.ResourcesID')"></span></a>*@
+                            <a href="#" onclick="editSchedule('@item.ResourcesID')">View</a>
+                        </td>
+
+                        <td>
+                            @item.TimeSheetFrequency
+                        </td>
+                        <td>
+                            @item.ResourcesName
+                        </td>
+                        @*<td>
+                                    <span> @String.Format("{0: " + dateformat + "}", item.TimeSheetDate) &nbsp;</span>
+
+                                    <span>
+                                        @{
+                                        item.MonthName = new DateTime(2000, item.MonthID, 1).ToString("MMMM");
+                                    }
+                                    @item.MonthName, &nbsp;@item.Year
+                                </span>
+
+                            </td>*@
+                        <td>
+                            @item.NoOFShift
+                            @{TempData["TotalShift" + item.ResourcesID.ToString()] = item.NoOFShift; }
+
+                        </td>
+
+                        <td>
+                            @{
+                                var Hour = item.TolShiftHrs / 60 > 0 ? item.TolShiftHrs / 60 : 0;
+                                var min = item.TolShiftHrs % 60 > 0 ? item.TolShiftHrs % 60 : 0;
+                                TempData["TotalShiftHrs" + item.ResourcesID.ToString()] = item.TolShiftHrs;
+                            }
+
+                            @*@Hour <b> Hr </b> @min <b> Min</b>*@
+
+                            @Hour <b>Hr</b>
+
+
+                        </td>
+                        <td>
+                            @item.TolHly
+                            @{TempData["TotalHly" + item.ResourcesID.ToString()] = item.TolHly; }
+                        </td>
+                        <td>
+                            @{
+                                var ex = item.TolHlyHours;
+                                var hr = ex / 60 > 0 ? ex / 60 : 0;
+                                var mn = ex % 60 > 0 ? ex % 60 : 0;
+                                @*@hr<b> Hr </b>@mn<b> Min</b>*@
+                            TempData["TotalHlytHours" + item.ResourcesID.ToString()] = item.TolHlyHours;
+                            }
+
+
+                            @hr <b>Hr</b>
+                        </td>
+                        <td>@if (item.Payment == null || item.Payment==0)
+                        {
+                            float totalPayment = 0; 
+                            if ( item.PaymentValueList!=null  && item.PaymentValueList.Count() > 0)
+                            {
+
+                                double? p1a = 0, p1b = 0, p2a = 0, p2b = 0, p3a = 0, p3b = 0, p4a = 0;
+
+                                foreach (var pymnt in item.PaymentValueList)
+                                {
+                                    int monthEndDay1 = DateTime.DaysInMonth(item.dtDethTime1.Year, item.dtDethTime1.Month);
+                                    DateTime monthEndDate1 = new DateTime(item.dtDethTime1.Year, item.dtDethTime1.Month, monthEndDay1);
+
+                                    int monthEndDay2 = DateTime.DaysInMonth(item.dtDethTime2.Year, item.dtDethTime2.Month);
+                                    DateTime monthEndDate2 = new DateTime(item.dtDethTime2.Year, item.dtDethTime2.Month, monthEndDay2);
+
+                                    if ((pymnt.PstartDate <= item.dtDethTime2 && pymnt.PendDate >= item.dtDethTime2 && pymnt.PendDate < item.dtDethTime1))
+                                    {
+                                        if (item.dtDethTime2 <= monthEndDate2 && monthEndDate2 < pymnt.PendDate)
+                                        {
+                                            p1a = (((monthEndDate2 - item.dtDethTime2).TotalDays * pymnt.Payment) / monthEndDay2) + (((pymnt.PendDate - monthEndDate2).Value.TotalDays * pymnt.Payment) / monthEndDay1);
+                                        }
+                                        else
+                                        {
+
+                                            p1b = (pymnt.Payment * ((pymnt.PendDate - item.dtDethTime2).Value.TotalDays)) / DateTime.DaysInMonth(pymnt.PendDate.Value.Year, pymnt.PendDate.Value.Month);
+                                        }
+
+                                    }
+
+
+                                    if (pymnt.PstartDate <= item.dtDethTime1 && pymnt.PendDate > item.dtDethTime1)
+                                    {
+                                        if (item.dtDethTime1 > monthEndDate2 && pymnt.PstartDate < monthEndDate2)
+                                        {
+                                            p2a = ((pymnt.Payment * (item.dtDethTime1 - monthEndDate2).TotalDays) / monthEndDay1) + ((pymnt.Payment * (monthEndDate2 - pymnt.PstartDate).Value.TotalDays) / monthEndDay2);
+                                        }
+                                        else
+                                        {
+                                            p2b = (pymnt.Payment * (item.dtDethTime1 - pymnt.PstartDate).Value.TotalDays) / DateTime.DaysInMonth(pymnt.PstartDate.Value.Year, pymnt.PstartDate.Value.Month);
+                                        }
+
+                                    }
+
+
+                                    if (pymnt.PstartDate >= item.dtDethTime2 && pymnt.PendDate < item.dtDethTime1)
+                                    {
+                                        if ((monthEndDate2 > item.dtDethTime2 && monthEndDate2 < pymnt.PstartDate) || (item.dtDethTime1 > monthEndDate2 && monthEndDate2 > pymnt.PendDate))
+                                        {
+                                            p3a = (pymnt.Payment * (pymnt.PendDate - pymnt.PstartDate).Value.TotalDays) / DateTime.DaysInMonth(pymnt.PstartDate.Value.Year, pymnt.PstartDate.Value.Month);
+
+                                        }
+                                        if (pymnt.PstartDate <= monthEndDate2 && pymnt.PendDate > monthEndDate2)
+                                        {
+                                            p3b = ((pymnt.Payment * (monthEndDate2 - pymnt.PstartDate).Value.TotalDays) / monthEndDay2) + (pymnt.Payment * (pymnt.PendDate - monthEndDate2).Value.TotalDays) / monthEndDay1;
+                                        }
+                                    }
+
+                                    if (pymnt.PstartDate <= item.dtDethTime1 && pymnt.PendDate == null)
+                                    {
+
+                                        //p4a = (pymnt.Payment*(item.dtDethTime1 - item.dtDethTime2).TotalDays)/monthEndDay1;
+                                        p4a = pymnt.Payment;
+                                    }
+
+                                }
+
+                                totalPayment = (float)(p1a + p1b + p2a + p2b + p3a + p3b + p4a);
+                                TempData["Payment" + item.ResourcesID.ToString()] = totalPayment;
+                                <span> @String.Format("{0: " + currencyformat + "}", totalPayment)&nbsp;@totalPayment</span>
+
+                            }
+
+
+
+                        }
+                        else
+                        {
+                            <span> @String.Format("{0: " + currencyformat + "}", item.Payment)&nbsp;@item.Payment</span>
+                                
+
+                                }
+
+
+                        </td>
+                        <td>
+                            @item.Status
+                        </td>
+                        <td>
+                            <span> @String.Format("{0: " + dateformat + "}", item.StatusDate) &nbsp;</span>
+
+                        </td>
+                        @if (item.StatusDate != null)
+                        {
+                        <td>
+                            @item.locked
+                        </td>
+                        <td>
+                            @item.LockedBy
+                        </td>
+                        <td>
+
+                            <span> @String.Format("{0: " + dateformat + "}", item.LockedDateTime) &nbsp; @String.Format("{0: " + timeformat + "}", item.LockedDateTime) &nbsp;</span>
+
+                        </td>
+                        }
+                    </tr>
+
+                                    }
+
+
+                                }
+                                else
+                                {
+                                    <tr style="color:red; text-align:center">
+                                        <td colspan="13" style="background-color:white">
+                                            No Results Found..!
+                                        </td>
+
+                                    </tr>
+                                }
+
+        </tbody>
+
+
+    </table>
+
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        $('#RestTable1').DataTable({
+            //"displayLength": 5,
+            bPaginate: false,     //disable Pagination
+            bFilter: false,       //disable search text
+            bInfo: false,
+            "language": {
+                "zeroRecords": "<p class='text-danger'> No Results Found..! </p>",
+                "text-color": "#7f1416"
+            }
+        });
+        //$("#RestTable1").freezeHeader({
+        //    offset: '50px',
+        //    //background-color: rgba(255, 255, 255, 0.7)
+        //    //"background-color":"cadetblue"
+        //});
+
+
+                
+
+       
+       
+
+    });
+
+
+</script>
+
+

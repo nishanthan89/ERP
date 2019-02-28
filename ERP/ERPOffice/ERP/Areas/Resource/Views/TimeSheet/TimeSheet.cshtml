@@ -1,0 +1,155 @@
+﻿@model ERP.Resource.ViewModels.TimeSheetView
+@{
+    string dateformat = MvcApplication.DateFormat;
+    string timeformat = MvcApplication.TimeFormat;
+    ViewBag.Title = "Time Sheet";
+    // Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<div id="TimeSheetPanelDIV">
+    <div class="panel panel-success">
+        <div class="panel-heading col-md-12"> <b> Time Sheet </b> </div>
+        <div class="panel-body">
+
+            @if (Model.graphID == 123)
+            {
+                <div id="TsearchID">
+                    @Html.Partial("_SearchView", Model.TsearchBBO)
+                </div>
+                <br />
+                <div class="col-md-12" >
+                    @if (Model.timeSheetView != null)
+                    {
+                        @Html.Partial("_GraphView", Model.timeSheetView);
+                    }
+
+                </div>
+
+            }
+            else
+            {
+                <div id="TsearchID">
+                    @Html.Partial("_SearchView", Model.TsearchBBO)
+                </div>
+                <br />
+                <div class="col-md-12" id="SearchViewID">
+                    @if (Model.timeSheetView != null)
+                    {
+                        @Html.Partial("_TimeSheetView", Model.timeSheetView);
+                    }
+                    
+                </div>
+
+            }
+
+
+
+
+        </div>
+    </div>
+</div>
+
+<script>
+
+    function editSchedule(ResourcesID) {
+       console.log(ResourcesID);
+
+
+
+        $.ajax({
+            url: '@Url.Action("TimesheetAuthorized", "TimeSheet")',
+            dataType: 'json',
+            data: ({ ResourcesID: ResourcesID }),
+            type: "POST",
+            success: function (data) {
+                // alert("hai ");
+                //alert(data.partialview)
+                $('#TsearchID').hide();
+                $('#SearchViewID').html("").show();
+                $("#SearchViewID").html(data.partialview);
+
+            },
+            error: function (data) {
+                alert("Error");
+            }
+        })
+
+
+    }
+
+
+
+    function SavedSuccess(status) {
+        var u = new SpeechSynthesisUtterance();
+        //use JSON2 or some JS library to parse the string
+        //var  date = new Date(parseInt(status.AuthoStatusDate.substring(6)));
+
+        //var now = (("0" + (date.getDate())).slice(-2) + '/' + ("0" + (date.getMonth() + 1)).slice(-2) + '/' + date.getFullYear() + " " + date.getHours() + ":" + date.getMinutes());
+        console.log(status.AuthoStatusDate);
+        var a = moment(status.AuthoStatusDate);
+        @{
+            string dateformatcal = null;
+            if (dateformat == "dd/MM/yyyy")
+            {
+                dateformatcal = "DD/MM/YYYY ";
+            }
+            else if (dateformat == "MM/dd/yyyy")
+            {
+                dateformatcal = " MM/DD/YYYY ";
+            }
+            else if (dateformat == "yyyy-MM-dd")
+            {
+                dateformatcal = " YYYY-MM-DD ";
+            }
+        }
+
+
+        var x = a.format('@dateformatcal , @timeformat'); // "Sunday, February 14th 2010, 3:25:50 pm"
+        //var y = a.format("HH:mm");
+
+        console.log(x);
+
+   //alert(a);
+  //  alert(x);
+    //alert(y);
+
+
+
+
+        if (status.success == true) {
+
+            $('#authorisedIdStatus').html("").show();
+            $("#authorisedIdStatus").html(status.AuthoStatus);
+
+            if (status.AuthoStatus == "Authorized") {
+                $("#authorisedIdStatusDate").html("").show();
+                $("#authorisedIdStatusDate").html(x);
+               // document.getElementById("#authorisedIdStatusDate").valueOf(now);
+                $('#Authorized').hide();
+                $('#UnAuthorized').show();
+                   //  alert("Authorized")
+               }
+            if (status.AuthoStatus == "UnAuthorized") {
+                $("#authorisedIdStatusDate").html("").show();
+                $('#UnAuthorized').hide();
+                $('#Authorized').show();
+               //  alert("UnAuthorized")
+           }
+           u.text = status.errorMsg;
+            speechSynthesis.speak(u);
+            successMessage(status.errorMsg, 'Success');
+        }
+
+        else {
+
+            u.text = status.errorMsg;
+            speechSynthesis.speak(u);
+            successMessage(status.errorMsg, 'Error');
+        }
+    }
+
+</script>
+

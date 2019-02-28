@@ -1,0 +1,113 @@
+﻿@model ERP.Utility.ViewModels.MaritalTypeView
+@{
+    ViewBag.Title = "Marital Status";
+}
+
+<div class="panel panel-success">
+    <div class="panel-heading">
+        <h3 class="panel-title">Marital Status</h3>
+    </div>
+
+    <div class="panel-body">
+        <div class="col-md-3" id="MaritalList">
+            @Html.Partial("_MaritalStatusList", Model.MaritalStatusList)
+        </div>
+
+        <div class="col-md-5 col-md-offset-3 " id="CreateEditMarital">
+            @Html.Partial("_CreateEditMaritalStatus", Model.MaritalStatus)
+        </div>
+    </div>
+</div>
+
+@*<script>
+
+    function SaveMarital(status) {
+
+        if (status.success == true) {
+            $.post('@Url.Action("GetMaritalStatus", "MasterInfo")',
+                 function (result) {
+                     $("#MaritalList").html(result);
+                 });
+            $.get('@Url.Action("CreateMaritalStatus", "MasterInfo")',
+                      function (result) {
+                          $("#CreateEditMarital").html(result);
+                      });
+            successMessage(status.errorMsg, 'Success');
+        }
+        else {
+            $("#CreateEditMarital").html(status);
+        }
+    }
+
+    function CancelButton() {
+        $.get('@Url.Action("CreateMaritalStatus", "MasterInfo")',
+                              function (result) {
+                                  $("#CreateEditMarital").html(result);
+                              });
+    }
+
+    function DeleteMarital(MaritalID) {
+        //console.log(MaritalID);
+
+        $.get('@Url.Action("CreateMaritalStatus", "MasterInfo")',
+                       function (result) {
+                           $("#CreateEditMarital").html(result);
+                       }),
+         swal({
+             title: 'Confirm',
+             text: 'Are you sure you want to Delete?',
+             type: 'warning',
+             showCancelButton: true,
+             confirmButtonText: 'Yes',
+             cancelButtonText: 'No'
+         },
+          function (isConfirm) {
+              console.log(isConfirm);
+              if (isConfirm) {
+                  $.ajax({
+                      url: '@Url.Action("DeleteMaritalStatus", "MasterInfo")',
+                      type: 'POST',
+                      dataType: 'html',
+                      data: ({ id: MaritalID }),
+                      success: function (data) {
+                          var dataObj = jQuery.parseJSON(data);
+                          if (dataObj.success == true) {
+                              successMessage(dataObj.errorMsg, 'Success');
+                              $.post('@Url.Action("GetMaritalStatus", "MasterInfo")',
+            function (result) {
+                $("#MaritalList").html(result);
+            });
+                          }
+                          else {
+                              console.log("hi");
+                              successMessage(dataObj.errorMsg, 'Error');
+                          }
+                      },
+                      error: function (data) {
+                          alert("error Loading the data");
+                      }
+                  })
+              }
+          })
+    }
+
+
+    function EditMarital(MaritalID) {
+
+        $.ajax({
+            url: '@Url.Action("EditMaritalStatus", "MasterInfo")',
+            dataType: 'html',
+            data: ({ id: MaritalID }),
+            success: function (data) {
+                $("#CreateEditMarital").html(data).show();
+            },
+            error: function (data) {
+                alert("error Loading the data");
+            }
+        })
+    }
+</script>*@
+
+@*@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}*@

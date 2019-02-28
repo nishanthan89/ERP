@@ -1,0 +1,92 @@
+﻿@model ERP.Utility.Models.EmployeeTypeBO
+
+@using (Ajax.BeginForm("CreateEmployeeType", "MasterInfo", new { id = 0 }, new AjaxOptions { HttpMethod = "POST", OnSuccess = "Save" }))
+{
+
+    @Html.AntiForgeryToken()
+    <br />
+    <div class="form-horizontal well">       
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })       
+        @Html.HiddenFor(model => model.EmployeeTypeID)
+        @if (Model.EmployeeTypeID != 0)
+        { 
+            @Html.HiddenFor(model => model.EmployeeTypeName)
+        }
+
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.EmployeeTypeID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.EmployeeTypeID, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.EmployeeTypeID, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+      
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.EmployeeTypeName, htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-8">
+                    @* @Html.EditorFor(model => model.EmployeeTypeName, new { htmlAttributes = new { @class = "form-control", disabled = (Model.EmployeeTypeID == 0 ? "" : "disabled") } })*@
+                    
+                    @if (Model.EmployeeTypeID != 0)
+                    {
+                         @Html.EditorFor(model => model.EmployeeTypeName, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+                    }
+                    else
+                    {
+                        @Html.EditorFor(model => model.EmployeeTypeName, new { htmlAttributes = new { @class = "form-control" } })
+                    }                   
+                    @Html.ValidationMessageFor(model => model.EmployeeTypeName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ReportingTo, htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-8">
+                    @Html.DropDownListFor(model => model.ReportingTo, ViewContext.Controller.ViewBag.Reporting as IEnumerable<SelectListItem>, "-- Select --", new { @class = "form-control" })
+                    @*@Html.EditorFor(model => model.ReportingTo, new { htmlAttributes = new { @class = "form-control" } })*@
+                    @Html.ValidationMessageFor(model => model.ReportingTo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-4 col-md-8">
+                    <input type="submit" value=@ViewBag.btnName class="btn btn-success" data-toggle="tooltip" title="@ViewBag.btnName the Employee type" />
+                    @*<input type="submit" value=@ViewBag.btnName class="btn btn-primary" />*@
+                    <input type="button" value="Cancel" class="btn btn-default" data-toggle="tooltip" title="Cancel the Employee type Creation" role="button" onclick="CancelButton()" />
+
+                </div>
+            </div>
+            </div>
+        
+}
+    
+@*<script>
+    $(document).ready(function () {
+        console.log("ready!");
+    if (@Model.EmployeeTypeID != 0)
+    {
+        $("#EmployeeTypeName").attr('disabled', 'disabled');
+        var a=$("#EmployeeTypeName").val();
+        
+        //$('#Reportingto option[value=a]').attr('disabled', 'disabled');
+        $('#Reportingto option[value=a]').hide();
+        //console.log( $("#EmployeeTypeName").val());
+
+        //var x= $('#Reportingto option:contains("c")').attr('disabled', 'disabled');
+        //console.log(x);
+    }
+
+    });
+
+</script>*@
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

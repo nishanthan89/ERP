@@ -1,0 +1,72 @@
+﻿@model ERP.Resource.Models.TimeSearchBO
+
+@using (Ajax.BeginForm("SearchTimeSheet", "TimeSheet", new AjaxOptions { HttpMethod = "POST",UpdateTargetId= "SearchViewID", InsertionMode =InsertionMode.Replace@*, OnSuccess = "SearchList"*@ }))
+{
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="col-md-10">
+            <div class="col-md-2">
+                <div class="form-group-sm ">
+                    @Html.LabelFor(model => model.Frequency, new { @class = "col-sm-1 control-label" })
+                    @*  @Html.DropDownList("year_selected", (SelectList)(ViewData["YearSelected"]), new { tabindex = "14", multiple = "multiple", style = "width:150px;height:200px;" })*@
+                    @Html.DropDownListFor(model => model.FrequencyID, new SelectList(ViewBag.TimeSheetFrz, "Value", "Text"), "-- Frequency--", htmlAttributes: new { @class = "form-control" })
+                </div>
+                @Html.ValidationMessageFor(model => model.FrequencyID, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="col-md-2">
+                <div class="form-group-sm ">
+                    @Html.LabelFor(model => model.ResourcesName, new { @class = "col-sm-1 control-label" })
+
+                    @Html.DropDownListFor(model => model.ResourcesID, new SelectList(ViewBag.Resources, "Value", "Text"), "-- Resources--", htmlAttributes: new { @class = "form-control" })
+                </div>
+                @Html.ValidationMessageFor(model => model.ResourcesID, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-2">
+                <div class="form-group-sm ">
+
+                    @Html.LabelFor(model => model.MonthName, new { @class = "col-sm-1 control-label" })
+
+                    @Html.DropDownListFor(model => Model.MonthID, new SelectList(Enumerable.Range(1, 12).Select(r => new { Text = new DateTime(2000, r, 1).ToString("MMMM"), Value = r.ToString() }), "Value", "Text"), htmlAttributes: new { @class = "form-control" })
+                </div>
+                @Html.ValidationMessageFor(model => model.MonthID, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-2 ">
+                <div class="form-group-sm">
+                    @Html.LabelFor(model => model.Year, new { @class = "col-md-1 control-label" })
+
+                    @Html.DropDownListFor(model => model.Year, Enumerable.Range(DateTime.Now.AddYears(-5).Year, 6).Select(i => new SelectListItem { Value = i.ToString(), Text = i.ToString() }), htmlAttributes: new { @class = "form-control" })
+                </div>
+                @Html.ValidationMessageFor(model => model.Year, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-2">
+                <div class="form-group-sm">
+                    @Html.LabelFor(model => model.Status, new { @class = "col-md-1 control-label" })
+
+                    @Html.DropDownListFor(model => model.StatusID, new SelectList(ViewBag.Status, "Value", "Text"), "-- Status --", htmlAttributes: new { @class = "form-control" })
+                </div>
+                @Html.ValidationMessageFor(model => model.StatusID, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="col-md-2">
+                <div class="form-group-sm">
+                    <br />
+                    
+                    <input type="submit" class="form-control btn-success" name="ButtonType" value="Search" />
+                </div>
+
+            </div>
+            
+        </div>
+
+        <div class="col-lg-offset-10">
+            <div class="col-md-10">
+                <div class="form-group-sm">
+                    <br />
+                    <input type="submit" class="form-control btn-success" name="ButtonType" value="Graph View" />
+                </div>
+            </div>
+        </div>
+            </div>
+
+            }

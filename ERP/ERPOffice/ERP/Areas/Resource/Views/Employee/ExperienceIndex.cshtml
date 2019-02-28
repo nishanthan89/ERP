@@ -1,0 +1,34 @@
+﻿@model ERP.Resource.ViewModels.EmployeeExperienceViewBO
+
+@{
+    ViewBag.Title = "Resource Experience";
+    //Layout = Request.IsAjaxRequest() ? null : "~/Views/Shared/_Layout.cshtml";
+}
+<div id="employeeExperienceIndexDIV">
+    @*Tabs for Edit Employee*@
+    @if (Model.EmployeeExperienceViewModels.ResourceID != 0)
+    {
+        @Html.Partial("_ResourceSubMenu", Model.ResourceSubMenuBO)
+    }
+    @*Ends*@
+
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            <h2 class="panel-title">Resource Experiences</h2>
+        </div>
+
+        <div class="panel-body">
+            <div id="employeeExperienceListDIV" class="col-md-6">
+                @{
+                    Html.RenderPartial("_ExperienceList", Model.EmployeeExpereienceList);
+                }
+            </div>
+            <div class="col-md-6" id="createEditExperienceDIV">
+                @{
+                    Html.RenderPartial("_CreateEditExperience", Model.EmployeeExperienceViewModels);
+                }
+            </div>
+        </div>
+    </div>
+</div>
+

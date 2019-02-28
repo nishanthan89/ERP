@@ -1,0 +1,233 @@
+﻿@model IEnumerable<ERP.Utility.Models.SkillBO>
+
+<div class="pull-right">
+    <a @*href="@Url.Action("CreateSkill", "MasterInfo",new { area = "Utility"})"*@ 
+       class="btn btn-success" onclick="CreateSkill()" role="button"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;Add New Skill</a>
+    <br /><br />
+</div>
+
+<table class="table table-responsive" id="skillTable">
+    <thead>
+        <tr>
+            <th></th>
+            <th>
+                @Html.DisplayNameFor(model => model.SkillName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SkillDescription)
+            </th>
+            @*<th>@Html.DisplayNameFor(model => model.)</th>*@
+            <th>@Html.DisplayName("No of Resources")</th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    @if (Model.Count() != 0 || Model != null)
+    {
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <a data-toggle="tooltip" title="Edit" role="button" onclick="EditSkill(@item.SkillID)" id="edit"><span class="glyphicon glyphicon-pencil text-success" style="position:static"></span></a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SkillName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SkillDescription)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NoOfResources)
+                </td>
+                <td>
+                    @*@Html.ActionLink("Show Employees", "ShowEmployees","MasterInfo", new {  id=item.SkillID})*@                    
+                    <a data-toggle="modal" @*title="Show Employees"*@ role="button" onclick="ShowEmployees(@item.SkillID)" id="showEmp">Show Employees</a>
+                </td>
+                <td>                   
+                    @*@Html.ActionLink("ModalTest ", "ShowSkillCategoryLevel", "MasterInfo",new { id = 39 }, new { @class = "modal-link btn btn-success" })*@
+                    <a data-toggle="tooltip" style="position:static" title="Show Skill Category & Levels" role="button" onclick="ShowSkillCategoryLevel(@item.SkillID)" id="showSkillCategory">Show Skill category & Levels</a>
+                </td>
+                <td>
+                    <a data-toggle="tooltip" title="Delete" role="button" onclick="Delete(@item.SkillID)"><span class="glyphicon glyphicon-trash text-danger" style="position:static"></span></a>
+                </td>
+            </tr>
+        }
+    }
+    else
+    {
+        <tr>
+            <td align="center" colspan=15>
+                <center>
+                    <font color="red" ; style="text-align:center">"Sorry, No SKill found!!."</font>
+                </center>
+            </td>
+
+        </tr>
+    }
+</table>
+
+
+<!-- Modal -->
+<div class="modal" id="skillModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            @*<div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">@ViewBag.Modalheader</h4>
+                </div>*@
+            <div class="modal-body" id="skillCategoryBody">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                @*<button type="button" class="btn btn-primary">Save changes</button>*@
+            </div>
+        </div>
+    </div>
+</div>
+@* end modal container *@
+
+<script>
+    $(document).ready(function () {
+        $('#skillTable').DataTable({
+            //"displayLength": 5,
+            bPaginate: false,     //disable Pagination
+            bFilter: false,       //disable search text
+            bInfo: false,
+            "language": {
+                "zeroRecords": "<p class='text-danger'>Sorry!..No matching Records found...</p>",
+                "text-color": "#7f1416"
+            }
+        });
+        $("#skillTable").freezeHeader({
+            offset: '50px',
+            //background-color: rgba(255, 255, 255, 0.7)
+            //"background-color":"cadetblue"
+        });
+        //$("#submenu").freezeHeader(
+        //    {
+        //        offset: '50px',
+        //    });
+    });
+
+   function EditSkill(SkillID) {
+        console.log("edit");
+        $.ajax({
+            url: '@Url.Action("EditSkill", "MasterInfo")',
+            dataType: 'html',
+            data: ({ id: SkillID }),
+            success: function (data) {
+                //console.log(data);
+                $("#Skill").html(data);//selected data will overide the skillList div
+            },
+            error: function (data) {
+                alert("error Loading the data");
+            }
+        })
+    }
+
+    function Delete(SkillID) {
+        swal({
+            title: 'Confirm',
+            text: 'Would You Like To Delete This Skill?',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes',
+            cancelButtonText: 'No'
+        },
+         function (isConfirm) {
+             console.log(isConfirm);
+             if (isConfirm) {
+                 $.ajax({
+                     url: '@Url.Action("DeleteSkill", "MasterInfo")',
+                     type: 'POST',
+                     dataType: 'html',
+                     data: ({ id: SkillID }),
+                     success: function Delete(status) {
+                         var statusObj = jQuery.parseJSON(status);
+                         console.log(statusObj);
+                         if (statusObj.success == true) {
+                             console.log(statusObj.success);
+                             $.post('@Url.Action("GetSkillList", "MasterInfo")',
+                                                               function (result) {
+                                                                   $("#Skill").html(result);
+                                                               });
+                             successMessage(statusObj.errorMsg, 'Success');
+                         }
+                         else {
+                             console.log(statusObj.success);
+                             successMessage(statusObj.errorMsg, 'Error');
+                         }
+
+                         @*$.get('@Url.Action("CreateSkillCategory", "MasterInfo")',
+                                function (result) {
+                                    $("#CreateDiv").html(result);
+                                });*@
+                     },
+                     error: function (data) {
+                         alert("error Loading the data");
+                     }
+                 })
+             }
+         })
+    }
+
+    function ShowSkillCategoryLevel(SkillID) {
+        $.ajax({
+            url: '@Url.Action("ShowSkillCategoryLevel", "MasterInfo")',
+            dataType: 'html',
+            data: ({ id: SkillID }),
+            success: function (result) {
+                console.log("hi");
+                $("#skillCategoryBody").html(result);
+                $('#skillModal').modal();//display the partial view in Modal dialog
+            },
+            error: function (data) {
+                console.log(data);
+                alert("error Loading the data");
+            }
+        })
+    }
+
+    function ShowEmployees(SkillID) {
+        console.log(SkillID);
+        $.ajax({
+            url: '@Url.Action("ShowEmployees", "MasterInfo")',
+            dataType: 'html',
+            data: ({ id: SkillID }),
+            success: function (result) {
+                console.log("sucess");
+                $("#skillCategoryBody").html(result);
+                $('#skillModal').modal();//display the partial view in Modal dialog
+            },
+            error: function (data) {
+                alert("error Loading the data");
+            }
+        })
+    }
+
+    @*function ShowSkillCategoryLevel(SkillID) {
+        console.log(SkillID);
+      $.ajax({
+          url: '@Url.Action("ShowSkillCategoryLevel", "MasterInfo")',
+          dataType: 'html',
+          data: ({ id: SkillID }),
+          success: function (data) {
+              console.log(data);
+
+              $("#myModalnew").modal();
+              //$('#skillContainer').html(data);
+
+              //$('#skillModal').modal('show');
+              //$("#skill").html(data).show();
+          },
+          error: function (data) {
+              console.log(data);
+              alert("error Loading the data");
+          }
+      })
+    }*@
+
+
+</script>

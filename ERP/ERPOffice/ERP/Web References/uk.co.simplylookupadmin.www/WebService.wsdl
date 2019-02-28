@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://www.simply-postcode-lookup.com/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://www.simply-postcode-lookup.com/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://www.simply-postcode-lookup.com/">
+      <s:element name="SearchForAddress">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DataKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SearchType" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SearchPrima" type="tns:PL_SearchPrimaRecord" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="PL_SearchPrimaRecord">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Organistaion" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BuildingOrNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Street" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TownOrVillage" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="County" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="POBox" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Postcode" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SearchForAddressResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SearchForAddressResult" type="tns:PL_AddressesDataReturnedRecord" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="PL_AddressesDataReturnedRecord">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Lines" type="tns:ArrayOfAddressLinesClass" />
+          <s:element minOccurs="1" maxOccurs="1" name="LineCount" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="SearchPerformedWithoutError" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorMessage" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BuyMoreCreditsURL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CreditsStatusText" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="CreditsLeft" type="s:long" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfAddressLinesClass">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="AddressLinesClass" nillable="true" type="tns:AddressLinesClass" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="AddressLinesClass">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Address" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetAddressRecord">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DataKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SearchType" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="AddressID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAddressRecordResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAddressRecordResult" type="tns:PL_AddressRecord" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="PL_AddressRecord">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="AddressRecordGotWithoutError" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorMessage" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CreditsStatusText" />
+          <s:element minOccurs="0" maxOccurs="1" name="BuyMoreCreditsURL" />
+          <s:element minOccurs="0" maxOccurs="1" name="CompanyName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Line1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Line2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Line3" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Town" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CountyState" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PostZipCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Country" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DeliveryPointSuffix" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NoHouseHolds" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SmallOrg" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MailSort" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Spare" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UDPRN" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Unique" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="longitude_WGS84" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="latitude_WGS84" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UK_os_reference" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UK_OS_grid_east" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UK_OS_grid_north" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UK_NHS_code" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UK_NHS_region" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UK_country" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UK_IntroductionDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UK_county" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UK_district" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UK_ward" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UK_wardstatus" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UK_gridstatus" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GeoDistanceToHomePostcode" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetUrlforPrefuredMap">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="PostCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ZoomLevel" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUrlforPrefuredMapResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetUrlforPrefuredMapResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SearchForThoroughfareAddress">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DataKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SearchType" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Postcode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SearchForThoroughfareAddressResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SearchForThoroughfareAddressResult" type="tns:PL_AddressRecord" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SearchForPostZonData">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DataKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SearchType" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Postcode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="HomePostCode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SearchForPostZonDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SearchForPostZonDataResult" type="tns:PL_AddressRecord" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="SearchForAddressSoapIn">
+    <wsdl:part name="parameters" element="tns:SearchForAddress" />
+  </wsdl:message>
+  <wsdl:message name="SearchForAddressSoapOut">
+    <wsdl:part name="parameters" element="tns:SearchForAddressResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAddressRecordSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAddressRecord" />
+  </wsdl:message>
+  <wsdl:message name="GetAddressRecordSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAddressRecordResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetUrlforPrefuredMapSoapIn">
+    <wsdl:part name="parameters" element="tns:GetUrlforPrefuredMap" />
+  </wsdl:message>
+  <wsdl:message name="GetUrlforPrefuredMapSoapOut">
+    <wsdl:part name="parameters" element="tns:GetUrlforPrefuredMapResponse" />
+  </wsdl:message>
+  <wsdl:message name="SearchForThoroughfareAddressSoapIn">
+    <wsdl:part name="parameters" element="tns:SearchForThoroughfareAddress" />
+  </wsdl:message>
+  <wsdl:message name="SearchForThoroughfareAddressSoapOut">
+    <wsdl:part name="parameters" element="tns:SearchForThoroughfareAddressResponse" />
+  </wsdl:message>
+  <wsdl:message name="SearchForPostZonDataSoapIn">
+    <wsdl:part name="parameters" element="tns:SearchForPostZonData" />
+  </wsdl:message>
+  <wsdl:message name="SearchForPostZonDataSoapOut">
+    <wsdl:part name="parameters" element="tns:SearchForPostZonDataResponse" />
+  </wsdl:message>
+  <wsdl:portType name="WebServiceSoap">
+    <wsdl:operation name="SearchForAddress">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Search for an address, based on criteria in SearchPrima, returning AddressesDataReturnedRecord</wsdl:documentation>
+      <wsdl:input message="tns:SearchForAddressSoapIn" />
+      <wsdl:output message="tns:SearchForAddressSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAddressRecord">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get Address record based on the Address ID, return AddressRecord</wsdl:documentation>
+      <wsdl:input message="tns:GetAddressRecordSoapIn" />
+      <wsdl:output message="tns:GetAddressRecordSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUrlforPrefuredMap">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get URL of Map ZoomLevel = Street, District or Area</wsdl:documentation>
+      <wsdl:input message="tns:GetUrlforPrefuredMapSoapIn" />
+      <wsdl:output message="tns:GetUrlforPrefuredMapSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SearchForThoroughfareAddress">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get Thourghfare Address Record from Postcode</wsdl:documentation>
+      <wsdl:input message="tns:SearchForThoroughfareAddressSoapIn" />
+      <wsdl:output message="tns:SearchForThoroughfareAddressSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SearchForPostZonData">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get PostZon Data Address Record from Postcode, optionally enter Home Postcode to return distance</wsdl:documentation>
+      <wsdl:input message="tns:SearchForPostZonDataSoapIn" />
+      <wsdl:output message="tns:SearchForPostZonDataSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WebServiceSoap" type="tns:WebServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SearchForAddress">
+      <soap:operation soapAction="http://www.simply-postcode-lookup.com/SearchForAddress" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAddressRecord">
+      <soap:operation soapAction="http://www.simply-postcode-lookup.com/GetAddressRecord" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUrlforPrefuredMap">
+      <soap:operation soapAction="http://www.simply-postcode-lookup.com/GetUrlforPrefuredMap" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchForThoroughfareAddress">
+      <soap:operation soapAction="http://www.simply-postcode-lookup.com/SearchForThoroughfareAddress" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchForPostZonData">
+      <soap:operation soapAction="http://www.simply-postcode-lookup.com/SearchForPostZonData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="WebServiceSoap12" type="tns:WebServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SearchForAddress">
+      <soap12:operation soapAction="http://www.simply-postcode-lookup.com/SearchForAddress" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAddressRecord">
+      <soap12:operation soapAction="http://www.simply-postcode-lookup.com/GetAddressRecord" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUrlforPrefuredMap">
+      <soap12:operation soapAction="http://www.simply-postcode-lookup.com/GetUrlforPrefuredMap" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchForThoroughfareAddress">
+      <soap12:operation soapAction="http://www.simply-postcode-lookup.com/SearchForThoroughfareAddress" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchForPostZonData">
+      <soap12:operation soapAction="http://www.simply-postcode-lookup.com/SearchForPostZonData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WebService">
+    <wsdl:port name="WebServiceSoap" binding="tns:WebServiceSoap">
+      <soap:address location="http://www.simplylookupadmin.co.uk/WebService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="WebServiceSoap12" binding="tns:WebServiceSoap12">
+      <soap12:address location="http://www.simplylookupadmin.co.uk/WebService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

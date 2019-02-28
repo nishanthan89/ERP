@@ -1,0 +1,170 @@
+﻿@model ERP.Utility.ViewModels.ShiftPatternView
+@{
+    ViewBag.Title = "Shift Pattern";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="panel panel-success">
+    <div class="panel-heading">
+        <h2 class="panel-title">Shift Pattern</h2>
+    </div>
+    <div class="panel-body">
+        <div class="col-md-7" id="ShiftPatternList">
+            @Html.Partial("_ShiftPatternList", Model.shiftPatternView)
+        </div>
+        <div class="col-md-5" id="CreateEditShiftPattern">
+            @Html.Partial("_CreateEditShiftPattern", Model.shiftPatternBO)
+        </div>
+    </div>
+</div>
+
+<script>
+    //Saves Shift Pattern
+    function SaveShiftPattern(status) {
+        if (status.success == true) {
+            //alert("refresh")
+            $.post('@Url.Action("GetShiftPatternList", "MasterInfo")',
+                 function (result) {
+                     //alert("refresh");
+                     $("#ShiftPatternList").html(result);
+                 });
+            $.get('@Url.Action("CheckShiftPattern", "MasterInfo")');
+            $.get('@Url.Action("CreateShiftPattern", "MasterInfo")',
+                      function (result) {
+                          //alert("jjjjj");
+                          $("#CreateEditShiftPattern").html(result);
+                      });
+            successMessage(status.errorMsg, 'Success');
+        }
+        else {
+            //console.log(status);
+            $("#CreateEditShiftPattern").html(status);
+        }
+    }
+
+    //Cancels Function
+    function CancelButton() {
+        $.get('@Url.Action("CreateShiftPattern", "MasterInfo")',
+                              function (result) {
+                                  $("#CreateEditShiftPattern").html(result);
+                              });
+        $.post('@Url.Action("GetShiftPatternList", "MasterInfo")',
+                 function (result) {
+                     //alert("refresh");
+                     $("#ShiftPatternList").html(result);
+                 });
+    }
+
+    //Deletes Shift Pattern
+    function DeleteShiftPattern(ShiftPatternID) {
+        swal({
+            title: 'Confirm',
+            text: 'Are you sure you want to Delete?',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes',
+            cancelButtonText: 'No'
+        },
+         function (isConfirm) {
+             // console.log(isConfirm);
+             if (isConfirm) {
+                 $.ajax({
+                     url: '@Url.Action("DeleteShiftPattern", "MasterInfo")',
+                     dataType: 'html',
+                     data: ({ id: ShiftPatternID }),
+                     success: function Delete(status) {
+                         var statusObj = jQuery.parseJSON(status);
+                         console.log(statusObj);
+                         if (statusObj.success == true) {
+                             console.log(statusObj.success);
+                             successMessage(statusObj.errorMsg, 'Success');
+                             $.post('@Url.Action("GetShiftPatternList", "MasterInfo")',
+                                                                 function (result) {
+                                                                     $("#ShiftPatternList").html(result);
+                                                                 });
+                         }
+                         else {
+                             console.log(statusObj.success);
+                             successMessage(statusObj.errorMsg, 'Error');
+                         }
+
+                         $.get('@Url.Action("CreateShiftPattern", "MasterInfo")',
+                                function (result) {
+                                    $("#CreateEditShiftPattern").html(result);
+                                });
+                     },
+                     error: function (data) {
+                         alert("error Loading the data");
+                     }
+                 })
+             }
+         })
+    }
+
+
+
+
+
+    @*function DeleteShiftPattern(ShiftPatternID) {
+        //console.log(ImmigrationID);
+
+        swal({
+            title: 'Confirm',
+            text: 'Are you sure you want to Delete?',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes',
+            cancelButtonText: 'No'
+        },
+         function (isConfirm) {
+             console.log(isConfirm);
+             if (isConfirm) {
+                 $.ajax({
+                     url: '@Url.Action("DeleteShiftPattern", "MasterInfo")',
+                     dataType: 'html',
+                     data: ({ id: ShiftPatternID }),
+                     success: function (data) {
+                         var dataObj = jQuery.parseJSON(data);
+                         if (dataObj.success == true) {
+                             successMessage(dataObj.errorMsg, 'Success');
+                             $.post('@Url.Action("GetShiftPatternList", "MasterInfo")',
+                                 $.get('@Url.Action("CreateShiftPattern", "MasterInfo")',
+                      function (result) {
+                          $("#CreateEditShiftPattern").html(result);
+                      }),
+            function (result) {
+                $("#ShiftPatternList").html(result);
+            });
+
+                         }
+                         else {
+                             console.log("hi");
+                             successMessage(dataObj.errorMsg, 'Error');
+                         }
+
+                     },
+                     error: function (data) {
+                         alert("error Loading the data");
+                     }
+                 })
+             }
+         })
+    }*@
+
+    //Edits Shift Pattern
+    function EditShiftPattern(ShiftPatternID) {
+        $.ajax({
+            url: '@Url.Action("EditShiftPattern", "MasterInfo")',
+            dataType: 'html',
+            data: ({ id: ShiftPatternID }),
+            success: function (data) {
+                $("#CreateEditShiftPattern").html(data).show();
+
+            },
+            error: function (data) {
+                alert("error Loading the data");
+            }
+        })
+    }
+</script>
+

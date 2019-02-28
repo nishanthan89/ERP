@@ -1,0 +1,117 @@
+﻿@model ERP.Utility.ViewModels.NationalityView
+
+@{
+    ViewBag.Title = "Nationality";
+}
+
+
+<div class="panel panel-success">
+    <div class="panel-heading">
+        <h3 class="panel-title">Nationality </h3>
+    </div>
+    <div class="panel-body">
+        <div class="col-md-4" id="List">
+            @Html.Partial("_NationalityList", Model.NationalityList)
+        </div>
+
+        <div class="col-md-5 col-md-offset-2" id="CreateEdit">
+            @Html.Partial("_CreateNationality", Model.Nationality)
+        </div>
+    </div>
+</div>
+
+@*<script>
+    function Save(status) {
+        console.log(status);
+        if (status.success == true) {
+            $.post('@Url.Action("GetNationalityList", "MasterInfo")',
+                    function (result) {
+                        console.log("refresh list--save save");
+                        $("#List").html(result);
+                    });
+            $.get('@Url.Action("CreateNationality", "MasterInfo", new RouteValueDictionary(new { id = 0 }))',
+                    function (result) {
+                        console.log("reload the create form");
+                        $("#CreateEdit").html(result);
+                    });
+            successMessage(status.errorMsg, 'Success');
+        }
+        else {
+            console.log("hi else");
+            $("#CreateEdit").html(status);
+        }
+    }
+
+
+    function CancelButton() {
+        $.get('@Url.Action("CreateNationality", "MasterInfo")',
+                              function (result) {
+                                  $("#CreateEdit").html(result);
+                              });
+    }
+
+    function EditNationality(NationalityId) {
+
+        $.ajax({
+            url: '@Url.Action("EditNationality", "MasterInfo")',
+            dataType: 'html',
+            data: ({ id: NationalityId }),
+            success: function (data) {
+                $.post('@Url.Action("GetNationalityList", "MasterInfo")',
+          function (result) {
+              $("#List").html(result);
+          });
+                $("#CreateEdit").html(data).show();
+            },
+            error: function (data) {
+                alert("error Loading the data");
+            }
+        })
+    }
+    function DeleteNationality(nationalityId) {
+        console.log(nationalityId);
+        swal({
+            title: 'Confirm',
+            text: 'Are you sure you want to Delete?',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes',
+            cancelButtonText: 'No'
+        },
+         function (isConfirm) {
+             console.log(isConfirm);
+             if (isConfirm) {
+                 $.ajax({
+                     url: '@Url.Action("DeleteNationality", "MasterInfo")',
+                     type: 'POST',
+                     dataType: 'html',
+                     data: ({ id: nationalityId }),
+                     success: function (data) {
+                         var dataObj = jQuery.parseJSON(data);
+                         if (dataObj.success == true) {
+                             successMessage(dataObj.errorMsg, 'Success');                            
+                         }
+                         else {
+                             console.log("hi");
+                             successMessage(dataObj.errorMsg, 'Error');
+                         }
+                         $.post('@Url.Action("GetNationalityList", "MasterInfo")',
+          function (result) {
+              $("#List").html(result);
+          });
+                         $.get('@Url.Action("CreateNationality", "MasterInfo")',
+                      function (result) {
+                          $("#CreateEdit").html(result);
+                      });
+                     },
+                     error: function (data) {
+                         alert("error Loading the data");
+                     }
+                 })
+             }
+         })
+    }
+</script>*@
+@*@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}*@

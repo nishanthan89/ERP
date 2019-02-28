@@ -1,0 +1,148 @@
+﻿@model IEnumerable<ERP.Admin.Models.BranchInfoBO>
+
+<div class="panel panel-success">
+    <div class="panel-heading">
+        <div class="panel-title list-inline">
+            <b>Branch Information </b> 
+
+        </div>
+    </div>
+
+    <div class="panel-body">
+
+
+        <div class="pull-right">
+            <a class="btn btn-success" id="AddBranchID" onclick="CreateBranchFun()" role="button"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp; Add New Branch </a>
+            &nbsp;
+            <br />
+
+        </div>
+            <div>
+                <table class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" id="RestTable1">
+                    <thead style="background-color:darkseagreen">
+                        <tr>
+                            <th>
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.BranchName)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(b => b.BranchCode)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(b => b.BranchType)
+                            </th>
+
+                            <th>
+                                @Html.DisplayNameFor(b => b.TelephoneNumber)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(b => b.FaxNumber)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(b => b.VATnumber)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(b => b.BranchStatus)
+                            </th>
+                            <th>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            </th>
+                        </tr>
+
+
+                    </thead>
+                    @if (Model != null && Model.Count() > 0)
+                    {
+
+                        foreach (var eth in Model)
+                        {
+                            <tr>
+                                <td>
+                                    <a data-toggle="tooltip" title="Edit Branch Details" role="button" onclick="EditBranch('@eth.BranchID')" id="edit"><span class="glyphicon glyphicon-pencil text-success"></span></a>
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(m => eth.BranchName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(m => eth.BranchCode)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(m => eth.BranchType)
+                                </td>
+
+                                <td>
+                                    @Html.DisplayFor(m => eth.TelephoneNumber)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(m => eth.FaxNumber)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(m => eth.VATnumber)
+                                </td>
+
+                                <td>
+                                    @Html.DisplayFor(m => eth.BranchStatus)
+                                </td>
+                                <td>
+                                    <a data-toggle="tooltip" title="Delete Branch Details " role="button" onclick="DeleteBranch(@eth.BranchID , '@eth.BranchName'
+                            )"><span class="glyphicon glyphicon-trash text-danger"></span></a>
+
+                                </td>
+
+
+                            </tr>
+
+                        }
+
+                    }
+
+
+                    else {
+
+
+                        <tr>
+                            <td align="center" colspan=15>
+
+
+                                <center>
+
+
+                                    <font color="red" ; style="text-align:center"> " No Results Found..!" </font>
+
+
+                                </center>
+
+
+                            </td>
+
+
+
+                        </tr>
+
+                    }
+
+
+
+                </table>
+            </div>
+        </div>
+
+        @*<div class="col-md-12" id="CreateEditBranchID" hidden="hidden" >
+
+                @Html.Partial("_CreateEditBranch", Model.branchInfoBO)
+            </div>*@
+
+    </div>
+
+<script>
+
+
+    $(document).ready(function () {
+        $('#RestTable1').DataTable({
+
+        })
+    });
+</script>
+

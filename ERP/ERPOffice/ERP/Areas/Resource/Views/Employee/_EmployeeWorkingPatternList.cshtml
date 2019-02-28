@@ -1,0 +1,236 @@
+﻿@model IEnumerable<ERP.Resource.Models.Employee_WorkingPatternDetailsBO>
+
+<div class="table-responsive">
+    <table class="table table-hover table-striped table-bordered" id="WorkingPatternListTable" style="border-bottom:hidden">
+        <thead>
+            <tr>
+                <th>
+
+                </th>
+                @*<th>
+                        @Html.DisplayNameFor(model => model.WorkingPatternID)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ResourceID)
+                    </th>*@
+                <th>
+                    @Html.DisplayNameFor(model => model.ChangeDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NoOfWorkingHours)
+                </th>
+                <th>
+                    Working Patterns
+                </th>
+                @*<th>
+                        @Html.DisplayNameFor(model => model.Sunday)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Monday)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Tuesday)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Wednesday)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Thursday)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Friday)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Saturday)
+                    </th>*@
+                <th>
+
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <a data-toggle="tooltip" title="Edit" role="button" onclick="EditEmployeeWorkingPattern(@item.WorkingPatternID)" id="edit"><span class="glyphicon glyphicon-pencil text-success"></span></a>
+                    </td>
+                    @*<td>
+                            @Html.DisplayFor(modelItem => item.WorkingPatternID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ResourceID)
+                        </td>*@
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ChangeDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NoOfWorkingHours)
+                    </td>
+                    <td>
+                        @if (item.Sunday == true)
+                        {
+                            <p class="col-md-1">@Html.DisplayNameFor(model => model.Sunday)&nbsp;&nbsp;</p>
+                            @*@Html.DisplayFor(modelItem => item.Sunday)*@
+                        }
+                        @if (item.Monday == true)
+                        {
+                            <p class="col-md-1">@Html.DisplayNameFor(model => model.Monday)&nbsp;&nbsp;</p>
+                            @*@Html.DisplayFor(modelItem => item.Monday)*@
+                        }
+                        @if (item.Tuesday == true)
+                        {
+                            <p class="col-md-1">@Html.DisplayNameFor(model => model.Tuesday)&nbsp;&nbsp;</p>
+                            @*@Html.DisplayFor(modelItem => item.Tuesday)*@
+                        }
+                        @if (item.Wednesday == true)
+                        {
+                            <p class="col-md-1">@Html.DisplayNameFor(model => model.Wednesday)&nbsp;&nbsp;</p>
+                            @*@Html.DisplayFor(modelItem => item.Wednesday)*@
+                        }
+                        @if (item.Thursday == true)
+                        {
+                            <p class="col-md-1">@Html.DisplayNameFor(model => model.Thursday)&nbsp;&nbsp;</p>
+                            @*@Html.DisplayFor(modelItem => item.Thursday)*@
+                        }
+                        @if (item.Friday == true)
+                        {
+                            <p class="col-md-1">@Html.DisplayNameFor(model => model.Friday)&nbsp;&nbsp;</p>
+                            @*@Html.DisplayFor(modelItem => item.Friday)*@
+                        }
+                        @if (item.Saturday == true)
+                        {
+                            <p class="col-md-1">@Html.DisplayNameFor(model => model.Saturday)&nbsp;&nbsp;</p>
+                            @*@Html.DisplayFor(modelItem => item.Saturday)*@
+                        }
+                    </td>
+                    @*<td>
+                            @Html.DisplayFor(modelItem => item.Sunday)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Monday)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Tuesday)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Wednesday)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Thursday)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Friday)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Saturday)
+                        </td>*@
+                    <td>
+                        <a data-toggle="tooltip" title="Delete" role="button" onclick="DeleteEmployeeWorkingPattern(this,@item.WorkingPatternID)"><span class="glyphicon glyphicon-trash text-danger"></span></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<script>
+    @*DataTable Function*@
+    $(document).ready(function () {
+        $('#WorkingPatternListTable').DataTable({
+            //"displayLength": 5,
+            bPaginate: false,     //Disables Pagination
+            bFilter: false,       //Disables search text
+            bInfo: false,
+            "language": {       //When the list is empty
+                "zeroRecords": "<p class='text-danger'>No Results Found</p>",
+                "text-color": "#7f1416"
+            }
+        });
+        $("#WorkingPatternListTable").freezeHeader({   //FreezeHeader function
+            offset: '50px'
+        });
+    });
+    @*End*@
+
+    @*EditEmployeeWorkingPattern Function for a particular Employee*@
+    function EditEmployeeWorkingPattern(EmpWorkingPatternId) {
+        $.ajax({
+            url: '@Url.Action("EditWorkingPattern", "Employee")',
+            dataType: 'html',
+            type: "Get",
+            data: ({ id: EmpWorkingPatternId }),
+            success: function (data) {
+                $("#EditWorkingPatternDIV").html(data).show();     //Shows EditWorkingPattern form
+                $("#EmpButtonsDIV").show();     //Shows "Save" and "Cancel Button"
+            },
+            error: function (data) {
+                sweetAlert("Error Loading The Data");
+            }
+        })
+    }
+    @*End*@
+
+    @*DeleteEmployeeWorkingpattern Function*@
+    function DeleteEmployeeWorkingPattern(record, EmpWorkingPatternId) {
+        swal({
+            title: 'Confirm',
+            text: 'Would You Like To Delete This WorkingPattern?',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes',
+            cancelButtonText: 'No',
+            //closeOnConfirm: false,
+        },
+        function (isConfirm) {
+            if (isConfirm) {
+                $.ajax({
+                    url: '@Url.Action("DeleteEmployeeWorkingPatterns", "Employee")',
+                    dataType: 'html',
+                    type: "Post",
+                    cache: false,
+                    data: ({ id: EmpWorkingPatternId }),
+                    success: function (data) {
+                        var dataObj = jQuery.parseJSON(data);       //Gets the message as "Json object"
+                        //console.log(dataObj);
+                        if (dataObj.success == true) {
+                            //sweetAlert(dataObj.errorMsg);
+                            $(record).closest('tr').remove();   //Deletes the selected record from the Data table
+                            window.setTimeout(function () {
+                                swal({
+                                    title: "Deleted",
+                                    text: dataObj.errorMsg,
+                                    type: "success"
+                                })
+                            }, 1000);
+                            //alert(dataObj.errorMsg);
+                            //successMessage(dataObj.errorMsg, 'Success');
+                        }
+                        else {
+                            console.log(dataObj.success);
+                            //successMessage(dataObj.errorMsg, 'Error');
+                            //sweetAlert(dataObj.errorMsg);
+                            window.setTimeout(function () {
+                                swal({
+                                    title: "Error",
+                                    text: dataObj.errorMsg,
+                                    type: "error"
+                                })
+                            }, 1000);
+                        }
+                        window.setTimeout(function () {
+                            location.reload(true);
+                        }, 2500);
+                    },
+                    error: function (data) {
+                        sweetAlert("Error Loading The Data");
+                    }
+                })
+            }
+            else {
+                sweetAlert("Cancelled", "You Have Cancelled Form Submission!", "error");
+            }
+        })
+    }
+    @*End*@
+</script>

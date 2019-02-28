@@ -1,0 +1,333 @@
+﻿@model ERP.Resource.Models.HolidayBO
+@{
+    string dateformat = MvcApplication.DateFormat;
+    string timeformat = MvcApplication.TimeFormat;
+}
+<script src="~/Scripts/jquery-2.0.0.min.js"></script>
+<div>
+     <div >
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+       Holiday Calendar
+      </h1>
+      @*<ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Calendar</li>
+      </ol>*@
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="row">
+        <!-- /.col -->
+        <div class="col-md-12">
+          <div class="box box-success">
+            <div class="box-body no-padding">
+              <!-- THE CALENDAR -->
+              <div id="calendar"></div>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /. box -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </section>
+    <!-- /.content -->
+  </div>
+</div>
+<div>
+    <div class="panel-body">
+        <div>
+            <table class="table table-responsive table-hover table-striped table-bordered" id="example" style="border-bottom:hidden">
+                <thead>
+                    <tr style="background-color:#CFE5DB;">
+                        <th>
+                        </th>
+                        <th>
+                        </th>
+                        <th>
+                            Resource Name
+                        </th>
+                        <th>
+                            Holiday Date
+                        </th>
+                        <th>
+                            Holiday Type
+                        </th>
+                        <th>
+                           Status
+                        </th>
+                        <th>
+                            Comment
+                        </th>
+                        <th>
+                            Authorised By
+                        </th>
+                        <th>
+
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.createHolidayList.Count != 0)
+                    {
+                        foreach (var item in Model.createHolidayList)
+                        {
+
+                            <tr>
+                                <td>
+                                    <a href="#"><span class="glyphicon glyphicon-pencil text-success"data-toggle="tooltip" title="Edit" onclick="editHoliday('@item.HolidayID')"></span></a>
+                                </td>
+                                <td>
+                                    <a href="#"><span class="glyphicon glyphicon-list text-success" data-toggle="tooltip" title="Details" onclick="detailsHoliday('@item.HolidayID')"></span></a>
+                                </td>
+                                <td>
+                                    @item.Resource
+                                </td>
+                               
+                                <td>
+                                    @String.Format("{0: " + dateformat + "}", item.HolidayDate) &nbsp; @item.HolidayDate.DayOfWeek.ToString().Substring(0, 3)
+                                </td>
+                               
+                                <td>
+                                    @item.HolidayType
+                                </td>
+                                <td>
+                                    @item.Status
+                                </td>
+                                <td>
+                                 @item.Comment
+                                </td>
+                                <td>
+                                    @item.StatusChangedBy
+                                 </td>
+
+                                <td>
+                                    @if(item.Status!= "Authorized")
+                                    {
+                                        <a href="#"><span class="glyphicon glyphicon-trash text-danger" data-toggle="tooltip" title="Delete" onclick="deleteHoliday(@item.HolidayID)"></span></a>
+                                        @*@Ajax.ActionLink(" ", "DeleteHoliday", "Holiday",new { holidayID = @item.HolidayID }, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "holidaySearchDIV" }, new { @class = "glyphicon glyphicon-trash text-danger" })*@
+                                    }
+                                </td>
+                                
+                            </tr>
+
+                        }
+                    }
+                    else {
+                        <tr>
+                            <td colspan="9" class="text-center">
+                                <span class="text-danger">No Results Found</span>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+</div>
+<script>
+    @*var resouceNam = @Html.Raw(Json.Encode(Model.createHolidayList.Select(x=>x.Resource)));
+   // alert(resouceNam);
+    var count=@Html.Raw(Json.Encode(Model.createHolidayList.Count()));*@
+
+    $(function () {
+
+        /* initialize the calendar
+         -----------------------------------------------------------------*/
+        //Date for the calendar events (dummy data)
+        //var date = new Date();
+        //var d = date.getDate(),
+        //    m = date.getMonth(),
+        //    y = date.getFullYear();
+
+            $('#calendar').fullCalendar({
+
+                header: {
+                    left: 'prevYear,prev,today,next,nextYear',
+                    center: 'title',
+                    // right: 'month,agendaWeek,agendaDay'
+                    right:'',
+                },
+                buttonText: {
+                    today: 'today',
+                    month: 'month',
+                    week: 'week',
+                    day: 'day'
+                },
+                //Random default events
+                events:@Html.Raw(Json.Encode(Model.EventArray)),
+                //events: [
+                //  {
+                //      title: resouceNam[i],
+                //      start: new Date(y, m, d),
+                //      backgroundColor: "#f56954", //red
+                //      borderColor: "#f56954" //red
+                //  }],
+                //editable: true,
+               // droppable: true, // this allows things to be dropped onto the calendar !!!
+                eventLimit: true,
+                displayEventTime:false,
+                defaultDate:new Date( @Model.searchHoliday.Year,((@Model.searchHoliday.Month)-1),30),
+
+            });
+
+
+
+        /* ADDING EVENTS */
+        //var currColor = "#3c8dbc"; //Red by default
+        ////Color chooser button
+        //var colorChooser = $("#color-chooser-btn");
+        //$("#color-chooser > li > a").click(function (e) {
+        //    e.preventDefault();
+        //    //Save color
+        //    currColor = $(this).css("color");
+        //    //Add color effect to button
+        //    $('#add-new-event').css({ "background-color": currColor, "border-color": currColor });
+        //});
+        //$("#add-new-event").click(function (e) {
+        //    e.preventDefault();
+        //    //Get value and make sure it is not null
+        //    var val = $("#new-event").val();
+        //    if (val.length == 0) {
+        //        return;
+        //    }
+
+        //    //Create events
+        //    var event = $("<div />");
+        //    event.css({ "background-color": currColor, "border-color": currColor, "color": "#fff" }).addClass("external-event");
+        //    event.html(val);
+        //    $('#external-events').prepend(event);
+
+        //    //Add draggable funtionality
+        //    ini_events(event);
+
+        //    //Remove event from text input
+        //    $("#new-event").val("");
+        //});
+    });
+@*</script>
+<script>*@
+    $(document).ready(function () {
+        $('#example').DataTable({
+            bFilter: false,       //disable search text
+            bInfo: false,
+            bPaginate: false,
+            bRetrieve:true,
+            "language": {
+                "zeroRecords": "<p class='text-danger'>No Results Found</p>",
+                "text-color": "#7f1416"
+            }
+        });
+
+        $("#example").freezeHeader({
+            offset: '50px',
+        });
+    });
+    function deleteHoliday(HolidayID) {
+        swal(
+                                             {
+                                                 title: 'Confirm',
+                                                 text: 'Are You Sure You Would Like To Delete This Holiday?',
+                                                 type: 'warning',
+                                                 showCancelButton: true,
+                                                 confirmButtonText: 'Yes',
+                                                 cancelButtonText: 'No',
+                                                 //closeOnConfirm: false,
+                                             },
+    function (isConfirm) {
+        if (isConfirm) {
+            var Month = $("#Month").val() == "" ? new Date().getMonth()+1: $("#Month").val();
+            var Year = $("#Year").val() == "" ? new Date().getFullYear() : $("#Year").val();
+            var EmployeeID = $("#SearchResourceID").val() == "" ? 0 : $("#SearchResourceID").val();
+            var holiID=HolidayID==null?0:HolidayID;
+            //alert(StatusID);
+            $.ajax({
+                url: '@Url.Action("DeleteHoliday", "Holiday")',
+                type: 'POST',
+                dataType: 'json',
+                data: ({ holidayID: holiID, employeeID: EmployeeID, month: Month, year: Year }),
+                success: function (data) {
+                   // alert(data.success);
+                    if(data.success==true){
+
+                        $("#holidaySearchDIV").html(data.partialview);
+                        successMessage(data.message, 'Success');
+                    }
+                    else{
+                        $("#holidaySearchDIV").html(data.partialview);
+                        successMessage(data.message, 'Error');
+                    }
+                },
+                error:function (data){
+                    $("#holidayPanelDIV").load('@Url.Action("Index", "Holiday")');
+                    successMessage("Something Wrong", 'Error');
+                }
+            })
+        }
+    });
+
+    }
+    function editHoliday(HolidayID) {
+        //alert(HolidayID);
+        var Month = $("#Month").val() == "" ?new Date().getMonth()+1  : $("#Month").val();
+        var Year = $("#Year").val() == "" ? new Date().getFullYear()  : $("#Year").val();
+        var EmployeeID = $("#SearchResourceID").val() == "" ? 0 : $("#SearchResourceID").val();
+        var holiID=HolidayID==null?0:HolidayID;
+        // alert(Month);
+        $.ajax({
+            url: '@Url.Action("EditHoliday", "Holiday")',
+            type: 'POST',
+            dataType: 'json',
+            data: ({ holidayID: holiID, employeeID: EmployeeID, month: Month, year: Year }),
+            success: function (data) {
+                  //alert(data);
+                if(data.success==true){
+                    $("#holidayPanelDIV").html(data.partialview);
+                    $("#holidayAssignDIV").hide();
+                    $("#requestOnDIV").hide();
+                }
+                else{
+                    $("#holidaySearchDIV").html(data.partialview);
+                    successMessage(data.message, 'Error');
+                }
+            },
+            error:function (data) {
+                successMessage(data.message, 'Error');
+            }
+        })
+    }
+    function detailsHoliday(HolidayID) {
+        //alert(HolidayID);
+        var Month = $("#Month").val() == "" ?new Date().getMonth()+1  : $("#Month").val();
+        var Year = $("#Year").val() == "" ? new Date().getFullYear()  : $("#Year").val();
+        var EmployeeID = $("#SearchResourceID").val() == "" ? 0 : $("#SearchResourceID").val();
+        var holiID=HolidayID==null?0:HolidayID;
+        // alert(Month);
+        $.ajax({
+            url: '@Url.Action("DetailsHoliday", "Holiday")',
+            type: 'POST',
+            dataType: 'json',
+            data: ({ holidayID: holiID, employeeID: EmployeeID, month: Month, year: Year }),
+            success: function (data) {
+                //  alert(data);
+                if(data.success==true){
+                    $("#holidayPanelDIV").html(data.partialview);
+                }
+                else{
+                    $("#holidayPanelDIV").load('@Url.Action("Index", "Holiday")');
+                }
+            }
+        })
+    }
+
+
+</script>
+@Scripts.Render("~/bundles/bootstrap")
+@Styles.Render("~/Content/css")
+<script src="~/Scripts/jquery.dataTables.min.js"></script>
+@*<script src="~/Scripts/jquery.freezeheader.js"></script>*@

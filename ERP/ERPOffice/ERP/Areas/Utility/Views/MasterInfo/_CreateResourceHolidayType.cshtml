@@ -1,0 +1,97 @@
+﻿@model ERP.Utility.Models.ResourceHolidayTypeBO
+
+
+@using (Ajax.BeginForm("CreateResourceHolidayType", "MasterInfo", new AjaxOptions { HttpMethod = "POST", OnSuccess = "Save" }))
+{
+    @Html.AntiForgeryToken()
+    <br />
+    <div class="form-horizontal well">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.HolidayTypeID)
+        @*@if (Model.HolidayTypeID != 0)
+            {
+                @Html.HiddenFor(model => model.HolidayTypeName)
+            }
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.HolidayTypeName, htmlAttributes: new { @class = "control-label col-md-5" })
+                        <div class="col-md-7">
+                            @if (Model == null || Model.HolidayTypeID != 0)
+                            {
+                                @Html.EditorFor(model => model.HolidayTypeName, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+                            }
+                            else
+                            {
+                                @Html.EditorFor(model => model.HolidayTypeName, new { htmlAttributes = new { @class = "form-control"} })
+                            }
+                            @Html.ValidationMessageFor(model => model.HolidayTypeName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>*@
+        <div class="form-group">
+            @Html.LabelFor(model => model.HolidayTypeName, htmlAttributes: new { @class = "control-label col-md-5" })
+            <div class="col-md-7">
+                @Html.EditorFor(model => model.HolidayTypeName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.HolidayTypeName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.AbbriviatedHolidayType, htmlAttributes: new { @class = "control-label col-md-5" })
+            <div class="col-md-7">
+                @Html.EditorFor(model => model.AbbriviatedHolidayType, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.AbbriviatedHolidayType, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.IconCode, htmlAttributes: new { @class = "control-label col-md-5" })
+            <div class="col-md-7">
+                @Html.EditorFor(model => model.IconCode, new { htmlAttributes = new { @class = "form-control", type = "color" } })
+                @Html.ValidationMessageFor(model => model.IconCode, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-5 col-md-7">
+                @if (Model.HolidayTypeID == 0)
+                {
+                    <input type="submit" value="Create" class="btn btn-success" data-toggle="tooltip" title="Create the Holiday Type" />
+}
+                else
+                {
+                    <input type="submit" value="Update" class="btn btn-success" data-toggle="tooltip" title="Update the Holiday Type" />
+}
+                <input type="button" value="Cancel" class="btn btn-default" data-toggle="tooltip" title="Cancel the Holiday Type Creation" role="button" onclick="CancelButton()" />
+            </div>
+        </div>
+    </div>
+}
+
+@Scripts.Render("~/bundles/jqueryval")
+<script>
+    function Save(status) {
+        if (status.success == true) {           
+            $.get('@Url.Action("CreateResourceHolidayType", "MasterInfo")',
+                      function (result) {
+                          $("#CreateEdit").html(result);
+                      });
+            console.log(status);
+            successMessage(status.errorMsg, 'Success');
+
+        }
+        else {
+            //successMessage(result.errorMsg, 'Error');
+            $("#CreateEdit").html(status);
+        }
+        $.post('@Url.Action("GetResourceHolidayTypeList", "MasterInfo")',
+                        function (result) {
+                            $("#List").html(result);
+                        });
+    }
+
+    function CancelButton() {
+        $.get('@Url.Action("CreateResourceHolidayType", "MasterInfo")',
+                              function (result) {
+                                  $("#CreateEdit").html(result);
+                              });
+    }
+</script>

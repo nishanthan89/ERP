@@ -1,0 +1,33 @@
+﻿@model ERP.Utility.Models.NationalityBO
+
+
+@using (Ajax.BeginForm("CreateNationality", "MasterInfo", new { id = 0 }, new AjaxOptions { HttpMethod = "POST", OnSuccess = "Save" }))
+{
+    @Html.AntiForgeryToken()
+    <br />
+    <div class="form-horizontal well">       
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.NationalityID)       
+        <div class="form-group">
+            @Html.LabelFor(model => model.NationalityName, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-8">
+                @Html.EditorFor(model => model.NationalityName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.NationalityName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-4 col-md-8">
+                <input type="submit" value=@ViewBag.btnName class="btn btn-success" data-toggle="tooltip" title="@ViewBag.btnName the Nationality" />
+                <input type="button" value="Cancel" class="btn btn-default" data-toggle="tooltip" title="Cancel the Nationality Creation" role="button" onclick="CancelButton()" />
+            </div>
+        </div>            
+    </div>
+      
+}
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

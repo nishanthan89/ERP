@@ -1,0 +1,147 @@
+﻿@model IEnumerable<ERP.Utility.Models.SkillLevelBO>
+
+<table class="table" id="skillLevelTable">
+    <thead>
+        <tr>
+            <th></th>
+            <th>
+                @Html.DisplayNameFor(model => model.SkillLevelName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>          
+            <th>
+                @Html.DisplayNameFor(model => model.MinSkillLevel)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MaxSkillLevel)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+@if (Model.Count() != 0 || Model != null)
+{
+foreach (var item in Model)
+{
+    <tr>      
+        <td>
+            <a data-toggle="tooltip" title="Edit" role="button" onclick="Edit(@item.SkillLevelID)" id="edit"><span class="glyphicon glyphicon-pencil text-success" style="position:static"></span></a>
+        </td>     
+        <td>
+            @Html.DisplayFor(modelItem => item.SkillLevelName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>       
+        <td>
+            @Html.DisplayFor(modelItem => item.MinSkillLevel)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MaxSkillLevel)
+        </td>
+        <td>
+            <a data-toggle="tooltip" title="Delete" role="button" onclick="Delete(@item.SkillLevelID)"><span class="glyphicon glyphicon-trash text-danger" style="position:static"></span></a>
+        </td>
+    </tr>
+}
+}
+else
+{
+    <tr>
+        <td align="center" colspan=15>
+            <center>
+                <font color="red" ; style="text-align:center">"Sorry, No Skill Level found!!."</font>
+            </center>
+        </td>
+
+    </tr>
+}
+</table>
+
+<script>
+    $(document).ready(function () {
+        $('#skillLevelTable').DataTable({
+            //"displayLength": 5,
+            bPaginate: false,     //disable Pagination
+            bFilter: false,       //disable search text
+            bInfo: false,
+            "language": {
+                "zeroRecords": "<p class='text-danger'>Sorry!..No matching Records found...</p>",
+                "text-color": "#7f1416"
+            }
+        });
+        $("#skillLevelTable").freezeHeader({
+            offset: '50px',
+            //background-color: rgba(255, 255, 255, 0.7)
+            //"background-color":"cadetblue"
+        });
+    });
+
+
+    function Delete(SkillLevelID) {       
+        swal({
+            title: 'Confirm',
+            text: 'Would You Like To Delete This Title?',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes',
+            cancelButtonText: 'No'
+        },
+         function (isConfirm) {
+             console.log(isConfirm);
+             if (isConfirm) {
+                 $.ajax({
+                     url: '@Url.Action("DeleteSkillLevel", "MasterInfo")',
+                     type: 'POST',
+                     dataType: 'html',
+                     data: ({ id: SkillLevelID }),
+                     success: function Delete(status) {
+                         var statusObj = jQuery.parseJSON(status);
+                         console.log(statusObj);
+                         if (statusObj.success == true) {
+                             console.log(statusObj.success);
+                             successMessage(statusObj.errorMsg, 'Success');
+                         }
+                         else {
+                             console.log(statusObj.success);
+                             successMessage(statusObj.errorMsg, 'Error');
+                         }
+                         $.post('@Url.Action("GetSkillLevelList", "MasterInfo")',
+                                                                function (result) {
+                                                                    $("#skillLevelList").html(result);
+                                                                });
+                         $.get('@Url.Action("CreateSkillLevel", "MasterInfo")',
+                                function (result) {
+                                    $("#createSkillLevel").html(result);
+                                });
+                     },
+                     error: function (data) {
+                         alert("error Loading the data");
+                     }
+                 })
+             }
+         })
+    }
+
+    function Edit(SkillLevelID) {
+        console.log("Edit");
+        $.ajax({
+            url: '@Url.Action("EditSkillLevel", "MasterInfo")',
+            dataType: 'html',
+            data: ({ id: SkillLevelID }),
+            success: function (data) {
+                console.log(data);
+                $("#createSkillLevel").html(data).show();
+                $.post('@Url.Action("GetSkillLevelList", "MasterInfo")',
+                        function (result) {
+                            $("#skillLevelList").html(result);
+                        }
+                                          );
+            },
+            error: function (data) {
+                alert("error Loading the data");
+            }
+        })
+    }
+
+</script>

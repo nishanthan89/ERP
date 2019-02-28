@@ -1,0 +1,38 @@
+﻿@model ERP.Resource.ViewModels.EmployeeSkillViewBO
+
+@{
+    ViewBag.Title = "SkillsIndex";
+    //Layout = Request.IsAjaxRequest() ? null : "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="employeeSkillsIndexDIV">
+    @*Tabs for Edit Employee*@
+    @if (Model.EmployeeID != 0)
+    {
+        @Html.Partial("_ResourceSubMenu", Model.ResourceSubMenuBO)
+    }
+    @*Ends*@
+
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            <h2 class="panel-title">Resource Skills</h2>
+        </div>
+        <div class="panel-body">
+            <div id="categoryCheckDIV">
+                @Html.Partial("_CreateEditSkills",Model)
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    @*Cancel function for "Cancel" button*@
+    function Cancel() {
+        $.get('@Url.Action("SkillsIndex", "Employee")',
+                function (result) {
+                    $("#employeeSkillsIndexDIV").html(result);
+                });
+        location.reload();
+    }
+    @*End*@
+</script>

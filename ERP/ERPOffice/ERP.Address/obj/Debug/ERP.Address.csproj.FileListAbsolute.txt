@@ -1,0 +1,13 @@
+E:\TFS\ERP\ERPOffice\ERPOffice\ERP.Address\bin\Debug\ERP.Address.dll.config
+E:\TFS\ERP\ERPOffice\ERPOffice\ERP.Address\bin\Debug\ERP.Address.dll
+E:\TFS\ERP\ERPOffice\ERPOffice\ERP.Address\bin\Debug\ERP.Address.pdb
+E:\TFS\ERP\ERPOffice\ERPOffice\ERP.Address\bin\Debug\EntityFramework.dll
+E:\TFS\ERP\ERPOffice\ERPOffice\ERP.Address\bin\Debug\ERP.DA.dll
+E:\TFS\ERP\ERPOffice\ERPOffice\ERP.Address\bin\Debug\ERP.DA.pdb
+E:\TFS\ERP\ERPOffice\ERPOffice\ERP.Address\bin\Debug\EntityFramework.xml
+E:\TFS\ERP\ERPOffice\ERPOffice\ERP.Address\obj\Debug\ERP.Address.dll
+E:\TFS\ERP\ERPOffice\ERPOffice\ERP.Address\obj\Debug\ERP.Address.pdb
+E:\TFS\ERP\ERPOffice\ERPOffice\ERP.Address\bin\Debug\ERP.DA.dll.config
+E:\TFS\ERP\ERPOffice\ERPOffice\ERP.Address\obj\Debug\ERP.Address.csproj.CoreCompileInputs.cache
+E:\TFS\ERP\ERPOffice\ERPOffice\ERP.Address\obj\Debug\ERP.Address.csprojAssemblyReference.cache
+E:\TFS\ERP\ERPOffice\ERPOffice\ERP.Address\obj\Debug\ERP.Address.csproj.CopyComplete

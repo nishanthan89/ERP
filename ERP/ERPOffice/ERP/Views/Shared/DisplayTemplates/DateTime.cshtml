@@ -1,0 +1,7 @@
+﻿
+@using ERP.MvcBinder
+@model DateTime?
+@{
+    string dateformat = MvcApplication.DateFormat;
+}
+@string.Format("{0:" + @dateformat + "}", Model)

@@ -1,0 +1,165 @@
+﻿@model ERP.Resource.ViewModels.EmployeeViewBO
+@*@{
+    ViewBag.Title = "ShiftPattern";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}*@
+
+<div class="panel panel-success">
+    <div class="panel-heading">
+        <h2 class="panel-title">Employee Payment</h2>
+    </div>
+    <div class="panel-body" id="payment">
+        <div class="col-md-offset-8">
+            <p>
+                @*<a href="@Url.Action("CreatePayment","Employee", new { id=Model.EmployeeID })"><span class="glyphicon glyphicon-pencil text-success" data-toggle="tooltip" title="Edit"></span></a>*@
+                <a class="btn btn-default" data-toggle="tooltip" title="Add New Payment" role="button" onclick="CreateEmployeePayment(@Model.EmployeeID)">&nbsp; Add New Payment</a>
+            </p>
+        </div>
+        <div class="col-md-12" id="EditPayment">
+           @* @Html.Partial("_EditPayment", Model.employeePaymentBO)*@
+        </div>
+        @if (Model.EmployeeID != null)
+        {
+            <div class="col-md-12" id="PaymentList">
+                @Html.Partial("_PaymentList", Model.employeePaymentList)
+            </div>
+        }        
+    </div>    
+</div>
+
+<script>
+    function CreateEmployeePayment(EmpID) {
+        //$("#error").hide();
+        // alert("inside create");
+        alert(EmpID);
+        $.ajax({
+            @*url: '@Url.Action("CreatePayment", "Employee")',*@
+            dataType: 'html',
+            data: ({ id: EmpID }),
+            type:"GET",
+            data: ({}),
+            success: function (data) {
+                $("#EditPayment").load('@Url.Action("CreatePayment", "Employee")');
+                //$("#EditPayment").html(data).show();
+                // alert(data);
+            }
+        })
+    }
+
+    function CancelEmployeePayment() {
+        //$("#error").hide();
+        // alert("inside create");
+        $.ajax({
+            url: '@Url.Action("EditEmployee", "Employee")',
+            dataType: 'html',
+            data: ({}),
+            success: function (data) {
+                $("#EditPayment").html(data).hide();
+                // alert(data);
+            }
+        })
+    }
+
+    @*function SaveEmployeePayment(EmpID) {
+        //$("#error").hide();
+        alert(EmpID);
+        $.ajax({
+            url: '@Url.Action("CreatePayment", "Employee")',
+            //type: 'POST',
+            data: ({ id: EmpID }),
+            dataType: 'html',
+            type: "Post",
+            data: ({}),
+            success: function (data) {
+                location.reload();
+            }
+        })
+    }*@
+
+    function SaveEmployeePayment() {
+        var model=@Html.Raw(Json.Encode(Model));
+        var paymentAmount = $("#PaymentAmount").val();
+        var paymentTypeID = $("#PaymentTypeID").val();
+        var startDate = $("#StartDate").val();
+        var empPayID = $("#EmployeePayID").val();
+        var empPayID=document.getElementById("EmployeePayID").value==""?0:document.getElementById("EmployeePayID").value;
+        //var endDate=document.getElementById("EndDate").value==""?null:document.getElementById("EndDate").value;
+        //alert(empPayID);
+        //alert(endDate);        
+        $.ajax({
+            url: '@Url.Action("CreatePayment", "Employee")',
+            dataType: 'html',
+            type: "Post",
+            cache: false,
+            data: ({empView:model,PaymentAmount:paymentAmount,PaymentTypeID:paymentTypeID,StartDate:startDate,EmpPayId:empPayID}),
+            success: function (data) {
+                location.reload();
+                //$("#EditPayment").html(data).show();
+                //alert(data)
+                @*$("#check").load('@Url.Action("EditEmployee", "Employee")');*@
+                }
+        })
+    }
+
+    function EditEmployeePayment(EmpPayId) {
+        $.ajax({
+            url: '@Url.Action("EditPayment", "Employee")',
+            dataType: 'html',
+            type: "Get",
+            data: ({ id: EmpPayId }),
+            success: function (data) {
+                //alert(data);
+                $("#EditPayment").html(data).show();
+                //$("#PaymentList").html(data).show();
+            },
+            error: function (data) {
+
+                alert("Error Loading the data");
+                $("#PaymentList").load('@Url.Action("EmpPaymentList", "Employee")');
+            }
+        })
+    }
+
+
+    function DeleteEmployeePayment(EmpPayId) {
+
+        swal({
+            title: 'Confirm',
+            text: 'Are you sure you want to Delete?',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes',
+            cancelButtonText: 'No'
+        },
+        function(isConfirm)
+        {
+            if (isConfirm)
+            {
+                //alert("inside");
+                $.ajax({
+                    url: '@Url.Action("DeleteEmployeePayment", "Employee")',
+                    dataType: 'html',
+                    data: ({ id: EmpPayId }),
+                    success: function (data) {
+                        @*$.post('@Url.Action("EmpPaymentList", "Employee")',
+                            function (result) {
+                                $("#PaymentList").html(result);
+                            })*@
+                        location.reload();
+                        },
+
+                    error: function (data) {
+
+                        alert("Error Loading the data");
+                        }
+                })
+            }
+            else
+            {
+                sweetAlert("Cancelled", "You have Cancelled Form Submission!", "error");
+            }
+        })
+
+    }
+</script>
+

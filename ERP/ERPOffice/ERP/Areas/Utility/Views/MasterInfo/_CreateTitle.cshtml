@@ -1,0 +1,75 @@
+﻿@model ERP.Utility.Models.TitleBO
+
+@using (Ajax.BeginForm("CreateTitle", "MasterInfo", new AjaxOptions { HttpMethod = "POST", OnSuccess = "SaveTitle" }))
+{
+     @Html.AntiForgeryToken()
+    <br />
+    <div class="form-horizontal well">   
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.TitleID)
+               
+            <div class="form-group">
+                @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-7">
+                    @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-8">
+                    @if (Model==null || Model.TitleID == 0)
+                    {
+                        <input type="submit" value="Create" class="btn btn-success" data-toggle="tooltip" title="Create the Title" id="create"/>
+}
+                    else
+                    {
+                        <input type="submit" value="Update" class="btn btn-success" data-toggle="tooltip" title="Update the Title" id="Update"/>
+}
+                    <input type="button" value="Cancel" class="btn btn-default" data-toggle="tooltip" title="Cancel the Title Creation" role="button" onclick="CancelButton()" />
+
+                </div>
+            </div>
+        </div>
+}
+
+@Scripts.Render("~/bundles/jqueryval")
+
+<script>
+    function SaveTitle(status) {
+        console.log("inside save");
+        if (status.success == true) {          
+            $.get('@Url.Action("CreateTitle", "MasterInfo")',
+                      function (result) {
+                          $("#CreateEditTitle").html(result);
+                      });
+            console.log(status);
+            successMessage(status.errorMsg, 'Success');
+        }
+        else {
+            //console.log(status);
+            //successMessage(result.errorMsg, 'Error');
+            $("#CreateEditTitle").html(status);
+        }
+        $.post('@Url.Action("GetTitleList", "MasterInfo")',
+                function (result) {
+                    $("#TitleList").html(result);
+                });
+    }
+
+    function CancelButton() {       
+        $.get('@Url.Action("CreateTitle", "MasterInfo")',
+                              function (result) {
+                                  $("#CreateEditTitle").html(result);
+                              });
+    }
+</script>
+
+@*<script>
+     @Scripts.Render("~/bundles/jqueryval")
+</script>*@
+
+@*@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    }*@
+

@@ -1,0 +1,14 @@
+E:\TFS\ERP\ERPOffice\ERPOffice\ERP.Utility\bin\Release\ERP.Utility.dll
+E:\TFS\ERP\ERPOffice\ERPOffice\ERP.Utility\bin\Release\ERP.Utility.pdb
+E:\TFS\ERP\ERPOffice\ERPOffice\ERP.Utility\bin\Release\EntityFramework.dll
+E:\TFS\ERP\ERPOffice\ERPOffice\ERP.Utility\bin\Release\ERP.Address.dll
+E:\TFS\ERP\ERPOffice\ERPOffice\ERP.Utility\bin\Release\ERP.Admin.dll
+E:\TFS\ERP\ERPOffice\ERPOffice\ERP.Utility\bin\Release\ERP.DA.dll
+E:\TFS\ERP\ERPOffice\ERPOffice\ERP.Utility\bin\Release\System.Web.Mvc.dll
+E:\TFS\ERP\ERPOffice\ERPOffice\ERP.Utility\bin\Release\ERP.Address.pdb
+E:\TFS\ERP\ERPOffice\ERPOffice\ERP.Utility\bin\Release\ERP.Admin.pdb
+E:\TFS\ERP\ERPOffice\ERPOffice\ERP.Utility\bin\Release\ERP.DA.pdb
+E:\TFS\ERP\ERPOffice\ERPOffice\ERP.Utility\bin\Release\EntityFramework.xml
+E:\TFS\ERP\ERPOffice\ERPOffice\ERP.Utility\obj\Release\ERP.Utility.csprojResolveAssemblyReference.cache
+E:\TFS\ERP\ERPOffice\ERPOffice\ERP.Utility\obj\Release\ERP.Utility.dll
+E:\TFS\ERP\ERPOffice\ERPOffice\ERP.Utility\obj\Release\ERP.Utility.pdb

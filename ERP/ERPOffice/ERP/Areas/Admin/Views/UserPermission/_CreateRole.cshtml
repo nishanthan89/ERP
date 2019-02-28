@@ -1,0 +1,67 @@
+﻿@model ERP.Admin.ViewModels.UserRoleViewModel
+
+@using (Ajax.BeginForm("CreateRole", "UserPermission", new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace, UpdateTargetId = "createRoleDiv", OnSuccess = "onAjaxSuccess", OnBegin = "onAjaxBegin" }))
+{
+    @Html.AntiForgeryToken()
+    <form role="form" class="form-horizontal">
+        <div class="form-group">
+            <div class="control-label col-md-4">
+                @Html.LabelFor(model => model.RoleName)
+            </div>
+            <div>
+                @Html.TextBoxFor(model => model.RoleName, new { @class = "form-control" })
+                @Html.HiddenFor(model=>model.RoleID)
+                @Html.ValidationMessageFor(model => model.RoleName, "", new { id = "RoleNameID" ,@class= "text-danger col-md-offset-4" })
+            </div>
+        </div>
+        <div class="form-group ">
+            <div class="control-label col-md-4">
+                @Html.LabelFor(model => model.SelectPermissions)
+            </div>
+            <div>
+                @Html.ListBoxFor(
+                             model => model.SelectPermissions,
+                             ViewBag.PermissionList as MultiSelectList,
+                             new { @class = "chosen-select", data_placeholder = "Choose Some Option...", style = "width:750px;", tabindex = "4" }
+                         )
+            </div>
+
+        </div>
+        <br />
+        <div class="form-group">
+            <div class="control-label col-md-4">
+                @Html.LabelFor(model => model.SelectUsers)
+            </div>
+            <div>
+                @Html.ListBoxFor(
+                             model => model.SelectUsers,
+                             ViewBag.UserList as MultiSelectList,
+                             new { @class = "chosen-select", data_placeholder = "Choose Some Option...", style = "width:750px;", tabindex = "4" }
+                         )
+
+            </div>
+        </div>
+        <div class="form-group col-md-offset-6">
+                <input type="submit" class="btn btn-success" id="saveID" name="submit" value="Save"/>
+            <input type="button" id="cancelButton" name="Cancel" value="Clear" class="btn btn-default" onclick="CancelButton()"/>
+        </div>
+    </form>
+}
+
+<script type="text/javascript">
+
+    var config = {
+        '.chosen-select': {},
+        '.chosen-select-deselect': { allow_single_deselect: true },
+        '.chosen-select-no-single': { disable_search_threshold: 10 },
+        '.chosen-select-no-results': { no_results_text: 'Oops, nothing found!' },
+        '.chosen-select-width': { width: "95%" }
+    }
+    for (var selector in config) {
+        $(selector).chosen(config[selector]);
+    }
+
+</script>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

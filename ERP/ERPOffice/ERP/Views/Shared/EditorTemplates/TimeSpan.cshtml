@@ -1,0 +1,40 @@
+﻿@using ERP.MvcBinder
+@model Nullable<TimeSpan>
+
+@{ 
+    var time = Model as TimeSpan?;
+    string timeFormat = MvcApplication.TimeFormat;
+
+    DateTime date = DateTime.Now.Date;
+
+    if (((bool?)ViewData["nowIfNull"] == true))
+{
+    time = ConvertTimeZone.ConvertTimeServertoTimeZone();
+}
+    else if (((bool?)ViewData["nowIfNull"] ?? false))
+{
+    time = null;
+}
+
+    if (time != null)
+    {
+        date = date.AddMinutes(((TimeSpan)time).TotalMinutes);
+    }
+}
+
+@Html.TextBox("", time == null ? String.Empty :
+                    string.Format("{0:" + timeFormat + "}", date),
+                    new
+                    {
+                        @class = "form-control",
+                        @onblur = "return ValidateColon(this);",
+                        maxlength = "8",
+                        style = "width:90px;",
+                        size = "6",
+                        placeholder = timeFormat.ToLower()
+
+                    })
+<div class="add-on">
+    <i data-time-icon="icon-time" data-date-icon="icon-calendar">
+    </i>
+</div>

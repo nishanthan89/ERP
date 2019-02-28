@@ -1,0 +1,252 @@
+﻿@model IEnumerable<ERP.Resource.Models.TimeSheetBO>
+
+
+
+<html>
+
+<head>
+@if(Model != null)
+{
+
+    <script>
+      
+        google.charts.load('current', {'packages':['bar']});
+        google.charts.setOnLoadCallback(drawChart);
+        function drawChart() {
+            var data1 = [];
+            var data2 = [];
+            var data11 = [];
+            var data22 = [];
+            var data111 = [];
+            var data222 = [];
+            var data1111 = [];
+            var Header1 =['Resources', 'NumberOfShift'];
+            var Header2 =['Resources', 'NumberOfHoliday'];
+            var Header11 =['Resources', 'TotalShiftHours'];
+            var Header22 =['Resources', 'TotalHolidayHours'];
+            var Header111 =['Resources', 'TotalShiftHours','TotalShiftdays'];
+            var Header222 =['Resources', 'TotalHolidayHours','TotalHolidays'];
+            var Header1111 =['Resources', 'TotalShiftHours','TotalShiftdays','TotalHolidayHours','TotalHolidays'];
+            data1.push(Header1);
+            data2.push(Header2);
+            data11.push(Header11);
+            data22.push(Header22);
+            data111.push(Header111);
+            data222.push(Header222);
+            data1111.push(Header1111);
+            var ResourcesName = @Html.Raw(Json.Encode(Model.Select(x=>x.ResourcesName)));
+            var TotShifHour=@Html.Raw(Json.Encode(Model.Select(x => x.TolShiftHrs / 60 > 0 ? x.TolShiftHrs / 60 : 0)));
+            var NOOfShift = @Html.Raw(Json.Encode(Model.Select(x=>x.NoOFShift)));
+            var TotHolyHour=@Html.Raw(Json.Encode(Model.Select(x=>x.TolHlyHours / 60 > 0 ? x.TolHlyHours / 60 : 0)));
+            var NOOfHoliday = @Html.Raw(Json.Encode(Model.Select(x=>x.TolHly)));
+            var Count=@Html.Raw(Json.Encode(Model.Select(x=>x.ResourcesName).Count()));
+
+            for (var d = 0; d < Count; d++) {
+                var ResourcesNames = ResourcesName[d];
+                var NOOfShifts=NOOfShift[d];
+
+                data1.push([ResourcesNames,NOOfShifts]);
+            }
+            for (var d = 0; d < Count; d++) {
+                var ResourcesNames = ResourcesName[d];
+                var NOOfHolidays=NOOfHoliday[d];
+
+                data2.push([ResourcesNames,NOOfHolidays]);
+            }
+            for (var d = 0; d < Count; d++) {
+                var ResourcesNames = ResourcesName[d];
+                var TotShifHours=TotShifHour[d];
+
+                data11.push([ResourcesNames,TotShifHours]);
+            }
+            for (var d = 0; d < Count; d++) {
+                var ResourcesNames = ResourcesName[d];
+                var TotHolyHours=TotHolyHour[d];
+
+                data22.push([ResourcesNames,TotHolyHours]);
+            }
+            for (var d = 0; d < Count; d++) {
+                var ResourcesNames = ResourcesName[d];
+                var TotShifHours=TotShifHour[d];
+                var NOOfShifts=NOOfShift[d];
+                data111.push([ResourcesNames,TotShifHours,NOOfShifts]);
+            }
+
+            for (var d = 0; d < Count; d++) {
+                var ResourcesNames = ResourcesName[d];
+                var TotHolyHours=TotHolyHour[d];
+                var NOOfHolidays=NOOfHoliday[d];
+                data222.push([ResourcesNames,TotHolyHours,NOOfHolidays]);
+            }
+
+            for (var d = 0; d < Count; d++) {
+                var ResourcesNames = ResourcesName[d];
+                var TotShifHours=TotShifHour[d];
+                var NOOfShifts=NOOfShift[d];
+                var TotHolyHours=TotHolyHour[d];
+                var NOOfHolidays=NOOfHoliday[d];
+                data1111.push([ResourcesNames,TotShifHours,NOOfShifts,TotHolyHours,NOOfHolidays]);
+            }
+
+            var chartdata1 = new google.visualization.arrayToDataTable(data1);
+            var chartdata2 = new google.visualization.arrayToDataTable(data2);
+            var chartdata11 = new google.visualization.arrayToDataTable(data11);
+            var chartdata22 = new google.visualization.arrayToDataTable(data22);
+            var chartdata111 = new google.visualization.arrayToDataTable(data111);
+            var chartdata222 = new google.visualization.arrayToDataTable(data222);
+            var chartdata1111 = new google.visualization.arrayToDataTable(data1111);
+            var options1 = {
+                chart: {
+                    title:'TotalShiftDays Report ',
+                    subtitle: 'Resources VS TotalShiftDays',
+                },
+                // bars: 'horizontal' // Required for Material Bar Charts.
+            };
+
+            var options2 ={
+                chart: {
+                    title: 'TotalHolidays Report',
+                    subtitle: 'Resources vs TotalHolidays',
+                },
+                // bars: 'horizontal' // Required for Material Bar Charts.
+            };
+            var options11 ={
+                chart: {
+                    title: 'TotalShiftHours Report',
+                    subtitle: 'Resources vs TotalShiftHours',
+                },
+                // bars: 'horizontal' // Required for Material Bar Charts.
+            };
+            var options22 ={
+                chart: {
+                    title: 'TotalHolidayHours Report',
+                    subtitle: 'Resources vs TotalHolidayHours',
+                },
+                // bars: 'horizontal' // Required for Material Bar Charts.
+            };
+
+            var options111 ={
+                chart: {
+                    title: 'TotalShift Report',
+                    subtitle: 'Resources vs TotalShiftHours VS TotalShiftdays',
+                },
+                // bars: 'horizontal' // Required for Material Bar Charts.
+            };
+
+            var options222 ={
+                chart: {
+                    title: 'TotalHoliday Report',
+                    subtitle: 'Resources vs TotalHolidayHours VS TotalHolidays',
+                },
+                // bars: 'horizontal' // Required for Material Bar Charts.
+            };
+
+            var options1111 ={
+                chart: {
+                    title: 'Analyzing Final Report',
+                    subtitle: 'Resources vs TotalShiftHours VS TotalShiftdays VS TotalHolidayHours VS TotalHolidays',
+                },
+                // bars: 'horizontal' // Required for Material Bar Charts.
+            };
+            var chart1 = new google.charts.Bar(document.getElementById('barchart_material1'));
+            var chart2 = new google.charts.Bar(document.getElementById('barchart_material2'));
+            var chart11 = new google.charts.Bar(document.getElementById('barchart_material11'));
+            var chart22 = new google.charts.Bar(document.getElementById('barchart_material22'));
+            var chart111 = new google.charts.Bar(document.getElementById('barchart_material111'));
+            var chart222 = new google.charts.Bar(document.getElementById('barchart_material222'));
+            var chart1111 = new google.charts.Bar(document.getElementById('barchart_material1111'));
+            chart1.draw(chartdata1, options1);
+            chart2.draw(chartdata2, options2);
+            chart11.draw(chartdata11, options11);
+            chart22.draw(chartdata22, options22);
+            chart111.draw(chartdata111, options111);
+            chart222.draw(chartdata222, options222);
+            chart1111.draw(chartdata1111, options1111);
+        }
+          
+
+
+
+
+
+      
+
+
+    </script>
+
+}
+
+
+</head>
+<body>
+
+    @if (Model != null)
+    {
+
+
+        <div class="row">
+
+
+            <div class="col-md-12">
+                <div class="col-md-6">
+                    <div id="barchart_material1" style="width: 500px; height: 300px;"></div>
+                </div>
+                <div class="col-md-6">
+                    <div id="barchart_material2" style="width: 500px; height: 300px;"></div>
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-6">
+                    <div id="barchart_material11" style="width: 500px; height: 300px;"></div>
+                </div>
+                <div class="col-md-6">
+                    <div id="barchart_material22" style="width: 500px; height: 300px;"></div>
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-6">
+                    <div id="barchart_material111" style="width: 500px; height: 300px;"></div>
+                </div>
+                <div class="col-md-6">
+                    <div id="barchart_material222" style="width: 500px; height: 300px;"></div>
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-md-10">
+                <div class="col-md-10">
+                    <div id="barchart_material1111" style="width: 1000px; height: 300px;"></div>
+                </div>
+
+                
+       
+            </div>
+
+        </div>
+    }
+    @if(Model==null)
+    {
+        <div class="row">
+            <div class="col-md-10">
+                <div class="col-md-10">
+
+                    <div style="color:red; text-align:center">
+                        <div colspan="10" style="background-color:white">
+                            No Results Found..!
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</body>
+</html>
+
+

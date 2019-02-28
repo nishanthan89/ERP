@@ -1,0 +1,146 @@
+﻿@model ERP.Utility.ViewModels.EmployeeTypeView
+
+@{
+    ViewBag.Title = "Employee Type";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="panel panel-success">
+    <div class="panel-heading">
+        <h3 class="panel-title">Employee Type </h3>
+    </div>
+    <div class="panel-body">
+        <div class="col-md-5" id="TypeList">
+            @Html.Partial("_EmpTypeList", Model.empList)
+        </div>
+
+        <div class="col-md-5 col-md-offset-1" id="CreateEdit">
+            @Html.Partial("_CreateEmployeeType", Model.empTypeBO)
+        </div>
+    </div>
+</div>
+
+<script>
+    function Save(status) {
+        console.log(status);
+        if (status.success == true) {
+            $.post('@Url.Action("GetTypeList", "MasterInfo")',
+                    function (result) {
+                        //console.log("refresh list--save save");
+                        $("#TypeList").html(result);
+                    });
+            $.get('@Url.Action("CreateEmployeeType", "MasterInfo", new RouteValueDictionary(new { id = 0 }))',
+                    function (result) {
+                        console.log("reload the create form");
+                        $("#CreateEdit").html(result);
+                    });
+            successMessage(status.errorMsg, 'Success');
+        }
+        else {
+            console.log("hi else");
+            $("#CreateEdit").html(status);
+        }
+    }
+
+    function CancelButton() {
+        console.log("Cancel buttton");
+        $.get('@Url.Action("CreateEmployeeType", "MasterInfo", new RouteValueDictionary(new { id = 0 }))',
+                              function (result) {
+                                  $("#CreateEdit").html(result);
+                              });
+    }
+    function EditEmployeeType(EmployeeTypeID) {
+        console.log("hi else");
+        $.ajax({
+            url: '@Url.Action("EditEmployeeType", "MasterInfo")',
+            dataType: 'html',
+            data: ({ id: EmployeeTypeID }),
+            success: function (data) {
+                // $("#EmployeeTypeName").attr('disabled', 'disabled');
+                $("#CreateEdit").html(data).show();
+                $.post('@Url.Action("GetTypeList", "MasterInfo")',
+                                function (result) {
+                                    $("#TypeList").html(result);
+                                });
+            },
+            error: function (data) {
+                alert("error Loading the data");
+            }
+        })
+
+    }
+    //function HideDropdownItem() {
+    //    var empType = $("#EmployeeTypeName").val();
+    //    var empTypeList = $('<option/>').val();
+    //    console.log(empTypeList.length);
+    //    //for (var i = 0; i < empTypeList.length; i++) {
+    //    //    console.log(empTypeList.length);
+    //    //    console.log(empTypeList[i].value);
+    //    //    (empTypeList[i].value == empType)
+    //    //      ? empTypeList[i].disabled = true
+    //    //      : empTypeList[i].disabled = false;
+    //    //    //  $("select option[value*=empType]").prop('disabled', true);
+    //    //}
+    //}
+    @*function UpdateTitle(result) {
+        console.log(result);
+        if (result.success == true) {
+            $.post('@Url.Action("GetTitleList", "MasterInfo")',
+                    function (result) {
+                        $("#TitleList").html(result);
+                    });
+
+            $.get('@Url.Action("CreateTitle", "MasterInfo")',
+                      function (result) {
+                          $("#CreateEditTitle").html(result);
+                      });
+
+            ('Successfully saved');
+        }
+        else {
+            console.log("else");
+            successMessage(result.errorMsg, 'Error');
+        }
+    }*@
+    function DeleteEmployeeType(EmployeeTypeID) {
+        // console.log(TitleId);
+        swal({
+            title: 'Confirm',
+            text: 'Are you sure you want to Delete?',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes',
+            cancelButtonText: 'No'
+        },
+         function (isConfirm) {
+             //console.log(isConfirm);
+             if (isConfirm) {
+                 $.ajax({
+                     url: '@Url.Action("DeleteEmployeeType", "MasterInfo")',
+                     dataType: 'html',
+                     data: ({ id: EmployeeTypeID }),
+                     success: function (status) {
+                         var statusObj = jQuery.parseJSON(status);
+                         if (statusObj.success == true) {
+                             successMessage(statusObj.errorMsg, 'Success');
+                         }
+                         else {
+                             successMessage(statusObj.errorMsg, 'Error');
+                         }
+                         $.get('@Url.Action("CreateEmployeeType", "MasterInfo")',
+                                 function (result) {
+                                     $("#CreateEdit").html(result);
+                                 });
+                         $.post('@Url.Action("GetTypeList", "MasterInfo")',
+                                function (result) {
+                                    $("#TypeList").html(result);
+                                });
+                     },
+                     error: function (data) {
+                         alert("error Loading the data");
+                     }
+                 })
+             }
+         })
+    }
+</script>

@@ -1,0 +1,121 @@
+﻿@model ERP.Utility.ViewModels.TitleView
+@{
+    ViewBag.Title = "Title";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@*<div class="wrapper">*@
+    <div class="panel panel-success">
+
+        <div class="panel-heading">
+            <h3 class="panel-title">Title  </h3>
+        </div>
+        <div class="panel-body">
+            <div class="col-md-3" id="TitleList">
+                @Html.Partial("_TitleList", Model.TitleList)
+            </div>
+            <div class="col-md-5 col-md-offset-3" id="CreateEditTitle">
+                @Html.Partial("_createTitle", Model.titleBO)
+            </div>
+
+        </div>
+        @*   <br /><br />    <br />   <br />    <br />    <br />    <br /><br /><br /><br /><br /><br /><br /><br />*@
+    </div>
+@*</div>*@
+<script>
+    function SaveTitle(status) {
+
+        if (status.success == true) {
+            $.post('@Url.Action("GetTitleList", "MasterInfo")',
+                 function (result) {
+                     $("#TitleList").html(result);
+                 });
+            $.get('@Url.Action("CreateTitle", "MasterInfo")',
+                      function (result) {
+                          $("#CreateEditTitle").html(result);
+                      });
+            console.log(status);
+            successMessage(status.errorMsg, 'Success');
+
+        }
+        else {
+            //console.log(status);
+            //successMessage(result.errorMsg, 'Error');
+            $("#CreateEditTitle").html(status);
+
+        }
+
+    }
+
+    function DeleteTitle(TitleId) {
+        //console.log(TitleId);
+        swal({
+            title: 'Confirm',
+            text: 'Are you sure you want to Delete?',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes',
+            cancelButtonText: 'No'
+        },
+         function (isConfirm) {
+             console.log(isConfirm);
+             if (isConfirm) {
+                 $.ajax({
+                     url: '@Url.Action("DeleteTitle", "MasterInfo")',
+                     dataType: 'html',
+                     data: ({ id: TitleId }),
+                     success: function Delete(status) {
+                         var statusObj = jQuery.parseJSON(status);
+                         console.log(statusObj);
+                         if (statusObj.success == true) {
+                             console.log(statusObj.success);
+                             successMessage(statusObj.errorMsg, 'Success');                            
+                         }
+                         else {
+                             console.log(statusObj.success);
+                             successMessage(statusObj.errorMsg, 'Error');
+                         }
+                         $.post('@Url.Action("GetTitleList", "MasterInfo")',
+                                                                function (result) {
+                                                                    $("#TitleList").html(result);
+                                                                });
+                         $.get('@Url.Action("CreateTitle", "MasterInfo")',
+                                function (result) {
+                                    $("#CreateEditTitle").html(result);
+                                });
+                     },
+                     error: function (data) {
+                         alert("error Loading the data");
+                     }
+                 })
+             }
+         })
+    }
+
+    function CancelButton() {
+        $.get('@Url.Action("CreateTitle", "MasterInfo")',
+                              function (result) {
+                                  $("#CreateEditTitle").html(result);
+                              });
+    }
+
+    function EditTitle(TitleId) {
+        $.ajax({
+            url: '@Url.Action("EditTitle", "MasterInfo")',
+            dataType: 'html',
+            data: ({ id: TitleId }),
+            success: function (data) {
+                console.log(data);
+                $("#CreateEditTitle").html(data).show();
+                $.post('@Url.Action("GetTitleList", "MasterInfo")',
+                                                                function (result) {
+                                                                    $("#TitleList").html(result);
+                                                                });
+            },
+            error: function (data) {
+                alert("error Loading the data");
+            }
+        })
+    }
+
+
+</script>

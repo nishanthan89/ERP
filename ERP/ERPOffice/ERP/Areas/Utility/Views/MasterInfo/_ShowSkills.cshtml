@@ -1,0 +1,33 @@
+﻿@model IEnumerable<ERP.Utility.Models.SkillGroupBO>
+
+
+<table class="table">
+    <tr>
+       
+        <th>
+            @Html.DisplayNameFor(model => model.SkillName)
+        </th>
+       
+       
+        <th>
+            @Html.DisplayNameFor(model => model.SkillLevel)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+       
+        <td>
+            @Html.DisplayFor(modelItem => item.SkillName)
+        </td>
+        
+        
+        <td>
+            @Html.DisplayFor(modelItem => item.SkillLevel)
+        </td>
+       
+    </tr>
+}
+
+</table>

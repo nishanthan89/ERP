@@ -1,0 +1,22 @@
+﻿
+
+@if (TempData["Success"] != null)
+            {
+    <div class="alert alert-success alert-dismissable" id="success-alert">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>@TempData["Success"]
+        @*<strong>Well done!</strong> <a href="#" class="alert-link"> @TempData["Success"]</a>.*@
+    </div>
+}
+@if (TempData["Error"] != null)
+            {
+    <div class="alert alert-danger alert-dismissable">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>@TempData["Error"]
+        @*<a href="#" class="alert-link"> @TempData["Error"]</a>.*@
+    </div>
+}
+
+<script>
+    $("#success-alert").fadeTo(2000, 500).delay(8000, function () {
+        $("#success-alert").alert('close');
+    });
+</script>

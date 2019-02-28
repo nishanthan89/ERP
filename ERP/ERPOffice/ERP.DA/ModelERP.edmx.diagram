@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="2a420aba827046b580fcdc3456602291" Name="Diagram1" ZoomLevel="67">
+        <EntityTypeShape EntityType="ERPModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="ERPModel.AspNetLoginOff" Width="1.5" PointX="3" PointY="46.375" />
+        <EntityTypeShape EntityType="ERPModel.AspNetPermission" Width="1.5" PointX="1.5" PointY="36.75" />
+        <EntityTypeShape EntityType="ERPModel.AspNetRole" Width="1.5" PointX="1.5" PointY="33.875" />
+        <EntityTypeShape EntityType="ERPModel.AspNetUserClaim" Width="1.5" PointX="3" PointY="43.625" />
+        <EntityTypeShape EntityType="ERPModel.AspNetUserLogin" Width="1.5" PointX="3" PointY="14" />
+        <EntityTypeShape EntityType="ERPModel.AspNetUser" Width="1.5" PointX="0.75" PointY="28.625" />
+        <EntityTypeShape EntityType="ERPModel.Branch_Details" Width="1.5" PointX="9" PointY="7.5" />
+        <EntityTypeShape EntityType="ERPModel.Branch_Holidays" Width="1.5" PointX="13.25" PointY="15.625" />
+        <EntityTypeShape EntityType="ERPModel.Branch_Status" Width="1.5" PointX="6.75" PointY="7.5" />
+        <EntityTypeShape EntityType="ERPModel.Branch_Type" Width="1.5" PointX="6.75" PointY="9.875" />
+        <EntityTypeShape EntityType="ERPModel.Common_Address" Width="1.5" PointX="3.75" PointY="19.125" />
+        <EntityTypeShape EntityType="ERPModel.Common_Area" Width="1.5" PointX="8.25" PointY="13" />
+        <EntityTypeShape EntityType="ERPModel.Common_AreaPostCodeDetails" Width="1.5" PointX="10.5" PointY="13.125" />
+        <EntityTypeShape EntityType="ERPModel.Common_Company" Width="1.5" PointX="12" PointY="33" />
+        <EntityTypeShape EntityType="ERPModel.Common_Country" Width="1.5" PointX="1.5" PointY="19.75" />
+        <EntityTypeShape EntityType="ERPModel.Common_CurrencyFormat" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="ERPModel.Common_DateFormat" Width="1.5" PointX="0.75" PointY="3.75" />
+        <EntityTypeShape EntityType="ERPModel.Common_Day" Width="1.5" PointX="8.25" PointY="51.625" />
+        <EntityTypeShape EntityType="ERPModel.Common_Department" Width="1.5" PointX="6" PointY="18.875" />
+        <EntityTypeShape EntityType="ERPModel.Common_Designation" Width="1.5" PointX="12" PointY="35.5" />
+        <EntityTypeShape EntityType="ERPModel.Common_EmployeeType" Width="1.5" PointX="3.75" PointY="35.25" />
+        <EntityTypeShape EntityType="ERPModel.Common_EthnicGroup" Width="1.5" PointX="3.75" PointY="38.375" />
+        <EntityTypeShape EntityType="ERPModel.Common_HostLogo" Width="1.5" PointX="2.75" PointY="3.75" />
+        <EntityTypeShape EntityType="ERPModel.Common_HostSettings" Width="1.5" PointX="4.75" PointY="0.75" />
+        <EntityTypeShape EntityType="ERPModel.Common_ImmigrationStatus" Width="1.5" PointX="3.75" PointY="16.75" />
+        <EntityTypeShape EntityType="ERPModel.Common_JobTitle" Width="1.5" PointX="0.75" PointY="16.625" />
+        <EntityTypeShape EntityType="ERPModel.Common_Key" Width="1.5" PointX="4.75" PointY="3.75" />
+        <EntityTypeShape EntityType="ERPModel.Common_Location" Width="1.5" PointX="6" PointY="16.25" />
+        <EntityTypeShape EntityType="ERPModel.Common_MaritalStatus" Width="1.5" PointX="3.75" PointY="40.75" />
+        <EntityTypeShape EntityType="ERPModel.Common_Nationality" Width="1.5" PointX="3.75" PointY="32.875" />
+        <EntityTypeShape EntityType="ERPModel.Common_PaymentType" Width="1.5" PointX="6" PointY="40.25" />
+        <EntityTypeShape EntityType="ERPModel.Common_Region" Width="1.5" PointX="6" PointY="13.25" />
+        <EntityTypeShape EntityType="ERPModel.Common_Skill" Width="1.5" PointX="6" PointY="37.375" />
+        <EntityTypeShape EntityType="ERPModel.Common_SkillCategory" Width="1.5" PointX="6" PointY="34.75" />
+        <EntityTypeShape EntityType="ERPModel.Common_SkillGroup" Width="1.5" PointX="8.25" PointY="38.875" />
+        <EntityTypeShape EntityType="ERPModel.Common_SkillLevelScheme" Width="1.5" PointX="6" PointY="43" />
+        <EntityTypeShape EntityType="ERPModel.Common_Team" Width="1.5" PointX="6" PointY="31.625" />
+        <EntityTypeShape EntityType="ERPModel.Common_TimeFormat" Width="1.5" PointX="6.75" PointY="0.75" />
+        <EntityTypeShape EntityType="ERPModel.Common_TimeSheetFrequency" Width="1.5" PointX="3.75" PointY="30.25" />
+        <EntityTypeShape EntityType="ERPModel.Common_Title" Width="1.5" PointX="0.75" PointY="25.125" />
+        <EntityTypeShape EntityType="ERPModel.Resouce_WorkingPatternDetails" Width="1.5" PointX="8.25" PointY="57.375" />
+        <EntityTypeShape EntityType="ERPModel.Resource_BranchDetails" Width="1.5" PointX="11.25" PointY="25" />
+        <EntityTypeShape EntityType="ERPModel.Resource_Department" Width="1.5" PointX="8.25" PointY="20.375" />
+        <EntityTypeShape EntityType="ERPModel.Resource_DepartmentAreaDetails" Width="1.5" PointX="10.5" PointY="17" />
+        <EntityTypeShape EntityType="ERPModel.Resource_Employee" Width="1.5" PointX="6" PointY="21.375" />
+        <EntityTypeShape EntityType="ERPModel.Resource_EmployeePayment" Width="1.5" PointX="8.25" PointY="28.75" />
+        <EntityTypeShape EntityType="ERPModel.Resource_ExperienceDetails" Width="1.5" PointX="14.25" PointY="24.5" />
+        <EntityTypeShape EntityType="ERPModel.Resource_Holiday" Width="1.5" PointX="11.25" PointY="28.625" />
+        <EntityTypeShape EntityType="ERPModel.Resource_Holiday_Type" Width="1.5" PointX="9" PointY="36" />
+        <EntityTypeShape EntityType="ERPModel.Resource_HolidayStatus" Width="1.5" PointX="13.5" PointY="28.75" />
+        <EntityTypeShape EntityType="ERPModel.Resource_HolidayStatusType" Width="1.5" PointX="11.25" PointY="38.25" />
+        <EntityTypeShape EntityType="ERPModel.Resource_ShiftPattern" Width="1.5" PointX="9" PointY="32.25" />
+        <EntityTypeShape EntityType="ERPModel.Resource_ShiftSchedule" Width="1.5" PointX="11.25" PointY="20.25" />
+        <EntityTypeShape EntityType="ERPModel.Resource_SkillDetails" Width="1.5" PointX="8.25" PointY="24.5" />
+        <EntityTypeShape EntityType="ERPModel.Resource_TimeSheet" Width="1.5" PointX="14.25" PointY="18.75" />
+        <EntityTypeShape EntityType="ERPModel.Resource_TimeSheetDetails" Width="1.5" PointX="16.5" PointY="20.25" />
+        <EntityTypeShape EntityType="ERPModel.Resource_TimeSheetDetailsHoliday" Width="1.5" PointX="16.5" PointY="24.125" />
+        <EntityTypeShape EntityType="ERPModel.Resource_WeeklyPatternDetails" Width="1.5" PointX="10.5" PointY="54.5" />
+        <EntityTypeShape EntityType="ERPModel.Resource_WorkingPattern" Width="1.5" PointX="8.25" PointY="54.25" />
+        <EntityTypeShape EntityType="ERPModel.sysdiagram" Width="1.5" PointX="0.75" PointY="6.75" />
+        <EntityTypeShape EntityType="ERPModel.User_UserDetails" Width="1.5" PointX="3" PointY="23.625" />
+        <AssociationConnector Association="ERPModel.FK_AspNetLoginOff_AspNetUsers" />
+        <AssociationConnector Association="ERPModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="ERPModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="ERPModel.FK_User_UserDetails_AspNetUsers" />
+        <AssociationConnector Association="ERPModel.FK_Branch_Details_Branch_Status1" />
+        <AssociationConnector Association="ERPModel.FK_Branch_Details_Branch_Type" />
+        <AssociationConnector Association="ERPModel.FK_Branch_Details_Common_Address" />
+        <AssociationConnector Association="ERPModel.FK_Branch_Holidays_Branch_Details" />
+        <AssociationConnector Association="ERPModel.FK_Resource_BranchDetails_Branch_Details" />
+        <AssociationConnector Association="ERPModel.FK_Resource_ShiftSchedule_Branch_Details" />
+        <AssociationConnector Association="ERPModel.FK_Branch_Holidays_Holiday_Type" />
+        <AssociationConnector Association="ERPModel.FK_Common_Address_Common_Country" />
+        <AssociationConnector Association="ERPModel.FK_Resource_Employee_Common_Address" />
+        <AssociationConnector Association="ERPModel.FK_User_UserDetails_Common_Address" />
+        <AssociationConnector Association="ERPModel.FK_Common_Area_Common_Region" />
+        <AssociationConnector Association="ERPModel.FK_Common_AreaPostCode_Details_Common_Area" />
+        <AssociationConnector Association="ERPModel.FK_Resource_DepartmentAreaDetails_Common_Area" />
+        <AssociationConnector Association="ERPModel.FK_Resource_ExperienceDetails_Common_Company" />
+        <AssociationConnector Association="ERPModel.FK_Resource_SkillDetails_Common_Company" />
+        <AssociationConnector Association="ERPModel.FK_Resource_WeeklyPatternDetails_Common_DayType" />
+        <AssociationConnector Association="ERPModel.FK_Resource_Department_Common_Department" />
+        <AssociationConnector Association="ERPModel.FK_Resource_ExperienceDetails_Common_Designation" />
+        <AssociationConnector Association="ERPModel.FK_Common_EmployeeType_Common_EmployeeType" />
+        <AssociationConnector Association="ERPModel.FK_Resource_Employee_Common_EmployeeType" />
+        <AssociationConnector Association="ERPModel.FK_Resource_Employee_Common_EthnicGroup" />
+        <AssociationConnector Association="ERPModel.FK_Resource_Employee_Common_ImmigrationStatus" />
+        <AssociationConnector Association="ERPModel.FK_User_UserDetails_Common_JobTitle" />
+        <AssociationConnector Association="ERPModel.FK_Resource_Department_Common_Location" />
+        <AssociationConnector Association="ERPModel.FK_Resource_Employee_Common_MaritalStatus" />
+        <AssociationConnector Association="ERPModel.FK_Resource_Employee_Common_Nationality1" />
+        <AssociationConnector Association="ERPModel.FK_Common_EmployeePayment_Common_PaymentType1" />
+        <AssociationConnector Association="ERPModel.FK_Common_SkillGroup_Common_Skill" />
+        <AssociationConnector Association="ERPModel.FK_Resource_SkillDetails_Common_Skill" />
+        <AssociationConnector Association="ERPModel.FK_Common_SkillGroup_Common_SkillCategory" />
+        <AssociationConnector Association="ERPModel.FK_Resource_SkillDetails_Common_SkillCategory" />
+        <AssociationConnector Association="ERPModel.FK_Common_SkillGroup_Common_SkillLevelScheme" />
+        <AssociationConnector Association="ERPModel.FK_Resource_Department_Common_Team" />
+        <AssociationConnector Association="ERPModel.FK_Resource_Employee_Common_TimeSheetFrequency" />
+        <AssociationConnector Association="ERPModel.FK_Resource_TimeSheet_Common_TimeSheetFrequency" />
+        <AssociationConnector Association="ERPModel.FK_Resource_Employee_Common_Title" />
+        <AssociationConnector Association="ERPModel.FK_User_UserDetails_Common_Title" />
+        <AssociationConnector Association="ERPModel.FK_Resouce_WorkingPatternDetails_Resource_Employee" />
+        <AssociationConnector Association="ERPModel.FK_Resource_BranchDetails_Resource_Employee" />
+        <AssociationConnector Association="ERPModel.FK_Resource_Department_Resource_Employee" />
+        <AssociationConnector Association="ERPModel.FK_Resource_DepartmentPostCodeDetails_Resource_Department" />
+        <AssociationConnector Association="ERPModel.FK_Common_EmployeePayment_Resource_Employee" />
+        <AssociationConnector Association="ERPModel.FK_Resource_ExperienceDetails_Resource_Employee" />
+        <AssociationConnector Association="ERPModel.FK_Resource_Holiday_Resource_Employee" />
+        <AssociationConnector Association="ERPModel.FK_Resource_ShiftSchedule_Resource_Employee" />
+        <AssociationConnector Association="ERPModel.FK_Resource_SkillDetails_Resource_Employee" />
+        <AssociationConnector Association="ERPModel.FK_Resource_TimeSheet_Resource_Employee" />
+        <AssociationConnector Association="ERPModel.FK_Resource_WorkingPattern_Resource_Employee" />
+        <AssociationConnector Association="ERPModel.FK_Resource_Holiday_Holiday_Type" />
+        <AssociationConnector Association="ERPModel.FK_Resource_HolidayStatus_Resource_Holiday1" />
+        <AssociationConnector Association="ERPModel.FK_Resource_TimeSheetDetailsHoliDay_Resource_Holiday" />
+        <AssociationConnector Association="ERPModel.FK_Resource_HolidayStatus_Resource_HolidayStatusType1" />
+        <AssociationConnector Association="ERPModel.FK_Resource_ShiftSchedule_Resource_ShiftPattern1" />
+        <AssociationConnector Association="ERPModel.FK_Resource_TimeSheetDetails_Resource_ShiftSchedule" />
+        <AssociationConnector Association="ERPModel.FK_Resource_TimeSheetDetails_Resource_TimeSheet" />
+        <AssociationConnector Association="ERPModel.FK_Resource_TimeSheetDetailsHoliDay_Resource_TimeSheet" />
+        <AssociationConnector Association="ERPModel.FK_Resource_WorkingPatternDetails_Resource_WorkingPattern" />
+        <AssociationConnector Association="ERPModel.AspNetRolePermission" />
+        <AssociationConnector Association="ERPModel.AspNetUserRoles" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

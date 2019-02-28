@@ -1,0 +1,64 @@
+﻿@model ERP.Resource.Models.ShiftBO
+
+@{
+    string dateformat = MvcApplication.DateFormat;
+    string timeformat = MvcApplication.TimeFormat;
+}
+
+<tbody>
+    @if (Model.ShiftScheduleList.Count != 0)
+    {
+        foreach (var item in Model.ShiftScheduleList)
+        {
+
+            <tr>
+                <td>
+                    <a href="#"><span class="glyphicon glyphicon-edit text-success" onclick="editSchedule('@item.ShiftScheduleID')"></span></a>
+                </td>
+                <td>
+                    @item.Employee
+                </td>
+                <td>
+                    @item.BranchName
+                </td>
+                <td>
+                    @String.Format("{0: " + dateformat + "}", item.ShiftStartDate) &nbsp; @item.ShiftStartDate.DayOfWeek.ToString().Substring(0, 3)
+                </td>
+                <td>
+                    @item.ShiftPattern
+                </td>
+                <td>
+                    @String.Format("{0: " + dateformat + "}", item.ExpectedOnDateTime) &nbsp; @String.Format("{0: " + timeformat + "}", item.ExpectedOnDateTime)
+                </td>
+                <td>
+                    @if (item.ActualOnDateTime != null)
+                    {
+                        <span> @String.Format("{0: " + dateformat + "}", item.ActualOnDateTime) &nbsp;</span> @String.Format("{0: " + timeformat + "}", item.ActualOnDateTime)
+                    }
+                </td>
+                <td>
+                    @String.Format("{0: " + dateformat + "}", item.ExpectedOffDateTime) &nbsp; @String.Format("{0: " + timeformat + "}", item.ExpectedOffDateTime)
+                </td>
+                <td>
+                    @if (item.ActualOffDateTime != null)
+                    {
+                        <span> @String.Format("{0: " + dateformat + "}", item.ActualOffDateTime)&nbsp;</span> @String.Format("{0: " + timeformat + "}", item.ActualOffDateTime)
+                    }
+                </td>
+
+                <td>
+                    @if (item.ActualOnDateTime == null && item.ActualOffDateTime == null)
+                    {
+                        <a href="#"><span class="glyphicon glyphicon-trash text-danger" onclick="deleteSchedule('@item.ShiftScheduleID')"></span></a>
+                    }
+                </td>
+            </tr>
+
+        }
+    }
+    
+</tbody>
+
+
+
+

@@ -1,0 +1,213 @@
+﻿@model ERP.Resource.Models.ShiftBO
+<script src="~/Scripts/jquery.freezeheader.js"></script>
+@{
+    string dateformat = MvcApplication.DateFormat;
+    string timeformat = MvcApplication.TimeFormat;
+}
+<div>
+    <div class="panel-body">
+        <div >
+            <table class="table table-responsive" id="example" style="border-bottom:hidden">
+                <thead>
+                    <tr style="background-color:#CFE5DB;">
+                        <th>
+                        </th>
+                        <th>
+                            Resource 
+                        </th>
+                        <th>
+                            Branch
+                        </th>
+                        <th>
+                            Shift Date
+                        </th>
+                        <th>
+                            Shift Pattern
+                        </th>
+                        <th>
+                            Expected OnTime
+                        </th>
+                        <th>
+                            Actual OnTime
+                        </th>
+                        <th>
+                            Expected OffTime
+                        </th>
+                        <th>
+                            Actual OffTime
+                        </th>
+                        <th>
+
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.ShiftScheduleList.Count != 0)
+                    {
+                        foreach (var item in Model.ShiftScheduleList)
+                        {
+
+                            <tr>
+                                <td>
+                                    <a href="#"><span class="glyphicon glyphicon-pencil text-success" data-toggle="tooltip" title="Edit" onclick="editSchedule('@item.ShiftScheduleID')"></span></a>
+                                </td>
+                                <td>
+                                    @item.Employee
+                                </td>
+                                <td>
+                                    @item.BranchName
+                                </td>
+                                <td>
+                                    @String.Format("{0: " + dateformat + "}", item.ShiftStartDate) &nbsp; @item.ShiftStartDate.DayOfWeek.ToString().Substring(0,3)
+                                </td>
+                                <td>
+                                    @item.ShiftPattern
+                                </td>
+                                <td>
+                                    @String.Format("{0: " + dateformat + "}", item.ExpectedOnDateTime) &nbsp; @String.Format("{0: " + timeformat + "}", item.ExpectedOnDateTime)
+                                </td>
+                                <td>
+                                    @if (item.ActualOnDateTime != null)
+                                    {
+                                        <span> @String.Format("{0: " + dateformat + "}", item.ActualOnDateTime) &nbsp;</span> @String.Format("{0: " + timeformat + "}", item.ActualOnDateTime)
+                                    }
+                                </td>
+                                <td>
+                                    @String.Format("{0: " + dateformat + "}", item.ExpectedOffDateTime) &nbsp; @String.Format("{0: " + timeformat + "}", item.ExpectedOffDateTime)
+                                </td>
+                                <td>
+                                    @if (item.ActualOffDateTime != null)
+                                    {
+                                        <span> @String.Format("{0: " + dateformat + "}", item.ActualOffDateTime)&nbsp;</span> @String.Format("{0: " + timeformat + "}", item.ActualOffDateTime)
+                                    }
+                                </td>
+
+                                <td>
+                                    @if (item.ActualOnDateTime == null && item.ActualOffDateTime == null)
+                                    {
+                                     <a href="#"><span class="glyphicon glyphicon-trash text-danger" data-toggle="tooltip" title="Delete"onclick="deleteSchedule('@item.ShiftScheduleID')" ></span></a>
+                                    }
+                                </td>
+                            </tr>
+
+                        }
+                    }
+                    
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $('#example').DataTable({
+            bFilter: false,       //disable search text
+            bInfo: false,
+            bPaginate: false,
+            "language": {
+                "zeroRecords": "<p class='text-danger'>Sorry!..No matching Records found...</p>",
+                "text-color":"#7f1416"
+            }
+        });
+
+        $("#example").freezeHeader({
+            offset: '50px',
+        });
+    });
+    function deleteSchedule(ShiftScheduleID) {
+        swal(
+                                             {
+                                                 title: 'Confirm',
+                                                 text: 'Are you sure to delete this Schedule?',
+                                                 type: 'warning',
+                                                 showCancelButton: true,
+                                                 confirmButtonText: 'Yes',
+                                                 cancelButtonText: 'No',
+                                                 //closeOnConfirm: false,
+                                             },
+    function (isConfirm) {
+        if (isConfirm) {
+            //var model = @Html.Raw(Json.Encode(@Model));
+        var EndDate=$("#EndDate").val();
+        var StartDate=$("#StartDate").val();
+        var EmployeeID=$("#EmployeeID").val()==""?0:$("#EmployeeID").val();
+        var BranchID = $("#BranchID").val() == "" ? 0 : $("#BranchID").val();
+       // alert(EndDate);
+        $.ajax({
+            url: '@Url.Action("DeleteSchedule","ShiftSchedule")',
+            type: 'POST',
+            cache: false,
+            dataType: 'html',
+            data: ({ ShiftScheduleID: ShiftScheduleID,EmployeeID:EmployeeID,EndDate:EndDate,StartDate:StartDate,BranchID:BranchID}),
+            success: function (data) {
+              //  alert(data);
+                $("#shiftSearchDIV").html(data).show();
+               // successMessage("Successfully Deleted", 'Sccess');
+            },
+            error: function (){
+                $("#shiftPanelDIV").load('@Url.Action("Index", "ShiftSchedule")');
+                console.log(result.errorMsg);
+                successMessage(result.errorMsg, 'Error');
+            }
+        })
+        }
+    });
+
+    }
+
+    function editSchedule(ShiftScheduleID) {
+        // alert(ShiftScheduleID);
+        var EndDate = $("#EndDate").val();
+        var StartDate = $("#StartDate").val();
+        var EmployeeID = $("#EmployeeID").val() == "" ? 0 : $("#EmployeeID").val();
+        var BranchID = $("#BranchID").val() == "" ? 0 : $("#BranchID").val();
+        $.ajax({
+            url: '@Url.Action("EditSchedule", "ShiftSchedule")',
+            type: 'GET',
+            cache: false,
+            dataType: 'html',
+            data: ({ ShiftScheduleID: ShiftScheduleID, EmployeeID: EmployeeID,BranchID:BranchID, EndDate: EndDate, StartDate: StartDate }),
+            success: function (data) {
+               // alert(data.BranchID);
+                $("#shiftPanelDIV").html(data).show();
+                $("#scheduleActivityDIV").hide();
+                $("#removeShiftDIV").hide();
+                $("#ExpectedOnTime").prop('readonly', true);
+                $("#ExpectedOffTime").prop('readonly', true);
+            }
+        })
+    }
+
+    var BlockNumber = 2;  //Infinate Scroll starts from second block
+    var NoMoreData = false;
+    var inProgress = false;
+    $(window).scroll(function () {
+        var scrollHeight = Math.ceil($(window).scrollTop());
+        var documentHeight = $(document).height() - $(window).height();
+
+        if ( scrollHeight + 2 >= documentHeight && !NoMoreData && !inProgress) {
+
+            inProgress = true;
+            $("#loadingDiv").show();
+            var model=  @Html.Raw(Json.Encode(Model));
+            var StartDate=document.getElementById("StartDate").value;
+            var EndDate=document.getElementById("EndDate").value;
+            var EmpID=document.getElementById("EmployeeID").value==""?null:document.getElementById("EmployeeID").value;
+            var BranchID=document.getElementById("BranchID").value==""?null:document.getElementById("BranchID").value;
+            //alert(document.getElementById("EmployeeID").value);
+            $.post("@Url.Action("InfinateScroll", "ShiftSchedule")", { "shiftSearch":model,"BlockNumber": BlockNumber,"StartDate":StartDate,"EndDate":EndDate,"EmpID":EmpID ,"BranchID":BranchID},
+                    function (data) {
+
+                        BlockNumber = BlockNumber + 1;
+                        NoMoreData = data.NoMoreData;
+                        $("#example").append(data.HTMLString);
+                        $("#loadingDiv").hide();
+                        inProgress = false;
+                    });
+        }
+    });
+</script>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

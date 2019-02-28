@@ -1,0 +1,80 @@
+﻿@model ERP.Utility.ViewModels.SkillCreation
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.SkillID)
+    <div class="form-horizontal">
+      
+        <div class="col-md-offset-3">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.SkillName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.SkillName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.SkillName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.SkillDescription, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.SkillDescription, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.SkillDescription, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+       
+        
+        @if (Model.SkillCategoryList.Count != 0)
+        {
+        <span>&nbsp;&nbsp;</span>
+
+        <div id="checkResourceList">
+            @for (int x = 0; x < 3; x++)
+            {
+                <div class="col-md-4">
+                    @Html.DisplayName("Skill Category")
+                    @Html.DisplayName("Skill Level")
+                    </div>
+                    }
+                    @for (int i = 0; i < Model.SkillCategoryList.Count; ++i)
+                    {
+
+                        <div class="col-md-4">
+                            @Html.CheckBoxFor(model => model.CategoryIncludeSkill[i].isSelected)
+                            @Html.HiddenFor(model => model.CategoryIncludeSkill[i].CategoryID)<span>&nbsp;&nbsp;</span>
+                            @Html.DisplayFor(model => model.SkillCategoryList[i].CategoryName)<span>&nbsp;&nbsp;</span>
+                            @Html.HiddenFor(model => model.SkillCategoryList[i].CategoryName)
+                            @Html.DropDownListFor(model => model.SkillLevelID, ViewContext.Controller.ViewBag.skillLevel as IEnumerable<SelectListItem>, "-- Select --")
+                            @Html.ValidationMessageFor(model => model.SkillLevelID, "", new { @class = "text-danger" })
+                        </div>
+
+
+                    }
+                </div>
+
+            }
+        <span>&nbsp;&nbsp;</span>
+    <br />
+      
+
+            <div class="col-md-offset-4">
+                <br /><br /><br />
+                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Cancel" class="btn btn-default" />
+               
+            </div>
+        </div>
+    
+
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

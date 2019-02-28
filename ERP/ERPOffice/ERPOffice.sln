@@ -1,0 +1,76 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ERP.Resource", "ERP.Resource\ERP.Resource.csproj", "{17D7B8C5-2D45-4166-96C8-441EFA064848}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ERP.Utility", "ERP.Utility\ERP.Utility.csproj", "{A4F20206-1B70-460D-81CF-01A8A6BA5621}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ERP.Admin", "ERP.Admin\ERP.Admin.csproj", "{09D76DB6-E00F-464E-833F-B1439F6F5A57}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ERP.Address", "ERP.Address\ERP.Address.csproj", "{DC516753-34E7-4D2D-BE47-25AFE871BF61}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ERP.DA", "ERP.DA\ERP.DA.csproj", "{182B2B1C-4621-41AE-AD94-0CF2CE326893}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ERP", "ERP\ERP.csproj", "{F9675CEC-DD56-44F8-ABA6-62A75978A7E3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{17D7B8C5-2D45-4166-96C8-441EFA064848}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17D7B8C5-2D45-4166-96C8-441EFA064848}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17D7B8C5-2D45-4166-96C8-441EFA064848}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17D7B8C5-2D45-4166-96C8-441EFA064848}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A4F20206-1B70-460D-81CF-01A8A6BA5621}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4F20206-1B70-460D-81CF-01A8A6BA5621}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4F20206-1B70-460D-81CF-01A8A6BA5621}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4F20206-1B70-460D-81CF-01A8A6BA5621}.Release|Any CPU.Build.0 = Release|Any CPU
+		{09D76DB6-E00F-464E-833F-B1439F6F5A57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09D76DB6-E00F-464E-833F-B1439F6F5A57}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{09D76DB6-E00F-464E-833F-B1439F6F5A57}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{09D76DB6-E00F-464E-833F-B1439F6F5A57}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC516753-34E7-4D2D-BE47-25AFE871BF61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC516753-34E7-4D2D-BE47-25AFE871BF61}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC516753-34E7-4D2D-BE47-25AFE871BF61}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC516753-34E7-4D2D-BE47-25AFE871BF61}.Release|Any CPU.Build.0 = Release|Any CPU
+		{182B2B1C-4621-41AE-AD94-0CF2CE326893}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{182B2B1C-4621-41AE-AD94-0CF2CE326893}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{182B2B1C-4621-41AE-AD94-0CF2CE326893}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{182B2B1C-4621-41AE-AD94-0CF2CE326893}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9675CEC-DD56-44F8-ABA6-62A75978A7E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9675CEC-DD56-44F8-ABA6-62A75978A7E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9675CEC-DD56-44F8-ABA6-62A75978A7E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9675CEC-DD56-44F8-ABA6-62A75978A7E3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 7
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://78.158.32.165:8080/tfs/erplanning
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ERP.Resource\\ERP.Resource.csproj
+		SccProjectName1 = ERP.Resource
+		SccLocalPath1 = ERP.Resource
+		SccProjectUniqueName2 = ERP.Utility\\ERP.Utility.csproj
+		SccProjectName2 = ERP.Utility
+		SccLocalPath2 = ERP.Utility
+		SccProjectUniqueName3 = ERP.Admin\\ERP.Admin.csproj
+		SccProjectName3 = ERP.Admin
+		SccLocalPath3 = ERP.Admin
+		SccProjectUniqueName4 = ERP.Address\\ERP.Address.csproj
+		SccProjectName4 = ERP.Address
+		SccLocalPath4 = ERP.Address
+		SccProjectUniqueName5 = ERP.DA\\ERP.DA.csproj
+		SccProjectName5 = ERP.DA
+		SccLocalPath5 = ERP.DA
+		SccProjectUniqueName6 = ERP\\ERP.csproj
+		SccProjectName6 = ERP
+		SccLocalPath6 = ERP
+	EndGlobalSection
+EndGlobal

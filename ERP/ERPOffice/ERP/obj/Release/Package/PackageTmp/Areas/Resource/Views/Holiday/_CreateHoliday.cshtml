@@ -1,0 +1,232 @@
+﻿@model ERP.Resource.ViewModels.CreateHolidayViewModel
+@{
+    ViewBag.Title = "Create Holiday";
+}
+<div>
+    <a href="@Url.Action("Index")"><span class="glyphicon glyphicon-backward"></span>&nbsp; Back to List</a>
+</div>
+<br />
+<div class="panel panel-success">
+    <div class="panel-heading">Holiday</div>
+    <div class="panel-body">
+
+        @using (Ajax.BeginForm("CreateHoliday", "Holiday", null, new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace, UpdateTargetId = "holidayPanelDIV",OnSuccess= "onAjaxSuccess", OnFailure= "onAjaxFailure" }))
+        {
+            @Html.AntiForgeryToken();
+            @Html.HiddenFor(model => model.HolidayID);
+            <div class="form-horizontal">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ResourceID, new { @class = "col-md-4 control-label" })
+                    <div class="col-md-2">
+                        @Html.DropDownListFor(model => model.ResourceID, new SelectList(ViewBag.ResourceList, "Value", "Text"), "-- Select --", htmlAttributes: new { @class = "form-control", style = "width:156px;" })
+                    </div>
+                    @Html.ValidationMessageFor(model => model.ResourceID, "", new { @class = "text-danger col-md-4" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.HolidayTypeID, new { @class = "col-md-4 control-label" })
+                    <div class="col-md-2">
+                        @Html.DropDownListFor(model => model.HolidayTypeID, new SelectList(ViewBag.HolidayTypeList, "Value", "Text"), "-- Select --", htmlAttributes: new { @class = "form-control", style = "width:156px;" })
+                    </div>
+                    @Html.ValidationMessageFor(model => model.HolidayTypeID, "", new { @class = "text-danger col-md-4" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.BookingHrs, new { @class = "col-md-4 control-label" })
+                    <div class="col-md-2">
+                        @Html.EditorFor(model => model.BookingHrs, new { htmlAttributes = new { @class = "form-control", style = "width:156px;" } })
+                    </div>
+                    @Html.ValidationMessageFor(model => model.BookingHrs, "", new { @class = "text-danger col-md-4" })
+                </div>
+                <div class="form-group" id="requestOnDIV">
+                    @Html.LabelFor(model => model.RequestedOn, new { @class = "col-md-4 control-label" })
+                    <div class="col-md-2">
+                        @Html.EditorFor(model => model.RequestedOn, new { htmlAttributes = new { @class = "form-control" }, nowIfNull = true })
+                    </div>
+                    @Html.ValidationMessageFor(model => model.RequestedOn, "", new { @class = "text-danger col-md-4" })
+                </div>
+                @if (Model.HolidayID != 0)
+                {
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.StatusID, new { @class = "col-md-4 control-label" })
+                        <div class="col-md-4">
+                            <div class="input-group form-inline">
+                                @if (Model.Status == "Authorised")
+                                {
+                                 @Html.DropDownListFor(model => model.StatusID, new SelectList(ViewBag.HolidayStatusTypeList, "Value", "Text"), "-- Select --", htmlAttributes: new { @class = "form-control", style = "width:156px;" ,@disabled="disabled"})
+                                 @Html.HiddenFor(model=>model.StatusID)
+                                <input type="button"id="UnAuthorised" name="UnAuthorised" value="UnAuthorised" style = "width:100px;"class="form-control" placeholder="UnAuthorised" onclick="unAuthorised('@Model.StatusID')">
+                                }
+                                else
+                                {
+                                <div>
+                                    @Html.DropDownListFor(model => model.StatusID, new SelectList(ViewBag.HolidayStatusTypeList, "Value", "Text"), "-- Select --", htmlAttributes: new { @class = "form-control", style = "width:156px;" })
+                                </div>
+                                }
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.StatusID, "", new { @class = "text-danger col-md-4" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.StatusChangedOn, new { @class = "col-md-4 control-label" })
+                        <div class="col-md-2">
+                            @Html.EditorFor(model => model.StatusChangedOn, new { htmlAttributes = new { @class = "form-control", style = "width:200px;" } })
+                        </div>
+                        @Html.ValidationMessageFor(model => model.StatusChangedOn, "", new { @class = "text-danger col-md-4" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.StatusChangedByID, new { @class = "col-md-4 control-label" })
+                        <div class="col-md-2">
+                            @Html.DropDownListFor(model => model.StatusChangedByID, new SelectList(ViewBag.ResourceList, "Value", "Text"), "-- Select --", htmlAttributes: new { @class = "form-control", style = "width:156px;" })
+                        </div>
+                        @Html.ValidationMessageFor(model => model.StatusChangedByID, "", new { @class = "text-danger col-md-4" })
+                    </div>
+                }
+                <div class="form-group form-inline">
+                    @Html.LabelFor(model => model.HolidayDate, new { @class = "col-md-4 control-label" })
+                    @if (Model.HolidayID == 0)
+                    {
+                        <div class="col-md-2">
+                            @Html.LabelFor(model => model.HolidayStartDate, new { @class = "control-label" })
+                            <div>
+                                @Html.EditorFor(model => model.HolidayStartDate, new { htmlAttributes = new { @class = "form-control" }, nowIfNull = true })
+                            </div>
+                            @Html.ValidationMessageFor(model => model.HolidayStartDate, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-2">
+                            @Html.LabelFor(model => model.HolidayEndDate, new { @class = "control-label" })
+                            <div>
+                                @Html.EditorFor(model => model.HolidayEndDate, new { htmlAttributes = new { @class = "form-control" }, nowIfNull = true })
+                            </div>
+                            @Html.ValidationMessageFor(model => model.HolidayEndDate, "", new { @class = "text-danger" })
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="col-md-2">
+                            <div>
+                                @Html.EditorFor(model => model.HolidayDate, new { htmlAttributes = new { @class = "form-control" }, nowIfNull = true })
+                            </div>
+                            @Html.ValidationMessageFor(model => model.HolidayDate, "", new { @class = "text-danger" })
+                        </div>
+                    }
+                </div>
+
+                <div class="form-group" id="holidayAssignDIV">
+                    <label class="col-md-4 control-label">Holiday Assign Type</label>
+                    <div class="col-md-4">
+                        @Html.RadioButtonFor(model => model.AssignType, "Weekly", new { onchange = "onChangeOption(this.value);" })<label class="control-label"> &nbsp; Weekly</label>
+                        @Html.RadioButtonFor(model => model.AssignType, "NoofDays", new { onchange = "onChangeOption(this.value);" })<label class="control-label">&nbsp; No of Days</label>
+
+                        @if (Model != null && Model.AssignType == "Weekly")
+                        {
+                            <div id="weekly" style="display:block;">
+                                @Html.EditorFor(model => model.WeeklyMonday)
+                                @Html.LabelFor(model => model.WeeklyMonday) &nbsp;
+                                @Html.EditorFor(model => model.WeeklyTuesday)
+                                @Html.LabelFor(model => model.WeeklyTuesday)&nbsp;
+                                @Html.EditorFor(model => model.WeeklyWednesday)
+                                @Html.LabelFor(model => model.WeeklyWednesday) &nbsp;
+                                @Html.EditorFor(model => model.WeeklyThursday)
+                                @Html.LabelFor(model => model.WeeklyThursday)&nbsp;
+                                @Html.EditorFor(model => model.WeeklyFriday)
+                                @Html.LabelFor(model => model.WeeklyFriday)&nbsp;
+                                @Html.EditorFor(model => model.WeeklySaturday)
+                                @Html.LabelFor(model => model.WeeklySaturday)&nbsp;
+                                @Html.EditorFor(model => model.WeeklySunday)
+                                @Html.LabelFor(model => model.WeeklySunday)&nbsp;
+                            </div>
+                        }
+                        else
+                        {
+                            <div id="weekly" style="display:none;">
+                                @Html.EditorFor(model => model.WeeklyMonday)
+                                @Html.LabelFor(model => model.WeeklyMonday)&nbsp;
+                                @Html.EditorFor(model => model.WeeklyTuesday)
+                                @Html.LabelFor(model => model.WeeklyTuesday)&nbsp;
+                                @Html.EditorFor(model => model.WeeklyWednesday)
+                                @Html.LabelFor(model => model.WeeklyWednesday)&nbsp;
+                                @Html.EditorFor(model => model.WeeklyThursday)
+                                @Html.LabelFor(model => model.WeeklyThursday)&nbsp;
+                                @Html.EditorFor(model => model.WeeklyFriday)
+                                @Html.LabelFor(model => model.WeeklyFriday)&nbsp;
+                                @Html.EditorFor(model => model.WeeklySaturday)
+                                @Html.LabelFor(model => model.WeeklySaturday)&nbsp;
+                                @Html.EditorFor(model => model.WeeklySunday)
+                                @Html.LabelFor(model => model.WeeklySunday)&nbsp;
+                            </div>
+                        }
+
+                        @if (Model != null && Model.AssignType == "NoofDays")
+                        {
+                            <div id="NoofDays" style="display:block;">
+                                @Html.TextBoxFor(model => model.NoofDays, new { @Value = 1, @class = "form-control", style = "width:90px;" })
+                            </div>
+                        }
+                        else
+                        {
+                            <div id="NoofDays" style="display:none">
+                                @Html.TextBoxFor(model => model.NoofDays, new { @Value = 1, @class = "form-control", style = "width:90px;" })
+                            </div>
+                        }
+                    </div>
+
+                    @Html.ValidationMessageFor(model => model.AssignType, "", new { @class = "text-danger col-md-4", id = "AssignTypeMsg" })
+                </div>
+
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Comment, new { @class = "col-md-4 control-label" })
+                    <div class="col-md-2">
+                        @Html.TextAreaFor(model => model.Comment, new { htmlAttributes = new { @class = "form-control", style = "width:200px;" } })
+                    </div>
+                    @Html.ValidationMessageFor(model => model.Comment, "", new { @class = "text-danger col-md-4" })
+                </div>
+            </div>
+            <div class="form-group col-md-offset-4">
+                <input type="submit" name="Save" value="Save" class="btn btn-success" />
+                <input type="reset" name="Reset" value="Reset" class="btn btn-default" />
+            </div>
+        }
+    </div>
+</div>
+
+<script>
+    function onChangeOption(value) {
+        if (value == 'Weekly') {
+            document.getElementById('weekly').style.display = 'block';
+            document.getElementById('NoofDays').style.display = 'none';
+        }
+        if (value == 'NoofDays') {
+            document.getElementById('NoofDays').style.display = 'block';
+            document.getElementById('weekly').style.display = 'none';
+        }
+
+    }
+
+    function onAjaxSuccess(result) {
+        if (result.success) {
+            //$("#holidayPanelDIV").load('Url.Action("Index", "Holiday")');
+            $.get('@Url.Action("Index", "Holiday")',
+                     function (data) {
+                         $("#holidayPanelDIV").html(data);
+                     });
+            //location.reload();
+            console.log(result.successMsg);
+            successMessage(result.successMsg, 'Success');
+        }
+        
+    }
+    function onAjaxFailure(result) {
+        if (result.error) {
+            console.log(result.errorMsg);
+            successMessage(result.errorMsg, 'Error');
+        }
+    }
+    function unAuthorised(StatusID){
+        $("#UnAuthorised").hide();
+        $("#StatusID").prop("disabled", false);
+    }
+</script>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

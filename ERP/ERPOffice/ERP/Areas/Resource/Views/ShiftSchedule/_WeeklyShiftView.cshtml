@@ -1,0 +1,335 @@
+﻿@model ERP.Resource.Models.ShiftBO
+@{
+    string dateformat = MvcApplication.DateFormat;
+    string timeformat = MvcApplication.TimeFormat;
+}
+<div>
+    <div class="panel-body">
+        <div>
+            @Html.HiddenFor(model => model.ShiftSearch.StartDate)
+            @if (Model.ShiftSchedule.ResourceNameList.Count != 0 && Model.ShiftSchedule.ResourceNameList != null)// PDF Download Button
+            {
+                <div class="pull-right">
+                    @Html.ActionLink("Download PDF", "CreatePdf", "ShiftSchedule", new { date = Model.ShiftSearch.StartDate }, new { @class = "btn btn-success" })
+                    @Html.ActionLink("Download Excel", "ExportToExcel", "ShiftSchedule", new { date = Model.ShiftSearch.StartDate }, new { @class = "btn btn-success" })
+                </div>
+            }
+            <table class="table table-responsive table-hover table-striped table-bordered" id="example" style="border-bottom:hidden">
+                <thead>
+                   
+                    <tr style="background-color:#CFE5DB;">
+                        <th>
+                            Resource
+                        </th>
+                        <th>
+                            @Model.ShiftSearch.StartDate.Value.DayOfWeek.ToString().Substring(0, 3) &nbsp; @String.Format("{0: " + dateformat + "}", Model.ShiftSearch.StartDate)
+                        </th>
+                        <th>
+                            @Model.ShiftSearch.StartDate.Value.AddDays(1).DayOfWeek.ToString().Substring(0, 3) &nbsp; @String.Format("{0: " + dateformat + "}", Model.ShiftSearch.StartDate.Value.AddDays(1))
+                        </th>
+                        <th>
+                            @Model.ShiftSearch.StartDate.Value.AddDays(2).DayOfWeek.ToString().Substring(0, 3) &nbsp; @String.Format("{0: " + dateformat + "}", Model.ShiftSearch.StartDate.Value.AddDays(2))
+                        </th>
+                        <th>
+                            @Model.ShiftSearch.StartDate.Value.AddDays(3).DayOfWeek.ToString().Substring(0, 3) &nbsp; @String.Format("{0: " + dateformat + "}", Model.ShiftSearch.StartDate.Value.AddDays(3))
+                        </th>
+                        <th>
+                            @Model.ShiftSearch.StartDate.Value.AddDays(4).DayOfWeek.ToString().Substring(0, 3) &nbsp; @String.Format("{0: " + dateformat + "}", Model.ShiftSearch.StartDate.Value.AddDays(4))
+                        </th>
+                        <th>
+                            @Model.ShiftSearch.StartDate.Value.AddDays(5).DayOfWeek.ToString().Substring(0, 3) &nbsp; @String.Format("{0: " + dateformat + "}", Model.ShiftSearch.StartDate.Value.AddDays(5))
+                        </th>
+                        <th>
+                            @Model.ShiftSearch.StartDate.Value.AddDays(6).DayOfWeek.ToString().Substring(0, 3) &nbsp; @String.Format("{0: " + dateformat + "}", Model.ShiftSearch.StartDate.Value.AddDays(6))
+                        </th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.ShiftSchedule.ResourceNameList.Count != 0)
+                    {
+                        int count1 = 0;
+                        Model.ShiftSchedule.ResourceNameList.ForEach(x =>
+                        {
+                            count1 = count1 + x.ShiftStartDateList.Where(p => p == Model.ShiftSearch.StartDate).ToList().Count;
+                        });
+                        int count2 = 0;
+                        DateTime date2 = Model.ShiftSearch.StartDate.Value.AddDays(1);
+                        Model.ShiftSchedule.ResourceNameList.ForEach(x =>
+                        {
+                            count2 = count2 + x.ShiftStartDateList.Where(p => p ==date2).ToList().Count;
+                        });
+                        int count3 = 0;
+                        DateTime date3 = Model.ShiftSearch.StartDate.Value.AddDays(2);
+                        Model.ShiftSchedule.ResourceNameList.ForEach(x =>
+                        {
+                            count3 = count3 + x.ShiftStartDateList.Where(p => p == date3).ToList().Count;
+                        });
+                        int count4 = 0;
+                        DateTime date4 = Model.ShiftSearch.StartDate.Value.AddDays(3);
+                        Model.ShiftSchedule.ResourceNameList.ForEach(x =>
+                        {
+                            count4 = count4 + x.ShiftStartDateList.Where(p => p == date4).ToList().Count;
+                        });
+                        int count5 = 0;
+                        DateTime date5 = Model.ShiftSearch.StartDate.Value.AddDays(4);
+                        Model.ShiftSchedule.ResourceNameList.ForEach(x =>
+                        {
+                            count5 = count5 + x.ShiftStartDateList.Where(p => p == date5).ToList().Count;
+                        });
+                        int count6 = 0;
+                        DateTime date6 = Model.ShiftSearch.StartDate.Value.AddDays(5);
+                        Model.ShiftSchedule.ResourceNameList.ForEach(x =>
+                        {
+                            count6 = count6 + x.ShiftStartDateList.Where(p => p == date6).ToList().Count;
+                        });
+                        int count7 = 0;
+                        DateTime date7 = Model.ShiftSearch.StartDate.Value.AddDays(6);
+                        Model.ShiftSchedule.ResourceNameList.ForEach(x =>
+                        {
+                            count7 = count7 + x.ShiftStartDateList.Where(p => p == date7).ToList().Count;
+                        });
+                        foreach (var item in Model.ShiftSchedule.ResourceNameList)
+                        {
+                            List<string> strBuilder = new List<string>();
+                            List<string> strBuilder1 = new List<string>();
+                            List<string> strBuilder2 = new List<string>();
+                            List<string> strBuilder3 = new List<string>();
+                            List<string> strBuilder4 = new List<string>();
+                            List<string> strBuilder5 = new List<string>();
+                            List<string> strBuilder6 = new List<string>();
+
+                            for (int i = 0; i < item.ShiftStartDateList.Count; i++)
+                            {
+
+                                if (item.ShiftStartDateList[i] == Model.ShiftSearch.StartDate)
+                                {
+                                    strBuilder.Add(@item.ShiftPatternList.ElementAt(i));
+                                }
+                                else if (item.ShiftStartDateList[i] == Model.ShiftSearch.StartDate.Value.AddDays(1))
+                                {
+                                    strBuilder1.Add(@item.ShiftPatternList.ElementAt(i));
+                                }
+                                else if (item.ShiftStartDateList[i] == Model.ShiftSearch.StartDate.Value.AddDays(2))
+                                {
+                                    strBuilder2.Add(@item.ShiftPatternList.ElementAt(i));
+                                }
+                                else if (item.ShiftStartDateList[i] == Model.ShiftSearch.StartDate.Value.AddDays(3))
+                                {
+                                    strBuilder3.Add(@item.ShiftPatternList.ElementAt(i));
+                                }
+                                else if (item.ShiftStartDateList[i] == Model.ShiftSearch.StartDate.Value.AddDays(4))
+                                {
+                                    strBuilder4.Add(@item.ShiftPatternList.ElementAt(i));
+                                }
+                                else if (item.ShiftStartDateList[i] == Model.ShiftSearch.StartDate.Value.AddDays(5))
+                                {
+                                    strBuilder5.Add(@item.ShiftPatternList.ElementAt(i));
+                                }
+                                else if (item.ShiftStartDateList[i] == Model.ShiftSearch.StartDate.Value.AddDays(6))
+                                {
+                                    strBuilder6.Add(@item.ShiftPatternList.ElementAt(i));
+                                }
+                            }
+
+                            <tr>
+                             
+                                <td>
+                                   
+                                    @item.ResourceWeekly
+                                </td>
+
+                                @if (strBuilder.Count == 0)
+                                {
+                                    <td>
+                                        @string.Join(", ", strBuilder)
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td style="background-color:lightgreen">
+                                        @string.Join(", ", strBuilder)
+                                    </td>
+                                }
+                                @if (strBuilder1.Count == 0)
+                                {
+                                    <td>
+                                        @string.Join(", ", strBuilder1)
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td style="background-color:lightgreen">
+                                        @string.Join(", ", strBuilder1)
+                                    </td>
+                                }
+                                @if (strBuilder2.Count == 0)
+                                {
+                                    <td>
+                                        @string.Join(", ", strBuilder2)
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td style="background-color:lightgreen">
+                                        @string.Join(", ", strBuilder2)
+                                    </td>
+                                }
+                                @if (strBuilder3.Count == 0)
+                                {
+                                    <td>
+                                        @string.Join(", ", strBuilder3)
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td style="background-color:lightgreen">
+                                        @string.Join(", ", strBuilder3)
+                                    </td>
+                                }
+                                @if (strBuilder4.Count == 0)
+                                {
+                                    <td>
+                                        @string.Join(", ", strBuilder4)
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td style="background-color:lightgreen">
+                                        @string.Join(", ", strBuilder4)
+                                    </td>
+                                }
+                                @if (strBuilder5.Count == 0)
+                                {
+                                    <td>
+                                        @string.Join(", ", strBuilder5)
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td style="background-color:lightgreen">
+                                        @string.Join(", ", strBuilder5)
+                                    </td>
+                                }
+                                @if (strBuilder6.Count == 0)
+                                {
+                                    <td>
+                                        @string.Join(", ", strBuilder6)
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td style="background-color:lightgreen">
+                                        @string.Join(", ", strBuilder6)
+                                    </td>
+                                }
+                                
+                            </tr>
+                           
+
+                        }
+                        <tr>
+                            <td>
+                                Daily Shift Total
+                            </td>
+                            @if (count1 == 0)
+                            {
+                                <td style="background-color:tomato">
+                                    @count1
+                                </td>
+                            }
+                            else
+                            {
+                                <td style="background-color:chartreuse">
+                                    @count1
+                                </td>
+                            }
+                            @if (count2 == 0)
+                            {
+                                <td style="background-color:tomato">
+                                    @count2
+                                </td>
+                            }
+                            else
+                            {
+                                <td style="background-color:chartreuse">
+                                    @count2
+                                </td>
+                            }
+                            @if (count3 == 0)
+                            {
+                                <td style="background-color:tomato">
+                                    @count3
+                                </td>
+                            }
+                            else
+                            {
+                                <td style="background-color:chartreuse">
+                                    @count3
+                                </td>
+                            }
+                            @if (count4 == 0)
+                            {
+                                <td style="background-color:tomato">
+                                    @count4
+                                </td>
+                            }
+                            else
+                            {
+                                <td style="background-color:chartreuse">
+                                    @count4
+                                </td>
+                            }
+                            @if (count5 == 0)
+                            {
+                                <td style="background-color:tomato">
+                                    @count5
+                                </td>
+                            }
+                            else
+                            {
+                                <td style="background-color:chartreuse">
+                                    @count5
+                                </td>
+                            }
+                            @if (count6 == 0)
+                            {
+                                <td style="background-color:tomato">
+                                    @count6
+                                </td>
+                            }
+                            else
+                            {
+                                <td style="background-color:chartreuse">
+                                    @count6
+                                </td>
+                            }
+                            @if (count7 == 0)
+                            {
+                                <td style="background-color:tomato">
+                                    @count7
+                                </td>
+                            }
+                            else
+                            {
+                                <td style="background-color:chartreuse">
+                                    @count7
+                                </td>
+                            }
+                        </tr>
+
+                    }
+                    else {
+                        <tr>
+                            <td colspan="8" class="text-center">
+                                <span class="text-danger">No Results Found</span>
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+</div>

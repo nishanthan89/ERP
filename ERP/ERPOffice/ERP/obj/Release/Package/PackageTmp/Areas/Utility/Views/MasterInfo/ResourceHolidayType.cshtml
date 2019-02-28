@@ -1,0 +1,121 @@
+﻿@model ERP.Utility.ViewModels.ResourceHolidayTypeView
+
+@{
+    ViewBag.Title = "Resource Holiday Type";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="panel panel-success">
+    <div class="panel-heading">
+        <h3 class="panel-title">Holiday Type  </h3>
+    </div>
+    <div class="panel-body">
+        <div class="col-md-5" id="List">
+            @Html.Partial("_ResourceHolidayTypeList", Model.RHolidayTypeList)
+        </div>
+
+        <div class="col-md-offset-1 col-md-5" id="CreateEdit">
+            @Html.Partial("_CreateResourceHolidayType", Model.RHolidayTypeBO)
+        </div>
+
+    </div>
+</div>
+
+
+<script>
+    function Save(status) {
+
+        if (status.success == true) {
+            $.post('@Url.Action("GetResourceHolidayTypeList", "MasterInfo")',
+                 function (result) {
+                     $("#List").html(result);
+                 });
+            $.get('@Url.Action("CreateResourceHolidayType", "MasterInfo")',
+                      function (result) {
+                          $("#CreateEdit").html(result);
+                      });
+            console.log(status);
+            successMessage(status.errorMsg, 'Success');
+
+        }
+        else {
+            //console.log(status);
+            //successMessage(result.errorMsg, 'Error');
+            $("#CreateEdit").html(status);
+
+        }
+
+    }
+
+    function DeleteHolidayType(HolidayTypeID) {
+        //console.log(TitleId);
+        swal({
+            title: 'Confirm',
+            text: 'Are you sure you want to Delete?',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes',
+            cancelButtonText: 'No'
+        },
+         function (isConfirm) {
+             // console.log(isConfirm);
+             if (isConfirm) {
+                 $.ajax({
+                     url: '@Url.Action("DeleteResourceHolidayType", "MasterInfo")',
+                     dataType: 'html',
+                     data: ({ id: HolidayTypeID }),
+                     success: function Delete(status) {
+                         var statusObj = jQuery.parseJSON(status);
+                         console.log(statusObj);
+                         if (statusObj.success == true) {
+                             console.log(statusObj.success);
+                             successMessage(statusObj.errorMsg, 'Success');                           
+                         }
+                         else {
+                             console.log(statusObj.success);
+                             successMessage(statusObj.errorMsg, 'Error');
+                         }
+                         $.post('@Url.Action("GetResourceHolidayTypeList", "MasterInfo")',
+                                                                function (result) {
+                                                                    $("#List").html(result);
+                                                                });
+                         $.get('@Url.Action("CreateResourceHolidayType", "MasterInfo")',
+                                function (result) {
+                                    $("#CreateEdit").html(result);
+                                });
+                     },
+                     error: function (data) {
+                         alert("error Loading the data");
+                     }
+                 })
+             }
+         })
+    }
+
+    function CancelButton() {
+        $.get('@Url.Action("CreateResourceHolidayType", "MasterInfo")',
+                              function (result) {
+                                  $("#CreateEdit").html(result);
+                              });
+    }
+
+    function EditHolidayType(HolidayTypeID) {
+        $.ajax({
+            url: '@Url.Action("EditResourceHolidayType", "MasterInfo")',
+            dataType: 'html',
+            data: ({ id: HolidayTypeID }),
+            success: function (data) {
+                $("#CreateEdit").html(data).show();
+                $.post('@Url.Action("GetResourceHolidayTypeList", "MasterInfo")',
+                                                                function (result) {
+                                                                    $("#List").html(result);
+                                                                });
+            },
+            error: function (data) {
+                alert("error Loading the data");
+            }
+        })
+    }
+
+
+</script>

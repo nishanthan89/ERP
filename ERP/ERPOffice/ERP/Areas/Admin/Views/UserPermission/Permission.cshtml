@@ -1,0 +1,117 @@
+﻿@model ERP.Admin.ViewModels.UserPermissionView
+
+@{
+    ViewBag.Title = "Permission";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<div>
+   
+        <div class="panel panel-success">
+            <div class="panel-heading">Permission</div>
+            <div class="panel-body">
+                <div class="col-md-offset-9 pull-right">
+                    <p>
+                        @*<a class="btn btn-success " data-toggle="tooltip" title="Create Role & Permission" role="button" onclick="createRole()" id="createRole">Create Role</a>*@
+                        <a class="btn btn-success" href="@Url.Action("UserPermission","UserPermission")" data-toggle="tooltip" title="User Details" role="button">User Details<span class="glyphicon glyphicon-user"></span><span class="glyphicon glyphicon-list"></span></a>
+                    </p>
+                </div>
+                <div id="createRoleFullDIV">
+                    @{
+                        Html.RenderPartial("_RoleDetails", Model.userRoleViewModelList);
+                    }
+                </div>
+                    <div id="createRoleDiv" class="col-md-offset-7">
+                        @{
+                            Html.RenderPartial("_CreateRole", Model.userRoleViewModel);
+                        }
+                    </div>
+               
+        </div>
+    </div>
+</div>
+<script>
+    function createRole() {
+        // alert("hi");
+        $.ajax({
+            url: '@Url.Action("CreateRole","UserPermission")',
+            dataType: 'html',
+            data: ({}),
+            success: function (data) {
+                $("#createRoleDiv").html(data).show();
+            }
+        })
+    }
+    function CancelButton() {
+        $("#RoleName").val("");
+        $('.chosen-select option').prop('selected', false).trigger('chosen:updated');
+    }
+    function onAjaxBegin() {
+        // alert($("#RoleName").val());
+        if ($("#RoleName").val() == "") {
+            $("#RoleNameID").html("<span class='danger'>Please Enter the Role Name</span>").show();
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+    function EditRole(RoleName) {
+        //alert(RoleName);
+        $.ajax({
+            url: '@Url.Action("EditRole", "UserPermission")',
+            dataType: 'html',
+            data: ({ RoleName: RoleName }),
+            success: function (data) {
+                $("#createRoleDiv").html(data).show();
+                $("#RoleName").prop('readonly', true);
+                $("#saveID").prop('value', 'Update');
+            },
+            error: function () {
+               $("#createRoleDiv").load('@Url.Action("CreateRole", "UserPermission")');
+            }
+        })
+    }
+    function onAjaxFailure() {
+        $("#RoleNameID").html("<span class='danger'>Role Name Already Exists</span>").show();
+    }
+    function onAjaxSuccess(result) {
+        if (result.success) {
+            //window.location.href = result.url;
+            $("#createRoleFullDIV").load('@Url.Action("Permission", "UserPermission")');
+            $("#createRoleDiv").load('@Url.Action("CreateRole", "UserPermission")');
+        }
+    }
+    function DeleteRole(RoleName) {
+        swal(
+                                             {
+                                                 title: 'Confirm',
+                                                 text: 'Are you sure to delete this Role?',
+                                                 type: 'warning',
+                                                 showCancelButton: true,
+                                                 confirmButtonText: 'Yes',
+                                                 cancelButtonText: 'No',
+                                                 //closeOnConfirm: false,
+                                             },
+    function (isConfirm) {
+        if (isConfirm) {
+            $.ajax({
+                url: '@Url.Action("DeleteRole", "UserPermission")',
+                dataType: 'json',
+                data: ({ role: RoleName }),
+                success: function (data) {
+                    $("#createRoleFullDIV").load('@Url.Action("Permission", "UserPermission")');
+                    $("#createRoleDiv").load('@Url.Action("CreateRole", "UserPermission")');
+                },
+                error: function () {
+                    $("#createRoleFullDIV").load('@Url.Action("Permission", "UserPermission")');
+                    $("#createRoleDiv").load('@Url.Action("CreateRole", "UserPermission")');
+                }
+            })
+        }
+    });
+
+    }
+
+</script>

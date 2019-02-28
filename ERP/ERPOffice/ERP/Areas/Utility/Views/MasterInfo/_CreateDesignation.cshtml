@@ -1,0 +1,71 @@
+﻿@model ERP.Utility.Models.DesignationBO
+
+
+@using (Ajax.BeginForm("CreateDesignation", "MasterInfo", new AjaxOptions { HttpMethod = "POST", OnSuccess = "SaveDesignation" }))
+{
+    @Html.AntiForgeryToken()
+    <br />
+    <div class="form-horizontal well">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.DesignationID)
+       
+        <div class="form-group">
+            @Html.LabelFor(model => model.Designation, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-7">
+                @Html.EditorFor(model => model.Designation, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Designation, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-4 col-md-8">
+
+                @if (Model == null || Model.DesignationID == 0)
+                {
+                    <input type="submit" value="Create" class="btn btn-success" data-toggle="tooltip" title="Create" id="create" />
+}
+                else
+                {
+                    <input type="submit" value="Update" class="btn btn-success" data-toggle="tooltip" title="Update" id="Update" />
+}
+                <input type="button" value="Cancel" class="btn btn-default" data-toggle="tooltip" title="Cancel" role="button" onclick="CancelButton()" />
+            </div>
+        </div>
+    </div>
+}
+
+@Scripts.Render("~/bundles/jqueryval")
+
+@*@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}*@
+
+<script>
+    function SaveDesignation(status) {
+        //console.log("inside save");
+        if (status.success == true) {
+            $.get('@Url.Action("CreateDesignation", "MasterInfo")',
+                      function (result) {
+                          $("#CreateDesi").html(result);
+                      });
+            console.log(status);
+            successMessage(status.errorMsg, 'Success');
+        }
+        else {
+            //console.log(status);
+            //successMessage(result.errorMsg, 'Error');
+            $("#CreateDesi").html(status);
+        }
+        $.post('@Url.Action("GetDesignationList", "MasterInfo")',
+                function (result) {
+                    $("#DesiList").html(result);
+                });
+    }
+
+    function CancelButton() {
+        $.get('@Url.Action("CreateDesignation", "MasterInfo")',
+                              function (result) {
+                                  $("#CreateDesi").html(result);
+                              });
+    }
+</script>

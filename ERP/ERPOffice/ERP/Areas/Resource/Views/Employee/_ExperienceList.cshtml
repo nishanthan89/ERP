@@ -1,0 +1,191 @@
+﻿@model IEnumerable<ERP.Resource.ViewModels.EmployeeExperienceViewModels>
+
+<div class="table-responsive">
+    <table class="table table-hover table-striped table-bordered" id="ExperienceListTable" style="border-bottom:hidden">
+        <thead>
+            <tr>
+                <th></th>
+                @*<th>
+                        @Html.DisplayNameFor(model => model.ExperienceID)
+                    </th>*@
+                @*<th>
+                        @Html.DisplayNameFor(model => model.ResourceID)
+                    </th>*@
+                @*<th>
+                        @Html.DisplayNameFor(model => model.DesignationID)
+                    </th>*@
+                <th>
+                    @Html.DisplayNameFor(model => model.DesignationName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Company)
+                </th>
+                @*<th>
+                        @Html.DisplayNameFor(model => model.Description)
+                    </th>*@
+                @*<th>
+                        @Html.DisplayNameFor(model => model.ExternalDesignation)
+                    </th>*@
+                @*<th>
+                        @Html.DisplayNameFor(model => model.StartYear)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.StartMonth)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.EndYear)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.EndMonth)
+                    </th>*@
+                <th>
+                    @Html.DisplayNameFor(model => model.Duration)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Count() > 0)
+            {
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            <a data-toggle="tooltip" title="Edit" role="button" onclick="EditExperience(@item.ExperienceID)" id="edit"><span class="glyphicon glyphicon-pencil text-success"></span></a>
+                        </td>
+                        @*<td>
+                                @Html.DisplayFor(modelItem => item.ExperienceID)
+                            </td>*@
+                        @*<td>
+                                @Html.DisplayFor(modelItem => item.ResourceID)
+                            </td>*@
+                        @*<td>
+                                @Html.DisplayFor(modelItem => item.DesignationID)
+                            </td>*@
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DesignationName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Company)
+                        </td>
+                        @*<td>
+                                @Html.DisplayFor(modelItem => item.Description)
+                            </td>*@
+                        @*<td>
+                                @Html.DisplayFor(modelItem => item.ExternalDesignation)
+                            </td>*@
+                        @*<td>
+                                @Html.DisplayFor(modelItem => item.StartYear)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.StartMonth)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.EndYear)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.EndMonth)
+                            </td>*@
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Duration)
+                        </td>
+                        <td>
+                            <a data-toggle="tooltip" title="Delete" role="button" onclick="DeleteExperience(this,@item.ExperienceID)"><span class="glyphicon glyphicon-trash text-danger"></span></a>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+
+<script>
+    @*DataTable Function*@
+    $(document).ready(function () {
+        alert("hh");
+        $('#ExperienceListTable').DataTable({
+            //"displayLength": 5,
+            bPaginate: false,     //Disables Pagination
+            bFilter: false,       //Disables search text
+            bInfo: false,
+            "language": {       //When the list is empty
+                "zeroRecords": "<p class='text-danger'>No Results Found</p>",
+                "text-color": "#7f1416"
+            }
+        });
+        $("#ExperienceListTable").freezeHeader({   //FreezeHeader function
+            offset: '50px'
+        });
+    });
+    @*End*@
+
+    @*Gets all details for a particular Experience*@
+    function EditExperience(EmpExperienceID) {
+        $.ajax({
+            url: '@Url.Action("EditExperience", "Employee")',
+            dataType: 'html',
+            data: ({ id: EmpExperienceID }),
+            success: function (data) {
+                $("#createEditExperienceDIV").html(data).show();
+            },
+            error: function (data) {
+                location.reload();
+            }
+        })
+    }
+    @*End*@
+
+    @*Deletes Resource Experience*@
+    function DeleteExperience(record,ExperienceID) {
+        console.log(ExperienceID);
+        swal({
+            title: 'Confirm',
+            text: 'Would You Like To Delete This Experience?',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes',
+            cancelButtonText: 'No'
+        },
+         function (isConfirm) {
+             console.log(isConfirm);
+             if (isConfirm) {
+                 $.ajax({
+                     url: '@Url.Action("DeleteExperience", "Employee")',
+                     type: 'POST',
+                     dataType: 'html',
+                     data: ({ id: ExperienceID }),
+                     success: function (data) {
+                         var dataObj = jQuery.parseJSON(data);
+
+                         if (dataObj.success == true) {
+                             successMessage(dataObj.errorMsg, 'Success');
+                             @*$.post('@Url.Action("GetExperienceList", "Employee")',
+                                    function (result) {
+                                        $("#employeeExperienceListDIV").html(result);
+                                    });*@
+                             $(record).closest('tr').remove();   //Deletes the selected record from the Data table
+                             window.setTimeout(function () {
+                                 location.reload(true);
+                             }, 1500);
+                         }
+                         else {
+                             successMessage(dataObj.errorMsg, 'Error');
+                             window.setTimeout(function () {
+                                 location.reload(true);
+                             }, 2500);
+                         }
+                         @*$.get('@Url.Action("CreateExperience", "Employee")',
+                                  function (result) {
+                                      $("#createEditExperienceDIV").html(result);
+                                  });*@
+                     },
+                     error: function (data) {
+                         alert("error Loading the data");
+                     }
+                 })
+             }
+         })
+    }
+    @*End*@
+
+</script>

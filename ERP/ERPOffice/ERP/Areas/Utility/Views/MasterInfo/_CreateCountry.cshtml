@@ -1,0 +1,87 @@
+﻿
+@model ERP.Utility.Models.CountryBO
+
+
+@using (Ajax.BeginForm("CreateCountry", "MasterInfo", new AjaxOptions { HttpMethod = "POST", OnSuccess = "Save" }))
+{
+    @Html.AntiForgeryToken()
+   <br />
+    <div class="form-horizontal well">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.CountryID)
+        
+            <div class="form-group">
+                @Html.LabelFor(model => model.CountryName, htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.CountryName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.CountryName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.CountryCode, htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.CountryCode, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.CountryCode, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.IsSelected, htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-7">
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.IsSelected)
+                        @Html.ValidationMessageFor(model => model.IsSelected, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        <div class="form-group">
+            <div class="col-md-offset-4 col-md-8">
+               
+                @if (Model == null || Model.CountryID == 0)
+                {
+                    <input type="submit" value="Create" class="btn btn-success" data-toggle="tooltip" title="Create the Country" />
+}
+                else
+                {
+                    <input type="submit" value="Update" class="btn btn-success" data-toggle="tooltip" title="Update the Country" />
+                }
+                <input type="button" value="Cancel" class="btn btn-default" data-toggle="tooltip" title="Cancel the Country Creation" role="button" onclick="CancelButton()" />
+            </div>
+        </div>
+        </div>
+        }
+
+@Scripts.Render("~/bundles/jqueryval")
+      
+            @*@Scripts.Render("~/bundles/jquery")
+        <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+        }*@
+
+<script>
+    function Save(status) {
+
+        if (status.success == true) {          
+            $.get('@Url.Action("CreateCountry", "MasterInfo")',
+                      function (result) {
+                          $("#CreateEdit").html(result);
+                      });
+            console.log(status);
+            successMessage(status.errorMsg, 'Success');
+        }
+        else {
+            $("#CreateEdit").html(status);
+        }
+        $.post('@Url.Action("GetCountryList", "MasterInfo")',
+               function (result) {
+                   $("#CountryList").html(result);
+               });
+    }
+
+    function CancelButton() {
+        $.get('@Url.Action("CreateCountry", "MasterInfo")',
+                              function (result) {
+                                  $("#CreateEdit").html(result);
+                              });
+    }
+</script>

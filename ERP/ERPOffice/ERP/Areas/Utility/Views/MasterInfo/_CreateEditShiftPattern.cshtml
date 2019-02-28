@@ -1,0 +1,153 @@
+﻿@model ERP.Utility.Models.ShiftPatternBO
+
+@using (Ajax.BeginForm("CreateShiftPattern", "MasterInfo", new AjaxOptions { HttpMethod = "POST", OnSuccess = "SaveShiftPattern" })) 
+{
+    @Html.AntiForgeryToken()
+   <br />
+    <div class="form-horizontal well">
+       
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.ShiftPatternID, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ShiftPatternID, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ShiftPatternID, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+        @Html.HiddenFor(model => model.ShiftPatternID)
+        <div class="form-group">
+            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-7">
+                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        @if (Model.ResourceCount != 0)
+        {
+            @Html.HiddenFor(model => model.ShiftStartTime)
+            @Html.HiddenFor(model => model.Duration)
+            <div class="form-group">
+                @Html.LabelFor(model => model.ShiftStartTime, htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-7">
+                    @Html.DisplayFor(model => model.ShiftStartTime, new { htmlAttributes = new { @class = "form-control", disabled = "disabled"} })
+                    @Html.ValidationMessageFor(model => model.ShiftStartTime, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Duration, htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-7">
+                    @*                @Html.EditorFor(model => model.Duration, new { htmlAttributes = new { @class = "form-control", min = 0, DataFormatString = @"{0:hh\-mm}" } })*@
+                    @Html.DisplayFor(model => model.Duration, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+                    @Html.ValidationMessageFor(model => model.Duration, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="form-group">
+                @Html.LabelFor(model => model.ShiftStartTime, htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-7">
+                    @Html.EditorFor(model => model.ShiftStartTime, new { htmlAttributes = new { @class = "form-control", min = 0 } })
+                    @Html.ValidationMessageFor(model => model.ShiftStartTime, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Duration, htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-7">
+                    @*                @Html.EditorFor(model => model.Duration, new { htmlAttributes = new { @class = "form-control", min = 0, DataFormatString = @"{0:hh\-mm}" } })*@
+                    @Html.EditorFor(model => model.Duration, new { htmlAttributes = new { @class = "form-control", min = 0 } })
+                    @Html.ValidationMessageFor(model => model.Duration, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        }
+        
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.BreakDuration, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-7">
+                @Html.EditorFor(model => model.BreakDuration, new { htmlAttributes = new { @class = "form-control", min = 0 } })
+                @Html.ValidationMessageFor(model => model.BreakDuration, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.IsEnable, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-7">
+                @Html.CheckBoxFor(model => model.IsEnable, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.IsEnable, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-4 col-md-8">
+                @*<input type="submit" value="Create" id="CreateId" class="btn btn-success" title="Save Shift Pattern" />
+                <input type="submit" value="Update" id="UpdateId" class="btn btn-success" title="Update Shift Pattern" hidden="hidden" />*@
+                @if (Model == null || Model.ShiftPatternID == 0)
+                {
+                    <input type="submit" value="Create"class="btn btn-success" data-toggle="tooltip" title="Create Shift Pattern" />
+}
+                else
+                {
+                    <input type="submit" value="Update" class="btn btn-success" data-toggle="tooltip" title="Update Shift Pattern" />
+                }
+                <input type="button" value="Cancel" class="btn btn-default" data-toggle="tooltip" title="Cancel Shift Pattern Creation" role="button" onclick="CancelButton()" />
+            </div>
+        </div>
+    </div>
+}
+@Scripts.Render("~/bundles/jqueryval")
+<script>
+    //to make timespan range data annotation spcified in Model to be worked.
+    //jquery unable to handle the Range expression so the Client Side Validation won't work, 
+    //but the Server Side Validation will.
+    $(document).ready(function () {
+        $("#Duration").rules('remove', 'range');
+    });
+
+    //enable the time picker
+    $(function () {
+        $('#ShiftStartTime,#Duration').timepicker({
+            format: 'LT',
+            showSeconds: false,
+            showMeridian: false,
+            defaultTime: false
+        });
+    });
+
+    //Saves Shift Pattern
+    function SaveShiftPattern(status) {
+        if (status.success == true) {         
+            $.get('@Url.Action("CreateShiftPattern", "MasterInfo")',
+                      function (result) {
+                          //alert("jjjjj");
+                          $("#CreateEditShiftPattern").html(result);
+                      });
+            successMessage(status.errorMsg, 'Success');
+        }
+        else {
+            //console.log(status);
+            $("#CreateEditShiftPattern").html(status);
+        }
+        $.post('@Url.Action("GetShiftPatternList", "MasterInfo")',
+               function (result) {
+                   //alert("refresh");
+                   $("#ShiftPatternList").html(result);
+               });
+    }
+  
+    //Cancels Function
+    function CancelButton() {
+        $.get('@Url.Action("CreateShiftPattern", "MasterInfo")',
+                              function (result) {
+                                  $("#CreateEditShiftPattern").html(result);
+                              });
+        $.post('@Url.Action("GetShiftPatternList", "MasterInfo")',
+                 function (result) {
+                     //alert("refresh");
+                     $("#ShiftPatternList").html(result);
+                 });
+    }
+
+</script>
+

@@ -1,0 +1,31 @@
+﻿@model ERP.Utility.Models.TitleBO
+
+@using (Ajax.BeginForm("createTitle", "MasterInfo", new AjaxOptions { HttpMethod = "POST", OnSuccess = "SaveTitle" }))
+{
+     @Html.AntiForgeryToken()
+    <br />
+    <div class="form-horizontal well">   
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.TitleID)
+               
+            <div class="form-group">
+                @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-7">
+                    @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-8">
+                    <input type="submit" value=@ViewBag.btnName class="btn btn-success"  data-toggle="tooltip" title="@ViewBag.btnName the Title"/>
+                    <input type="button" value="Cancel" class="btn btn-default" data-toggle="tooltip" title="Cancel the Title Creation" role="button" onclick="CancelButton()" />
+                </div>
+            </div>
+        </div>
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

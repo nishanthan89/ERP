@@ -1,0 +1,53 @@
+﻿@model IEnumerable<ERP.Utility.Models.CountryBO>
+<br />
+<table class="table">
+    <thead>
+        <tr>
+<th></th>
+            <th>
+                @Html.DisplayNameFor(model => model.CountryName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CountryCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsSelected)
+            </th>
+            <th></th>
+        </tr>
+        </thead>
+      @if (Model.Count() != 0 || Model != null)
+      {
+          foreach (var item in Model)
+          {
+            <tr>
+                <td>
+                    <a data-toggle="tooltip" title="Edit country" role="button" onclick="EditCountry(@item.CountryID)" id="edit"><span class="glyphicon glyphicon-pencil text-success"></span></a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CountryName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CountryCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsSelected)
+                </td>               
+                <td>
+                    <a data-toggle="tooltip" title="Delete Country" role="button" onclick="DeleteCountry(@item.CountryID)"><span class="glyphicon glyphicon-trash text-danger"></span></a>
+                </td>                                    
+            </tr>
+          }
+      }
+      else
+      {
+        <tr>
+            <td align="center" colspan=15>
+                <center>
+                    <font color="red" ; style="text-align:center">"Sorry, No COuntry found!!."</font>
+                </center>
+            </td>
+
+        </tr>
+      }
+</table>

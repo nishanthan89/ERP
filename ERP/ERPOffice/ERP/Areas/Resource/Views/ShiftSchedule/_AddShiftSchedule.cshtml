@@ -1,0 +1,441 @@
+﻿@using ERP.MVCHelpers
+@model ERP.Resource.ViewModels.ShiftScheduleViewModel
+@{
+    string dateformat = MvcApplication.DateFormat;
+    string timeformat = MvcApplication.TimeFormat;
+}
+
+<div>
+    <a href="@Url.Action("Index")"><span class="glyphicon glyphicon-backward"></span>&nbsp; Back to List</a>
+</div>
+<br />
+   <div class="panel panel-success">
+        <div class="panel-heading">Add Shift Schedule</div>
+
+        <div class="panel-body">
+
+@using (Ajax.BeginForm("AddShiftSchedule", "ShiftSchedule", new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace, UpdateTargetId = "shiftPanelDIV"@*, OnBegin = "onAjaxBegin"*@, OnSuccess = "onAjaxSuccess", OnFailure = "onAjaxFailure" }))
+{
+    if (Model.ShiftScheduleID != 0)
+    {
+        @Html.HiddenFor(model => model.EmployeeID)
+        @Html.HiddenFor(model => model.StartDate)
+        @Html.HiddenFor(model => model.EndDate)
+        @Html.HiddenFor(model => model.BranchID)
+         @Html.HiddenFor(model => model.ShiftPatternNameID)
+        @Html.HiddenFor(model=>model.ShiftStartDate)
+    }
+    @Html.HiddenFor(model => model.ShiftScheduleID)
+           @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.AntiForgeryToken()
+            <div class="form-horizontal">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.BranchNameID, new { @class = "col-md-4 text-right" })
+                    <div class="col-md-2 form-group-sm">
+                        @if (Model.ShiftScheduleID == 0)
+                        {
+                            @Html.DropDownListFor(model => model.BranchNameID, new SelectList(ViewBag.BranchList, "Value", "Text"), "-- Select --", htmlAttributes: new { @class = "form-control", style = "width:156px;" })
+                        }
+                        else
+                        {
+                            @Html.DisplayFor(model => model.BranchName )
+                            @Html.HiddenFor(model => model.BranchName)
+                            @Html.HiddenFor(model => model.BranchNameID)
+                        }
+                    </div>
+                    @Html.ValidationMessageFor(model => model.BranchNameID, "", new { @class = "text-danger col-md-4" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ResourceList, new { @class = "col-md-4 text-right" })
+                    <div class="col-md-3">
+                        @if (Model.ShiftScheduleID == 0)
+                        {
+                        <div class="scrollbar" id="resourceChechID" style="border-radius: .25em;">
+                            @Html.Partial("_ResourceCheckList",Model)
+                        </div>
+                        }
+                        else {
+                            <div>
+                               @Html.DisplayFor(model => model.Employee, new { @class = "form-control", style = "width:156px;" })
+                                @Html.HiddenFor(model => model.Employee, new { @class = "form-control", style = "width:156px;" })
+                                 @Html.HiddenFor(model => model.EditResourceID, new { @class = "form-control", style = "width:156px;" })
+                            </div>
+                        }
+                    </div>
+                    @Html.ValidationMessageFor(model => model.ResourceList, "", new { @class = "text-danger", id = "ResourceList" })
+                    @Html.ValidationMessageFor(model => model.EditResourceID, "", new { @class = "text-danger col-md-4" })
+                </div>
+                
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ShiftPatternID, new { @class = "col-md-4 text-right" })
+                    <div class="col-md-2 form-group-sm">
+                        @if (Model.ShiftScheduleID == 0)
+                        {
+                             @Html.DropDownListFor(model => model.ShiftPatternID, new SelectList(ViewBag.ShiftPatternList, "Value", "Text", "Selected"), "-- Select --", htmlAttributes: new { @class = "form-control", style = "width:156px;" })
+                        }
+                        else
+                        {
+                            @Html.DisplayFor(model => model.ShiftPattern)
+                            @Html.HiddenFor(model => model.ShiftPattern )
+                            @Html.HiddenFor(model => model.ShiftPatternID)
+                        }
+                     </div>
+                    @Html.ValidationMessageFor(model => model.ShiftPatternID, "", new { @class = "text-danger col-md-4" })
+                </div>
+                @if (Model.ShiftScheduleID == 0)
+                {
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ShiftStartDate, new { @class = "col-md-4 control-label" })
+                    <div class="col-md-2 form-group-sm">
+                        @Html.EditorFor(model => model.ShiftStartDate, new { htmlAttributes = new { @class = "form-control", style = "width:200px;" }, nowIfNull = true })
+                    </div>
+                    @Html.ValidationMessageFor(model => model.ShiftStartDate, "", new { @class = "text-danger col-md-4" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ShiftEndDate, new { @class = "col-md-4 control-label" })
+                    <div class="col-md-2 form-group-sm">
+                        @Html.EditorFor(model => model.ShiftEndDate, new { htmlAttributes = new { @class = "form-control", style = "width:200px;" }, nowIfNull = true })
+                    </div>
+                    @Html.ValidationMessageFor(model => model.ShiftEndDate, "", new { @class = "text-danger col-md-4" })
+                </div>
+                }
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ExpectedOnTime, new { @class = "col-md-4 text-right" })
+                   
+                        @if (Model.ShiftScheduleID != 0)
+                        {
+                            <div class="col-md-2 form-group-sm">
+                                @*@Html.DisplayFor(model => model.ExpectedOnDateTime, new { htmlAttributes = new { @class = "form-control", style = "width:200px;" } })*@
+                               @Html.DateTimeDisplay((DateTime)Model.ExpectedOnDateTime)
+                                 @Html.HiddenFor(model => model.ExpectedOnDateTime)
+                                @Html.HiddenFor(model => model.ExpectedOnTime)
+                            </div>
+                        }
+                    <div class="col-md-2 form-group-sm">
+                        @if (Model.ShiftScheduleID == 0)
+                        {
+                            @Html.EditorFor(model => model.ExpectedOnTime, new { htmlAttributes = new { @class = "form-control", nowIfNull = true, style = "width:75px;" } })
+                        }
+                    </div>
+                    
+                    @Html.ValidationMessageFor(model => model.ExpectedOnTime, "", new { @class = "text-danger col-md-4" })
+                </div>
+                    @if (Model.ShiftScheduleID != 0)
+                    {
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.ActualOnTime, new { @class = "col-md-4 control-label" })
+                            <div class="col-md-2 form-group-sm">
+                                @Html.EditorFor(model => model.ActualOnDateTime, new { htmlAttributes = new { @class = "form-control", style = "width:200px;" } })
+                            </div>
+                            <div class="form-group-sm">
+                                @Html.EditorFor(model => model.ActualOnTime, new { htmlAttributes = new { @class = "form-control", style = "width:75px;" } })
+                            </div>
+                            @Html.ValidationMessageFor(model => model.ActualOnTime, "", new { @class = "text-danger col-md-4 col-md-offset-7", id = "ActualOnTimeMsg" })
+
+                        </div>
+                    }
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ExpectedOffTime, new { @class = "col-md-4 text-right" })
+                   
+                        @if (Model.ShiftScheduleID != 0)
+                        {
+                            <div class="col-md-2 form-group-sm">
+                               @* @Html.DisplayFor(model => model.ExpectedOffDateTime, new { htmlAttributes = new { @class = "form-control", style = "width:200px;" } })*@
+                                @Html.HiddenFor(model => model.ExpectedOffDateTime)
+                                @Html.DateTimeDisplay((DateTime)Model.ExpectedOffDateTime)
+                                @Html.HiddenFor(model => model.ExpectedOffTime)
+                            </div>
+                        }
+                   @if (Model.ShiftScheduleID == 0)
+                   {
+                    <div class="col-md-2 form-group-sm">
+                     @Html.EditorFor(model => model.ExpectedOffTime)
+                </div>
+                   }
+                    @Html.ValidationMessageFor(model => model.ExpectedOffTime, "", new { @class = "text-danger col-md-4" })
+                </div>
+               
+                @if (Model.ShiftScheduleID != 0)
+                {
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ActualOffTime, new { @class = "col-md-4 control-label" })
+                    <div class="col-md-2 form-group-sm">
+                        @Html.EditorFor(model => model.ActualOffDateTime, new { htmlAttributes = new { @class = "form-control", style = "width:200px;" } })
+                    </div>
+                    <div class="form-group-sm">
+                        @Html.EditorFor(model => model.ActualOffTime, new { htmlAttributes = new { @class = "form-control",  style = "width:75px;" } })
+                    </div>
+
+                    @Html.ValidationMessageFor(model => model.ActualOffTime, "", new { @class = "text-danger col-md-4 col-md-offset-7", id = "ActualOffTimeMsg" })
+                </div>
+                }
+                @if (Model.ShiftScheduleID == 0)
+                {
+                <div class="form-group" id="scheduleActivityDIV">
+                    <label class="col-md-4 control-label">Shift Schedule Activity</label>
+                    <div class="col-md-5">
+                        @Html.RadioButtonFor(model => model.AssignType, "Weekly",  new { onchange = "onChangeOption(this.value);",style= "margin-top: 9px" })<span class="control-label"> &nbsp; Weekly</span>
+                        @Html.RadioButtonFor(model => model.AssignType, "NoofDays", new { onchange = "onChangeOption(this.value);" , style = "margin-top:9px" })<span class="control-label">&nbsp; No of Days</span>
+                        @Html.ValidationMessageFor(model => model.AssignType, "", new { @class = "text-danger", id = "AssignType" })
+                        @if (Model != null && Model.AssignType == "Weekly")
+                        {
+                            <div id="weekly" style="display:block;">
+                                @Html.EditorFor(model => model.WeeklyMonday)
+                                @Html.LabelFor(model => model.WeeklyMonday) &nbsp;
+                                @Html.EditorFor(model => model.WeeklyTuesday)
+                                @Html.LabelFor(model => model.WeeklyTuesday)&nbsp;
+                                @Html.EditorFor(model => model.WeeklyWednesday)
+                                @Html.LabelFor(model => model.WeeklyWednesday) &nbsp;
+                                @Html.EditorFor(model => model.WeeklyThursday)
+                                @Html.LabelFor(model => model.WeeklyThursday)&nbsp;
+                                @Html.EditorFor(model => model.WeeklyFriday)
+                                @Html.LabelFor(model => model.WeeklyFriday)&nbsp;
+                                @Html.EditorFor(model => model.WeeklySaturday)
+                                @Html.LabelFor(model => model.WeeklySaturday)&nbsp;
+                                @Html.EditorFor(model => model.WeeklySunday)
+                                @Html.LabelFor(model => model.WeeklySunday)&nbsp;
+                            </div>
+                        }
+                        else
+                        {
+                            <div id="weekly" style="display:none;">
+                                @Html.EditorFor(model => model.WeeklyMonday)
+                                @Html.LabelFor(model => model.WeeklyMonday)&nbsp;
+                                @Html.EditorFor(model => model.WeeklyTuesday)
+                                @Html.LabelFor(model => model.WeeklyTuesday)&nbsp;
+                                @Html.EditorFor(model => model.WeeklyWednesday)
+                                @Html.LabelFor(model => model.WeeklyWednesday)&nbsp;
+                                @Html.EditorFor(model => model.WeeklyThursday)
+                                @Html.LabelFor(model => model.WeeklyThursday)&nbsp;
+                                @Html.EditorFor(model => model.WeeklyFriday)
+                                @Html.LabelFor(model => model.WeeklyFriday)&nbsp;
+                                @Html.EditorFor(model => model.WeeklySaturday)
+                                @Html.LabelFor(model => model.WeeklySaturday)&nbsp;
+                                @Html.EditorFor(model => model.WeeklySunday)
+                                @Html.LabelFor(model => model.WeeklySunday)&nbsp;
+                            </div>
+                        }
+
+                        @if (Model != null && Model.AssignType == "NoofDays")
+                        {
+                            <div id="NoofDays" style="display:block;" class="form-group-sm">
+                                @Html.TextBoxFor(model => model.NoofDays, new { @*@Value = 1,*@ @class = "form-control", style = "width:90px;" ,@type = "number", @min = "1", @step = "1" })
+                            </div>
+                        }
+                        else
+                        {
+                            <div id="NoofDays" style="display:none" class="form-group-sm">
+                                @Html.TextBoxFor(model => model.NoofDays, new { @*@Value = 1,*@ @class = "form-control", style = "width:90px;", @type = "number", @min = "1", @step = "1" })
+                            </div>
+                        }
+                    </div>
+                </div>
+               
+                <div class="form-group" id="removeShiftDIV">
+                    <label class="control-label col-md-4">Do You Want To Remove The Already Assigned Shift Schedule?</label>
+                    <div class="col-md-4 form-group-sm">
+                        @Html.DropDownList("YesNo", new List<SelectListItem>
+                    {
+                        new SelectListItem {Text="Yes", Value="Yes"  },
+                        new SelectListItem {Text="No", Value="No", Selected = true }
+                    }, new { @class = "form-control", style = "width:80px;" })<selectlistitem>
+                    </div>
+                </div>
+                }
+            </div>
+
+            <div class="form-group col-md-offset-4">
+                <input type="submit" name="Save" value="Save" class="btn btn-success" />
+                <input type="reset" name="Reset" value="Reset" class="btn btn-default" />
+            </div>
+}
+        </div>
+
+    </div>
+
+
+<script>
+    $(document).on('change', '#ShiftPatternID', function () {
+        $("#ExpectedOnTime").empty();
+        $("#ExpectedOffTime").empty();
+        var rootDir = "@Url.Content("~/")";
+        $.ajax({
+            url: rootDir + 'ShiftSchedule/ShiftPattern',
+            type: 'POST',
+            dataType: 'json',
+            contentType: 'application/json',
+            data: JSON.stringify({
+                shiftPattrenId: $("#ShiftPatternID").val()
+            }),
+            success: function (data) {
+                document.getElementById("ExpectedOnTime").value = data.shiftStartTime;
+                document.getElementById("ExpectedOffTime").value = data.shiftEndTime;
+                $("#ExpectedOnTime").prop('readonly', true);
+                $("#ExpectedOffTime").prop('readonly', true);
+            },
+            error: function () {
+                $("#ExpectedOnTime").val("");
+                $("#ExpectedOffTime").val("");
+            }
+        });
+    });
+    $(document).on('change', '#BranchNameID', function () {
+        //$("#ExpectedOnTime").empty();
+        var branchNameID = $("#BranchNameID").val() == "" ? 0 : $("#BranchNameID").val();
+        //alert( $("#BranchNameID").val());
+        $.ajax({
+            url: '@Url.Action("GetResourceList","ShiftSchedule")',
+            type: 'POST',
+            dataType: 'html',
+            contentType: 'application/json',
+            data: JSON.stringify({
+                branchNameID: branchNameID
+            }),
+            success: function (data) {
+                //alert(data);
+                //var row = "";
+                //$.each(data, function (index, item) {
+                //    row += "<tr><td><input type='checkbox'id='" + item.ResourceID + "' name='ResourceID' class='check-box' /></td><td>" + item.Resource + "</td></tr>";
+                //});
+                //$("#contacts").html(row);
+                $("#resourceChechID").html(data);
+            },
+            error: function (data) {
+                alert(data);
+            }
+        });
+    });
+   
+    
+    function onChangeOption(value) {
+        if (value == 'Weekly') {
+            document.getElementById('weekly').style.display = 'block';
+            document.getElementById('NoofDays').style.display = 'none';
+        }
+        if (value == 'NoofDays') {
+            document.getElementById('NoofDays').style.display = 'block';
+            document.getElementById('weekly').style.display = 'none';
+        }
+
+    }
+
+    function onAjaxSuccess(result) {
+         //alert(result);
+        //alert(new Date(parseInt(model.EndDate.substr(6))));
+        if (result.success == true) {
+            var model = result.shiftsearch;
+            var empID = model.EmployeeID == null ? 0 : model.EmployeeID;
+            var branchID = model.BranchID == null ? 0 : model.BranchID;
+            var shiftPatternID = model.ShiftPatternNameID == null ? 0 : model.ShiftPatternNameID;
+            $.ajax({
+                url: '@Url.Action("Index", "ShiftSchedule")',
+                type: 'POST',
+                cache: false,
+                dataType: 'html',
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify({ shiftSearch: model, endDate: new Date(parseInt(model.EndDate.substr(6))), startDate: new Date(parseInt(model.StartDate.substr(6))), empID: empID, branchID: branchID, shiftPatternID: shiftPatternID }),
+                success: function (data) {
+                    $("#shiftPanelDIV").html(data);
+                    console.log(result.successMsg);
+                    successMessage(result.successMsg, 'Success');
+                },
+                error: function (data) {
+                    successMessage(result.successMsg, 'Error');
+                }
+            })
+           // window.location=Url.Action("Index", "ShiftSchedule");
+            
+        }
+        else if (result.success == false) {
+            var model = result.shiftsearch;
+            var empID = model.EmployeeID == null ? 0 : model.EmployeeID;
+            var branchID = model.BranchID == null ? 0 : model.BranchID;
+            var shiftPatternID = model.ShiftPatternNameID == null ? 0 : model.ShiftPatternNameID;
+            $.ajax({
+                url: '@Url.Action("Index", "ShiftSchedule")',
+                type: 'POST',
+                cache: false,
+                dataType: 'html',
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify({ shiftSearch: model, endDate: new Date(parseInt(model.EndDate.substr(6))), startDate: new Date(parseInt(model.StartDate.substr(6))), empID: empID, branchID: branchID, shiftPatternID: shiftPatternID }),
+                success: function (data) {
+                    $("#shiftPanelDIV").html(data);
+                    console.log(result.successMsg);
+                    successMessage(result.successMsg, 'Error');
+                },
+                error: function (data) {
+                    successMessage(result.successMsg, 'Error');
+                }
+            })
+            // window.location=Url.Action("Index", "ShiftSchedule");
+
+        }
+        else {
+            if (result.succeed == true) {
+               // alert("result");
+                $("#shiftPanelDIV").load('@Url.Action("Index")');
+                successMessage(result.successMsg, 'Success');
+            }
+            else {
+                console.log("AddmodelError");
+                $("#shiftPanelDIV").html(result);
+            }
+        }
+       // alert("hiii");
+    }
+
+    function onAjaxFailure() {
+        $("#scheduleActivityDIV").hide();
+        $("#removeShiftDIV").hide();
+        //console.log(result.errorMsg);
+        successMessage("Something Wrong", 'Error');
+    }
+
+    function onAjaxBegin() {
+        //alert($("#ShiftScheduleID").val());
+        if ($("#ShiftScheduleID").val() == 0 ) {
+            if ($("input[name='ResourceID[]']").is(":checked") == false || ($("input[type='radio']:checked").val() == "Weekly" && $("input[class='check-box']").is(":checked") == false))
+            {
+               // alert("check");
+            if ($("input[name='ResourceID[]']").is(":checked")==false) {
+                $("#Resource").html("<span class='text-danger'>Please Select An Employee</span>").show();
+                return false;
+            }
+            //if ($("input[type='radio']:checked").val() != "Weekly" && $("input[type='radio']:checked").val() != "NoofDays") {
+            //    $("#AssignTypeMsg").html("<span class='text-danger'>please Select Shift Schedule Activity</span>").show();
+            //}
+            if ($("input[type='radio']:checked").val() == "Weekly") {
+                if ($("input[class='check-box valid']").is(":checked") == false) {
+                    $("#AssignTypeMsg").html("<span class='text-danger'>please Select at least a Week Day</span>").show();
+                    return false;
+                }
+            }
+            //alert("false");
+
+            }
+            return true;
+        }
+        else {
+           // alert("else");
+            if ($("#EditResourceID").val() == 0 || $("#ActualOnTime").val() == "" || $("#ActualOffTime").val() == "") {
+                if ($("#EditResourceID").val() == 0) {
+                    $("#Resource").html("<span class='text-danger'>Please Select An Employee</span>").show();
+                }
+                if ($("#ActualOnTime").val() == "") {
+                    $("#ActualOnTimeMsg").html("<span class='text-danger'>Actual OnTime is Required</span>").show();
+                }
+                if ($("#ActualOffTime").val() == "") {
+                    $("#ActualOffTimeMsg").html("<span class='text-danger'>Actual OnTime is Required</span>").show();
+                }
+               // alert($("#ActualOnTime").val())
+                return false;
+            }
+            //alert("true");
+            return true;
+        }
+
+    }
+</script>
+@*<script src="~/Scripts/jquery-2.0.0.min.js"></script>*@
+    @Scripts.Render("~/bundles/jqueryval")
+

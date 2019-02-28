@@ -1,0 +1,140 @@
+﻿@model IEnumerable<ERP.Utility.Models.CountryBO>
+<br />
+<table class="table" id="CountryTable">
+    <thead>
+        <tr>
+<th></th>
+            <th>
+                @Html.DisplayNameFor(model => model.CountryName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CountryCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsSelected)
+            </th>
+            <th></th>
+        </tr>
+        </thead>
+      @if (Model.Count() != 0 || Model != null)
+      {
+          foreach (var item in Model)
+          {
+            <tr>
+                <td>
+                    <a data-toggle="tooltip" title="Edit" role="button" onclick="EditCountry(@item.CountryID)" id="edit"><span class="glyphicon glyphicon-pencil text-success" style="position:static"></span></a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CountryName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CountryCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsSelected)
+                </td>               
+                <td>
+                    <a data-toggle="tooltip" title="Delete" role="button" onclick="DeleteCountry(@item.CountryID)"><span class="glyphicon glyphicon-trash text-danger" style="position:static"></span></a>
+                </td>                                    
+            </tr>
+          }
+      }
+      else
+      {
+        <tr>
+            <td align="center" colspan=15>
+                <center>
+                    <font color="red" ; style="text-align:center">"Sorry, No Country found!!."</font>
+                </center>
+            </td>
+
+        </tr>
+      }
+</table>
+
+<script>
+    $(document).ready(function () {
+        $('#CountryTable').DataTable({
+            //"displayLength": 5,
+            bPaginate: false,     //disable Pagination
+            bFilter: false,       //disable search text
+            bInfo: false,
+            "language": {
+                "zeroRecords": "<p class='text-danger'>Sorry!..No matching Records found...</p>",
+                "text-color": "#7f1416"
+            }
+        });
+        $("#empTable").freezeHeader({
+            offset: '50px',
+            //background-color: rgba(255, 255, 255, 0.7)
+            //"background-color":"cadetblue"
+        });
+    });
+
+    function DeleteCountry(CountryId) {
+        swal({
+            title: 'Confirm',
+            text: 'Would You Like To Delete This Country?',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes',
+            cancelButtonText: 'No'
+        },
+         function (isConfirm) {
+             console.log(isConfirm);
+             if (isConfirm) {
+                 $.ajax({
+                     url: '@Url.Action("DeleteCountry", "MasterInfo")',
+                     type: 'POST',
+                     dataType: 'html',
+                     data: ({ id: CountryId }),
+                     success: function Delete(status) {
+                         var statusObj = jQuery.parseJSON(status);
+                         console.log(statusObj);
+                         if (statusObj.success == true) {
+                             console.log(statusObj.success);
+                             successMessage(statusObj.errorMsg, 'Success');
+
+                         }
+                         else {
+                             console.log(statusObj.success);
+                             successMessage(statusObj.errorMsg, 'Error');
+                         }
+
+                         $.get('@Url.Action("CreateCountry", "MasterInfo")',
+                                function (result) {
+                                    $("#CreateEdit").html(result);
+                                });
+                         $.post('@Url.Action("GetCountryList", "MasterInfo")',
+                                                                 function (result) {
+                                                                     $("#CountryList").html(result);
+                                                                 });
+                     },
+                     error: function (data) {
+                         alert("error Loading the data");
+                     }
+                 })
+             }
+         })
+    }
+
+
+    function EditCountry(CountryId) {
+        $.ajax({
+            url: '@Url.Action("EditCountry", "MasterInfo")',
+            dataType: 'html',
+            data: ({ id: CountryId }),
+            success: function (data) {
+                $("#CreateEdit").html(data).show();
+                $.post('@Url.Action("GetCountryList", "MasterInfo")',
+                        function (result) {
+                            $("#CountryList").html(result);
+                        });
+            },
+            error: function (data) {
+                alert("error Loading the data");
+            }
+        })
+    }
+
+</script>

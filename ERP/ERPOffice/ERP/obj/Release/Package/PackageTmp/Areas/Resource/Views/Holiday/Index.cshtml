@@ -1,0 +1,26 @@
+﻿@model ERP.Resource.Models.HolidayBO
+@{
+    ViewBag.Title = "Holiday";
+    Layout = Request.IsAjaxRequest() ? null : "~/Views/Shared/_Layout.cshtml";
+}
+<div id="holidayPanelDIV">
+    <div class="panel panel-success">
+        <div class="panel-heading">Holiday</div>
+        <div class="panel-body">
+            <div>
+                @{
+                    Html.RenderPartial("_SearchHoliday", Model.searchHoliday);
+                }
+            </div>
+            <hr />
+            <div id="holidaySearchDIV">
+                @{
+                    Html.RenderPartial("_HolidayDetail", Model);
+                }
+            </div>
+            <div id="loadingDiv" style="text-align: center; display: none; margin-bottom: 20px;">
+                <img alt="Loading" src="@Url.Content("~/Content/dist/img/ajax-loading.gif")" />
+            </div>
+        </div>
+    </div>
+</div>

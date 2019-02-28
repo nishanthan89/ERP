@@ -1,0 +1,118 @@
+﻿@model IEnumerable<ERP.Resource.ViewModels.EmployeePaymentViewModels>
+
+<div class="table-responsive">
+    <table class="table table-hover table-striped table-bordered" id="paymentList" style="border-bottom:hidden">
+        <thead>
+            <tr>
+                <th>
+
+                </th>
+                @*<th>
+                        @Html.DisplayNameFor(model => model.EmployeePayID)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.EmployeeID)
+                    </th>*@
+                @*<th>
+                        @Html.DisplayNameFor(model => model.EmployeeName)
+                    </th>*@
+                <th>
+                    @Html.DisplayNameFor(model => model.PaymentAmount)
+                </th>
+                @*<th>
+                        @Html.DisplayNameFor(model => model.PaymentTypeID)
+                    </th>*@
+                <th>
+                    @Html.DisplayNameFor(model => model.PaymentTypeName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.StartDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.EndDate)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Count() > 0)
+            {
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td class="text-center">
+                            @if (item.EndDate == null)
+                            {
+                                <a data-toggle="tooltip" title="Edit" role="button" onclick="EditEmployeePayment(@item.EmployeePayID)" id="edit"><span class="glyphicon glyphicon-pencil text-success"></span></a>
+                            }
+                        </td>
+                        @*<td>
+                                @Html.DisplayFor(modelItem => item.EmployeePayID)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.EmployeeID)
+                            </td>*@
+                        @*<td>
+                                @Html.DisplayFor(modelItem => item.EmployeeName)
+                            </td>*@
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PaymentAmount)
+                        </td>
+                        @*<td>
+                                @Html.DisplayFor(modelItem => item.PaymentTypeID)
+                            </td>*@
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PaymentTypeName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.StartDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EndDate)
+                        </td>
+                        <td class="text-center">
+                            @if (item.EndDate == null)
+                            {
+                                <a data-toggle="tooltip" title="Delete" role="button" onclick="DeleteEmployeePayment(@item.EmployeePayID)"><span class="glyphicon glyphicon-trash text-danger"></span></a>
+                            }
+                        </td>
+                    </tr>
+                }
+            }
+            @*else
+                {
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            <p class="text-center text-danger">Sorry, Records Not Found....</p>
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                }*@
+        </tbody>
+    </table>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#paymentList').DataTable({
+            //"displayLength": 5,
+            bPaginate: false,     //disable Pagination
+            bFilter: false,       //disable search text
+            bInfo: false,
+            "language": {
+                "zeroRecords": "<p class='text-danger'>Sorry!..No matching Records found...</p>",
+                "text-color": "#7f1416"
+            }
+        });
+        $("#paymentList").freezeHeader({
+            offset: '50px',
+            //background-color: rgba(255, 255, 255, 0.7)
+            //"background-color":"cadetblue"
+        });
+    });
+</script>

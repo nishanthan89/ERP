@@ -1,0 +1,209 @@
+@model IEnumerable<ERP.Resource.ViewModels.EmployeePaymentViewModels>
+
+<div class="table-responsive">
+    <table class="table table-hover table-striped table-bordered" id="PaymentListTable" style="border-bottom:hidden">
+        <thead>
+            <tr>
+                <th></th>
+                @*<th>
+                        @Html.DisplayNameFor(model => model.EmployeePayID)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.EmployeeID)
+                    </th>*@
+                @*<th>
+                        @Html.DisplayNameFor(model => model.EmployeeName)
+                    </th>*@
+                <th>
+                    @Html.DisplayNameFor(model => model.PaymentAmount)
+                </th>
+                @*<th>
+                        @Html.DisplayNameFor(model => model.PaymentTypeID)
+                    </th>*@
+                @*<th>
+                    @Html.DisplayNameFor(model => model.PaymentTypeName)
+                </th>*@
+                <th>
+                    @Html.DisplayNameFor(model => model.StartDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.EndDate)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Count() > 0)
+            {
+                foreach (var item in Model/*.OrderByDescending(x => x.StartDate)*/)
+                {
+                    <tr>
+                        <td class="text-center">
+                            @if (item.TimesheetAuthorizedDateList.Count() > 0)
+                            {
+                            <a></a>
+                            }
+                            else if (item.EndDate == null)
+                            {
+                                <a data-toggle="tooltip" title="Edit" role="button" onclick="EditEmployeePayment(@item.EmployeePayID)" id="edit"><span class="glyphicon glyphicon-pencil text-success"></span></a>
+                                //continue;
+                            }                           
+                            else
+                            {
+                                <a></a>
+                            }
+                        </td>
+                        @*<td>
+                                @Html.DisplayFor(modelItem => item.EmployeePayID)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.EmployeeID)
+                            </td>*@
+                        @*<td>
+                                @Html.DisplayFor(modelItem => item.EmployeeName)
+                            </td>*@
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PaymentAmount)
+                        </td>
+                        @*<td>
+                                @Html.DisplayFor(modelItem => item.PaymentTypeID)
+                            </td>*@
+                        @*<td>
+                            @Html.DisplayFor(modelItem => item.PaymentTypeName)
+                        </td>*@
+                        <td>
+                            @Html.DisplayFor(modelItem => item.StartDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EndDate)
+                        </td>
+                        <td class="text-center">
+                            @if (item.TimesheetAuthorizedDateList.Count() > 0)
+                            {
+                                <a></a>
+                            }
+                            else if (item.EndDate == null)
+                            {
+                                <a data-toggle="tooltip" title="Delete" role="button" onclick="DeleteEmployeePayment(this,@item.EmployeePayID)"><span class="glyphicon glyphicon-trash text-danger"></span></a>
+                                //continue;
+                            }
+                            else
+                            {
+                                <a></a>
+                            }
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+
+<script>
+    @*DataTable Function*@
+    $(document).ready(function () {
+        $('#PaymentListTable').DataTable({
+            //"displayLength": 5,
+            bPaginate: false,     //Disables Pagination
+            bFilter: false,       //Disables search text
+            bInfo: false,
+            "language": {       //When the list is empty
+                "zeroRecords": "<p class='text-danger'>No Results Found</p>",
+                "text-color": "#7f1416"
+            }
+        });
+        $("#PaymentListTable").freezeHeader({   //FreezeHeader function
+            offset: '50px'
+        });
+    });
+    @*End*@
+
+    @*EditEmployeePayment Function for a particular Employee*@
+    function EditEmployeePayment(EmpPayId) {
+        $.ajax({
+            url: '@Url.Action("EditPayment", "Employee")',
+            dataType: 'html',
+            type: "Get",
+            data: ({ id: EmpPayId }),
+            success: function (data) {
+                //alert(data);
+                @*$.post('@Url.Action("ListPayment", "Employee")',
+                   function (result) {
+                       alert("fgfg");
+                       $("#PaymentListDIV").html(result);
+                   }
+                );*@
+                $("#EditPaymentDIV").html(data).show();     //Shows EditPayment form
+                $("#PaymentStartDate").show();      //Shows "startDate" for Edit
+                $("#EmpButtonsDIV").show();     //Shows "Save" and "Cancel Button"
+            },
+            error: function (data) {
+                sweetAlert("Error Loading The Data");
+            }
+        })
+    }
+    @*End*@
+
+    @*DeleteEmployeePayment Function*@
+    function DeleteEmployeePayment(record,EmpPayId) {
+        swal({
+            title: 'Confirm',
+            text: 'Would You Like To Delete This Payment?',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes',
+            cancelButtonText: 'No',
+            //closeOnConfirm: false,
+        },
+        function (isConfirm) {
+            if (isConfirm) {
+                $.ajax({
+                    url: '@Url.Action("DeleteEmployeePayment", "Employee")',
+                    dataType: 'html',
+                    type: "Post",
+                    cache: false,
+                    data: ({ id: EmpPayId }),
+                    success: function (data) {
+                        var dataObj = jQuery.parseJSON(data);       //Gets the message as "Json object"
+                        //console.log(dataObj);
+                        if (dataObj.success == true) {
+                            //sweetAlert(dataObj.errorMsg);
+                            $(record).closest('tr').remove();   //Deletes the selected record from the Data table
+                            window.setTimeout(function () {
+                                swal({
+                                    title: "Deleted",
+                                    text: dataObj.errorMsg,
+                                    type: "success"
+                                })
+                            }, 1000);
+                            //alert(dataObj.errorMsg);
+                            //successMessage(dataObj.errorMsg, 'Success');
+                        }
+                        else {
+                            console.log(dataObj.success);
+                            //successMessage(dataObj.errorMsg, 'Error');
+                            //sweetAlert(dataObj.errorMsg);
+                            window.setTimeout(function () {
+                                swal({
+                                    title: "Error",
+                                    text: dataObj.errorMsg,
+                                    type: "error"
+                                })
+                            }, 1000);
+                        }
+                        window.setTimeout(function () {
+                            location.reload(true);
+                        }, 2500);
+                    },
+                    error: function (data) {
+                        sweetAlert("Error Loading The Data");
+                    }
+                })
+            }
+            else {
+                sweetAlert("Cancelled", "You Have Cancelled Form Submission!", "error");
+            }
+        })
+    }
+    @*End*@
+</script>

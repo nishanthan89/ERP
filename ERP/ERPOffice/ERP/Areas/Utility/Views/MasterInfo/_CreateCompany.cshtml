@@ -1,0 +1,75 @@
+﻿@model ERP.Utility.Models.CompanyBO
+
+
+@using (Ajax.BeginForm("CreateCompany", "MasterInfo", new AjaxOptions { HttpMethod = "POST", OnSuccess = "SaveCompany" }))
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal well">
+        
+        <br />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.CompanyID)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CompanyName, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-7">
+                @Html.EditorFor(model => model.CompanyName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CompanyName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-4 col-md-8">
+                @if (Model == null || Model.CompanyID == 0)
+                {
+                    <input type="submit" value="Create" class="btn btn-success" data-toggle="tooltip" title="Create" id="create" />
+}
+                else
+                {
+                    <input type="submit" value="Update" class="btn btn-success" data-toggle="tooltip" title="Update" id="Update" />
+}
+                <input type="button" value="Cancel" class="btn btn-default" data-toggle="tooltip" title="Cancel" role="button" onclick="CancelButton()" />
+
+            </div>
+
+        </div>
+    </div>
+}
+
+
+@Scripts.Render("~/bundles/jqueryval")
+
+@*@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}*@
+
+<script>
+    function SaveCompany(status) {
+       // console.log("inside save");
+        if (status.success == true) {
+            $.get('@Url.Action("CreateCompany", "MasterInfo")',
+                      function (result) {
+                          $("#CreateCompany").html(result);
+                      });
+            console.log(status);
+            successMessage(status.errorMsg, 'Success');
+        }
+        else {
+            //console.log(status);
+            //successMessage(result.errorMsg, 'Error');
+            $("#CreateCompany").html(status);
+        }
+        $.post('@Url.Action("GetCompanyList", "MasterInfo")',
+                function (result) {
+                    $("#CompanyList").html(result);
+                });
+    }
+
+    function CancelButton() {
+        $.get('@Url.Action("CreateCompany", "MasterInfo")',
+                              function (result) {
+                                  $("#CreateCompany").html(result);
+                              });
+    }
+</script>

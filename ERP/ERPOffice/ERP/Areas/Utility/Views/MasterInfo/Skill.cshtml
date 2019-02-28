@@ -1,0 +1,67 @@
+﻿@model ERP.Utility.ViewModels.SkillView
+
+@{
+    ViewBag.Title = "Skill";
+}
+
+@Html.Partial("_SkillLayout")
+<div class="panel panel-success">
+    <div class="panel-heading">
+        <h3 class="panel-title">Skill  </h3>
+    </div>
+
+    <div class="panel-body">
+        <div id="Skill">
+            @Html.Partial("_SKillList", Model.SkillList)
+        </div>
+    </div>
+</div>
+
+<script>
+    //function is called by create button
+    function CreateSkill() {
+        $.ajax({
+            url: '@Url.Action("CreateSkill", "MasterInfo")',
+            dataType: 'html',
+            success: function (data) {
+                console.log(data);
+                $("#Skill").html(data).show();//create form will override the skill list div
+            },
+            error: function (data) {
+                alert("error Loading the data");
+            }
+        })
+    }
+
+
+    function Save(status) {
+        console.log("inside save");
+        if (status.success == true) {
+            $.post('@Url.Action("GetSkillList", "MasterInfo")',
+               function (result) {
+                   $("#Skill").html(result);
+               });
+            console.log(status);
+            successMessage(status.errorMsg, 'Success');
+        }
+        else {
+            //console.log(status);
+            $("#Skill").html(status);//not successfully saved, and fill the div with returned partial view
+        }
+    }
+
+    function Cancel() {
+        $.get('@Url.Action("CreateSkill", "MasterInfo")',
+                              function (result) {
+                                  $("#Skill").html(result);
+                              });
+    }
+    //go back to list view
+    function GetSkillList() {
+        $.post('@Url.Action("GetSkillList", "MasterInfo")',
+                      function (result) {
+                          $("#Skill").html(result);
+                      });
+    }
+
+</script>

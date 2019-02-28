@@ -1,0 +1,861 @@
+@model ERP.Resource.ViewModels.EmployeeViewBO
+
+@{
+    ViewBag.Title = "Create Edit Resource";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div id="test5">
+    @*Tabs for Edit Employee*@
+    @if (Model.EmployeeID != 0)
+    {
+        @Html.Partial("_ResourceSubMenu", Model.ResourceSubMenuBO)
+    }
+    else
+    {
+        <div class="text-left">
+            @*<a href="@Url.Action("Index")"><span class="glyphicon glyphicon-backward"></span>&nbsp; Back to List</a>*@
+            <a href="@Url.Action("Index", "Employee" ,new { area="Resource" })"><span class="glyphicon glyphicon-backward"></span> Back To List</a>
+        </div>
+        <br />
+    }
+
+
+    @*Ends*@
+
+    @*Employee Creation Start*@
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            <h2 class="panel-title">Resource Personal Details</h2>
+        </div>
+        <div class="panel-body">
+            @using (Html.BeginForm("CreateEmployee", "Employee", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="form-horizontal">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="row">
+                        <div class="col-md-4">
+                            @*<div class="form-group">
+                                    @Html.LabelFor(model => model.EmployeeID, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-9">
+                                        @Html.EditorFor(model => model.EmployeeID, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.EmployeeID, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>*@
+                            @if (Model != null)
+                            {
+                                @Html.HiddenFor(model => model.EmployeeID)
+                            }
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.BranchID, htmlAttributes: new { @class = "control-label col-md-4" })
+                                <div class="form-group-sm col-md-8">
+                                    @*@Html.DropDownListFor(model => model.BranchID, ViewContext.Controller.ViewBag.Branch as IEnumerable<SelectListItem>, "-- Select --", new { @class = "form-control" })*@
+                                    @Html.ListBoxFor(model => model.BranchList,
+                                            ViewBag.ListOfBranch as MultiSelectList,
+                                            new { @class = "chosen-select form-control", data_placeholder = "-- Choose --"/*, style = "width:750px;"*/, tabindex = "4" }
+                                         )
+                                    @Html.ValidationMessageFor(model => model.BranchList, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.TitleID, htmlAttributes: new { @class = "control-label col-md-4" })
+                                <div class="form-group-sm col-md-8">
+                                    @Html.DropDownListFor(model => model.TitleID, ViewContext.Controller.ViewBag.Title as IEnumerable<SelectListItem>, "-- Select --", new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.TitleID, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-4" })
+                                <div class="form-group-sm col-md-8">
+                                    @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.MiddleName, htmlAttributes: new { @class = "control-label col-md-4" })
+                                <div class="form-group-sm col-md-8">
+                                    @Html.EditorFor(model => model.MiddleName, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.MiddleName, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-4" })
+                                <div class="form-group-sm col-md-8">
+                                    @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Sex, htmlAttributes: new { @class = "col-md-4 text-right" })
+                                <div class="form-group-sm col-md-8">
+                                    @Html.RadioButtonFor(model => model.Sex, "M")&nbsp;@Html.Label("Male")
+                                    &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+                                    @Html.RadioButtonFor(model => model.Sex, "F")&nbsp;@Html.Label("Female")
+                                    <br />
+                                    @Html.ValidationMessageFor(model => model.Sex, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.DoB, htmlAttributes: new { @class = "control-label col-md-4" })
+                                <div class="form-group-sm col-md-8">
+                                    @Html.EditorFor(model => model.DoB, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.DoB, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.MaritalStatusID, htmlAttributes: new { @class = "control-label col-md-4" })
+                                <div class="form-group-sm col-md-8">
+                                    @Html.DropDownListFor(model => model.MaritalStatusID, ViewContext.Controller.ViewBag.MaritalStatus as IEnumerable<SelectListItem>, "-- Select --", new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.MaritalStatusID, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.EthnicGroupID, htmlAttributes: new { @class = "control-label col-md-4" })
+                                <div class="form-group-sm col-md-8">
+                                    @Html.DropDownListFor(model => model.EthnicGroupID, ViewContext.Controller.ViewBag.EthnicGroup as IEnumerable<SelectListItem>, "-- Select --", new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.EthnicGroupID, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.ImmigrationStatusID, htmlAttributes: new { @class = "control-label col-md-4" })
+                                <div class="form-group-sm col-md-8">
+                                    @Html.DropDownListFor(model => model.ImmigrationStatusID, ViewContext.Controller.ViewBag.ImmigrationStatus as IEnumerable<SelectListItem>, "-- Select --", new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.ImmigrationStatusID, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            @*<div class="form-group">
+                                    @Html.LabelFor(model => model.AdderessID, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-9">
+                                        @Html.EditorFor(model => model.AdderessID, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.AdderessID, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>*@
+                        </div>
+
+                        <div class="col-md-4">
+                            @*<div class="form-group">
+                                    @Html.LabelFor(model => model.PhotoFileType, htmlAttributes: new { @class = "control-label col-md-4" })
+                                    <div class="col-md-8">
+                                        @Html.EditorFor(model => model.PhotoFileType, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.PhotoFileType, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>*@
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.NationalityID, htmlAttributes: new { @class = "control-label col-md-5" })
+                                <div class="form-group-sm col-md-7">
+                                    @*@Html.EditorFor(model => model.NationalityID, new { htmlAttributes = new { @class = "form-control" } })*@
+                                    @Html.DropDownListFor(model => model.NationalityID, ViewContext.Controller.ViewBag.NationalityStatus as IEnumerable<SelectListItem>, "-- Select --", new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.NationalityID, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @*@Html.HiddenFor(model => model.NINo)*@
+                                @Html.LabelFor(model => model.NINo, htmlAttributes: new { @class = "control-label col-md-5" })
+                                <div class="form-group-sm col-md-7">
+                                    @Html.EditorFor(model => model.NINo, new
+                                   {
+                                       htmlAttributes = new
+                                       {
+                                           @class = "form-control"@*, disabled = "disabled"*@ }
+                                   })
+                                    @Html.ValidationMessageFor(model => model.NINo, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-5" })
+                                <div class="form-group-sm col-md-7">
+                                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.MobileNo, htmlAttributes: new { @class = "control-label col-md-5" })
+                                <div class="form-group-sm col-md-7">
+                                    @Html.EditorFor(model => model.MobileNo, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.MobileNo, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.TelephoneNo, htmlAttributes: new { @class = "control-label col-md-5" })
+                                <div class="form-group-sm col-md-7">
+                                    @Html.EditorFor(model => model.TelephoneNo, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.TelephoneNo, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.NextOfKIN_Name, htmlAttributes: new { @class = "control-label col-md-5" })
+                                <div class="form-group-sm col-md-7">
+                                    @Html.EditorFor(model => model.NextOfKIN_Name, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.NextOfKIN_Name, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.KIN_MobileNo, htmlAttributes: new { @class = "control-label col-md-5" })
+                                <div class="form-group-sm col-md-7">
+                                    @Html.EditorFor(model => model.KIN_MobileNo, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.KIN_MobileNo, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.KIN_TelephoneNo, htmlAttributes: new { @class = "control-label col-md-5" })
+                                <div class="form-group-sm col-md-7">
+                                    @Html.EditorFor(model => model.KIN_TelephoneNo, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.KIN_TelephoneNo, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            @*<div class="form-group">
+                                        @Html.LabelFor(model => model.ProfilePhoto, htmlAttributes: new { @class = "control-label col-md-4" })
+                                        <div class="form-group-sm col-md-8">
+                                            <img src="@Url.Action(" ViewProfile","Employee",new { area="Resource" })" alt="Logo" style="max-width:140px; margin-top: -7px; " />
+                                            @Html.ValidationMessageFor(model => model.ProfilePhoto, "", new { @class = "text-danger" })
+                                        </div>
+                                </div>*@
+                        </div>
+
+                        <div class="col-md-4">
+                            @if (Model.EmployeeID != 0)
+                            {
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.DateOfJoin, htmlAttributes: new { @class = "col-md-4 text-right" })
+                                    <div class="form-group-sm col-md-8">
+                                        @Html.HiddenFor(model => model.DateOfJoin)
+                                        @Html.DisplayFor(model => model.DateOfJoin)
+                                    </div>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.DateOfJoin, htmlAttributes: new { @class = "control-label col-md-4" })
+                                    <div class="form-group-sm col-md-8">
+                                        @Html.EditorFor(model => model.DateOfJoin, new { @class = "form-control", nowifnull = true })
+                                        @Html.ValidationMessageFor(model => model.DateOfJoin, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            }
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.DateOfLeave, htmlAttributes: new { @class = "control-label col-md-4" })
+                                <div class="form-group-sm col-md-8">
+                                    @Html.EditorFor(model => model.DateOfLeave, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.DateOfLeave, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.EmployeeTypeID, htmlAttributes: new { @class = "control-label col-md-4" })
+                                <div class="form-group-sm col-md-8">
+                                    @Html.DropDownListFor(model => model.EmployeeTypeID, ViewContext.Controller.ViewBag.EmployeeType as IEnumerable<SelectListItem>, "-- Select --", new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.EmployeeTypeID, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.TimeSheetFrequencyID, htmlAttributes: new { @class = "control-label col-md-4" })
+                                <div class="form-group-sm col-md-8">
+                                    @Html.DropDownListFor(model => model.TimeSheetFrequencyID, ViewContext.Controller.ViewBag.TimeSheetFrequency as IEnumerable<SelectListItem>, "-- Select --", new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.TimeSheetFrequencyID, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @if (Model.PhotoString == null)
+                                {
+                                    <div class="form-group-sm control-label col-md-4 text-bold" @*id="test"*@>
+                                        Upload Your Profile Photo@*<input id="UploadImg" name="UploadFile" type="file" />*@
+                                        @*@if (Model.PhotoString == null)
+                                            {
+                                            <div id="imgPreview"></div>
+                                            }*@
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="form-group-sm control-label col-md-5 text-bold" id="test1">
+                                        Your Profile Photo@*<input id="UploadImg" name="UploadFile" type="file" />*@
+                                        @*@if (Model.PhotoString == null)
+                                            {
+                                            <div id="imgPreview"></div>
+                                            }*@
+                                    </div>
+                                }
+
+                                <div @*id="wrapper"*@ style="margin-top: 10px;">
+                                    @if (Model.PhotoString == null)
+                                    {
+                                        <input id="UploadImg" name="UploadFile" type="file" class="form-group-sm col-md-8" />
+                                            <div id="imgPreview" width="180"></div>
+                                            <a id="image" style="display:none;"><span class="glyphicon glyphicon-remove-sign text-danger" data-toggle="tooltip" title="Remove Profile" role="button" onclick="RemoveImageUpload(@Model.PhotoFileType)"></span></a>
+                                    }
+                                </div>
+                            </div>
+
+                            <div class="form-group" id="test2">
+                                @if (Model.PhotoString != null)
+                                {
+                                    <div class="col-md-4"></div>
+                                        <a @*data-toggle="tooltip" title="View Your Profile" role="button"*@><div id="imgPreview" class="col-md-6"><img src="@Model.PhotoString" width="180" /></div>&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                                        <a><span class="glyphicon glyphicon-remove-sign text-danger" data-toggle="tooltip" title="Remove Profile" role="button" onclick="RemoveImage(id=@Model.EmployeeID)"></span></a>
+                                }
+                            </div>
+
+                        </div>
+                    </div>
+                    @if (Model.EmployeeID == 0)
+                    {
+                        @*<div class="row">*@
+                        <div class="col-md-6 well">
+                            <div class="panel panel-success">
+                                <div class="panel-heading">
+                                    <h2 class="panel-title">Resource Payment</h2>
+                                </div>
+                                <div class="panel-body" id="CreatePaymentDIV">
+                                    @if (Model.EmployeeID == 0)
+                                    {
+                                        <div class="col-md-12" id="CreateEditPaymentDIV">
+                                            @{
+                                                Html.RenderPartial("_CreateEditPayment", Model.EmployeePaymentBO, new ViewDataDictionary
+                                                {
+                                                    TemplateInfo = new System.Web.Mvc.TemplateInfo() { HtmlFieldPrefix = "EmployeePaymentBO" }
+                                                });
+                                            }
+                                        </div>
+                                                }
+                                </div>
+                            </div>
+                            <div class="panel panel-success">
+                                <div class="panel-heading">
+                                    <h2 class="panel-title">Resource Working Pattern</h2>
+                                </div>
+                                <div class="panel-body" id="CreateWorkingPatternDIV">
+                                    @if (Model.EmployeeID == 0)
+                                    {
+                                        <div class="col-md-12">
+                                            @{
+                                                Html.RenderPartial("_CreateEditWorkingPattern", Model.WorkingPatternDetailsBO, new ViewDataDictionary
+                                                {
+                                                    TemplateInfo = new System.Web.Mvc.TemplateInfo() { HtmlFieldPrefix = "WorkingPatternDetailsBO" }
+                                                });
+                                            }
+                                        </div>
+                                                }
+                                </div>
+                            </div>
+                        </div>
+
+                                <div id="AddressDIV" class="col-md-6 well">
+                                    <div class="panel panel-success">
+                                        <div class="panel-heading">
+                                            <h2 class="panel-title">Resource Address</h2>
+                                        </div>
+                                        <div class="panel-body">
+                                            @{
+                                                Html.RenderPartial("_Address", Model.AddressViewModel, new ViewDataDictionary
+                                                {
+                                                    TemplateInfo = new System.Web.Mvc.TemplateInfo() { HtmlFieldPrefix = "AddressViewModel" }
+                                                });
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                                @*</div>*@
+                                                }
+                                                else
+                                                {
+                                                    <div class="row">
+                                                        <div id="AddressDIV" class="col-md-12 well">
+                                                            <div class="panel panel-success">
+                                                                <div class="panel-heading">
+                                                                    <h2 class="panel-title">Resource Address</h2>
+                                                                </div>
+                                                                <div class="panel-body">
+                                                                    @{
+                                                                        Html.RenderPartial("_Address", Model.AddressViewModel, new ViewDataDictionary
+                                                                        {
+                                                                            TemplateInfo = new System.Web.Mvc.TemplateInfo() { HtmlFieldPrefix = "AddressViewModel" }
+                                                                        });
+                                                                    }
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                                        }
+
+                    <div class="col-md-4">
+                        <div class="text-right">
+                            @if (Model.EmployeeID == 0)
+                            {
+                                <input type="submit" value="Save" class="btn btn-success" />
+                            }
+                            else
+                            {
+                                <input type="submit" value="Update" class="btn btn-success" />
+                            }
+                            <button type="reset" class="btn btn-default" data-toggle="tooltip" title="Reset" style="border-color:dimgrey;">Reset</button>
+                            <a href="@Url.Action("Index","Employee",new { area="Resource" })" class="btn btn-default" data-toggle="tooltip" title="Cancel" role="button" style="border-color:dimgrey;">Cancel</a>
+                        </div>
+                    </div>
+                </div>
+                                                                        }
+            @*Employee Creation End*@
+
+            <br />
+            <hr />
+            @*Payment Creation*@
+            @if (Model.EmployeeID != 0)
+            {
+                <div id="EmployeePaymentDIV" class="col-md-12 well ">
+                    <div class="panel panel-success">
+                        <div class="panel-heading">
+                            <h2 class="panel-title">Resource Payment</h2>
+                        </div>
+                        <div class="panel-body" id="CreatePaymentDIV">
+                            @if (Model.EmployeeID != 0)
+                            {
+                                <div class="col-md-6" id="PaymentListDIV">
+                                    @Html.Partial("_PaymentList", Model.EmployeePaymentList)
+                                </div>
+                                    @*<hr />*@
+                            }
+
+                            @if (Model.EmployeeID != 0)
+                            {
+                                <div class="col-md-6 text-right" @*class="text-right"*@>
+                                    <p id="AddPaymentID">
+                                        <a class="btn btn-success" data-toggle="tooltip" title="Add New Payment" role="button" onclick="CreateEmployeePayment(@Model.EmployeeID)">&nbsp; Add New Payment</a>
+                                    </p>
+                                </div>
+                            }
+                            <div class="col-md-6" id="EditPaymentDIV"></div>
+                        </div>
+                    </div>
+                </div>
+
+                    <div id="EmployeeWorkingPatternDIV" class="col-md-12 well ">
+                        <div class="panel panel-success">
+                            <div class="panel-heading">
+                                <h2 class="panel-title">Resource WorkingPattern</h2>
+                            </div>
+                            <div class="panel-body" id="CreateEditWorkingPatternDIV">
+                                @if (Model.EmployeeID != 0)
+                                {
+                                    <div class="col-md-6" id="WorkingPatternListDIV">
+                                        @Html.Partial("_EmployeeWorkingPatternList", Model.EmployeeWorkingPatternList)
+                                    </div>
+                                }
+
+                                @if (Model.EmployeeID != 0)
+                                {
+                                    <div class="col-md-6 text-right" @*class="text-right"*@>
+                                        <p id="AddWorkingPatternID">
+                                            <a class="btn btn-success" data-toggle="tooltip" title="Add New Working Pattern" role="button" onclick="CreateEmployeeWorkingPattern(@Model.EmployeeID)">&nbsp; Add New Working Pattern</a>
+                                        </p>
+                                    </div>
+                                }
+                                <div class="col-md-6" id="EditWorkingPatternDIV"></div>
+                            </div>
+                        </div>
+                    </div>
+            }
+            @*Ends*@
+        </div>
+    </div>
+</div>
+        <script>
+            @*UploadProfile Function*@
+            $(document).ready(function () {
+                $("#UploadImg").on('change', function () {
+                    //Gets count of selected files
+                    var countFiles = $(this)[0].files.length;
+                    var imgPath = $(this)[0].value;
+                    var extn = imgPath.substring(imgPath.lastIndexOf('.') + 1).toLowerCase();
+                    var image_holder = $("#imgPreview");
+                    image_holder.empty();
+                    if (extn == "gif" || extn == "png" || extn == "jpg" || extn == "jpeg") {
+                        if (typeof (FileReader) != "undefined") {
+                            //Loop for each file selected for uploaded
+                            for (var i = 0; i < countFiles; i++) {
+                                var reader = new FileReader();
+                                reader.onload = function (e) {
+                                    $("<img />", {
+                                        "src": e.target.result,
+                                        "class": "thumb-image"
+                                    }).appendTo(image_holder);
+                                }
+                                image_holder.show();
+                                if ($("#imgPreview")!=null) {
+                                    $("#image").show();
+                                }else {
+                                    $("#image").hide();
+                                }
+                                var uploadFile = $(this)[0].files[0].size;      //Gets uploaded file size
+                                //alert(uploadFile);
+                                if (uploadFile > 600000) { // Maximum size of Uploaded file is "0.6 mb"
+                                    $("#UploadImg").val('');  //Empty the selected file name from the choosen button
+                                    $("#image").hide();  //Hides remove button
+                                    sweetAlert("Selected Image Size Is Too Large!...Please Upload A Smaller Size Image!..");
+                                }
+                                reader.readAsDataURL($(this)[0].files[i]);
+                            }
+                        } else {
+                            alert("This Browser Does Not Support FileReader");
+                        }
+                    } else {
+                        $("#image").hide(); //Hides remove button
+                        $("#UploadImg").val('');  //Empty the selected file name from the choosen button
+                        sweetAlert("Please Select Only Images");
+                    }
+                });
+            });
+            @*End*@
+
+
+            @*Validate the DateLeft in Resource creation*@
+            $("#DateOfLeave").change(function () {
+                if ($("#EmployeeID").val()==0) {
+                    if ($("#DateOfJoin").val() >= $("#DateOfLeave").val()) {
+                        sweetAlert("DateLeft" +" '"+$("#DateOfLeave").val() +"'"+ " Should Be Greater Than The DateJoined"+" '"+$("#DateOfJoin").val() +"'");
+                    }
+                }
+            });
+            @*End*@
+
+
+            @*Validate the ChangeDate for Working Pattern*@
+            $("#WorkingPatternDetailsBO_ChangeDate").change(function () {
+                if ($("#EmployeeID").val()==0) {
+                    if ($("#WorkingPatternDetailsBO_ChangeDate").val() < $("#DateOfJoin").val()) {
+                        sweetAlert("Your Provided Change Date Should Be Greater Than Or Equal To The DateJoined"+" '"+$("#DateOfJoin").val() +"'");
+                    }
+                }
+            });
+            @*End*@
+
+
+            @*UploadProfile Image remove Function before saving to the database*@
+            function RemoveImageUpload(fileType) {
+                var image_holder = $("#imgPreview");    //Gets the value of Image Preview
+                var UploadImage_holder = $("#UploadImg");   //Gets the value of Upload image button section
+                swal({
+                    title: 'Confirm',
+                    text: 'Would You Like To Delete This Profile?',
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes',
+                    cancelButtonText: 'No',
+                    closeOnConfirm: false,
+                },
+                function (isConfirm) {
+                    if (isConfirm) {
+                        image_holder.empty();       //Empty the image
+                        //image_holder.val('');
+                        //sweetAlert("Profile Is Successfully Removed...");
+                        swal({
+                            title: "Deleted",
+                            text: "Profile Is Successfully Removed",
+                            type: "success"
+                        });
+                        UploadImage_holder.val('');     //Empty the upload image details
+                        $("#image").hide();     //hides Image Preview panel
+                    }
+                });
+            }
+            @*End*@
+
+
+            @*CreateEmployeePayment Function*@
+            function CreateEmployeePayment(EmpID) {
+                //alert(EmpID);
+                $.ajax({
+                    url: '@Url.Action("CreatePayment", "Employee")',
+                    dataType: 'html',
+                    data: ({ id: EmpID }),
+                    type:"GET",
+                    data: ({}),
+                    success: function (data) {
+                        $("#EditPaymentDIV").html(data).show();     //Shows Employee payment form to create
+                        $("#PaymentStartDate").show();      //Shows "StartDate" field
+                        $("#EmpButtonsDIV").show();     //Shows "Save" and "Cancel" buttons
+                    }
+                })
+            }
+            @*End*@
+
+
+            @*CancelEmployeePayment Function for "Cancel" Button*@
+            function CancelEmployeePayment() {
+                $.ajax({
+                    url: '@Url.Action("EditEmployee", "Employee")',
+                    dataType: 'html',
+                    data: ({}),
+                    success: function (data) {
+                        $("#EditPaymentDIV").html('');     //Hides Employee Payment form
+                        //location.reload();      //Reloads the page
+                    }
+                })
+            }
+            @*End*@
+
+
+            @*SaveEmployeePayment Function for a particular Employee*@
+            function SaveEmployeePayment() {
+                var model=@Html.Raw(Json.Encode(Model));    //Gets the all Employee model values from the Employee edit form
+                var PaymentAmount = $("#PaymentAmount").val();
+                var PaymentTypeID = $("#PaymentTypeID").val();
+                var StartDate = $("#StartDate").val();
+                //var EmpPayID = $("#EmployeePayID").val();
+                var EmpPayID=document.getElementById("EmployeePayID").value==""?0:document.getElementById("EmployeePayID").value;
+                if (PaymentAmount=="") {    //When the PaymentAmount is empty
+                    //sweetAlert("Please Enter Payment Amount!");
+                    successMessage('Please Enter Payment Amount!', 'Error');
+                }
+                else if (PaymentTypeID==0) {    //When the PaymentType is empty
+                    //sweetAlert("Please Select A Payment Frequency!");
+                    successMessage('Please Select A Payment Frequency!', 'Error');
+                }
+                else if (StartDate=="") {   //When the PaymentStart is empty
+                    //sweetAlert("Please Select Payment StartDate!");
+                    successMessage('Please Select Payment StartDate!', 'Error');
+                }
+                else if (PaymentAmount!="") {
+                    if (PaymentAmount <= 0.00) {
+                        //sweetAlert("Payment Amount Must Be Greater Than 0.00!...");
+                        //swal({
+                        //    title: "Error",
+                        //    text: "Payment Amount Must Be Greater Than 0.00!",
+                        //    type: "error"
+                        //});
+                        successMessage('Payment Amount Must Be Greater Than 0.00!', 'Error');
+                        return false;
+                    }
+                }
+                $.ajax({
+                    url: '@Url.Action("CreatePayment", "Employee")',
+                    dataType: 'html',
+                    type: "Post",
+                    cache: false,
+                    data: ({empView:model,paymentAmount:PaymentAmount,paymentTypeID:PaymentTypeID,startDate:StartDate,empPayId:EmpPayID}),
+                    success: function (data) {
+                        //alert(data);
+                        var dataObj = jQuery.parseJSON(data);   //Gets the message as "Json Object"
+                        //alert(dataObj);
+                        if (dataObj.success == true) {
+                            //alert(dataObj.success);
+                            //successMessage(dataObj.errorMsg, 'Success');
+                            swal({
+                                title: "Saved",
+                                text: dataObj.errorMsg,
+                                type: "success"
+                            },
+                            function () {
+                                location.reload(true);
+                            })
+                            //window.setTimeout(function(){
+                            //    location.reload();      //Refresh the Page
+                            //} ,1000);
+                        }else {
+                            swal({
+                                title: "Error",
+                                text: dataObj.errorMsg,
+                                type: "error"
+                            });
+                            //window.setTimeout(function(){
+                            //    location.reload();      //Refresh the Page
+                            //} ,2500);
+                        }
+                    }
+                })
+            }
+            @*End*@
+
+
+            @*DeleteProfile Function*@
+            function RemoveImage(empID) {
+                var image_holder = $("#imgPreview");    //Gets the value of Image Preview
+                var UploadImage_holder = $("#UploadImg");   //Gets the value of Upload image button section
+                swal({
+                    title: 'Confirm',
+                    text: 'Would You Like To Delete This Profile?',
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes',
+                    cancelButtonText: 'No',
+                    //closeOnConfirm: false,
+                },
+            function (isConfirm) {
+                if (isConfirm) {
+                    $.ajax({
+                        url: '@Url.Action("RemoveProfile", "Employee")',
+                        type: 'POST',
+                        cache: false,
+                        dataType: 'html',
+                        data: ({ id: empID }),
+                        success: function (result) {
+                            var resultObj = jQuery.parseJSON(result);
+                            console.log(resultObj);
+                            if (resultObj.success == true) {
+                                console.log(resultObj.success);
+                                swal({
+                                    title: "Deleted",
+                                    text: resultObj.errorMsg,
+                                    type: "success"
+                                },
+                                function () {
+                                    @*$("#test5").load('@Url.Action("EditEmployee", "Employee")');*@
+                                    $("#test1").hide();
+                                    $("#test2").hide();
+                                    //$("#UploadImg").show();
+                                    //$("#imgPreview").show();
+                                    //$("#image").show();                                             
+                                })                               
+                            }
+                            else {
+                                console.log(resultObj.success);
+                                swal({
+                                    title: "Error",
+                                    text: resultObj.errorMsg,
+                                    type: "error"
+                                },
+                                function () {
+                                    location.reload(true);
+                                })
+                            }
+                        }
+                    })
+                }
+            })
+            }
+            @*End*@
+
+
+            @*CreateEmployeeWorkingPattern Function*@
+            function CreateEmployeeWorkingPattern(EmpID) {
+                $.ajax({
+                    url: '@Url.Action("CreateWorkingPattern", "Employee")',
+                    dataType: 'html',
+                    data: ({ id: EmpID }),
+                    type:"GET",
+                    data: ({}),
+                    success: function (data) {
+                        $("#EditWorkingPatternDIV").html(data).show();     //Shows Employee payment form to create
+                        $("#EmpButtonsDIV").show();     //Shows "Save" and "Cancel" buttons
+                    }
+                })
+            }
+            @*End*@
+
+
+            @*CancelEmployeeWorkingPattern Function for "Cancel" Button*@
+            function CancelEmployeeWorkingPattern() {
+                $.ajax({
+                    url: '@Url.Action("EditEmployee", "Employee")',
+                    dataType: 'html',
+                    data: ({}),
+                    success: function (data) {
+                        $("#EditWorkingPatternDIV").html('');     //Hides Employee WorkingPattern form
+                        //location.reload();      //Reloads the page
+                    }
+                })
+            }
+            @*End*@
+
+
+            @*SaveEmployeeWorkingPattern Function for a particular Employee*@
+            function SaveEmployeeWorkingPattern() {
+                var models=@Html.Raw(Json.Encode(Model));    //Gets the all Employee model values from the Employee edit form
+
+                var Monday = $("#Monday").val();
+                var Tuesday = $("#Tuesday").val();
+                var Wednesday = $("#Wednesday").val();
+                var Thursday = $("#Thursday").val();
+                var Friday = $("#Friday").val();
+                var Saturday = $("#Saturday").val();
+                var Sunday = $("#Sunday").val();
+                var ChangeDate = $("#ChangeDate").val();
+                var NoOfWorkingHours = $("#NoOfWorkingHours").val();
+                var WorkingPatternID=document.getElementById("WorkingPatternID").value==""?0:document.getElementById("WorkingPatternID").value;
+
+                if (NoOfWorkingHours=="") {    //When the "NoOfWorkingHours" is empty
+                    sweetAlert("Please Enter The Working Hours!...");
+                }
+                else if (NoOfWorkingHours.includes(CharacterData)) {    //When the "NoOfWorkingHours" has characters
+                    sweetAlert("The Working Hours Cannot Be String Or Character!...");
+                }                
+                else if (ChangeDate=="") {   //When the ChangeDate is empty
+                    sweetAlert("Please Choose A Working Pattern ChangeDate!...");
+                }
+                $.ajax({
+                    url: '@Url.Action("CreateWorkingPattern", "Employee")',
+                    dataType: 'html',
+                    type: "Post",
+                    //cache: false,
+                    data: ({empView:models,changeday:ChangeDate,workingPatternID:WorkingPatternID,noOfHours:NoOfWorkingHours,mon:Monday,tues:Tuesday,wed:Wednesday,thur:Thursday,fri:Friday,sat:Saturday,sun:Sunday}),
+                    success: function (data) {
+                        //alert(Monday);
+                        var dataObj = jQuery.parseJSON(data);   //Gets the message as "Json Object"
+                        //alert(dataObj);
+                        if (dataObj.success == true) {   
+                            swal({
+                                title: "Saved",
+                                text: dataObj.errorMsg,
+                                type: "success"
+                            },
+                            function () {
+                                location.reload(true);
+                            })
+                            //window.setTimeout(function(){
+                            //    location.reload();      //Refresh the Page
+                            //} ,1000);
+                        }else {
+                            swal({
+                                title: "Error",
+                                text: dataObj.errorMsg,
+                                type: "error"
+                            });
+                            //window.setTimeout(function(){
+                            //    location.reload();      //Refresh the Page
+                            //} ,2500);
+                        }
+                    }
+                })
+            }
+            @*End*@
+
+
+            @*Choosen Dropdown Settings*@
+            var config = {
+                '.chosen-select': {},
+                '.chosen-select-deselect': { allow_single_deselect: true },
+                '.chosen-select-no-single': { disable_search_threshold: 10 },
+                '.chosen-select-no-results': { no_results_text: 'Oops, nothing found!' },
+                '.chosen-select-width': { width: "95%" }
+            }
+            for (var selector in config) {
+                $(selector).chosen(config[selector]);
+            }
+            @*End*@
+
+</script>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

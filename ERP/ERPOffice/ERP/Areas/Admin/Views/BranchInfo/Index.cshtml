@@ -1,0 +1,191 @@
+﻿@model ERP.Admin.ViewModels.BranchInfoViewModel
+@{
+    ViewBag.Title = "Branch";
+    //Layout =Request.IsAjaxRequest()?null: "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<div class="col-md-12" id="BranchListID">
+
+    @Html.Partial("_BranchListView", Model.branchInfoViewModel)
+    </div>
+
+    <script>
+        var u = new SpeechSynthesisUtterance(); // VoiceObject Create
+
+        function CreateBranchFun() {
+            //u.text = 'Create A New Branch';
+            //speechSynthesis.speak(u);
+            $.ajax({
+                url: '@Url.Action("CreateBranch", "BranchInfo")',
+                dataType: 'html',
+                data: ({}),
+                type: "GET",
+                success: function (data) {
+                    $('#BranchListID').html("").show();
+
+
+                    //alert(data);
+                    $("#BranchListID").html(data).show();
+                    // alert(data);
+
+                },
+                error: function (data) {
+                    alert(data);
+                }
+            })
+        }
+
+
+        function SavedBranch(status) {
+            // alert(status.success)
+            // console.log(status)
+            if (status.success == true) {
+
+                $.ajax({
+                    url: '@Url.Action("listBranch", "BranchInfo")',
+                    dataType: 'html',
+                    data: ({}),
+                    success: function (data) {
+                        $('#BranchListID').html("").show();
+                        $("#BranchListID").html(data).show();
+
+                    }
+                })
+                u.text = status.errorMsg;
+                speechSynthesis.speak(u);
+                successMessage(status.errorMsg, 'Success');
+                location.reload();
+
+            } else {
+                u.text = status.errorMsg;
+                speechSynthesis.speak(u);
+                successMessage(status.errorMsg, 'Error');
+
+
+
+            }
+
+        }
+
+
+
+
+        function DeleteBranch(BranchID, BranchName) {
+
+
+
+            swal({
+                title: "Confirm",
+                text: 'Would You Like To Delete This "' + ' ' + BranchName + '  ' + ' " Branch?',
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes',
+                cancelButtonText: 'No'
+            },
+             function (isConfirm) {
+                 console.log(isConfirm);
+                 if (isConfirm) {
+                     $.ajax({
+                         type: "POST",
+                         url: '@Url.Action("Delete", "BranchInfo")',
+                         dataType: 'html',
+                         data: ({ Id: BranchID }),
+                         success: function (dat) {
+                             var dataObj = jQuery.parseJSON(dat);
+                             //alert(dataObj.success);
+                             if (dataObj.success == true) {
+                                 $.post('@Url.Action("ListBranch", "BranchInfo")',
+                       function (result) {
+                           console.log(dat.success)
+                           $('#BranchListID').html("").show();
+                           $("#BranchListID").html(result);
+                       
+
+                       })
+
+
+                                 u.text = dataObj.errorMsg;
+                                 speechSynthesis.speak(u);
+                                 // location.reload();
+                                 successMessage(dataObj.errorMsg, 'Success');
+
+
+                             }
+
+                             else {
+                                 $.ajax({
+                                     url: '@Url.Action("listBranch", "BranchInfo")',
+                                     dataType: 'html',
+                                     data: ({}),
+                                     success: function (data) {
+                                         $('#BranchListID').html("").show();
+                                         $("#BranchListID").html(data).show();
+                          
+                                     }
+                                 })
+                                 u.text = dataObj.errorMsg;
+                                 speechSynthesis.speak(u);
+                                 successMessage(dataObj.errorMsg, 'Error');
+
+                             }
+                         },
+                         error: function (data) {
+                             alert("error Loading the data");
+                         }
+                     })
+                 }
+             })
+        }
+
+
+        function EditBranch(BranchID) {
+            // alert(BranchID)
+            // location.reload();
+            $.ajax({
+                url: '@Url.Action("EditBranch", "branchInfo")',
+                type: "POST",
+                dataType: 'json',
+                data: ({ Id: BranchID }),
+                success: function (data) {
+
+                    // alert(data.success);
+
+
+
+                    if (data.success == false) {
+                        // alert("False Message ")
+                        $.ajax({
+                            url: '@Url.Action("listBranch", "BranchInfo")',
+                            dataType: 'html',
+                            data: ({}),
+                            success: function (data) {
+                                $('#BranchListID').html("").show();
+                                $("#BranchListID").html(data).show();
+
+                            }
+                        })
+                        successMessage(data.errorMsg, 'Error');
+                        u.text = data.errorMsg;
+                        speechSynthesis.speak(u);
+                    }
+
+                    else {
+                        // alert("View");
+
+                        $("#BranchListID").html("").show();
+                        $("#BranchListID").html(data.partialview);
+
+                    }
+                },
+                error: function (data) {
+                    successMessage("error Loading the data", 'Error');
+                    location.reload();
+                }
+            })
+        }
+
+
+
+    </script>
+

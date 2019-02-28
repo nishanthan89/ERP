@@ -1,0 +1,58 @@
+﻿@model IEnumerable<ERP.Utility.Models.EmployeeTypeBO>
+
+<br />
+<table class="table">
+    <thead>
+        <tr>
+            <th></th>
+            @*<th>
+                    @Html.DisplayNameFor(model => model.EmployeeTypeID)
+                </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.EmployeeTypeName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ReportingTo)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+        @if (Model != null || Model.Count() != 0)
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <a data-toggle="tooltip" title="Edit Title" role="button" onclick="EditEmployeeType(@item.EmployeeTypeID)" id="edit"><span class="glyphicon glyphicon-pencil text-success"></span></a>&nbsp;
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EmployeeTypeName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ReportingEmployee)
+                    </td>
+                    <td>
+                        <a data-toggle="tooltip" title="Delete Title" role="button" onclick="DeleteEmployeeType(@item.EmployeeTypeID)"><span class="glyphicon glyphicon-trash text-danger"></span></a>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td align="center" colspan=15>
+                    <center>
+                        <font color="red" ; style="text-align:center">"Sorry, No Title found!!."</font>
+                    </center>
+                </td>
+
+            </tr>
+        }
+
+</table>

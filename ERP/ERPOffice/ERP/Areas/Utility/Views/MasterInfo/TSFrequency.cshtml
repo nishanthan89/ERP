@@ -1,0 +1,111 @@
+﻿@model ERP.Utility.ViewModels.TSFrequencyView
+
+@{
+    ViewBag.Title = "Timesheet Frequency";    
+}
+
+<div class="panel panel-success">
+    <div class="panel-heading">
+        <h3 class="panel-title">Timesheet Frequency </h3>
+    </div>
+    <div class="panel-body">
+        <div class="col-md-5" id="FrequencyList">           
+            @Html.Partial("_TSFrequencyList", Model.TSFrequencyList)
+        </div>
+        <div class="col-md-offset-1 col-md-5" id="CreateEditFrequency">
+            
+            @*@Html.Partial("_CreateTSFrequency", Model.frequencyBO)*@
+
+        </div>
+
+    </div>
+</div>
+
+<script>
+    function Update(status) {
+        if (status.success == true) {
+            $.post('@Url.Action("GetTSFrequencyList", "MasterInfo")',
+                 function (result) {
+                     $("#FrequencyList").html(result);
+                 });
+            @*$.get('@Url.Action("CreateTSFrequency", "MasterInfo")',
+                      function (result) {
+                          $("#CreateEditFrequency").html(result);
+                      });*@
+            $("#CreateEditFrequency").hide();
+            console.log(status);
+            successMessage(status.errorMsg, 'Success');
+        }
+        else {
+            $("#CreateEditFrequency").html(status);
+        }
+    }
+
+    @*function DeleteFrequency(FrequencyID) {
+        //console.log(TitleId);
+        swal({
+            title: 'Confirm',
+            text: 'Are you sure you want to Delete?',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes',
+            cancelButtonText: 'No'
+        },
+         function (isConfirm) {
+             // console.log(isConfirm);
+             if (isConfirm) {
+                 $.ajax({
+                     url: '@Url.Action("DeleteTSFrequency", "MasterInfo")',
+                     dataType: 'html',
+                     data: ({ id: FrequencyID }),
+                     success: function Delete(status) {
+                         var statusObj = jQuery.parseJSON(status);
+                         console.log(statusObj);
+                         if (statusObj.success == true) {
+                             console.log(statusObj.success);
+                             successMessage(statusObj.errorMsg, 'Success');
+                             $.post('@Url.Action("GetTSFrequencyList", "MasterInfo")',
+                                                                 function (result) {
+                                                                     $("#FrequencyList").html(result);
+                                                                 });
+                         }
+                         else {
+                             console.log(statusObj.success);
+                             successMessage(statusObj.errorMsg, 'Error');
+                         }
+
+                         $.get('@Url.Action("CreateTSFrequency", "MasterInfo")',
+                                function (result) {
+                                    $("#CreateEditFrequency").html(result);
+                                });
+                     },
+                     error: function (data) {
+                         alert("error Loading the data");
+                     }
+                 })
+             }
+         })
+    }*@
+
+    function CancelButton() {
+        $("#CreateEditFrequency").hide();
+    }
+
+    @*function EditFrequency(FrequencyID) {
+        console.log("1");
+        $.ajax({
+            url: '@Url.Action("EditTSFrequency", "MasterInfo")',
+            dataType: 'html',
+            data: ({ id: FrequencyID }),
+            success: function (data) {
+                $("#CreateEditFrequency").html(data).show();
+                console.log("2");
+            },
+            error: function (data) {
+                alert("error Loading the data");
+            }
+        })
+    }*@
+
+</script>
+

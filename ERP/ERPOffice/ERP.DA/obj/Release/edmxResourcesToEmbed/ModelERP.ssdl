@@ -1,0 +1,1100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ERPModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="__MigrationHistory">
+    <Key>
+      <PropertyRef Name="MigrationId" />
+      <PropertyRef Name="ContextKey" />
+    </Key>
+    <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+    <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+    <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetRoles">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetUserClaims">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="ClaimType" Type="nvarchar(max)" />
+    <Property Name="ClaimValue" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="AspNetUserLogins">
+    <Key>
+      <PropertyRef Name="LoginProvider" />
+      <PropertyRef Name="ProviderKey" />
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetUserRoles">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetUsers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="256" />
+    <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+    <Property Name="PasswordHash" Type="nvarchar(max)" />
+    <Property Name="SecurityStamp" Type="nvarchar(max)" />
+    <Property Name="PhoneNumber" Type="nvarchar(max)" />
+    <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+    <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+    <Property Name="LockoutEndDateUtc" Type="datetime" />
+    <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+    <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Branch_Details">
+    <Key>
+      <PropertyRef Name="BranchID" />
+    </Key>
+    <Property Name="BranchID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BranchName" Type="nvarchar" MaxLength="50" />
+    <Property Name="BranchCode" Type="nvarchar" MaxLength="50" />
+    <Property Name="BranchStatusID" Type="int" />
+    <Property Name="BranchTypeID" Type="int" />
+    <Property Name="Telephone" Type="nvarchar" MaxLength="50" />
+    <Property Name="Fax" Type="nvarchar" MaxLength="50" />
+    <Property Name="AddressID" Type="int" />
+    <Property Name="VATNumber" Type="nvarchar" MaxLength="20" />
+    <Property Name="Status" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Branch_Holidays">
+    <Key>
+      <PropertyRef Name="BnchComHolyID" />
+    </Key>
+    <Property Name="BnchComHolyID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BranchID" Type="int" />
+    <Property Name="HolidayTypeID" Type="int" />
+    <Property Name="HolidayDate" Type="datetime" />
+    <Property Name="HolidayName" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Branch_Status">
+    <Key>
+      <PropertyRef Name="BranchStatusID" />
+    </Key>
+    <Property Name="BranchStatusID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BranchStatus" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Branch_Type">
+    <Key>
+      <PropertyRef Name="BranchTypeID" />
+    </Key>
+    <Property Name="BranchTypeID" Type="int" Nullable="false" />
+    <Property Name="BranchType" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Common_Address">
+    <Key>
+      <PropertyRef Name="AddressID" />
+    </Key>
+    <Property Name="AddressID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AddressLine1" Type="nvarchar" MaxLength="50" />
+    <Property Name="AddressLine2" Type="nvarchar" MaxLength="50" />
+    <Property Name="AddressLine3" Type="nvarchar" MaxLength="50" />
+    <Property Name="Town" Type="nvarchar" MaxLength="50" />
+    <Property Name="County" Type="nvarchar" MaxLength="50" />
+    <Property Name="PostCode" Type="nvarchar" MaxLength="50" />
+    <Property Name="CountryID" Type="int" />
+  </EntityType>
+  <EntityType Name="Common_Country">
+    <Key>
+      <PropertyRef Name="CountryID" />
+    </Key>
+    <Property Name="CountryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CountryName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="CountryCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="IsSelected" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Common_CurrencyFormat">
+    <Key>
+      <PropertyRef Name="CurrencyID" />
+    </Key>
+    <Property Name="CurrencyID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Currency" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Common_DateFormat">
+    <Key>
+      <PropertyRef Name="DateFormatID" />
+    </Key>
+    <Property Name="DateFormatID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DateFormat" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Common_Day">
+    <Key>
+      <PropertyRef Name="DayID" />
+    </Key>
+    <Property Name="DayID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DayName" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Common_EmployeeType">
+    <Key>
+      <PropertyRef Name="EmployeeTypeID" />
+    </Key>
+    <Property Name="EmployeeTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EmployeeTypeName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Description" Type="nvarchar" MaxLength="50" />
+    <Property Name="ReportingTo" Type="int" />
+  </EntityType>
+  <EntityType Name="Common_EthnicGroup">
+    <Key>
+      <PropertyRef Name="EthnicGroupID" />
+    </Key>
+    <Property Name="EthnicGroupID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EthnicGroupName" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Common_HostLogo">
+    <Key>
+      <PropertyRef Name="LogoID" />
+    </Key>
+    <Property Name="LogoID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="HostLogoContent" Type="image" Nullable="false" />
+    <Property Name="HostLogoContentType" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Common_HostSettings">
+    <Key>
+      <PropertyRef Name="HostKey" />
+    </Key>
+    <Property Name="HostKey" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="HostValue" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Common_ImmigrationStatus">
+    <Key>
+      <PropertyRef Name="ImmigrationStatusID" />
+    </Key>
+    <Property Name="ImmigrationStatusID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ImmigrationName" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Common_Key">
+    <Key>
+      <PropertyRef Name="KeyName" />
+    </Key>
+    <Property Name="KeyName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="KeyValue" Type="bigint" Nullable="false" />
+    <Property Name="Prefix" Type="nvarchar" MaxLength="5" />
+    <Property Name="LeadingChar" Type="char" MaxLength="1" />
+    <Property Name="MaximumChars" Type="tinyint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Common_MaritalStatus">
+    <Key>
+      <PropertyRef Name="MaritalStatusID" />
+    </Key>
+    <Property Name="MaritalStatusID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MaritalStatusName" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Common_Nationality">
+    <Key>
+      <PropertyRef Name="NationalityID" />
+    </Key>
+    <Property Name="NationalityID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NationalityName" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Common_PaymentType">
+    <Key>
+      <PropertyRef Name="PaymentTypeID" />
+    </Key>
+    <Property Name="PaymentTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PaymentName" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Common_TimeFormat">
+    <Key>
+      <PropertyRef Name="TimeID" />
+    </Key>
+    <Property Name="TimeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TimeFormat" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Common_TimeSheetFrequency">
+    <Key>
+      <PropertyRef Name="TimeSheetFrequencyID" />
+    </Key>
+    <Property Name="TimeSheetFrequencyID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TimeSheetFrequencyName" Type="nvarchar" MaxLength="50" />
+    <Property Name="TimeSheetFrequencyDeadline" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Common_Title">
+    <Key>
+      <PropertyRef Name="TitleID" />
+    </Key>
+    <Property Name="TitleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TitleName" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Resource_BranchDetails">
+    <Key>
+      <PropertyRef Name="ResourceBranchID" />
+    </Key>
+    <Property Name="ResourceBranchID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BranchID" Type="int" />
+    <Property Name="ResourceID" Type="int" />
+    <Property Name="IsDefault" Type="bit" />
+  </EntityType>
+  <EntityType Name="Resource_Employee">
+    <Key>
+      <PropertyRef Name="EmployeeID" />
+    </Key>
+    <Property Name="EmployeeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TitleID" Type="int" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+    <Property Name="MiddleName" Type="nvarchar" MaxLength="50" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+    <Property Name="DoB" Type="date" />
+    <Property Name="Sex" Type="char" MaxLength="1" />
+    <Property Name="NationalityID" Type="int" />
+    <Property Name="EmployeeTypeID" Type="int" />
+    <Property Name="EthnicGroupID" Type="int" />
+    <Property Name="MaritalStatusID" Type="int" />
+    <Property Name="TimeSheetFrequencyID" Type="int" />
+    <Property Name="DateOfJoin" Type="date" />
+    <Property Name="DateOfLeave" Type="date" />
+    <Property Name="ProfilePhoto" Type="image" />
+    <Property Name="PhotoFileType" Type="nvarchar" MaxLength="50" />
+    <Property Name="NINo" Type="nvarchar" MaxLength="50" />
+    <Property Name="ImmigrationStatusID" Type="int" />
+    <Property Name="AdderessID" Type="int" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+    <Property Name="TelephoneNo" Type="nvarchar" MaxLength="50" />
+    <Property Name="MobileNo" Type="nvarchar" MaxLength="50" />
+    <Property Name="NextOfKIN_Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="KIN_TelephoneNo" Type="nvarchar" MaxLength="50" />
+    <Property Name="KIN_MobileNo" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Resource_EmployeePayment">
+    <Key>
+      <PropertyRef Name="EmployeePayID" />
+    </Key>
+    <Property Name="EmployeePayID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EmployeeID" Type="int" />
+    <Property Name="PaymentAmount" Type="float" />
+    <Property Name="PaymentTypeID" Type="int" />
+    <Property Name="StartDate" Type="date" Nullable="false" />
+    <Property Name="EndDate" Type="date" />
+  </EntityType>
+  <EntityType Name="Resource_Holiday">
+    <Key>
+      <PropertyRef Name="HolidayID" />
+    </Key>
+    <Property Name="HolidayID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ResourceID" Type="int" />
+    <Property Name="HolidayDate" Type="datetime" />
+    <Property Name="HolidayTypeID" Type="int" />
+    <Property Name="BookingHrs" Type="float" />
+    <Property Name="Comments" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Resource_Holiday_Type">
+    <Key>
+      <PropertyRef Name="HolidayTypeID" />
+    </Key>
+    <Property Name="HolidayTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="HolidayTypeName" Type="nvarchar" MaxLength="50" />
+    <Property Name="AbbriviatedHolidayType" Type="nvarchar" MaxLength="15" />
+    <Property Name="IconCode" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Resource_HolidayStatus">
+    <Key>
+      <PropertyRef Name="HolidayStatusID" />
+    </Key>
+    <Property Name="HolidayStatusID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="HolidayID" Type="int" Nullable="false" />
+    <Property Name="HolidayStatusTypeID" Type="int" />
+    <Property Name="StatusDateTime" Type="datetime" />
+    <Property Name="StatusChangedBy" Type="int" />
+    <Property Name="Comments" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="Resource_HolidayStatusType">
+    <Key>
+      <PropertyRef Name="HolidayStatusTypeID" />
+    </Key>
+    <Property Name="HolidayStatusTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="HolidayStatusType" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Resource_ShiftPattern">
+    <Key>
+      <PropertyRef Name="ShiftPatternID" />
+    </Key>
+    <Property Name="ShiftPatternID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ShiftStartTime" Type="int" />
+    <Property Name="Duration" Type="int" />
+    <Property Name="IsEnable" Type="bit" />
+    <Property Name="BreakDuration" Type="int" />
+  </EntityType>
+  <EntityType Name="Resource_ShiftSchedule">
+    <Key>
+      <PropertyRef Name="ShiftScheduleID" />
+    </Key>
+    <Property Name="ShiftScheduleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EmployeeID" Type="int" />
+    <Property Name="ShiftPatternID" Type="int" />
+    <Property Name="ShiftDate" Type="datetime" />
+    <Property Name="ExpectedOnTime" Type="datetime" />
+    <Property Name="ExpectedOffTime" Type="datetime" />
+    <Property Name="ActualOnTime" Type="datetime" />
+    <Property Name="ActualOffTime" Type="datetime" />
+    <Property Name="BranchID" Type="int" />
+  </EntityType>
+  <EntityType Name="Resource_TimeSheet">
+    <Key>
+      <PropertyRef Name="TimeSheetID" />
+    </Key>
+    <Property Name="TimeSheetID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ResourceID" Type="int" />
+    <Property Name="TimeSheetDate" Type="datetime" />
+    <Property Name="TimeSheetFrequencyID" Type="int" />
+    <Property Name="TimeSheetAuthorizationDate" Type="datetime" />
+    <Property Name="Approved" Type="nvarchar" MaxLength="50" />
+    <Property Name="LockedBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="LockedDateTime" Type="datetime" />
+    <Property Name="Comments" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Resource_TimeSheetDetails">
+    <Key>
+      <PropertyRef Name="TimeSheetDetailsID" />
+    </Key>
+    <Property Name="TimeSheetDetailsID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TimeSheetID" Type="int" />
+    <Property Name="ShiftScheduleID" Type="int" />
+  </EntityType>
+  <EntityType Name="Resource_TimeSheetDetailsHoliday">
+    <Key>
+      <PropertyRef Name="TimeSheetDetailsHoliID" />
+    </Key>
+    <Property Name="TimeSheetDetailsHoliID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TimeSheetID" Type="int" />
+    <Property Name="HolidayID" Type="int" />
+  </EntityType>
+  <EntityType Name="Resource_WeeklyPatternDetails">
+    <Key>
+      <PropertyRef Name="WrkPatternDetailsID" />
+    </Key>
+    <Property Name="WrkPatternDetailsID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PatternID" Type="int" />
+    <Property Name="DayID" Type="int" />
+  </EntityType>
+  <EntityType Name="Resource_WorkingPattern">
+    <Key>
+      <PropertyRef Name="PatternID" />
+    </Key>
+    <Property Name="PatternID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ResourceID" Type="int" />
+    <Property Name="PatternStartDate" Type="datetime" />
+    <Property Name="PatternEndDate" Type="datetime" />
+    <Property Name="NoOfHours" Type="float" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <Association Name="FK_Branch_Details_Branch_Status1">
+    <End Role="Branch_Status" Type="Self.Branch_Status" Multiplicity="0..1" />
+    <End Role="Branch_Details" Type="Self.Branch_Details" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Branch_Status">
+        <PropertyRef Name="BranchStatusID" />
+      </Principal>
+      <Dependent Role="Branch_Details">
+        <PropertyRef Name="BranchStatusID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Branch_Details_Branch_Type">
+    <End Role="Branch_Type" Type="Self.Branch_Type" Multiplicity="0..1" />
+    <End Role="Branch_Details" Type="Self.Branch_Details" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Branch_Type">
+        <PropertyRef Name="BranchTypeID" />
+      </Principal>
+      <Dependent Role="Branch_Details">
+        <PropertyRef Name="BranchTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Branch_Details_Common_Address">
+    <End Role="Common_Address" Type="Self.Common_Address" Multiplicity="0..1" />
+    <End Role="Branch_Details" Type="Self.Branch_Details" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Common_Address">
+        <PropertyRef Name="AddressID" />
+      </Principal>
+      <Dependent Role="Branch_Details">
+        <PropertyRef Name="AddressID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Branch_Holidays_Branch_Details">
+    <End Role="Branch_Details" Type="Self.Branch_Details" Multiplicity="0..1" />
+    <End Role="Branch_Holidays" Type="Self.Branch_Holidays" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Branch_Details">
+        <PropertyRef Name="BranchID" />
+      </Principal>
+      <Dependent Role="Branch_Holidays">
+        <PropertyRef Name="BranchID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Branch_Holidays_Holiday_Type">
+    <End Role="Resource_Holiday_Type" Type="Self.Resource_Holiday_Type" Multiplicity="0..1" />
+    <End Role="Branch_Holidays" Type="Self.Branch_Holidays" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Resource_Holiday_Type">
+        <PropertyRef Name="HolidayTypeID" />
+      </Principal>
+      <Dependent Role="Branch_Holidays">
+        <PropertyRef Name="HolidayTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Common_Address_Common_Country">
+    <End Role="Common_Country" Type="Self.Common_Country" Multiplicity="0..1" />
+    <End Role="Common_Address" Type="Self.Common_Address" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Common_Country">
+        <PropertyRef Name="CountryID" />
+      </Principal>
+      <Dependent Role="Common_Address">
+        <PropertyRef Name="CountryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Common_EmployeePayment_Common_PaymentType1">
+    <End Role="Common_PaymentType" Type="Self.Common_PaymentType" Multiplicity="0..1" />
+    <End Role="Resource_EmployeePayment" Type="Self.Resource_EmployeePayment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Common_PaymentType">
+        <PropertyRef Name="PaymentTypeID" />
+      </Principal>
+      <Dependent Role="Resource_EmployeePayment">
+        <PropertyRef Name="PaymentTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Common_EmployeePayment_Resource_Employee">
+    <End Role="Resource_Employee" Type="Self.Resource_Employee" Multiplicity="0..1" />
+    <End Role="Resource_EmployeePayment" Type="Self.Resource_EmployeePayment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Resource_Employee">
+        <PropertyRef Name="EmployeeID" />
+      </Principal>
+      <Dependent Role="Resource_EmployeePayment">
+        <PropertyRef Name="EmployeeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Common_EmployeeType_Common_EmployeeType">
+    <End Role="Common_EmployeeType" Type="Self.Common_EmployeeType" Multiplicity="0..1" />
+    <End Role="Common_EmployeeType1" Type="Self.Common_EmployeeType" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Common_EmployeeType">
+        <PropertyRef Name="EmployeeTypeID" />
+      </Principal>
+      <Dependent Role="Common_EmployeeType1">
+        <PropertyRef Name="ReportingTo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserClaims">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserLogins">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+    <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetRoles">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserRoles">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserRoles">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Resource_BranchDetails_Branch_Details">
+    <End Role="Branch_Details" Type="Self.Branch_Details" Multiplicity="0..1" />
+    <End Role="Resource_BranchDetails" Type="Self.Resource_BranchDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Branch_Details">
+        <PropertyRef Name="BranchID" />
+      </Principal>
+      <Dependent Role="Resource_BranchDetails">
+        <PropertyRef Name="BranchID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Resource_BranchDetails_Resource_Employee">
+    <End Role="Resource_Employee" Type="Self.Resource_Employee" Multiplicity="0..1" />
+    <End Role="Resource_BranchDetails" Type="Self.Resource_BranchDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Resource_Employee">
+        <PropertyRef Name="EmployeeID" />
+      </Principal>
+      <Dependent Role="Resource_BranchDetails">
+        <PropertyRef Name="ResourceID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Resource_Employee_Common_Address">
+    <End Role="Common_Address" Type="Self.Common_Address" Multiplicity="0..1" />
+    <End Role="Resource_Employee" Type="Self.Resource_Employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Common_Address">
+        <PropertyRef Name="AddressID" />
+      </Principal>
+      <Dependent Role="Resource_Employee">
+        <PropertyRef Name="AdderessID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Resource_Employee_Common_EmployeeType">
+    <End Role="Common_EmployeeType" Type="Self.Common_EmployeeType" Multiplicity="0..1" />
+    <End Role="Resource_Employee" Type="Self.Resource_Employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Common_EmployeeType">
+        <PropertyRef Name="EmployeeTypeID" />
+      </Principal>
+      <Dependent Role="Resource_Employee">
+        <PropertyRef Name="EmployeeTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Resource_Employee_Common_EthnicGroup">
+    <End Role="Common_EthnicGroup" Type="Self.Common_EthnicGroup" Multiplicity="0..1" />
+    <End Role="Resource_Employee" Type="Self.Resource_Employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Common_EthnicGroup">
+        <PropertyRef Name="EthnicGroupID" />
+      </Principal>
+      <Dependent Role="Resource_Employee">
+        <PropertyRef Name="EthnicGroupID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Resource_Employee_Common_ImmigrationStatus">
+    <End Role="Common_ImmigrationStatus" Type="Self.Common_ImmigrationStatus" Multiplicity="0..1" />
+    <End Role="Resource_Employee" Type="Self.Resource_Employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Common_ImmigrationStatus">
+        <PropertyRef Name="ImmigrationStatusID" />
+      </Principal>
+      <Dependent Role="Resource_Employee">
+        <PropertyRef Name="ImmigrationStatusID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Resource_Employee_Common_MaritalStatus">
+    <End Role="Common_MaritalStatus" Type="Self.Common_MaritalStatus" Multiplicity="0..1" />
+    <End Role="Resource_Employee" Type="Self.Resource_Employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Common_MaritalStatus">
+        <PropertyRef Name="MaritalStatusID" />
+      </Principal>
+      <Dependent Role="Resource_Employee">
+        <PropertyRef Name="MaritalStatusID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Resource_Employee_Common_Nationality1">
+    <End Role="Common_Nationality" Type="Self.Common_Nationality" Multiplicity="0..1" />
+    <End Role="Resource_Employee" Type="Self.Resource_Employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Common_Nationality">
+        <PropertyRef Name="NationalityID" />
+      </Principal>
+      <Dependent Role="Resource_Employee">
+        <PropertyRef Name="NationalityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Resource_Employee_Common_TimeSheetFrequency">
+    <End Role="Common_TimeSheetFrequency" Type="Self.Common_TimeSheetFrequency" Multiplicity="0..1" />
+    <End Role="Resource_Employee" Type="Self.Resource_Employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Common_TimeSheetFrequency">
+        <PropertyRef Name="TimeSheetFrequencyID" />
+      </Principal>
+      <Dependent Role="Resource_Employee">
+        <PropertyRef Name="TimeSheetFrequencyID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Resource_Employee_Common_Title">
+    <End Role="Common_Title" Type="Self.Common_Title" Multiplicity="0..1" />
+    <End Role="Resource_Employee" Type="Self.Resource_Employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Common_Title">
+        <PropertyRef Name="TitleID" />
+      </Principal>
+      <Dependent Role="Resource_Employee">
+        <PropertyRef Name="TitleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Resource_Holiday_Holiday_Type">
+    <End Role="Resource_Holiday_Type" Type="Self.Resource_Holiday_Type" Multiplicity="0..1" />
+    <End Role="Resource_Holiday" Type="Self.Resource_Holiday" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Resource_Holiday_Type">
+        <PropertyRef Name="HolidayTypeID" />
+      </Principal>
+      <Dependent Role="Resource_Holiday">
+        <PropertyRef Name="HolidayTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Resource_Holiday_Resource_Employee">
+    <End Role="Resource_Employee" Type="Self.Resource_Employee" Multiplicity="0..1" />
+    <End Role="Resource_Holiday" Type="Self.Resource_Holiday" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Resource_Employee">
+        <PropertyRef Name="EmployeeID" />
+      </Principal>
+      <Dependent Role="Resource_Holiday">
+        <PropertyRef Name="ResourceID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Resource_HolidayStatus_Resource_Employee">
+    <End Role="Resource_Employee" Type="Self.Resource_Employee" Multiplicity="0..1" />
+    <End Role="Resource_HolidayStatus" Type="Self.Resource_HolidayStatus" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Resource_Employee">
+        <PropertyRef Name="EmployeeID" />
+      </Principal>
+      <Dependent Role="Resource_HolidayStatus">
+        <PropertyRef Name="StatusChangedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Resource_HolidayStatus_Resource_Holiday1">
+    <End Role="Resource_Holiday" Type="Self.Resource_Holiday" Multiplicity="1" />
+    <End Role="Resource_HolidayStatus" Type="Self.Resource_HolidayStatus" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Resource_Holiday">
+        <PropertyRef Name="HolidayID" />
+      </Principal>
+      <Dependent Role="Resource_HolidayStatus">
+        <PropertyRef Name="HolidayID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Resource_HolidayStatus_Resource_HolidayStatusType1">
+    <End Role="Resource_HolidayStatusType" Type="Self.Resource_HolidayStatusType" Multiplicity="0..1" />
+    <End Role="Resource_HolidayStatus" Type="Self.Resource_HolidayStatus" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Resource_HolidayStatusType">
+        <PropertyRef Name="HolidayStatusTypeID" />
+      </Principal>
+      <Dependent Role="Resource_HolidayStatus">
+        <PropertyRef Name="HolidayStatusTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Resource_ShiftSchedule_Branch_Details">
+    <End Role="Branch_Details" Type="Self.Branch_Details" Multiplicity="0..1" />
+    <End Role="Resource_ShiftSchedule" Type="Self.Resource_ShiftSchedule" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Branch_Details">
+        <PropertyRef Name="BranchID" />
+      </Principal>
+      <Dependent Role="Resource_ShiftSchedule">
+        <PropertyRef Name="BranchID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Resource_ShiftSchedule_Resource_Employee">
+    <End Role="Resource_Employee" Type="Self.Resource_Employee" Multiplicity="0..1" />
+    <End Role="Resource_ShiftSchedule" Type="Self.Resource_ShiftSchedule" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Resource_Employee">
+        <PropertyRef Name="EmployeeID" />
+      </Principal>
+      <Dependent Role="Resource_ShiftSchedule">
+        <PropertyRef Name="EmployeeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Resource_ShiftSchedule_Resource_ShiftPattern1">
+    <End Role="Resource_ShiftPattern" Type="Self.Resource_ShiftPattern" Multiplicity="0..1" />
+    <End Role="Resource_ShiftSchedule" Type="Self.Resource_ShiftSchedule" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Resource_ShiftPattern">
+        <PropertyRef Name="ShiftPatternID" />
+      </Principal>
+      <Dependent Role="Resource_ShiftSchedule">
+        <PropertyRef Name="ShiftPatternID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Resource_TimeSheet_Common_TimeSheetFrequency">
+    <End Role="Common_TimeSheetFrequency" Type="Self.Common_TimeSheetFrequency" Multiplicity="0..1" />
+    <End Role="Resource_TimeSheet" Type="Self.Resource_TimeSheet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Common_TimeSheetFrequency">
+        <PropertyRef Name="TimeSheetFrequencyID" />
+      </Principal>
+      <Dependent Role="Resource_TimeSheet">
+        <PropertyRef Name="TimeSheetFrequencyID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Resource_TimeSheet_Resource_Employee">
+    <End Role="Resource_Employee" Type="Self.Resource_Employee" Multiplicity="0..1" />
+    <End Role="Resource_TimeSheet" Type="Self.Resource_TimeSheet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Resource_Employee">
+        <PropertyRef Name="EmployeeID" />
+      </Principal>
+      <Dependent Role="Resource_TimeSheet">
+        <PropertyRef Name="ResourceID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Resource_TimeSheetDetails_Resource_ShiftSchedule">
+    <End Role="Resource_ShiftSchedule" Type="Self.Resource_ShiftSchedule" Multiplicity="0..1" />
+    <End Role="Resource_TimeSheetDetails" Type="Self.Resource_TimeSheetDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Resource_ShiftSchedule">
+        <PropertyRef Name="ShiftScheduleID" />
+      </Principal>
+      <Dependent Role="Resource_TimeSheetDetails">
+        <PropertyRef Name="ShiftScheduleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Resource_TimeSheetDetails_Resource_TimeSheet">
+    <End Role="Resource_TimeSheet" Type="Self.Resource_TimeSheet" Multiplicity="0..1" />
+    <End Role="Resource_TimeSheetDetails" Type="Self.Resource_TimeSheetDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Resource_TimeSheet">
+        <PropertyRef Name="TimeSheetID" />
+      </Principal>
+      <Dependent Role="Resource_TimeSheetDetails">
+        <PropertyRef Name="TimeSheetID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Resource_TimeSheetDetailsHoliDay_Resource_Holiday">
+    <End Role="Resource_Holiday" Type="Self.Resource_Holiday" Multiplicity="0..1" />
+    <End Role="Resource_TimeSheetDetailsHoliday" Type="Self.Resource_TimeSheetDetailsHoliday" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Resource_Holiday">
+        <PropertyRef Name="HolidayID" />
+      </Principal>
+      <Dependent Role="Resource_TimeSheetDetailsHoliday">
+        <PropertyRef Name="HolidayID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Resource_TimeSheetDetailsHoliDay_Resource_TimeSheet">
+    <End Role="Resource_TimeSheet" Type="Self.Resource_TimeSheet" Multiplicity="0..1" />
+    <End Role="Resource_TimeSheetDetailsHoliday" Type="Self.Resource_TimeSheetDetailsHoliday" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Resource_TimeSheet">
+        <PropertyRef Name="TimeSheetID" />
+      </Principal>
+      <Dependent Role="Resource_TimeSheetDetailsHoliday">
+        <PropertyRef Name="TimeSheetID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Resource_WeeklyPatternDetails_Common_DayType">
+    <End Role="Common_Day" Type="Self.Common_Day" Multiplicity="0..1" />
+    <End Role="Resource_WeeklyPatternDetails" Type="Self.Resource_WeeklyPatternDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Common_Day">
+        <PropertyRef Name="DayID" />
+      </Principal>
+      <Dependent Role="Resource_WeeklyPatternDetails">
+        <PropertyRef Name="DayID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Resource_WorkingPattern_Resource_Employee">
+    <End Role="Resource_Employee" Type="Self.Resource_Employee" Multiplicity="0..1" />
+    <End Role="Resource_WorkingPattern" Type="Self.Resource_WorkingPattern" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Resource_Employee">
+        <PropertyRef Name="EmployeeID" />
+      </Principal>
+      <Dependent Role="Resource_WorkingPattern">
+        <PropertyRef Name="ResourceID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Resource_WorkingPatternDetails_Resource_WorkingPattern">
+    <End Role="Resource_WorkingPattern" Type="Self.Resource_WorkingPattern" Multiplicity="0..1" />
+    <End Role="Resource_WeeklyPatternDetails" Type="Self.Resource_WeeklyPatternDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Resource_WorkingPattern">
+        <PropertyRef Name="PatternID" />
+      </Principal>
+      <Dependent Role="Resource_WeeklyPatternDetails">
+        <PropertyRef Name="PatternID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ERPModelStoreContainer">
+    <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Branch_Details" EntityType="Self.Branch_Details" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Branch_Holidays" EntityType="Self.Branch_Holidays" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Branch_Status" EntityType="Self.Branch_Status" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Branch_Type" EntityType="Self.Branch_Type" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Common_Address" EntityType="Self.Common_Address" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Common_Country" EntityType="Self.Common_Country" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Common_CurrencyFormat" EntityType="Self.Common_CurrencyFormat" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Common_DateFormat" EntityType="Self.Common_DateFormat" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Common_Day" EntityType="Self.Common_Day" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Common_EmployeeType" EntityType="Self.Common_EmployeeType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Common_EthnicGroup" EntityType="Self.Common_EthnicGroup" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Common_HostLogo" EntityType="Self.Common_HostLogo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Common_HostSettings" EntityType="Self.Common_HostSettings" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Common_ImmigrationStatus" EntityType="Self.Common_ImmigrationStatus" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Common_Key" EntityType="Self.Common_Key" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Common_MaritalStatus" EntityType="Self.Common_MaritalStatus" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Common_Nationality" EntityType="Self.Common_Nationality" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Common_PaymentType" EntityType="Self.Common_PaymentType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Common_TimeFormat" EntityType="Self.Common_TimeFormat" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Common_TimeSheetFrequency" EntityType="Self.Common_TimeSheetFrequency" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Common_Title" EntityType="Self.Common_Title" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Resource_BranchDetails" EntityType="Self.Resource_BranchDetails" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Resource_Employee" EntityType="Self.Resource_Employee" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Resource_EmployeePayment" EntityType="Self.Resource_EmployeePayment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Resource_Holiday" EntityType="Self.Resource_Holiday" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Resource_Holiday_Type" EntityType="Self.Resource_Holiday_Type" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Resource_HolidayStatus" EntityType="Self.Resource_HolidayStatus" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Resource_HolidayStatusType" EntityType="Self.Resource_HolidayStatusType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Resource_ShiftPattern" EntityType="Self.Resource_ShiftPattern" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Resource_ShiftSchedule" EntityType="Self.Resource_ShiftSchedule" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Resource_TimeSheet" EntityType="Self.Resource_TimeSheet" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Resource_TimeSheetDetails" EntityType="Self.Resource_TimeSheetDetails" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Resource_TimeSheetDetailsHoliday" EntityType="Self.Resource_TimeSheetDetailsHoliday" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Resource_WeeklyPatternDetails" EntityType="Self.Resource_WeeklyPatternDetails" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Resource_WorkingPattern" EntityType="Self.Resource_WorkingPattern" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Branch_Details_Branch_Status1" Association="Self.FK_Branch_Details_Branch_Status1">
+      <End Role="Branch_Status" EntitySet="Branch_Status" />
+      <End Role="Branch_Details" EntitySet="Branch_Details" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Branch_Details_Branch_Type" Association="Self.FK_Branch_Details_Branch_Type">
+      <End Role="Branch_Type" EntitySet="Branch_Type" />
+      <End Role="Branch_Details" EntitySet="Branch_Details" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Branch_Details_Common_Address" Association="Self.FK_Branch_Details_Common_Address">
+      <End Role="Common_Address" EntitySet="Common_Address" />
+      <End Role="Branch_Details" EntitySet="Branch_Details" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Branch_Holidays_Branch_Details" Association="Self.FK_Branch_Holidays_Branch_Details">
+      <End Role="Branch_Details" EntitySet="Branch_Details" />
+      <End Role="Branch_Holidays" EntitySet="Branch_Holidays" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Branch_Holidays_Holiday_Type" Association="Self.FK_Branch_Holidays_Holiday_Type">
+      <End Role="Resource_Holiday_Type" EntitySet="Resource_Holiday_Type" />
+      <End Role="Branch_Holidays" EntitySet="Branch_Holidays" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Common_Address_Common_Country" Association="Self.FK_Common_Address_Common_Country">
+      <End Role="Common_Country" EntitySet="Common_Country" />
+      <End Role="Common_Address" EntitySet="Common_Address" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Common_EmployeePayment_Common_PaymentType1" Association="Self.FK_Common_EmployeePayment_Common_PaymentType1">
+      <End Role="Common_PaymentType" EntitySet="Common_PaymentType" />
+      <End Role="Resource_EmployeePayment" EntitySet="Resource_EmployeePayment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Common_EmployeePayment_Resource_Employee" Association="Self.FK_Common_EmployeePayment_Resource_Employee">
+      <End Role="Resource_Employee" EntitySet="Resource_Employee" />
+      <End Role="Resource_EmployeePayment" EntitySet="Resource_EmployeePayment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Common_EmployeeType_Common_EmployeeType" Association="Self.FK_Common_EmployeeType_Common_EmployeeType">
+      <End Role="Common_EmployeeType" EntitySet="Common_EmployeeType" />
+      <End Role="Common_EmployeeType1" EntitySet="Common_EmployeeType" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+      <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+      <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Resource_BranchDetails_Branch_Details" Association="Self.FK_Resource_BranchDetails_Branch_Details">
+      <End Role="Branch_Details" EntitySet="Branch_Details" />
+      <End Role="Resource_BranchDetails" EntitySet="Resource_BranchDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Resource_BranchDetails_Resource_Employee" Association="Self.FK_Resource_BranchDetails_Resource_Employee">
+      <End Role="Resource_Employee" EntitySet="Resource_Employee" />
+      <End Role="Resource_BranchDetails" EntitySet="Resource_BranchDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Resource_Employee_Common_Address" Association="Self.FK_Resource_Employee_Common_Address">
+      <End Role="Common_Address" EntitySet="Common_Address" />
+      <End Role="Resource_Employee" EntitySet="Resource_Employee" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Resource_Employee_Common_EmployeeType" Association="Self.FK_Resource_Employee_Common_EmployeeType">
+      <End Role="Common_EmployeeType" EntitySet="Common_EmployeeType" />
+      <End Role="Resource_Employee" EntitySet="Resource_Employee" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Resource_Employee_Common_EthnicGroup" Association="Self.FK_Resource_Employee_Common_EthnicGroup">
+      <End Role="Common_EthnicGroup" EntitySet="Common_EthnicGroup" />
+      <End Role="Resource_Employee" EntitySet="Resource_Employee" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Resource_Employee_Common_ImmigrationStatus" Association="Self.FK_Resource_Employee_Common_ImmigrationStatus">
+      <End Role="Common_ImmigrationStatus" EntitySet="Common_ImmigrationStatus" />
+      <End Role="Resource_Employee" EntitySet="Resource_Employee" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Resource_Employee_Common_MaritalStatus" Association="Self.FK_Resource_Employee_Common_MaritalStatus">
+      <End Role="Common_MaritalStatus" EntitySet="Common_MaritalStatus" />
+      <End Role="Resource_Employee" EntitySet="Resource_Employee" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Resource_Employee_Common_Nationality1" Association="Self.FK_Resource_Employee_Common_Nationality1">
+      <End Role="Common_Nationality" EntitySet="Common_Nationality" />
+      <End Role="Resource_Employee" EntitySet="Resource_Employee" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Resource_Employee_Common_TimeSheetFrequency" Association="Self.FK_Resource_Employee_Common_TimeSheetFrequency">
+      <End Role="Common_TimeSheetFrequency" EntitySet="Common_TimeSheetFrequency" />
+      <End Role="Resource_Employee" EntitySet="Resource_Employee" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Resource_Employee_Common_Title" Association="Self.FK_Resource_Employee_Common_Title">
+      <End Role="Common_Title" EntitySet="Common_Title" />
+      <End Role="Resource_Employee" EntitySet="Resource_Employee" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Resource_Holiday_Holiday_Type" Association="Self.FK_Resource_Holiday_Holiday_Type">
+      <End Role="Resource_Holiday_Type" EntitySet="Resource_Holiday_Type" />
+      <End Role="Resource_Holiday" EntitySet="Resource_Holiday" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Resource_Holiday_Resource_Employee" Association="Self.FK_Resource_Holiday_Resource_Employee">
+      <End Role="Resource_Employee" EntitySet="Resource_Employee" />
+      <End Role="Resource_Holiday" EntitySet="Resource_Holiday" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Resource_HolidayStatus_Resource_Employee" Association="Self.FK_Resource_HolidayStatus_Resource_Employee">
+      <End Role="Resource_Employee" EntitySet="Resource_Employee" />
+      <End Role="Resource_HolidayStatus" EntitySet="Resource_HolidayStatus" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Resource_HolidayStatus_Resource_Holiday1" Association="Self.FK_Resource_HolidayStatus_Resource_Holiday1">
+      <End Role="Resource_Holiday" EntitySet="Resource_Holiday" />
+      <End Role="Resource_HolidayStatus" EntitySet="Resource_HolidayStatus" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Resource_HolidayStatus_Resource_HolidayStatusType1" Association="Self.FK_Resource_HolidayStatus_Resource_HolidayStatusType1">
+      <End Role="Resource_HolidayStatusType" EntitySet="Resource_HolidayStatusType" />
+      <End Role="Resource_HolidayStatus" EntitySet="Resource_HolidayStatus" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Resource_ShiftSchedule_Branch_Details" Association="Self.FK_Resource_ShiftSchedule_Branch_Details">
+      <End Role="Branch_Details" EntitySet="Branch_Details" />
+      <End Role="Resource_ShiftSchedule" EntitySet="Resource_ShiftSchedule" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Resource_ShiftSchedule_Resource_Employee" Association="Self.FK_Resource_ShiftSchedule_Resource_Employee">
+      <End Role="Resource_Employee" EntitySet="Resource_Employee" />
+      <End Role="Resource_ShiftSchedule" EntitySet="Resource_ShiftSchedule" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Resource_ShiftSchedule_Resource_ShiftPattern1" Association="Self.FK_Resource_ShiftSchedule_Resource_ShiftPattern1">
+      <End Role="Resource_ShiftPattern" EntitySet="Resource_ShiftPattern" />
+      <End Role="Resource_ShiftSchedule" EntitySet="Resource_ShiftSchedule" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Resource_TimeSheet_Common_TimeSheetFrequency" Association="Self.FK_Resource_TimeSheet_Common_TimeSheetFrequency">
+      <End Role="Common_TimeSheetFrequency" EntitySet="Common_TimeSheetFrequency" />
+      <End Role="Resource_TimeSheet" EntitySet="Resource_TimeSheet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Resource_TimeSheet_Resource_Employee" Association="Self.FK_Resource_TimeSheet_Resource_Employee">
+      <End Role="Resource_Employee" EntitySet="Resource_Employee" />
+      <End Role="Resource_TimeSheet" EntitySet="Resource_TimeSheet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Resource_TimeSheetDetails_Resource_ShiftSchedule" Association="Self.FK_Resource_TimeSheetDetails_Resource_ShiftSchedule">
+      <End Role="Resource_ShiftSchedule" EntitySet="Resource_ShiftSchedule" />
+      <End Role="Resource_TimeSheetDetails" EntitySet="Resource_TimeSheetDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Resource_TimeSheetDetails_Resource_TimeSheet" Association="Self.FK_Resource_TimeSheetDetails_Resource_TimeSheet">
+      <End Role="Resource_TimeSheet" EntitySet="Resource_TimeSheet" />
+      <End Role="Resource_TimeSheetDetails" EntitySet="Resource_TimeSheetDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Resource_TimeSheetDetailsHoliDay_Resource_Holiday" Association="Self.FK_Resource_TimeSheetDetailsHoliDay_Resource_Holiday">
+      <End Role="Resource_Holiday" EntitySet="Resource_Holiday" />
+      <End Role="Resource_TimeSheetDetailsHoliday" EntitySet="Resource_TimeSheetDetailsHoliday" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Resource_TimeSheetDetailsHoliDay_Resource_TimeSheet" Association="Self.FK_Resource_TimeSheetDetailsHoliDay_Resource_TimeSheet">
+      <End Role="Resource_TimeSheet" EntitySet="Resource_TimeSheet" />
+      <End Role="Resource_TimeSheetDetailsHoliday" EntitySet="Resource_TimeSheetDetailsHoliday" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Resource_WeeklyPatternDetails_Common_DayType" Association="Self.FK_Resource_WeeklyPatternDetails_Common_DayType">
+      <End Role="Common_Day" EntitySet="Common_Day" />
+      <End Role="Resource_WeeklyPatternDetails" EntitySet="Resource_WeeklyPatternDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Resource_WorkingPattern_Resource_Employee" Association="Self.FK_Resource_WorkingPattern_Resource_Employee">
+      <End Role="Resource_Employee" EntitySet="Resource_Employee" />
+      <End Role="Resource_WorkingPattern" EntitySet="Resource_WorkingPattern" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Resource_WorkingPatternDetails_Resource_WorkingPattern" Association="Self.FK_Resource_WorkingPatternDetails_Resource_WorkingPattern">
+      <End Role="Resource_WorkingPattern" EntitySet="Resource_WorkingPattern" />
+      <End Role="Resource_WeeklyPatternDetails" EntitySet="Resource_WeeklyPatternDetails" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

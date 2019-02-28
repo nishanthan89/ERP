@@ -1,0 +1,52 @@
+﻿@model IEnumerable<ERP.Utility.ViewModels.EmployeeView>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.EmployeeID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FName)
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.LName)
+        </th>*@
+        <th></th>
+    </tr>
+@if (Model.Count() > 0)
+{
+    foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmployeeID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FName)
+                @Html.DisplayFor(modelItem => item.LName)
+            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.LName)
+                </td>*@
+            @*<td>
+                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                </td>*@
+        </tr>
+    }
+}
+
+else
+{
+    <tr>
+        <td align="center" colspan=15>
+            <center>
+                <font color="red" ; style="text-align:center">"Sorry, There Are No Employees Have This Skill!!."</font>
+            </center>
+        </td>
+
+    </tr>
+}
+</table>
